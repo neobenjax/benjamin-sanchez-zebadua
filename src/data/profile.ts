@@ -9,7 +9,6 @@ export interface SynergyItem {
   id: string;
   title: string;
   description: string;
-  // We'll map string names to lucide-react icons in the component
   iconName: string; 
   technologies: string[];
 }
@@ -24,12 +23,21 @@ export interface TimelineNode {
   type: "engineering" | "finance" | "education";
 }
 
+export interface ChartDataPoint {
+  date: string;
+  value: number;
+}
+
 export interface InsightCaseStudy {
   id: string;
   title: string;
   category: string;
   description: string;
   metrics: string[];
+  badgeType: "metric" | "reading";
+  readingTime?: string;
+  // Specific mock data for Recharts sparklines
+  chartData?: ChartDataPoint[]; 
 }
 
 export interface ToolboxCategory {
@@ -123,14 +131,40 @@ export const profileData: ProfileData = {
       title: "Undervalued Stock Analysis",
       category: "Equity Research",
       description: "Detailed fundamental analysis of mid-cap Canadian equities combining DCF modeling with sentiment analysis.",
-      metrics: ["DCF Modeling", "EBITDA Multiples", "Sentiment Scoring"]
+      metrics: ["DCF Modeling", "EBITDA Multiples", "Sentiment Scoring"],
+      badgeType: "metric",
+      chartData: [
+        { date: "M1", value: 12 },
+        { date: "M2", value: 15 },
+        { date: "M3", value: 18 },
+        { date: "M4", value: 14 },
+        { date: "M5", value: 24 },
+        { date: "M6", value: 29 },
+      ]
     },
     {
       id: "lbo-research",
-      title: "LBO Structuring Research",
+      title: "LBO Structuring Mechanics",
       category: "Corporate Finance",
-      description: "A theoretical case study on the mechanics of a Leveraged Buyout within the tech sector, focusing on debt schedules.",
-      metrics: ["Debt Tranches", "IRR Projections", "Cash Flow Modeling"]
+      description: "A theoretical case study on the mechanics of a Leveraged Buyout within the tech sector, focusing on complex debt schedules.",
+      metrics: ["Debt Tranches", "IRR Projections", "Cash Flow"],
+      badgeType: "metric",
+      chartData: [
+        { date: "Y1", value: 100 },
+        { date: "Y2", value: 80 },
+        { date: "Y3", value: 45 },
+        { date: "Y4", value: 20 },
+        { date: "Y5", value: 0 },
+      ]
+    },
+    {
+      id: "esg-thought-leadership",
+      title: "The Future of ESG Data Pipelines",
+      category: "Thought Leadership",
+      description: "Exploring how automated data pipelines and Large Language Models are reshaping ESG scoring frameworks for wealth managers.",
+      metrics: ["ESG Scoring", "LLMs", "React / AWS"],
+      badgeType: "reading",
+      readingTime: "6 min read"
     }
   ],
 
