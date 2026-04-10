@@ -62,21 +62,21 @@ export const profileData: ProfileData = {
     {
       id: "computing-mindset",
       title: "Computing Mindset",
-      description: "\"With a background in software engineering, I am trained to approach complex financial planning with structured, persistent problem-solving.\"",
+      description: "I approach complex financial planning with the structured, persistent problem-solving of a Senior Developer. I see systems where others see noise.",
       iconName: "Cpu",
       technologies: ["Systematic Risk Analysis", "Algorithmic Efficiency", "Financial Architecture"],
     },
     {
       id: "work-ethic",
       title: "Uncompromising Work Ethic",
-      description: "\"Whether handling highly sensitive customer wealth data or enterprise private databases, I operate with strict due diligence to guarantee stakeholder trust.\"",
+      description: "Managing sensitive wealth data and enterprise banking databases at BBVA required strict due diligence and zero-margin for error.",
       iconName: "Briefcase",
       technologies: ["Due Diligence", "Enterprise Compliance", "Data Integrity"],
     },
     {
       id: "learning-machine",
       title: "The Learning Machine",
-      description: "\"Both tech and financial sectors are constantly evolving; I rapidly adapt to master new systems and market landscapes—a trait that fueled my successful move from Mexico to Canada.\"",
+      description: "Rapidly mastered diverse domains—from high-traffic JavaScript frameworks at BBVA to Canadian Tax & Estate Planning at Lambton.",
       iconName: "LineChart",
       technologies: ["Rapid Domain Adaptation", "Cross-Disciplinary Execution", "Continuous Growth"],
     }
@@ -85,14 +85,14 @@ export const profileData: ProfileData = {
   journey: [
     {
       id: "financial-intern",
-      period: "Internship Phase",
+      period: "Jan 2026 — Apr 2026",
       role: "Financial Risk & Advisory Analyst",
-      company: "Wealth Management",
+      company: "Lambton College",
       description: "Executed actionable wealth solutions bridging theoretical finance with strictly regulated frameworks.",
       highlights: [
-        "Focused on complex tax-minimization strategies.",
-        "Developed ESG-compliant investment strategies and portfolios.",
-        "Conducted fundamental market analysis to secure high-yield assets."
+        "Formulated strategic tax-minimization plans and analyzed market funds (T-bills, cash equivalents) for customized growth proposals.",
+        "Developed comprehensive retirement projections and estate liability reports for client portfolios.",
+        "Collaborated on ESG-compliant investment strategies, evaluating reputational impacts and ethical goal alignment."
       ],
       type: "finance"
     },
@@ -103,22 +103,22 @@ export const profileData: ProfileData = {
       company: "Lambton College",
       description: "Bridging theoretical finance with real-world client solutions.",
       highlights: [
-        "Mastered advanced Canadian institutional frameworks.",
-        "Obtained Investment Funds in Canada (IFC) Certification.",
-        "Translated engineering logic to quantitative portfolio modeling."
+        "Obtained Investment Funds in Canada (IFC) Certification while mastering advanced Canadian institutional frameworks.",
+        "Translated engineering logic to quantitative portfolio modeling.",
+        "Specialized in core Canadian tax and estate planning fundamentals."
       ],
       type: "education"
     },
     {
       id: "bbva-senior-dev",
-      period: "2019 — 2024 (Mexico)",
+      period: "Oct 2019 — Oct 2024 (Mexico)",
       role: "Senior Software Developer",
-      company: "BBVA",
+      company: "BBVA Mexico",
       description: "Spearheaded high-traffic JavaScript applications within robust legacy frameworks.",
       highlights: [
-        "Engineered a 30% boost in application reliability across systems.",
-        "Led AI-driven efficiency initiatives and development standards.",
-        "Maintained zero-margin data error policies on enterprise databases."
+        "Led AI tool integration to optimize coding efficiency, accelerating implementation and reducing manual errors.",
+        "Spearheaded performance initiatives resulting in a 30% boost in application reliability and speed in high-traffic environments.",
+        "Established organization-wide best practices, reducing defect rates by 20% and enhancing software quality standards."
       ],
       type: "engineering"
     }
@@ -174,7 +174,7 @@ export const profileData: ProfileData = {
     },
     {
       title: "Track 2: Finance",
-      skills: ["Canadian Tax Law", "Estate Planning", "ESG Risk Profiling", "IFC Certification", "Financial Modeling (Advanced Excel)"]
+      skills: ["Strategic Tax Minimization", "Estate Planning", "ESG Risk Profiling", "Fundamental Analysis", "DCF Modeling", "IFC Certification", "Retirement Projections"]
     }
   ]
 };
