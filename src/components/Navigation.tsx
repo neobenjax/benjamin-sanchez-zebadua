@@ -20,10 +20,9 @@ export default function Navigation() {
     <nav className="fixed w-full z-50 glass border-b border-white/10">
       <div className="max-w-7xl mx-auto px-8 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="font-serif text-xl tracking-[0.2em] text-white font-semibold">
-              BENJAMIN <span className="opacity-50 font-sans tracking-normal mx-1">//</span> FINTECH ARCHITECT
+          <div className="flex-shrink flex-1 max-w-[70%] sm:max-w-none">
+            <Link href="/" className="font-serif text-base md:text-xl tracking-[0.1em] md:tracking-[0.2em] text-white font-semibold flex flex-wrap items-center">
+              <span>BENJAMIN</span> <span className="opacity-50 font-sans tracking-normal mx-1 hidden sm:inline">//</span><span className="opacity-50 font-sans tracking-normal mx-1 sm:hidden"> </span> <span>FINTECH ARCHITECT</span>
             </Link>
           </div>
 
@@ -41,8 +40,9 @@ export default function Navigation() {
               ))}
             </div>
             <a
-              href="/resume.pdf"
-              className="px-6 py-2.5 rounded-sm bg-accent text-primary font-semibold text-sm hover:brightness-110 transition-all"
+              href="/benjamin-cv.pdf"
+              download
+              className="px-6 py-2.5 rounded-sm bg-accent text-primary font-semibold text-sm hover:brightness-110 transition-all whitespace-nowrap"
             >
               Download CV
             </a>
@@ -81,7 +81,8 @@ export default function Navigation() {
                 </Link>
               ))}
               <a
-                href="/resume.pdf"
+                href="/benjamin-cv.pdf"
+                download
                 className="block px-3 py-3 mt-4 text-center rounded-sm bg-accent text-primary font-bold text-base hover:brightness-110 transition-all"
               >
                 Download CV

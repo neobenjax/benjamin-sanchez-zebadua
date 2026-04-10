@@ -5,6 +5,9 @@ import { ArrowUpRight } from "lucide-react";
 import { profileData } from "@/data/profile";
 
 export default function Footer() {
+  const mailSubject = encodeURIComponent("Exploration: Bridging Tech & Finance with Benjamin");
+  const mailBody = encodeURIComponent("Hi Benjamin, I came across your FinTech Architect portfolio. I’m interested in your dual-core approach—specifically how you’re applying a computing mindset to financial strategy. Are you available for a brief sync regarding [Project/Role]?");
+
   return (
     <footer className="bg-primary pt-20 pb-12 border-t border-white/5 relative overflow-hidden">
       {/* Decorative subtle background elements */}
@@ -23,7 +26,7 @@ export default function Footer() {
               Bringing quantitative rigor and software scaling discipline to holistic wealth and risk management.
             </p>
             <a
-              href={`mailto:${profileData.social.email}`}
+              href={`mailto:besaze@hotmail.com?subject=${mailSubject}&body=${mailBody}`}
               className="inline-flex items-center text-accent font-semibold text-lg hover:text-white transition-colors"
             >
               Reach Out via Email
