@@ -9,7 +9,7 @@ export interface SynergyItem {
   id: string;
   title: string;
   description: string;
-  iconName: string; 
+  iconName: string;
   technologies: string[];
 }
 
@@ -36,8 +36,7 @@ export interface InsightCaseStudy {
   metrics: string[];
   badgeType: "metric" | "reading";
   readingTime?: string;
-  // Specific mock data for Recharts sparklines
-  chartData?: ChartDataPoint[]; 
+  chartData?: ChartDataPoint[];
 }
 
 export interface ToolboxCategory {
@@ -55,71 +54,71 @@ export interface ProfileData {
 
 export const profileData: ProfileData = {
   hero: {
-    headline: "Engineering Reliable Wealth Strategies.",
-    subtext: "Transitioning a robust foundation as a Senior Software Engineer at BBVA into a nuanced, analytical career as a Canadian Wealth Strategist. Building intelligent financial solutions powered by scalable technology.",
+    headline: "Precision in Code. Performance in Finance.",
+    subtext: "I am Benjamin Sanchez Zebadua, based in Ottawa, ON (Relocated from Mexico). I apply a computing mindset to bridge the gap between complex data and actionable solutions. Whether architecting scalable systems or engineering financial strategies, I deliver precision-driven results for a digital-first economy. My journey took me from the high-traffic tech hubs of Mexico to the Canadian financial landscape, and I bring that same disciplined, global mindset to every project.",
   },
-  
+
   synergy: [
     {
-      id: "code-scalability",
-      title: "Code Scalability",
-      description: "Architecting high-traffic, resilient systems.",
-      iconName: "Code",
-      technologies: ["LitElement", "Node.js", "Microservices", "AWS"],
-    },
-    {
-      id: "financial-intelligence",
-      title: "Financial Intelligence",
-      description: "Delivering holistic wealth structuring and advisory.",
-      iconName: "LineChart",
-      technologies: ["ESG Analysis", "Tax Minimization", "Estate Planning"],
-    },
-    {
-      id: "ai-driven-research",
-      title: "AI-Driven Research",
-      description: "Leveraging LLMs to extract market data and execute fundamental analysis at scale.",
+      id: "computing-mindset",
+      title: "Computing Mindset",
+      description: "\"With a background in software engineering, I am trained to approach complex financial planning with structured, persistent problem-solving.\"",
       iconName: "Cpu",
-      technologies: ["Market Data Pipelines", "Prompt Engineering", "Fundamental Analysis"],
+      technologies: ["Systematic Risk Analysis", "Algorithmic Efficiency", "Financial Architecture"],
+    },
+    {
+      id: "work-ethic",
+      title: "Uncompromising Work Ethic",
+      description: "\"Whether handling highly sensitive customer wealth data or enterprise private databases, I operate with strict due diligence to guarantee stakeholder trust.\"",
+      iconName: "Briefcase",
+      technologies: ["Due Diligence", "Enterprise Compliance", "Data Integrity"],
+    },
+    {
+      id: "learning-machine",
+      title: "The Learning Machine",
+      description: "\"Both tech and financial sectors are constantly evolving; I rapidly adapt to master new systems and market landscapes—a trait that fueled my successful move from Mexico to Canada.\"",
+      iconName: "LineChart",
+      technologies: ["Rapid Domain Adaptation", "Cross-Disciplinary Execution", "Continuous Growth"],
     }
   ],
 
   journey: [
     {
-      id: "wil-internship",
-      period: "Recent",
-      role: "Wealth Management Intern (WIL)",
-      company: "Financial Services / Wealth Management",
-      description: "Applied academic financial frameworks to real-world client portfolios, focusing on sustainable and tax-efficient growth.",
+      id: "financial-intern",
+      period: "Internship Phase",
+      role: "Financial Risk & Advisory Analyst",
+      company: "Wealth Management",
+      description: "Executed actionable wealth solutions bridging theoretical finance with strictly regulated frameworks.",
       highlights: [
-        "Authored comprehensive ESG impact reports for client portfolios.",
-        "Modeled tax minimization strategies across corporate and personal accounts.",
-        "Conducted competitor analysis for improved asset allocation."
+        "Focused on complex tax-minimization strategies.",
+        "Developed ESG-compliant investment strategies and portfolios.",
+        "Conducted fundamental market analysis to secure high-yield assets."
       ],
       type: "finance"
     },
     {
-      id: "postgrad-finance",
-      period: "Transition Phase",
-      role: "Postgraduate Student",
-      company: "Financial Planning & Wealth Management",
-      description: "Pivoted from pure software engineering to holistic wealth strategy through rigorous academic focus.",
+      id: "lambton-pg",
+      period: "Present Phase (Canada)",
+      role: "PG Financial Planning & Wealth Management",
+      company: "Lambton College",
+      description: "Bridging theoretical finance with real-world client solutions.",
       highlights: [
-        "Certified in core financial planning frameworks.",
-        "Specialized in Canadian taxation and retirement modeling.",
-        "Bridged technical analytical skills with equity valuation."
+        "Mastered advanced Canadian institutional frameworks.",
+        "Obtained Investment Funds in Canada (IFC) Certification.",
+        "Translated engineering logic to quantitative portfolio modeling."
       ],
       type: "education"
     },
     {
       id: "bbva-senior-dev",
-      period: "Previous",
-      role: "Senior Software Engineer",
+      period: "2019 — 2024 (Mexico)",
+      role: "Senior Software Developer",
       company: "BBVA",
-      description: "Led front-end and microservice architecture for high-traffic banking applications.",
+      description: "Spearheaded high-traffic JavaScript applications within robust legacy frameworks.",
       highlights: [
-        "Maintained and optimized critical systems processing thousands of transactions.",
-        "Spearheaded Agile/Scrum methodologies across cross-functional pods.",
-        "Implemented robust CI/CD pipelines and DevOps best practices."
+        "Engineered a 30% boost in application reliability across systems.",
+        "Led AI-driven efficiency initiatives and development standards.",
+        "Maintained zero-margin data error policies on enterprise databases."
       ],
       type: "engineering"
     }
@@ -128,54 +127,54 @@ export const profileData: ProfileData = {
   insights: [
     {
       id: "undervalued-stock",
-      title: "Undervalued Stock Analysis",
+      title: "Fundamental Analysis in Mid-Caps",
       category: "Equity Research",
-      description: "Detailed fundamental analysis of mid-cap Canadian equities combining DCF modeling with sentiment analysis.",
-      metrics: ["DCF Modeling", "EBITDA Multiples", "Sentiment Scoring"],
+      description: "Using raw data and institutional reporting to identify undervalued market opportunities for Canadian mid-cap equities.",
+      metrics: ["DCF Modeling", "EBITDA Multiples", "Value Analysis"],
       badgeType: "metric",
       chartData: [
-        { date: "M1", value: 12 },
-        { date: "M2", value: 15 },
-        { date: "M3", value: 18 },
-        { date: "M4", value: 14 },
-        { date: "M5", value: 24 },
-        { date: "M6", value: 29 },
+        { date: "M1", value: 45 },
+        { date: "M2", value: 42 },
+        { date: "M3", value: 39 },
+        { date: "M4", value: 50 },
+        { date: "M5", value: 68 },
+        { date: "M6", value: 85 },
       ]
     },
     {
-      id: "lbo-research",
-      title: "LBO Structuring Mechanics",
-      category: "Corporate Finance",
-      description: "A theoretical case study on the mechanics of a Leveraged Buyout within the tech sector, focusing on complex debt schedules.",
-      metrics: ["Debt Tranches", "IRR Projections", "Cash Flow"],
+      id: "app-reliability",
+      title: "Enterprise Reliability & Optimization",
+      category: "Software Architecture",
+      description: "Analyzing the 30% technical reliability boost at BBVA through the integration of Next-Gen systems and AI efficiency tooling.",
+      metrics: ["System Uptime", "AI Integration", "Traffic Loads"],
       badgeType: "metric",
       chartData: [
-        { date: "Y1", value: 100 },
-        { date: "Y2", value: 80 },
-        { date: "Y3", value: 45 },
-        { date: "Y4", value: 20 },
-        { date: "Y5", value: 0 },
+        { date: "Q1", value: 70 },
+        { date: "Q2", value: 82 },
+        { date: "Q3", value: 86 },
+        { date: "Q4", value: 98 },
+        { date: "Q5", value: 99.9 },
       ]
     },
     {
       id: "esg-thought-leadership",
-      title: "The Future of ESG Data Pipelines",
+      title: "ESG-Compliant Investment Strategies",
       category: "Thought Leadership",
-      description: "Exploring how automated data pipelines and Large Language Models are reshaping ESG scoring frameworks for wealth managers.",
-      metrics: ["ESG Scoring", "LLMs", "React / AWS"],
+      description: "Exploring exactly how modern risk frameworks quantify abstract corporate ESG data to drive safer, tax-efficient portfolio yields.",
+      metrics: ["ESG Scoring", "Tax Minimization", "Risk Profiling"],
       badgeType: "reading",
-      readingTime: "6 min read"
+      readingTime: "5 min read"
     }
   ],
 
   toolbox: [
     {
-      title: "Software & Technology",
-      skills: ["JavaScript / TypeScript", "Node.js", "React / Next.js", "AWS Architecture", "SQL / NoSQL", "Git / DevOps"]
+      title: "Track 1: Engineering",
+      skills: ["JavaScript (Lit Element)", "Node.js", "DevOps (GitHub/Bitbucket)", "Agile (Scrum/Jira)", "AWS", "Testing (Mocha/Chai)"]
     },
     {
-      title: "Financial & Advisory",
-      skills: ["Morningstar Direct", "Salesforce CRM", "ESG Frameworks", "NaviPlan", "Tax Optimization", "Portfolio Construction"]
+      title: "Track 2: Finance",
+      skills: ["Canadian Tax Law", "Estate Planning", "ESG Risk Profiling", "IFC Certification", "Financial Modeling (Advanced Excel)"]
     }
   ]
 };

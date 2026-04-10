@@ -26,7 +26,7 @@ export default function Hero() {
           >
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             <span className="text-sm font-medium tracking-wide text-gray-300">
-              Transforming Technology into Wealth Management
+              Current State: Bridging Software Engineering & Financial Strategy
             </span>
           </motion.div>
 
