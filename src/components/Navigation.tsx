@@ -18,12 +18,12 @@ export default function Navigation() {
 
   return (
     <nav className="fixed w-full z-50 glass border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-8 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="font-serif text-xl tracking-[0.2em] text-white font-semibold">
-              BENJAMIN <span className="opacity-50 font-sans tracking-normal mx-1">//</span> STRATEGIST
+              BENJAMIN <span className="opacity-50 font-sans tracking-normal mx-1">//</span> FINTECH ARCHITECT
             </Link>
           </div>
 

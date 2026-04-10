@@ -26,7 +26,7 @@ const cardVariants: Variants = {
 export default function Synergy() {
   return (
     <section id="synergy" className="relative py-32 bg-primary">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-8 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -41,7 +41,7 @@ export default function Synergy() {
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-white">The Synergy</h2>
-          <p className="mt-4 text-xl text-gray-400 max-w-2xl">
+          <p className="mt-4 text-xl text-gray-300 max-w-2xl">
             Fusing software engineering precision with wealth management analytics.
           </p>
         </motion.div>
@@ -67,7 +67,7 @@ export default function Synergy() {
                 <h3 className="text-2xl font-serif font-semibold text-white mb-4">
                   {item.title}
                 </h3>
-                <p className="text-gray-400 mb-8 flex-grow">
+                <p className="text-gray-300 mb-8 flex-grow">
                   {item.description}
                 </p>
                 <div className="space-y-2">
@@ -76,7 +76,7 @@ export default function Synergy() {
                   </h4>
                   <ul className="space-y-2">
                     {item.technologies.map((tech, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-400">
+                      <li key={idx} className="flex items-center text-sm text-gray-300">
                         <span className="w-1.5 h-1.5 bg-accent/50 rounded-full mr-2" />
                         {tech}
                       </li>

@@ -7,7 +7,7 @@ import { Briefcase, GraduationCap } from "lucide-react";
 export default function Journey() {
   return (
     <section id="journey" className="relative py-32 bg-[#081426]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-8 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -18,7 +18,7 @@ export default function Journey() {
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
             Journey Timeline
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             The evolution from engineering high-traffic architecture to structuring holistic wealth strategies.
           </p>
         </motion.div>
@@ -51,9 +51,9 @@ export default function Journey() {
                       {node.period}
                     </span>
                     {isEducation ? (
-                      <GraduationCap className="h-5 w-5 text-gray-400" />
+                      <GraduationCap className="h-5 w-5 text-gray-300" />
                     ) : (
-                      <Briefcase className="h-5 w-5 text-gray-400" />
+                      <Briefcase className="h-5 w-5 text-gray-300" />
                     )}
                   </div>
                   
@@ -63,7 +63,7 @@ export default function Journey() {
                   <div className="text-lg text-gray-300 mb-6 font-medium">
                     {node.company}
                   </div>
-                  <p className="text-gray-400 mb-6 pb-6 border-b border-white/10">
+                  <p className="text-gray-300 mb-6 pb-6 border-b border-white/10">
                     {node.description}
                   </p>
                   

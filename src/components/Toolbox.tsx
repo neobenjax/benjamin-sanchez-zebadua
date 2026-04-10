@@ -7,7 +7,7 @@ import { Layers } from "lucide-react";
 export default function Toolbox() {
   return (
     <section id="toolbox" className="relative py-32 bg-[#081426]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-8 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -19,7 +19,7 @@ export default function Toolbox() {
             <Layers className="text-accent w-8 h-8" />
           </div>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">The Toolbox</h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             A dual-track skill array combining technical deployment with deep financial architecture.
           </p>
         </motion.div>

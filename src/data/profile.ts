@@ -44,18 +44,25 @@ export interface ToolboxCategory {
   skills: string[];
 }
 
+export interface SocialLinks {
+  email: string;
+  linkedin: string;
+  github: string;
+}
+
 export interface ProfileData {
   hero: HeroData;
   synergy: SynergyItem[];
   journey: TimelineNode[];
   insights: InsightCaseStudy[];
   toolbox: ToolboxCategory[];
+  social: SocialLinks;
 }
 
 export const profileData: ProfileData = {
   hero: {
     headline: "Precision in Code. Performance in Finance.",
-    subtext: "I am Benjamin Sanchez Zebadua, based in Ottawa, ON (Relocated from Mexico). I apply a computing mindset to bridge the gap between complex data and actionable solutions. Whether architecting scalable systems or engineering financial strategies, I deliver precision-driven results for a digital-first economy. My journey took me from the high-traffic tech hubs of Mexico to the Canadian financial landscape, and I bring that same disciplined, global mindset to every project.",
+    subtext: "I am Benjamin Sanchez Zebadua, based in Ottawa, ON (Relocated from Mexico). I apply a computing mindset to bridge the gap between complex data and actionable solutions. Mastering 'VibeCoding' and AI-Leveraged Productivity, whether architecting scalable systems or engineering financial strategies, I deliver precision-driven results for a digital-first economy. My journey took me from the high-traffic tech hubs of Mexico to the Canadian financial landscape, and I bring that same disciplined, global mindset to every project.",
   },
 
   synergy: [
@@ -69,7 +76,7 @@ export const profileData: ProfileData = {
     {
       id: "work-ethic",
       title: "Uncompromising Work Ethic",
-      description: "Managing sensitive wealth data and enterprise banking databases at BBVA required strict due diligence and zero-margin for error.",
+      description: "Privacy & Compliance-Aware AI usage: High-efficiency automation guarded by strict data integrity standards.",
       iconName: "Briefcase",
       technologies: ["Due Diligence", "Enterprise Compliance", "Data Integrity"],
     },
@@ -170,11 +177,17 @@ export const profileData: ProfileData = {
   toolbox: [
     {
       title: "Track 1: Engineering",
-      skills: ["JavaScript (Lit Element)", "Node.js", "DevOps (GitHub/Bitbucket)", "Agile (Scrum/Jira)", "AWS", "Testing (Mocha/Chai)"]
+      skills: ["JavaScript (Lit Element)", "Node.js", "DevOps (GitHub/Bitbucket)", "Agile (Scrum/Jira)", "AWS", "Testing (Mocha/Chai)", "Vercel CI/CD", "DNS/Domain Config", "GitHub Actions"]
     },
     {
       title: "Track 2: Finance",
       skills: ["Strategic Tax Minimization", "Estate Planning", "ESG Risk Profiling", "Fundamental Analysis", "DCF Modeling", "IFC Certification", "Retirement Projections"]
     }
-  ]
+  ],
+
+  social: {
+    email: "besaze@hotmail.com",
+    linkedin: "https://www.linkedin.com/in/benjaminsanchezzebadua/",
+    github: "https://github.com/neobenjax"
+  }
 };

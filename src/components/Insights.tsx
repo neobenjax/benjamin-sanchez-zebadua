@@ -8,7 +8,7 @@ import { ResponsiveContainer, AreaChart, Area } from "recharts";
 export default function Insights() {
   return (
     <section id="insights" className="relative py-32 bg-primary">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-8 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,7 +24,7 @@ export default function Insights() {
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Strategic Feed</h2>
-            <p className="text-xl text-gray-400">
+            <p className="text-xl text-gray-300">
               High-end financial frameworks and thoughtful engineering approaches.
             </p>
           </div>
@@ -69,7 +69,7 @@ export default function Insights() {
               <div className="p-8 flex flex-col h-full relative z-10">
                 {/* Header with Badges */}
                 <div className="flex items-center justify-between mb-8">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-gray-300">
                     {insight.category}
                   </span>
                   
@@ -92,7 +92,7 @@ export default function Insights() {
                   {insight.title}
                 </h3>
                 
-                <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">
+                <p className="text-gray-300 text-sm leading-relaxed mb-8 flex-grow">
                   {insight.description}
                 </p>
                 
