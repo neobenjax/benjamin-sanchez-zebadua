@@ -30,7 +30,7 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white leading-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white leading-tight mb-6 mt-4">
             {profileData.hero.headline}
           </h1>
 
