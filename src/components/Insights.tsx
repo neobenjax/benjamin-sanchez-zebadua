@@ -74,15 +74,10 @@ export default function Insights() {
                   </span>
                   
                   {/* Dynamic Badge */}
-                  {insight.badgeType === "metric" ? (
+                  {insight.badgeType === "metric" && (
                     <div className="flex items-center px-2.5 py-1 rounded-sm bg-accent/20 border border-accent text-accent text-xs font-bold shadow-sm shadow-accent/20">
                       <TrendingUp className="w-3 h-3 mr-1.5" />
                       DATA INSIGHT
-                    </div>
-                  ) : (
-                    <div className="flex items-center px-2.5 py-1 rounded-sm glass text-gray-300 text-xs font-medium">
-                      <Clock className="w-3 h-3 mr-1.5" />
-                      {insight.readingTime}
                     </div>
                   )}
                 </div>
@@ -109,11 +104,13 @@ export default function Insights() {
                 </div>
 
                 {/* Footer Link */}
-                <div className="pt-4 border-t border-white/10 mt-auto">
+                <div className="pt-4 border-t border-white/10 mt-auto min-h-[40px]">
+                  {/* Action links hidden per UI cleanup:
                   <a href={`#${insight.id}`} className="inline-flex items-center text-sm font-semibold text-accent group-hover:text-white transition-colors">
                     Read Analysis
                     <ArrowUpRight className="ml-1 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </a>
+                  */}
                 </div>
               </div>
             </motion.div>
