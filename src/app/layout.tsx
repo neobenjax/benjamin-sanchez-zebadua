@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   description: "Bridging Software Engineering and Financial Strategy. Delivering precision-driven results for a digital-first economy.",
   keywords: ["FinTech", "Software Engineer", "Wealth Management", "Ottawa", "BBVA", "Financial Strategist"],
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon.png",
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
