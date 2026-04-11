@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
@@ -14,9 +14,43 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  themeColor: "#0A192F",
+};
+
 export const metadata: Metadata = {
-  title: "Benjamin - FinTech Strategist",
-  description: "Personal portfolio for Benjamin, a FinTech Strategist bridging Senior Software Engineering and Wealth Management.",
+  title: "Benjamin Sanchez Zebadua | FinTech Architect",
+  description: "Bridging Software Engineering and Financial Strategy. Delivering precision-driven results for a digital-first economy.",
+  keywords: ["FinTech", "Software Engineer", "Wealth Management", "Ottawa", "BBVA", "Financial Strategist"],
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  openGraph: {
+    title: "Benjamin Sanchez Zebadua | FinTech Architect",
+    description: "Precision in Code. Performance in Finance.",
+    url: "https://your-vercel-url.com",
+    siteName: "Benjamin Sanchez Zebadua",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Benjamin Sanchez Zebadua | FinTech Architect",
+      },
+    ],
+    locale: "en_CA",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Benjamin Sanchez Zebadua | FinTech Architect",
+    description: "Precision in Code. Performance in Finance.",
+    images: ["/og-image.png"],
+  },
+  alternates: {
+    canonical: "https://your-vercel-url.com",
+  },
 };
 
 export default function RootLayout({
