@@ -36,3 +36,31 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
 }
+
+/* FinTech Architect Aesthetic for Markdown Tables */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.prose th {
+  font-weight: 600;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background-color: rgba(16, 185, 129, 0.05);
+  color: var(--foreground);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.prose td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.prose tr:last-child td {
+  border-bottom: none;
+}

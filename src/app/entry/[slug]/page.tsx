@@ -1,6 +1,7 @@
 import { getPostData, getSortedPostsData } from "@/lib/posts";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
@@ -77,7 +78,7 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
           prose-pre:bg-[#081426] prose-pre:border prose-pre:border-white/10
           mb-20"
         >
-          <ReactMarkdown>{post.content}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
         </article>
       </div>
       <Footer />

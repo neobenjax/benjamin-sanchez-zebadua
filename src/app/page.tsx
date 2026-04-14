@@ -9,14 +9,13 @@ import { getSortedPostsData } from "@/lib/posts";
 
 export default function Home() {
   const allPosts = getSortedPostsData();
-  const recentPosts = allPosts.slice(0, 3);
 
   return (
     <main className="flex-grow">
       <Hero />
       <Synergy />
       <Journey />
-      <Insights posts={recentPosts} />
+      <Insights posts={allPosts} />
       <Toolbox />
       <Footer />
     </main>

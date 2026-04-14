@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { profileData } from "@/data/profile";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -44,19 +45,19 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
           >
-            <a
-              href="#synergy"
+            <Link
+              href="/#synergy"
               className="group flex items-center px-8 py-4 bg-accent text-primary font-bold rounded-sm text-lg hover:brightness-110 transition-all w-full sm:w-auto justify-center"
             >
               Explore Synergy
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
-              href="#journey"
+            </Link>
+            <Link
+              href="/#journey"
               className="flex items-center px-8 py-4 glass text-white font-semibold rounded-sm text-lg hover:bg-white/10 transition-all border border-transparent hover:border-white/20 w-full sm:w-auto justify-center"
             >
               View Journey
-            </a>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

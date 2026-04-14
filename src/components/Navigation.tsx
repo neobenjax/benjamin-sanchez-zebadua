@@ -6,11 +6,11 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "Synergy", href: "#synergy" },
-  { name: "Journey", href: "#journey" },
-  { name: "Insights", href: "#insights" },
-  { name: "Toolbox", href: "#toolbox" },
+  { name: "Home", href: "/" },
+  { name: "Synergy", href: "/#synergy" },
+  { name: "Journey", href: "/#journey" },
+  { name: "Insights", href: "/#insights" },
+  { name: "Toolbox", href: "/#toolbox" },
 ];
 
 export default function Navigation() {

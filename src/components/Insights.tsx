@@ -36,7 +36,7 @@ export default function Insights({ posts }: InsightsProps) {
 
         {/* Card-Based Feed Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post, idx) => (
+          {posts.slice(0, 3).map((post, idx) => (
             <motion.div
               key={post.slug}
               initial={{ opacity: 0, y: 20 }}
@@ -83,7 +83,7 @@ export default function Insights({ posts }: InsightsProps) {
         </div>
 
         {/* See More Button */}
-        {posts.length > 0 && (
+        {posts.length > 3 ? (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -98,6 +98,8 @@ export default function Insights({ posts }: InsightsProps) {
               View Full Strategic Feed
             </Link>
           </motion.div>
+        ) : (
+          <div className="h-16 mt-16" aria-hidden="true" />
         )}
       </div>
     </section>

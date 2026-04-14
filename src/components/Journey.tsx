@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { profileData } from "@/data/profile";
 import { Briefcase, GraduationCap } from "lucide-react";
+import Link from "next/link";
 
 export default function Journey() {
   return (
@@ -18,9 +19,18 @@ export default function Journey() {
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
             Journey Timeline
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            The evolution from engineering high-traffic architecture to structuring holistic wealth strategies.
-          </p>
+          <div className="flex flex-col items-center">
+            <p className="text-xl text-gray-300 max-w-2xl text-center">
+              The evolution from engineering high-traffic architecture to structuring holistic wealth strategies.
+            </p>
+            <Link 
+              href="/entry/001-vibecoding-workflow" 
+              className="mt-6 inline-flex items-center px-5 py-2.5 glass border border-accent/20 rounded-sm text-sm text-accent hover:bg-white/5 hover:border-accent/40 transition-all group"
+            >
+              Read about how I engineered this site in under 4 hours
+              <span className="ml-2 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span>
+            </Link>
+          </div>
         </motion.div>
 
         <div className="relative max-w-4xl mx-auto">
