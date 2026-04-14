@@ -64,3 +64,21 @@ h1, h2, h3, h4, h5, h6 {
 .prose tr:last-child td {
   border-bottom: none;
 }
+
+/* Custom Scrollbar for Code and Tables */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(10, 25, 47, 0.5);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #10B981;
+  border-radius: 4px;
+}
+
+/* React Medium Image Zoom Override */
+[data-rmiz-modal-overlay="visible"] {
+  background-color: rgba(10, 25, 47, 0.9) !important;
+}
