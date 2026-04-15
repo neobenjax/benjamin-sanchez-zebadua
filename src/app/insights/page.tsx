@@ -48,10 +48,11 @@ export default function InsightsList() {
                   
                   <div className="flex items-center px-2.5 py-1 rounded-sm glass text-gray-300 text-xs font-medium whitespace-nowrap ml-4">
                     <Clock className="w-3 h-3 mr-1.5" />
-                    {new Date(post.date).toLocaleDateString('en-US', {
+                    {new Date(post.date).toLocaleDateString('en-CA', {
                       month: 'short',
                       day: 'numeric',
-                      year: 'numeric'
+                      year: 'numeric',
+                      timeZone: 'UTC'
                     })}
                   </div>
                 </div>

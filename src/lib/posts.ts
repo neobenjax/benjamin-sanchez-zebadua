@@ -45,7 +45,7 @@ export function getSortedPostsData(): PostInfo[] {
       return {
         slug,
         title: matterResult.data.title || "Untitled",
-        date: matterResult.data.date || new Date().toISOString(),
+        date: matterResult.data.date ? `${matterResult.data.date}T00:00:00` : new Date().toISOString(),
         description: matterResult.data.description || "",
         category: matterResult.data.category || "General",
       };
@@ -73,7 +73,7 @@ export function getPostData(slug: string): PostContent | null {
       frontMatter: {
         slug,
         title: matterResult.data.title || "Untitled",
-        date: matterResult.data.date || new Date().toISOString(),
+        date: matterResult.data.date ? `${matterResult.data.date}T00:00:00` : new Date().toISOString(),
         description: matterResult.data.description || "",
         category: matterResult.data.category || "General",
       },

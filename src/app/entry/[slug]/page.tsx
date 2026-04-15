@@ -54,10 +54,11 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
             </span>
             <span className="w-1.5 h-1.5 bg-accent rounded-full" />
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-300">
-              {new Date(post.frontMatter.date).toLocaleDateString('en-US', {
+              {new Date(post.frontMatter.date).toLocaleDateString('en-CA', {
                 year: 'numeric',
                 month: 'long',
-                day: 'numeric'
+                day: 'numeric',
+                timeZone: 'UTC'
               })}
             </span>
           </div>
