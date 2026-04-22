@@ -186,7 +186,7 @@ export const profileData: ProfileData = {
   ],
 
   social: {
-    email: "besaze@hotmail.com",
+    email: "hello@benjaminsz.com",
     linkedin: "https://www.linkedin.com/in/benjaminsanchezzebadua/",
     github: "https://github.com/neobenjax"
   }

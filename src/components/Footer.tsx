@@ -26,7 +26,7 @@ export default function Footer() {
               Bringing quantitative rigor and software scaling discipline to holistic wealth and risk management.
             </p>
             <a
-              href={`mailto:besaze@hotmail.com?subject=${mailSubject}&body=${mailBody}`}
+              href={`mailto:hello@benjaminsz.com?subject=${mailSubject}&body=${mailBody}`}
               className="inline-flex items-center text-accent font-semibold text-lg hover:text-white transition-colors"
             >
               Reach Out via Email

@@ -10,7 +10,7 @@ export default function FAB() {
   return (
     <div className="fixed bottom-6 right-6 z-50">
       <a
-        href={`mailto:besaze@hotmail.com?subject=${mailSubject}&body=${mailBody}`}
+        href={`mailto:hello@benjaminsz.com?subject=${mailSubject}&body=${mailBody}`}
         className="group relative flex items-center justify-center w-14 h-14 bg-[#10B981] text-[#0A192F] rounded-full shadow-lg shadow-[#10B981]/30 hover:shadow-[#10B981]/50 hover:scale-110 transition-all duration-300"
         aria-label="Contact Email"
       >
