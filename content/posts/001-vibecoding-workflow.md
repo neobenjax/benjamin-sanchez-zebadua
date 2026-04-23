@@ -4,6 +4,7 @@ date: "2026-04-14"
 description: "How I leveraged a Computing Mindset and AI Agents to bridge the gap between a polished resume and a live FinTech brand."
 category: "Software Architecture"
 coverImage: "/images/posts/001-vibecoding-hero.png"
+tags: ["VibeCoding", "SoftwareArchitecture", "DevOps", "AIAgents"]
 ---
 
 # The Death of Portfolio Procrastination

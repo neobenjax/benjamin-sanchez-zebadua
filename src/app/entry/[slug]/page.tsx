@@ -7,6 +7,7 @@ import Link from "next/link";
 import Footer from "@/components/Footer";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
+import SkillTag from "@/components/SkillTag";
 
 export async function generateStaticParams() {
   const posts = getSortedPostsData();
@@ -68,6 +69,13 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
           <p className="text-xl text-gray-300">
             {post.frontMatter.description}
           </p>
+          {post.frontMatter.tags && post.frontMatter.tags.length > 0 && (
+            <div className="flex flex-wrap mt-6">
+              {post.frontMatter.tags.map((tag) => (
+                <SkillTag key={tag} tag={tag} />
+              ))}
+            </div>
+          )}
         </header>
 
         {/* Markdown Content */}
@@ -109,6 +117,17 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
             {post.content}
           </ReactMarkdown>
         </article>
+
+        {/* Bottom Tags */}
+        {post.frontMatter.tags && post.frontMatter.tags.length > 0 && (
+          <div className="border-t border-white/10 pt-8 mt-8">
+            <div className="flex flex-wrap">
+              {post.frontMatter.tags.map((tag) => (
+                <SkillTag key={tag} tag={tag} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
       <Footer />
     </main>

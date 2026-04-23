@@ -10,6 +10,7 @@ export interface PostInfo {
   date: string;
   description: string;
   category: string;
+  tags?: string[];
 }
 
 export interface PostContent {
@@ -34,7 +35,7 @@ export function getSortedPostsData(): PostInfo[] {
   const fileNames = fs.readdirSync(postsDirectory);
 
   const allPostsData = fileNames
-    .filter((fileName) => fileName.endsWith(".md"))
+    .filter((fileName) => fileName.endsWith(".md") && /^\d{3}-/.test(fileName))
     .map((fileName) => {
       const slug = fileName.replace(/\.md$/, "");
       const fullPath = path.join(postsDirectory, fileName);
@@ -48,6 +49,7 @@ export function getSortedPostsData(): PostInfo[] {
         date: matterResult.data.date ? `${matterResult.data.date}T00:00:00` : new Date().toISOString(),
         description: matterResult.data.description || "",
         category: matterResult.data.category || "General",
+        tags: matterResult.data.tags || [],
       };
     });
 
@@ -76,6 +78,7 @@ export function getPostData(slug: string): PostContent | null {
         date: matterResult.data.date ? `${matterResult.data.date}T00:00:00` : new Date().toISOString(),
         description: matterResult.data.description || "",
         category: matterResult.data.category || "General",
+        tags: matterResult.data.tags || [],
       },
       content: matterResult.content,
     };

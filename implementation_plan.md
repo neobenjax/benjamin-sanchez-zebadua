@@ -1,50 +1,26 @@
-# Implementation Plan: Benjamin's Portfolio
+# Implementation Plan: Interactive Skill Tagging System
 
-## 1. Context & Objectives
-Build a production-ready, mobile-first personal portfolio for Benjamin, a FinTech Strategist transitioning from Senior Software Engineer to Canadian Wealth Management. The design language is "Institutional Trust" (similar to Goldman Sachs or Stripe) featuring a default dark mode, navy primary colors, and success green accents.
+## 1. Front-Matter Parsing Update (`src/lib/posts.ts`)
+- Update `PostInfo` and `PostContent` interfaces to include `tags: string[]`.
+- Update `getSortedPostsData` and `getPostData` to extract the `tags` array from `matterResult.data.tags`. Ensure it falls back to an empty array `[]` if not present.
 
-## 2. Tech Stack Setup
-- **Framework**: Next.js 14+ (App Router)
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Icons**: Lucide-React
-- **Architecture**: Modular components driven by a central `src/data/profile.ts` file.
+## 2. UI Implementation: SkillTag Component (`src/components/SkillTag.tsx`)
+- Create a `SkillTag` React component inside `src/components/SkillTag.tsx` for reusability. It should receive `tag: string`.
+- Styles: Small 'pill' shape, thin Success Green (`#10B981` / `text-accent` / `border-accent`) border, transparent background, Success Green text.
+- Interaction: Wrapper is a `Link` directing to `/insights?tag={tag}`.
 
-## 3. Execution Phases
+## 3. UI Implementation: Single Post View (`src/app/entry/[slug]/page.tsx`)
+- Import the `SkillTag` component.
+- Extract `post.frontMatter.tags`.
+- Top Placement: Display the tags container between the description and the first H1 header (before the markdown content).
+- Bottom Placement: Display the tags container right after the markdown content block, just before the footer container.
 
-### Phase 1: Project Initialization & Configuration (Current Step)
-- Create Next.js application using `create-next-app`.
-- Install necessary dependencies (`framer-motion`, `lucide-react`, `clsx`, `tailwind-merge`).
-- Configure `tailwind.config.ts` with custom color palette:
-  - Primary: Navy (`#0A192F`)
-  - Secondary: Charcoal (Dark Grays)
-  - Accent: Success Green (`#10B981`)
-- Set up global CSS (`globals.css`) for default dark mode, typography, and glassmorphism utilities.
-- Create the responsive **Navigation Component** as a foundation.
+## 4. Filtering Logic (`src/app/insights/page.tsx`)
+- Update the page component to receive `searchParams` as a Promise (adhering to Next.js >15 conventions).
+- Await `searchParams` and extract the `tag` parameter.
+- Filter the `posts` array to only include those containing the active tag.
+- Render an active filter indicator and a "Clear Filter" button when a tag is selected.
 
-### Phase 2: Core Data Engine
-- Establish `src/data/profile.ts`.
-- Define typing and populate initial drafted data for:
-  - Hero Data
-  - Synergy Competencies
-  - Journey Timeline Nodes
-  - Insights / Case Studies
-  - Toolbox (Tech/Finance)
-
-### Phase 3: UI Component Assembly
-- **Hero Section**: Implement with Framer Motion for weighted, sophisticated entrance.
-- **The Synergy Grid**: Glassmorphism cards displaying core competencies.
-- **Journey Timeline**: Interactive timeline showing phase transitions.
-- **Insights Grid**: Cards focusing on financial case studies instead of typical code repos.
-- **The Toolbox**: Combined grid layout using subtle hover state micro-animations.
-
-### Phase 4: Integration & UX Polish
-- Assemble sections into the main page (`src/app/page.tsx`).
-- Refine mobile responsiveness (hamburger menus, stacking grids).
-- Add scroll-triggered animations and scroll spy for navigation.
-- Audit performance and SEO metadata.
-
-### Phase 5: Testing, Walkthrough & Delivery
-- Write detailed walkthrough guide for manual testing.
-- Obtain user approval for functionality and design.
-- Create git feature branch, stash, commit, push, merge, and clean up.
+## 5. Template Update (`content/posts/*.md`)
+- Update `000-template.md` front-matter to include `tags: ["architecture", "automation"]`.
+- Update the other existing markdown files (`000-welcome.md`, `001-vibecoding-workflow.md`) with placeholder tags to test the system properly.

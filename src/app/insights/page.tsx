@@ -1,15 +1,29 @@
 import { getSortedPostsData } from "@/lib/posts";
 import Link from "next/link";
-import { ArrowLeft, Clock, TrendingUp, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, Clock, TrendingUp, ArrowUpRight, X } from "lucide-react";
 import Footer from "@/components/Footer";
+import TagFilterDropdown from "@/components/TagFilterDropdown";
+import tagsData from "@/data/tags.json";
 
 export const metadata = {
   title: "Strategic Feed | Benjamin Sanchez Zebadua",
   description: "Aggregated thought leadership and professional insights.",
 };
 
-export default function InsightsList() {
-  const posts = getSortedPostsData();
+export default async function InsightsList({ searchParams }: { searchParams: Promise<{ tag?: string }> }) {
+  const resolvedParams = await searchParams;
+  const activeTag = resolvedParams?.tag;
+  const allPosts = getSortedPostsData();
+  
+  let displayTag = activeTag;
+  if (activeTag) {
+    const matchedTag = tagsData.find(t => t.toLowerCase() === activeTag.toLowerCase());
+    if (matchedTag) displayTag = matchedTag;
+  }
+
+  const posts = activeTag
+    ? allPosts.filter(post => post.tags && post.tags.some(t => t.toLowerCase() === activeTag.toLowerCase()))
+    : allPosts;
 
   return (
     <main className="flex-grow bg-primary pt-32 min-h-screen flex flex-col">
@@ -31,6 +45,23 @@ export default function InsightsList() {
           <p className="text-xl text-gray-300 max-w-2xl">
             A complete archive of engineering blueprints, tax-minimization logic, and architectural case studies.
           </p>
+          
+          <div className="mt-6 max-w-xs">
+            <TagFilterDropdown tags={tagsData} />
+          </div>
+          
+          {activeTag && (
+            <div className="flex items-center space-x-4 mt-8">
+              <span className="text-gray-400">Filtered by skill:</span>
+              <span className="inline-flex items-center px-3 py-1 rounded-full border border-accent text-accent text-xs font-semibold bg-accent/10">
+                {displayTag}
+              </span>
+              <Link href="/insights" className="inline-flex items-center text-sm text-gray-400 hover:text-white transition-colors">
+                <X className="w-4 h-4 mr-1" />
+                Clear Filter
+              </Link>
+            </div>
+          )}
         </div>
 
         {/* Grid */}

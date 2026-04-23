@@ -5,6 +5,7 @@ description: "A comprehensive formatting benchmark utilizing standard Next.js Ta
 category: "Engineering Protocol"
 author: "Benjamin Sanchez Zebadua"
 coverImage: "/images/posts/000-template/cover.png"
+tags: ["NextJS", "TailwindCSS", "Markdown", "Documentation"]
 ---
 
 # The Strategic Feed: Markdown Draft Template

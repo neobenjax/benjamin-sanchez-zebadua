@@ -105,7 +105,7 @@ export const profileData: ProfileData = {
     },
     {
       id: "lambton-pg",
-      period: "Present Phase (Canada)",
+      period: "Sept 2024 — Present",
       role: "PG Financial Planning & Wealth Management",
       company: "Lambton College",
       description: "Bridging theoretical finance with real-world client solutions.",

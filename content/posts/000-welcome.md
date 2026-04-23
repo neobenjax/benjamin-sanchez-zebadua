@@ -3,6 +3,7 @@ title: "Tax Minimization & Estate Planning Architecture"
 date: "2026-04-14"
 description: "A dual-core approach mapping Software Engineering precision directly into Canadian Wealth Management workflows."
 category: "Wealth Management"
+tags: ["WealthManagement", "TaxOptimization", "SystematicRisk", "FinTech"]
 ---
 
 # Welcome to the Strategic Feed
