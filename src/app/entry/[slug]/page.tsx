@@ -24,6 +24,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${post.frontMatter.title} - Benjamin Sanchez Zebadua`,
     description: post.frontMatter.description,
+    alternates: {
+      canonical: `/entry/${slug}`,
+    },
+    openGraph: {
+      url: `/entry/${slug}`,
+    },
   };
 }
 

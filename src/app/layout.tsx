@@ -20,6 +20,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://benjaminsz.com'),
   title: "Benjamin Sanchez Zebadua | FinTech Architect",
   description: "Bridging Software Engineering and Financial Strategy. Delivering precision-driven results for a digital-first economy.",
   keywords: ["FinTech", "Software Engineer", "Wealth Management", "Ottawa", "BBVA", "Financial Strategist"],
@@ -35,8 +36,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Benjamin Sanchez Zebadua | FinTech Architect",
     description: "Precision in Code. Performance in Finance.",
-    url: "https://your-vercel-url.com",
-    siteName: "Benjamin Sanchez Zebadua",
+    url: "https://benjaminsz.com",
+    siteName: "Benjamin Sanchez Zebadua | FinTech Architect",
     images: [
       {
         url: "/og-image.png",
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://your-vercel-url.com",
+    canonical: "https://benjaminsz.com",
   },
 };
 
