@@ -5,8 +5,8 @@
 - [x] Run `node scripts/generate-tags.mjs`
 - [x] Verify `src/data/tags.json` updates
 - [x] Run `npm run build` to validate the site
-- [ ] Create branch `feature/publish-003-intentionality`
-- [ ] Commit changes to the feature branch
-- [ ] Push branch to GitHub
+- [x] Create branch `feature/publish-003-intentionality`
+- [x] Commit changes to the feature branch
+- [x] Push branch to GitHub
 - [ ] Merge branch into `main` (Post-Approval)
 - [ ] Delete feature branch
