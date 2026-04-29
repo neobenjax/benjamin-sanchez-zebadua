@@ -1,9 +1,12 @@
-# Task List: Interactive Skill Tagging System
+# Task List: Publish "Intentionality and Milestones"
 
-- [ ] Update `src/lib/posts.ts` to support parsing the `tags` field from markdown front-matter.
-- [ ] Create `SkillTag` component in `src/components/SkillTag.tsx`.
-- [ ] Integrate tags at the top and bottom of `src/app/entry/[slug]/page.tsx`.
-- [ ] Add filter logic and "Clear Filter" button to `src/app/insights/page.tsx`.
-- [ ] Update markdown posts (`000-template.md`, `000-welcome.md`, `001-vibecoding-workflow.md`) to include `tags`.
-- [ ] Write a detailed walkthrough guide with changes and instructions for manual testing.
-- [ ] Ask for user approval before stashing, committing, and pushing code.
+- [x] Correct `coverImage` extension in `003-intentionality-and-milestones.md` (.png -> .jpg)
+- [x] Verify image assets in `/public/images/posts/003-intentionality-and-milestones/`
+- [x] Run `node scripts/generate-tags.mjs`
+- [x] Verify `src/data/tags.json` updates
+- [x] Run `npm run build` to validate the site
+- [ ] Create branch `feature/publish-003-intentionality`
+- [ ] Commit changes to the feature branch
+- [ ] Push branch to GitHub
+- [ ] Merge branch into `main` (Post-Approval)
+- [ ] Delete feature branch
