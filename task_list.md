@@ -8,5 +8,5 @@
 - [x] Create branch `feature/publish-003-intentionality`
 - [x] Commit changes to the feature branch
 - [x] Push branch to GitHub
-- [ ] Merge branch into `main` (Post-Approval)
-- [ ] Delete feature branch
+- [x] Merge branch into `main` (Post-Approval)
+- [x] Delete feature branch
