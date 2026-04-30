@@ -47,6 +47,7 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
         {/* Navigation */}
         <Link
           href="/"
+          data-umami-event="portfolio-return"
           className="inline-flex items-center text-accent mb-12 hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />

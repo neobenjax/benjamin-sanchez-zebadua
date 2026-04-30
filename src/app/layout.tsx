@@ -4,6 +4,7 @@ import "./globals.css";
 import Navigation from "@/components/Navigation";
 import FAB from "@/components/FAB";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -70,6 +71,15 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${playfair.variable} h-full scroll-smooth`}
     >
+      <head>
+        {process.env.NODE_ENV === "production" && (
+          <Script
+            src="https://cloud.umami.is/script.js"
+            data-website-id="0349ac64-ebc4-4bb6-9963-617ab54ebf4b"
+            strategy="afterInteractive"
+          />
+        )}
+      </head>
       <body className="min-h-full flex flex-col bg-primary text-foreground">
         <Navigation />
         {children}
