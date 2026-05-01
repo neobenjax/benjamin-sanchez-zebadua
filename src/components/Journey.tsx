@@ -4,10 +4,13 @@ import { motion } from "framer-motion";
 import { profileData } from "@/data/profile";
 import { Briefcase, GraduationCap } from "lucide-react";
 import Link from "next/link";
+import { useSectionTracking } from "@/hooks/useSectionTracking";
 
 export default function Journey() {
+  const sectionRef = useSectionTracking("journey");
+
   return (
-    <section id="journey" className="relative py-32 bg-[#081426]">
+    <section ref={sectionRef} id="journey" className="relative py-32 bg-[#081426]">
       <div className="max-w-7xl mx-auto px-8 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

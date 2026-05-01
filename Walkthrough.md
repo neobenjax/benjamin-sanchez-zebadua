@@ -1,43 +1,50 @@
-# Metadata Update Walkthrough
+# Walkthrough: Behavioral Events & Visibility Tracking
 
-The portfolio project has been successfully updated to use the production domain (`benjaminsz.com`) for all metadata and Open Graph tags.
+## Summary of Changes
+1. **Section Visibility Tracking**:
+   - Created `src/hooks/useSectionTracking.ts`. This custom hook utilizes the `IntersectionObserver` API to monitor elements on the screen. It triggers an `umami.track("Section View", { name: "..." })` event whenever the bound section remains visible on screen for more than 1 second.
+   - Connected this hook to four primary architectural components:
+     - `Hero.tsx` -> Tracks as `hero`
+     - `Journey.tsx` -> Tracks as `journey`
+     - `Insights.tsx` (Strategic Feed) -> Tracks as `strategic-feed`
+     - `Toolbox.tsx` (Skills) -> Tracks as `skills`
 
-## What Was Changed
+2. **Interaction Tracking (Intent Events)**:
+   - Modified `Insights.tsx` to add `data-umami-event="article-card-click"` to the post preview links.
+   - Modified `TagFilterDropdown.tsx` to utilize `data-umami-event="filter-dropdown-use"` for tracking usage of the insight filtering mechanism.
+   - Modified `SkillTag.tsx` to utilize `data-umami-event="tag-pill-click"` to track direct clicks on the skill pills.
 
-1. **`src/app/layout.tsx`**
-   - Added `metadataBase: new URL('https://benjaminsz.com')` to auto-resolve relative metadata paths.
-   - Replaced `https://your-vercel-url.com` with `https://benjaminsz.com` for `openGraph.url` and `alternates.canonical`.
-   - Updated `openGraph.siteName` to "Benjamin Sanchez Zebadua | FinTech Architect" for consistent branding.
+3. **Performance Telemetry**:
+   - Updated the `next/script` in `src/app/layout.tsx` to include `data-performance="true"`. This allows Umami to automatically capture core web vitals and overall page performance metrics out-of-the-box.
 
-2. **`src/app/entry/[slug]/page.tsx`**
-   - Configured `generateMetadata` to explicitly pass `/entry/${slug}` for `canonical` and `openGraph.url`.
-   - Thanks to Next.js's native features, these relative URLs combine with `metadataBase` to automatically form complete production URLs like `https://benjaminsz.com/entry/some-article-slug`.
+4. **Error Monitoring**:
+   - Created `src/app/not-found.tsx` to provide a visually congruent "404 Not Found" experience that automatically logs a `System Error` event to Umami containing the requested path.
+   - Created `src/app/error.tsx` as a Next.js error boundary to catch internal application errors (500s) and log a `System Error` to Umami before presenting the user with an option to recover the application state.
+   - Implemented an elegant visual language matching the `bg-primary` and `accent` aesthetic for both error pages.
+
+5. **Type Safety**:
+   - Added `src/types/global.d.ts` to cleanly extend the `Window` interface, preventing TypeScript errors related to accessing `window.umami` throughout the codebase.
 
 ## How to Test Manually
 
-Once the application is running locally (or in your production environment), you can verify the meta tags in your browser.
+1. **Verify Development Tracking**:
+   - By default, Umami doesn't execute its script in `development` mode (due to `NODE_ENV === "production"` in `layout.tsx`). To test locally:
+     - Run `npm run build && npm start`.
+     - Alternatively, temporarily remove `{process.env.NODE_ENV === "production" && (` in `layout.tsx` and run `npm run dev`.
 
-1. **Start the Development Server**
-   Run the project using `npm run dev` and navigate to `http://localhost:3000`.
+2. **Test Section Visibility Tracking**:
+   - Load the homepage. Keep the Hero section in view for >1 second.
+   - Scroll down slowly. Stop at the Journey timeline, the Strategic Feed, and The Toolbox. Ensure you pause for at least 1 second on each.
+   - Open your browser's **Network tab** (F12 > Network). You should see `POST` requests to `https://cloud.umami.is/api/send` containing `"name": "Section View"` and `"data": { "name": "..." }`.
 
-2. **Inspect the `<head>` of the Homepage**
-   - Right-click anywhere on the page and select **"Inspect"** or **"Inspect Element"**.
-   - Open the `<head>` section of the HTML document.
-   - Look for the following elements:
-     - `<link rel="canonical" href="https://benjaminsz.com">`
-     - `<meta property="og:url" content="https://benjaminsz.com">`
-     - `<meta property="og:image" content="https://benjaminsz.com/og-image.png">`
-     - `<meta property="og:site_name" content="Benjamin Sanchez Zebadua | FinTech Architect">`
+3. **Test Intent Events (Interactions)**:
+   - On the homepage or Insights page, click an Article Card Link ("Read Analysis").
+   - Click a "Skill Pill" (e.g., "Next.js" or "Wealth Management").
+   - Change a selection in the Tag Filter Dropdown on the Insights page.
+   - In the Network tab, look for the `POST` requests recording these direct event names (`article-card-click`, `tag-pill-click`, `filter-dropdown-use`).
 
-3. **Inspect a Dynamic Route (e.g., an article page)**
-   - Click on any blog post or case study (e.g., `http://localhost:3000/entry/003-intentionality-and-milestones`).
-   - Right-click and inspect the `<head>` element again.
-   - Look for the updated dynamic URLs:
-     - `<link rel="canonical" href="https://benjaminsz.com/entry/003-intentionality-and-milestones">`
-     - `<meta property="og:url" content="https://benjaminsz.com/entry/003-intentionality-and-milestones">`
+4. **Test Error Boundaries**:
+   - Navigate to a non-existent URL (e.g., `http://localhost:3000/does-not-exist`). You should see the custom "404" screen. Check the Network tab to ensure a `System Error` event with `type: '404'` fired.
 
-4. **Test with Social Sharing Debuggers (Production Only)**
-   Once the site is deployed, you can use these tools to preview how the card will look when shared:
-   - [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/)
-   - [Twitter Card Validator](https://cards-dev.twitter.com/validator) (or X's current equivalent)
-   - Simply paste your domain or an article URL into these tools, and they will fetch and display the preview image (`/og-image.png`), title, description, and canonical URL.
+5. **Test Performance Telemetry**:
+   - Performance metrics are collected automatically when the page load lifecycle completes. Reload the homepage and look for the final `POST` event to Umami; its payload should contain additional variables related to Core Web Vitals (LCP, CLS, etc.).

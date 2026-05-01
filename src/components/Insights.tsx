@@ -4,14 +4,17 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Clock } from "lucide-react";
 import Link from "next/link";
 import { PostInfo } from "@/lib/posts";
+import { useSectionTracking } from "@/hooks/useSectionTracking";
 
 interface InsightsProps {
   posts: PostInfo[];
 }
 
 export default function Insights({ posts }: InsightsProps) {
+  const sectionRef = useSectionTracking("strategic-feed");
+
   return (
-    <section id="insights" className="relative py-32 bg-primary">
+    <section ref={sectionRef} id="insights" className="relative py-32 bg-primary">
       <div className="max-w-7xl mx-auto px-8 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -73,7 +76,7 @@ export default function Insights({ posts }: InsightsProps) {
 
                 {/* Footer Link */}
                 <div className="pt-4 border-t border-white/10 mt-auto min-h-[40px]">
-                  <Link href={`/entry/${post.slug}`} className="inline-flex items-center text-sm font-semibold text-accent group-hover:text-white transition-colors">
+                  <Link href={`/entry/${post.slug}`} data-umami-event="article-card-click" className="inline-flex items-center text-sm font-semibold text-accent group-hover:text-white transition-colors">
                     Read Analysis
                     <ArrowUpRight className="ml-1 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </Link>

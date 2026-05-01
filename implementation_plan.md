@@ -1,22 +1,23 @@
-# Implementation Plan: Integration and Publication of "Intentionality and Milestones" - COMPLETED
+# Implementation Plan: Behavioral Events & Visibility Tracking
 
-## Objective
-Integrate the new article `003-intentionality-and-milestones.md` into the portfolio, ensure all technical requirements (taxonomy, assets, build) are met, and publish the changes to the repository.
+## 1. Section Visibility Tracking
+- Create a new hook `src/hooks/useSectionTracking.ts` utilizing `IntersectionObserver`.
+- The hook will trigger `window.umami.track('Section View', { name: sectionName })` when the section is visible for more than 1 second.
+- Integrate the hook into:
+  - `src/components/Hero.tsx` -> 'hero'
+  - `src/components/Journey.tsx` -> 'journey'
+  - `src/components/Insights.tsx` -> 'strategic-feed'
+  - `src/components/Toolbox.tsx` -> 'skills'
 
-## Steps Summary
+## 2. Interaction Tracking (Intent Events)
+- In `src/components/Insights.tsx`, add `data-umami-event="article-card-click"` to the post links.
+- In `src/components/TagFilterDropdown.tsx`, update the event to `data-umami-event="filter-dropdown-use"`.
+- In `src/components/SkillTag.tsx`, add `data-umami-event="tag-pill-click"` to the `Link` element.
 
-### Phase 1: Content Validation & Correction - DONE
-- Corrected `coverImage` extension in `content/posts/003-intentionality-and-milestones.md`.
-- Verified image assets.
+## 3. Performance Telemetry
+- Modify `src/app/layout.tsx` to include `data-performance="true"` on the Umami `<Script>` tag.
+- Ensure the types for `window.umami` are handled via global type declaration or safe checks.
 
-### Phase 2: Technical Integration - DONE
-- Refreshed taxonomy using `node scripts/generate-tags.mjs`.
-- Validated build with `npm run build`.
-
-### Phase 3: Deployment Workflow - DONE
-- Created and pushed `feature/publish-003-intentionality`.
-- Merged into `main`.
-- Bumped version to `0.5.2`.
-- Purged feature branch.
-
-## Status: Published ✅
+## 4. Error Monitoring
+- Create `src/app/not-found.tsx` to automatically trigger `umami.track('System Error', { type: '404', path: window.location.pathname })` on mount.
+- Create `src/app/error.tsx` to trigger a similar event for type '500'.

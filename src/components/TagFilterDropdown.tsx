@@ -10,7 +10,7 @@ export default function TagFilterDropdown({ tags }: { tags: string[] }) {
   return (
     <select
       value={currentTag}
-      data-umami-event="filter-used"
+      data-umami-event="filter-dropdown-use"
       onChange={(e) => {
         const val = e.target.value;
         if (val) {

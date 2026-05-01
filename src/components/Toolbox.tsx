@@ -3,10 +3,13 @@
 import { motion } from "framer-motion";
 import { profileData } from "@/data/profile";
 import { Layers } from "lucide-react";
+import { useSectionTracking } from "@/hooks/useSectionTracking";
 
 export default function Toolbox() {
+  const sectionRef = useSectionTracking("skills");
+
   return (
-    <section id="toolbox" className="relative py-32 bg-[#081426]">
+    <section ref={sectionRef} id="toolbox" className="relative py-32 bg-[#081426]">
       <div className="max-w-7xl mx-auto px-8 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
