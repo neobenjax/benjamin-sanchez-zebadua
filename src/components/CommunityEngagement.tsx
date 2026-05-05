@@ -3,31 +3,15 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, HeartHandshake } from "lucide-react";
 import Link from "next/link";
+import { PostInfo } from "@/lib/posts";
 
-const engagements = [
-  {
-    slug: "cn-cycle-2026",
-    role: "Route Captain",
-    event: "CN Cycle for CHEO (May 2026)",
-    description: "Oversaw safety and logistics for 6,000+ participants, coordinating Route Assistants and local officials.",
-  },
-  {
-    slug: "mutchmor-2025",
-    role: "Setup Supervisor",
-    event: "Mutchmor Book Sale (March 2025)",
-    description: "Coordinated volunteer teams and dynamic inventory flow for a massive community retail transformation.",
-  },
-  {
-    slug: "cn-cycle-2025",
-    role: "General Support",
-    event: "CN Cycle for CHEO (May 2025)",
-    description: "Focused on site integrity, assembly, and athlete logistics to ensure a flawless event foundation.",
-  }
-];
+interface CommunityEngagementProps {
+  stories: PostInfo[];
+}
 
-export default function CommunityEngagement() {
+export default function CommunityEngagement({ stories }: CommunityEngagementProps) {
   return (
-    <section id="community" className="relative py-32 bg-primary/95">
+    <section id="purpose-driven" data-umami-event="section-view-leadership" className="relative py-32 bg-primary/95">
       <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary/95 to-primary z-0"></div>
       <div className="max-w-7xl mx-auto px-8 lg:px-8 relative z-10">
         <motion.div
@@ -53,7 +37,7 @@ export default function CommunityEngagement() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {engagements.map((item, idx) => (
+          {stories.map((item, idx) => (
             <motion.div
               key={item.slug}
               initial={{ opacity: 0, y: 20 }}
@@ -65,12 +49,13 @@ export default function CommunityEngagement() {
               <div className="p-8 flex flex-col h-full relative z-10">
                 <div className="flex items-center justify-between mb-6">
                   <span className="text-xs font-semibold uppercase tracking-wider text-accent">
-                    {item.role}
+                    {/* Extract Role from title if possible, or just use category */}
+                    {item.title.split(":")[0]}
                   </span>
                 </div>
                 
                 <h3 className="text-2xl font-serif text-white font-bold mb-3 group-hover:text-accent transition-colors duration-300">
-                  {item.event}
+                  {item.title.includes(":") ? item.title.split(":")[1].trim() : item.title}
                 </h3>
                 
                 <p className="text-gray-300 text-sm leading-relaxed mb-8 flex-grow">

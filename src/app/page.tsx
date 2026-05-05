@@ -10,13 +10,14 @@ import { getSortedPostsData } from "@/lib/posts";
 
 export default function Home() {
   const allPosts = getSortedPostsData(true);
+  const stories = getSortedPostsData(false).filter(post => post.type === "story" && post.slug !== "about-me");
 
   return (
     <main className="flex-grow">
       <Hero />
       <Synergy />
       <Journey />
-      <CommunityEngagement />
+      <CommunityEngagement stories={stories} />
       <Insights posts={allPosts} />
       <Toolbox />
       <Footer />

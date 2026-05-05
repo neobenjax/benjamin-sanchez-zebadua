@@ -2,7 +2,7 @@ import { getPostData, getSortedPostsData } from "@/lib/posts";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, HeartHandshake } from "lucide-react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import Zoom from "react-medium-image-zoom";
@@ -57,9 +57,16 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
         {/* Header */}
         <header className="mb-12 border-b border-white/10 pb-12">
           <div className="flex items-center space-x-4 mb-6">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-300">
-              {post.frontMatter.category}
-            </span>
+            {post.frontMatter.type === "story" ? (
+              <span className="text-accent tracking-widest text-sm font-semibold uppercase flex items-center">
+                <HeartHandshake className="w-4 h-4 mr-2" />
+                Leadership in Action
+              </span>
+            ) : (
+              <span className="text-xs font-semibold uppercase tracking-wider text-gray-300">
+                {post.frontMatter.category}
+              </span>
+            )}
             <span className="w-1.5 h-1.5 bg-accent rounded-full" />
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-300">
               {new Date(post.frontMatter.date).toLocaleDateString('en-CA', {
