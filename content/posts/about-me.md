@@ -3,6 +3,7 @@ title: "Benjamin Sanchez Zebadua | FinTech Architect"
 date: "2026-04-14"
 description: "Bridging the gap between Senior Software Engineering and Canadian Wealth Management."
 category: "Professional Profile"
+type: "story"
 tags: ["Leadership", "FinTech", "Engineering", "Ottawa"]
 ---
 

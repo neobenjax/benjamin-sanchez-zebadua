@@ -13,7 +13,7 @@ export const metadata = {
 export default async function InsightsList({ searchParams }: { searchParams: Promise<{ tag?: string }> }) {
   const resolvedParams = await searchParams;
   const activeTag = resolvedParams?.tag;
-  const allPosts = getSortedPostsData();
+  const allPosts = getSortedPostsData(true);
   
   let displayTag = activeTag;
   if (activeTag) {

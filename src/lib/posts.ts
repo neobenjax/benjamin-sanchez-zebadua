@@ -11,6 +11,7 @@ export interface PostInfo {
   description: string;
   category: string;
   tags?: string[];
+  type?: "insight" | "story";
 }
 
 export interface PostContent {
@@ -30,12 +31,12 @@ function ensureDirectory() {
 /**
  * Gets a sorted list of all posts (front-matter only).
  */
-export function getSortedPostsData(): PostInfo[] {
+export function getSortedPostsData(excludeStories: boolean = false): PostInfo[] {
   ensureDirectory();
   const fileNames = fs.readdirSync(postsDirectory);
 
-  const allPostsData = fileNames
-    .filter((fileName) => fileName.endsWith(".md") && /^\d{3}-/.test(fileName))
+  let allPostsData = fileNames
+    .filter((fileName) => fileName.endsWith(".md"))
     .map((fileName) => {
       const slug = fileName.replace(/\.md$/, "");
       const fullPath = path.join(postsDirectory, fileName);
@@ -50,8 +51,13 @@ export function getSortedPostsData(): PostInfo[] {
         description: matterResult.data.description || "",
         category: matterResult.data.category || "General",
         tags: matterResult.data.tags || [],
+        type: matterResult.data.type || "insight",
       };
     });
+
+  if (excludeStories) {
+    allPostsData = allPostsData.filter(post => post.type !== "story");
+  }
 
   return allPostsData.sort((a, b) => {
     if (a.date < b.date) {
@@ -79,6 +85,7 @@ export function getPostData(slug: string): PostContent | null {
         description: matterResult.data.description || "",
         category: matterResult.data.category || "General",
         tags: matterResult.data.tags || [],
+        type: matterResult.data.type || "insight",
       },
       content: matterResult.content,
     };
