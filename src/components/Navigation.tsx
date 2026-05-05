@@ -18,18 +18,18 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed w-full z-50 glass border-b border-white/10">
+    <nav className="fixed w-full z-[100] glass border-b border-white/10">
       <div className="max-w-7xl mx-auto px-8 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <div className="flex-shrink flex-1 max-w-[70%] sm:max-w-none">
-            <Link href="/" className="font-serif text-base md:text-xl tracking-[0.1em] md:tracking-[0.2em] text-white font-semibold flex flex-wrap items-center">
-              <span>BENJAMIN</span> <span className="opacity-50 font-sans tracking-normal mx-1 hidden sm:inline">//</span><span className="opacity-50 font-sans tracking-normal mx-1 sm:hidden"> </span> <span>FINTECH ARCHITECT</span>
+          <div className="flex-shrink flex-1 max-w-[75%] sm:max-w-none mr-4">
+            <Link href="/" className="font-serif text-[clamp(0.85rem,2.5vw,1.25rem)] leading-tight tracking-normal md:tracking-wide lg:tracking-[0.2em] text-white font-semibold flex flex-wrap items-center">
+              <span>BENJAMIN</span> <span className="opacity-50 font-sans tracking-normal mx-1 md:mx-2">//</span> <span>FINTECH ARCHITECT</span>
             </Link>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            <div className="flex items-baseline space-x-8">
+          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+            <div className="flex items-baseline space-x-6 xl:space-x-8">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
@@ -50,7 +50,7 @@ export default function Navigation() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-md text-gray-400 hover:text-white focus:outline-none"
@@ -68,7 +68,7 @@ export default function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass overflow-hidden border-t border-white/10"
+            className="lg:hidden glass overflow-hidden border-t border-white/10"
           >
             <div className="px-4 pt-2 pb-6 space-y-1 sm:px-3 flex flex-col">
               {navItems.map((item) => (
