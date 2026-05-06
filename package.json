@@ -1,18 +1,19 @@
 {
   "name": "temp-portfolio",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "node scripts/generate-tags.mjs && next build",
     "start": "next start",
     "lint": "eslint",
-    "image:optimize": "node scripts/optimize-images.mjs",
+    "image:migrate": "node scripts/optimize-images.mjs --all",
+    "image:staged": "node scripts/optimize-images.mjs",
     "prepare": "husky"
   },
   "lint-staged": {
     "public/images/**/*.{jpg,jpeg,png}": [
-      "npm run image:optimize"
+      "npm run image:staged"
     ]
   },
   "dependencies": {
