@@ -112,11 +112,18 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
                   <table className="min-w-[600px] w-full" {...props} />
                 </div>
               ),
-              img: ({ node, ...props }) => (
-                <Zoom zoomMargin={45}>
-                  <img {...props} className="rounded-lg shadow-md max-w-full h-auto cursor-zoom-in my-8 mx-auto" />
-                </Zoom>
-              ),
+              img: ({ node, ...props }) => {
+                const src = props.src || "";
+                const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, ".webp");
+                return (
+                  <Zoom zoomMargin={45}>
+                    <picture>
+                      <source srcSet={webpSrc} type="image/webp" />
+                      <img {...props} className="rounded-lg shadow-md max-w-full h-auto cursor-zoom-in my-8 mx-auto block" />
+                    </picture>
+                  </Zoom>
+                );
+              },
               p: ({ node, children, ...props }) => {
                 const hasImage = node?.children?.some(
                   (child: any) => child.type === 'element' && child.tagName === 'img'
