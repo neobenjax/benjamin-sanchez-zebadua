@@ -114,7 +114,7 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
               ),
               img: ({ node, ...props }) => {
                 const src = props.src || "";
-                const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, ".webp");
+                const webpSrc = typeof src === 'string' ? src.replace(/\.(jpg|jpeg|png)$/i, ".webp") : (src as unknown as string);
                 return (
                   <Zoom zoomMargin={45}>
                     <picture>
