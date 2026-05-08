@@ -7,7 +7,13 @@
 
   --color-primary: #0A192F;
   --color-secondary: #334155;
-  --color-accent: #10B981;
+  --color-accent: var(--color-accent);
+  
+  --color-bg-base: var(--color-bg-base);
+  --color-bg-surface: var(--color-bg-surface);
+  --color-text-main: var(--color-text-main);
+  --color-text-muted: var(--color-text-muted);
+  --color-theme-border: var(--color-border);
 }
 
 @variant dark (&:where(.dark, .dark *));
@@ -35,13 +41,27 @@
 }
 
 :root {
-  --background: #F8FAFC;
-  --foreground: #0F172A;
+  --color-bg-base: #F8FAFC;
+  --color-bg-surface: #FFFFFF;
+  --color-text-main: #0F172A;
+  --color-text-muted: #475569;
+  --color-accent: #059669;
+  --color-border: #E2E8F0;
+
+  --background: var(--color-bg-base);
+  --foreground: var(--color-text-main);
 }
 
 .dark {
-  --background: #0A192F;
-  --foreground: #F8FAFC;
+  --color-bg-base: #0A192F;
+  --color-bg-surface: #112240;
+  --color-text-main: #F8FAFC;
+  --color-text-muted: #94A3B8;
+  --color-accent: #10B981;
+  --color-border: rgba(255, 255, 255, 0.1);
+
+  --background: var(--color-bg-base);
+  --foreground: var(--color-text-main);
 }
 
 body {

@@ -25,7 +25,7 @@ const cardVariants: Variants = {
 
 export default function Synergy() {
   return (
-    <section id="synergy" className="relative py-32 bg-primary">
+    <section id="synergy" className="relative py-32 bg-[var(--color-bg-surface)] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-8 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -40,8 +40,8 @@ export default function Synergy() {
               Core Competencies
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white">The Synergy</h2>
-          <p className="mt-4 text-xl text-gray-300 max-w-2xl">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-[var(--color-text-main)]">The Synergy</h2>
+          <p className="mt-4 text-xl text-[var(--color-text-muted)] max-w-2xl">
             Fusing software engineering precision with wealth management analytics.
           </p>
         </motion.div>
@@ -59,24 +59,24 @@ export default function Synergy() {
               <motion.div
                 key={item.id}
                 variants={cardVariants}
-                className="glass p-8 rounded-sm group hover:glass-hover transition-all duration-300"
+                className="glass p-8 rounded-sm group hover:glass-hover transition-all duration-300 border border-[var(--color-border)] shadow-sm dark:shadow-none bg-[var(--color-bg-surface)] dark:bg-transparent"
               >
                 <div className="p-4 bg-accent/10 rounded-sm inline-block mb-6 group-hover:bg-accent/20 transition-colors">
                   <Icon className="w-8 h-8 text-accent" />
                 </div>
-                <h3 className="text-2xl font-serif font-semibold text-white mb-4">
+                <h3 className="text-2xl font-serif font-semibold text-[var(--color-text-main)] mb-4">
                   {item.title}
                 </h3>
-                <p className="text-gray-300 mb-8 flex-grow">
+                <p className="text-[var(--color-text-muted)] mb-8 flex-grow">
                   {item.description}
                 </p>
                 <div className="space-y-2">
-                  <h4 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-3">
+                  <h4 className="text-sm font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-3">
                     Core Focus
                   </h4>
                   <ul className="space-y-2">
                     {item.technologies.map((tech, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-300">
+                      <li key={idx} className="flex items-center text-sm text-[var(--color-text-muted)]">
                         <span className="w-1.5 h-1.5 bg-accent/50 rounded-full mr-2" />
                         {tech}
                       </li>

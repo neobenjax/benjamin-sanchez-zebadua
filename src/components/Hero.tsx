@@ -16,7 +16,7 @@ export default function Hero() {
   const sectionRef = useSectionTracking("hero");
 
   return (
-    <section ref={sectionRef} id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+    <section ref={sectionRef} id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-[radial-gradient(circle,rgba(16,185,129,0.03)_0%,rgba(248,250,252,1)_100%)] dark:bg-[radial-gradient(circle,rgba(16,185,129,0.05)_0%,rgba(2,6,23,1)_100%)]">
       {/* Background gradients */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#10B981]/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#334155]/30 rounded-full blur-[120px] pointer-events-none" />

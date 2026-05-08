@@ -29,7 +29,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-8 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink flex-1 max-w-[75%] sm:max-w-none mr-4">
-            <Link href="/" className="font-serif text-[clamp(0.85rem,2.5vw,1.25rem)] leading-tight tracking-normal md:tracking-wide lg:tracking-[0.2em] text-slate-900 dark:text-white font-semibold flex flex-wrap items-center">
+            <Link href="/" className="font-serif text-[clamp(0.85rem,2.5vw,1.25rem)] leading-tight tracking-normal md:tracking-wide lg:tracking-[0.2em] text-slate-900 dark:text-white font-bold dark:font-semibold flex flex-wrap items-center">
               <span>BENJAMIN</span> <span className="opacity-50 font-sans tracking-normal mx-1 md:mx-2 text-slate-500 dark:text-white">//</span> <span>FINTECH ARCHITECT</span>
             </Link>
           </div>
