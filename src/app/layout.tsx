@@ -61,6 +61,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -70,6 +72,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${playfair.variable} h-full scroll-smooth`}
+      suppressHydrationWarning
     >
       <head>
         {process.env.NODE_ENV === "production" && (
@@ -82,10 +85,12 @@ export default function RootLayout({
         )}
       </head>
       <body className="min-h-full flex flex-col bg-primary text-foreground">
-        <Navigation />
-        {children}
-        <Analytics />
-        <FAB />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Navigation />
+          {children}
+          <Analytics />
+          <FAB />
+        </ThemeProvider>
       </body>
     </html>
   );

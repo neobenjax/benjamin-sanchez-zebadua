@@ -10,17 +10,36 @@
   --color-accent: #10B981;
 }
 
+@variant dark (&:where(.dark, .dark *));
+
 @utility glass {
-  background-color: rgba(10, 25, 47, 0.7);
+  background-color: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.dark .glass {
+  background-color: rgba(10, 25, 47, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
 }
 
 @utility glass-hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark .glass-hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
 :root {
+  --background: #F8FAFC;
+  --foreground: #0F172A;
+}
+
+.dark {
   --background: #0A192F;
   --foreground: #F8FAFC;
 }
@@ -28,6 +47,7 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -79,6 +99,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* React Medium Image Zoom Override */
+/* React Medium Image Zoom Override */
 [data-rmiz-modal-overlay="visible"] {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.dark [data-rmiz-modal-overlay="visible"] {
   background-color: rgba(10, 25, 47, 0.9) !important;
 }

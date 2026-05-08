@@ -10,7 +10,7 @@ export default function Journey() {
   const sectionRef = useSectionTracking("journey");
 
   return (
-    <section ref={sectionRef} id="journey" className="relative py-32 bg-[#081426]">
+    <section ref={sectionRef} id="journey" className="relative py-32 bg-slate-50 dark:bg-[#081426] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-8 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -19,16 +19,16 @@ export default function Journey() {
           transition={{ duration: 0.6 }}
           className="mb-20 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 dark:text-white mb-6">
             Journey Timeline
           </h2>
           <div className="flex flex-col items-center">
-            <p className="text-xl text-gray-300 max-w-2xl text-center">
+            <p className="text-xl text-slate-600 dark:text-gray-300 max-w-2xl text-center">
               The evolution from engineering high-traffic architecture to structuring holistic wealth strategies.
             </p>
             <Link 
               href="/entry/001-vibecoding-workflow" 
-              className="mt-6 inline-flex items-center px-5 py-2.5 glass border border-accent/20 rounded-sm text-sm text-accent hover:bg-white/5 hover:border-accent/40 transition-all group"
+              className="mt-6 inline-flex items-center px-5 py-2.5 glass border border-slate-200 dark:border-accent/20 rounded-sm text-sm text-accent hover:bg-black/5 dark:hover:bg-white/5 dark:hover:border-accent/40 transition-all group"
             >
               Read about how I engineered this site in under 4 hours
               <span className="ml-2 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span>
@@ -38,7 +38,7 @@ export default function Journey() {
 
         <div className="relative max-w-4xl mx-auto">
           {/* Vertical Line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-1/2" />
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-slate-200 dark:bg-white/10 md:-translate-x-1/2" />
 
           {profileData.journey.map((node, index) => {
             const isEducation = node.type === "education";
@@ -47,7 +47,7 @@ export default function Journey() {
             return (
               <div key={node.id} className={`relative mb-16 md:mb-24 flex items-center md:justify-between w-full p-4 md:p-0 ${isEven ? 'md:flex-row-reverse' : ''}`}>
                 {/* Timeline dot */}
-                <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-primary border-2 border-accent rounded-full transform -translate-x-1/2 mt-1 md:mt-0 z-10" />
+                <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-white dark:bg-primary border-2 border-accent rounded-full transform -translate-x-1/2 mt-1 md:mt-0 z-10" />
 
                 {/* Content spacer for desktop alternating layout */}
                 <div className="hidden md:block w-5/12" />
@@ -64,25 +64,25 @@ export default function Journey() {
                       {node.period}
                     </span>
                     {isEducation ? (
-                      <GraduationCap className="h-5 w-5 text-gray-300" />
+                      <GraduationCap className="h-5 w-5 text-slate-400 dark:text-gray-300" />
                     ) : (
-                      <Briefcase className="h-5 w-5 text-gray-300" />
+                      <Briefcase className="h-5 w-5 text-slate-400 dark:text-gray-300" />
                     )}
                   </div>
                   
-                  <h3 className="text-2xl font-serif font-bold text-white mb-1">
+                  <h3 className="text-2xl font-serif font-bold text-slate-900 dark:text-white mb-1">
                     {node.role}
                   </h3>
-                  <div className="text-lg text-gray-300 mb-6 font-medium">
+                  <div className="text-lg text-slate-700 dark:text-gray-300 mb-6 font-medium">
                     {node.company}
                   </div>
-                  <p className="text-gray-300 mb-6 pb-6 border-b border-white/10">
+                  <p className="text-slate-600 dark:text-gray-300 mb-6 pb-6 border-b border-slate-200 dark:border-white/10">
                     {node.description}
                   </p>
                   
                   <ul className="space-y-3">
                     {node.highlights.map((highlight, idx) => (
-                      <li key={idx} className="flex text-sm text-gray-300">
+                      <li key={idx} className="flex text-sm text-slate-600 dark:text-gray-300">
                         <span className="text-accent mr-3 font-serif select-none">→</span>
                         {highlight}
                       </li>

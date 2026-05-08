@@ -35,16 +35,16 @@ export default function Hero() {
             className="inline-flex items-center space-x-2 glass px-4 py-2 rounded-full mb-8 border border-accent/20"
           >
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            <span className="text-sm font-medium tracking-wide text-gray-300">
+            <span className="text-sm font-medium tracking-wide text-slate-600 dark:text-gray-300">
               Current State: Bridging Software Engineering & Financial Strategy
             </span>
           </motion.div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white leading-tight mb-6 mt-4">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-slate-900 dark:text-white leading-tight mb-6 mt-4">
             {profileData.hero.headline}
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10">
+          <p className="text-lg md:text-xl text-slate-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10">
             {profileData.hero.subtext}
           </p>
 
@@ -66,14 +66,14 @@ export default function Hero() {
             </a>
             <Link
               href="/#synergy"
-              className="group flex items-center px-8 py-4 bg-accent text-primary font-bold rounded-sm text-lg hover:brightness-110 transition-all w-full lg:w-auto justify-center"
+              className="group flex items-center px-8 py-4 bg-accent text-white dark:text-primary font-bold rounded-sm text-lg hover:brightness-110 transition-all w-full lg:w-auto justify-center"
             >
               Explore Synergy
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="/#journey"
-              className="flex items-center px-8 py-4 glass text-white font-semibold rounded-sm text-lg hover:bg-white/10 transition-all border border-transparent hover:border-white/20 w-full lg:w-auto justify-center"
+              className="flex items-center px-8 py-4 glass text-slate-700 dark:text-white font-semibold rounded-sm text-lg hover:bg-black/5 dark:hover:bg-white/10 transition-all border border-slate-200 dark:border-transparent dark:hover:border-white/20 w-full lg:w-auto justify-center"
             >
               View Journey
             </Link>
