@@ -3,7 +3,7 @@ title: "Route Captain: CN Cycle for CHEO 2026"
 date: "2026-05-03"
 description: "Orchestrating safety logistics and coordinating Route Assistants for a 6,000+ participant charity event."
 category: "Community Impact"
-type: "story"
+type: "article"
 ---
 
 ![Route Captain CN Cycle 2026](/images/posts/cn-cycle-2026/cn-cycle-2026-cover-and-headline.jpg)

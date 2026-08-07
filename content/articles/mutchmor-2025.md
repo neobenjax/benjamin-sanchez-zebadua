@@ -3,7 +3,7 @@ title: "Setup Supervisor: Mutchmor Book Sale 2025"
 date: "2025-03-15"
 description: "Coordinating volunteer teams and managing complex inventory flow for a massive community event."
 category: "Community Impact"
-type: "story"
+type: "article"
 ---
 
 ## The Mission

@@ -3,7 +3,7 @@ title: "General Support: CN Cycle for CHEO 2025"
 date: "2025-05-04"
 description: "Foundational community engagement focusing on site integrity and athlete logistics."
 category: "Community Impact"
-type: "story"
+type: "article"
 ---
 
 ![General Support CN Cycle 2025](/images/posts/cn-cycle-2025/cn-cycle-2025-cover-and-headline.jpg)

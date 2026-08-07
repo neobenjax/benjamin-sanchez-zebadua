@@ -6,11 +6,11 @@ import CommunityEngagement from "@/components/CommunityEngagement";
 import Toolbox from "@/components/Toolbox";
 import Footer from "@/components/Footer";
 
-import { getSortedPostsData } from "@/lib/posts";
+import { getSortedContentByType } from "@/lib/content";
 
 export default function Home() {
-  const allPosts = getSortedPostsData(true);
-  const stories = getSortedPostsData(false).filter(post => post.type === "story" && post.slug !== "about-me");
+  const allPosts = getSortedContentByType("posts");
+  const stories = getSortedContentByType("articles");
 
   return (
     <main className="flex-grow">

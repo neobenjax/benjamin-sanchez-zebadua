@@ -61,6 +61,9 @@ export const metadata: Metadata = {
   },
 };
 
+import { ThemeProvider } from "@/context/ThemeContext";
+import DevTunerLauncher from "@/components/DevTunerLauncher";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -82,10 +85,13 @@ export default function RootLayout({
         )}
       </head>
       <body className="min-h-full flex flex-col bg-primary text-foreground">
-        <Navigation />
-        {children}
-        <Analytics />
-        <FAB />
+        <ThemeProvider>
+          <Navigation />
+          {children}
+          <Analytics />
+          <FAB />
+          <DevTunerLauncher />
+        </ThemeProvider>
       </body>
     </html>
   );
