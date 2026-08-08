@@ -3,8 +3,9 @@
   "version": "0.10.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "node scripts/generate-tags.mjs && next build",
+    "dev": "node scripts/transpile-current-theme.mjs && next dev",
+    "build": "node scripts/transpile-current-theme.mjs && node scripts/generate-tags.mjs && next build",
+    "transpile:theme": "node scripts/transpile-current-theme.mjs",
     "start": "next start",
     "lint": "eslint",
     "lint:css": "node scripts/check-css-no-important.mjs",

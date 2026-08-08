@@ -32,6 +32,7 @@ export function ThemeTuner() {
     activePresetId,
     savedPresets,
     primarySeedColor,
+    isDraft,
     setPrimarySeedColor,
     generateRandomTheme,
     applyPreset,
@@ -112,7 +113,10 @@ export function ThemeTuner() {
           <h3 className="text-xl font-serif font-bold text-[var(--color-text-primary)] flex items-center gap-2">
             <Sliders className="w-5 h-5 text-[var(--color-accent)]" /> Theme & Color Engine
           </h3>
-          <Badge variant="pulse">Design System v1.0</Badge>
+          <div className="flex items-center gap-2">
+            {isDraft && <Badge variant="secondary" className="text-amber-400 border-amber-500/30">Unsaved Draft</Badge>}
+            <Badge variant="pulse">Design System v1.0</Badge>
+          </div>
         </div>
       </div>
 
@@ -125,7 +129,7 @@ export function ThemeTuner() {
           <span className="text-[11px] text-[var(--color-text-muted)] font-mono">{primarySeedColor}</span>
         </div>
         <p className="text-xs text-[var(--color-text-secondary)]">
-          All 10 design system tokens are automatically computed to ensure WCAG AA contrast compliance based on this primary seed.
+          All 10 design system tokens are automatically computed based on this seed. Edits remain temporary drafts until saved.
         </p>
 
         <div className="flex items-center gap-3 pt-1">
@@ -183,7 +187,7 @@ export function ThemeTuner() {
             </option>
           ))}
           {!savedPresets.some((p) => p.id === activePresetId) && (
-            <option value={activePresetId}>Custom Generated Theme ({tuningMode.toUpperCase()})</option>
+            <option value={activePresetId}>Unsaved Draft Theme ({tuningMode.toUpperCase()})</option>
           )}
         </select>
 

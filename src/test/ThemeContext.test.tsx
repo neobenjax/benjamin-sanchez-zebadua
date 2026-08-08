@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, beforeEach } from 'vitest';
 import React from 'react';
-import { ThemeProvider, useTheme, DEFAULT_FINTECH_MIDNIGHT } from '../context/ThemeContext';
+import { ThemeProvider, useTheme, DEFAULT_FINTECH_MIDNIGHT, ThemePreset } from '../context/ThemeContext';
 import { exportDesignSystemToMarkdown } from '@/lib/designSystemMd';
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (

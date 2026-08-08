@@ -61,6 +61,7 @@ export interface ThemeContextType {
   activePresetId: string;
   savedPresets: ThemePreset[];
   primarySeedColor: string;
+  isDraft: boolean;
   setActiveMode: (mode: 'dark' | 'light') => void;
   setTuningMode: (mode: 'dark' | 'light') => void;
   setPrimarySeedColor: (hex: string) => void;
@@ -87,6 +88,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [activePresetId, setActivePresetId] = useState<string>('fintech-midnight');
   const [savedPresets, setSavedPresets] = useState<ThemePreset[]>([DEFAULT_FINTECH_MIDNIGHT]);
   const [primarySeedColor, setPrimarySeedColorState] = useState<string>('#10B981');
+  const [isDraft, setIsDraft] = useState<boolean>(false);
 
   // Apply CSS custom properties to DOM
   const applyTokensToDOM = (mode: 'dark' | 'light', dark: ThemeTokens, light: ThemeTokens) => {
@@ -136,7 +138,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return Array.from(map.values());
   };
 
-  // Load configuration from localStorage & server files on mount
+  // Load configuration from server files & currentdesigntheme.md on mount
   useEffect(() => {
     const loadInitialThemes = async () => {
       let fileCurrentTheme: ThemePreset | null = null;
@@ -177,28 +179,39 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       const mergedPresets = Array.from(combinedMap.values());
       setSavedPresets(mergedPresets);
 
-      const savedConfig = localStorage.getItem(STORAGE_KEY);
-      if (savedConfig) {
-        try {
-          const parsed = JSON.parse(savedConfig);
-          if (parsed.darkTokens) setDarkTokens(parsed.darkTokens);
-          if (parsed.lightTokens) setLightTokens(parsed.lightTokens);
-          if (parsed.activeMode) setActiveMode(parsed.activeMode);
-          if (parsed.activePresetId) setActivePresetId(parsed.activePresetId);
-          if (parsed.primarySeedColor) setPrimarySeedColorState(parsed.primarySeedColor);
-
-          applyTokensToDOM(
-            parsed.activeMode || 'dark',
-            parsed.darkTokens || DEFAULT_FINTECH_MIDNIGHT.tokens,
-            parsed.lightTokens || DEFAULT_FINTECH_MIDNIGHT.tokens
-          );
-        } catch {
-          applyTokensToDOM('dark', darkTokens, lightTokens);
+      // Reloading ALWAYS prefers currentdesigntheme.md baseline over unsaved drafts!
+      if (fileCurrentTheme) {
+        setDarkTokens(fileCurrentTheme.tokens);
+        setLightTokens(fileCurrentTheme.tokens);
+        setActivePresetId(fileCurrentTheme.id);
+        setActiveMode(fileCurrentTheme.mode);
+        if (fileCurrentTheme.primarySeed) {
+          setPrimarySeedColorState(fileCurrentTheme.primarySeed);
+        } else {
+          setPrimarySeedColorState(fileCurrentTheme.tokens.accent);
         }
-      } else if (fileCurrentTheme) {
-        applyPreset(fileCurrentTheme);
+        applyTokensToDOM(fileCurrentTheme.mode, fileCurrentTheme.tokens, fileCurrentTheme.tokens);
+        setIsDraft(false);
       } else {
-        applyTokensToDOM('dark', darkTokens, lightTokens);
+        const savedConfig = localStorage.getItem(STORAGE_KEY);
+        if (savedConfig) {
+          try {
+            const parsed = JSON.parse(savedConfig);
+            if (parsed.darkTokens) setDarkTokens(parsed.darkTokens);
+            if (parsed.lightTokens) setLightTokens(parsed.lightTokens);
+            if (parsed.activeMode) setActiveMode(parsed.activeMode);
+            if (parsed.activePresetId) setActivePresetId(parsed.activePresetId);
+            if (parsed.primarySeedColor) setPrimarySeedColorState(parsed.primarySeedColor);
+
+            applyTokensToDOM(
+              parsed.activeMode || 'dark',
+              parsed.darkTokens || DEFAULT_FINTECH_MIDNIGHT.tokens,
+              parsed.lightTokens || DEFAULT_FINTECH_MIDNIGHT.tokens
+            );
+          } catch {
+            applyTokensToDOM('dark', darkTokens, lightTokens);
+          }
+        }
       }
     };
 
@@ -242,7 +255,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     dark: ThemeTokens,
     light: ThemeTokens,
     presetId: string,
-    seedColor: string
+    seedColor: string,
+    syncToFileSystem: boolean = true
   ) => {
     const payload = {
       activeMode: mode,
@@ -251,17 +265,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       activePresetId: presetId,
       primarySeedColor: seedColor,
     };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    if (syncToFileSystem) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    }
     applyTokensToDOM(mode, dark, light);
 
-    const activePresetObj: ThemePreset = {
-      id: presetId,
-      name: savedPresets.find((p) => p.id === presetId)?.name || 'Active Design System',
-      mode,
-      tokens: mode === 'dark' ? dark : light,
-      primarySeed: seedColor,
-    };
-    syncThemeToFileSystem(activePresetObj, 'saveCurrent');
+    if (syncToFileSystem) {
+      const activePresetObj: ThemePreset = {
+        id: presetId,
+        name: savedPresets.find((p) => p.id === presetId)?.name || 'Active Design System',
+        mode,
+        tokens: mode === 'dark' ? dark : light,
+        primarySeed: seedColor,
+      };
+      syncThemeToFileSystem(activePresetObj, 'saveCurrent');
+    }
   };
 
   const persistSavedPresets = (presets: ThemePreset[]) => {
@@ -270,6 +288,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(SAVED_PRESETS_KEY, JSON.stringify(unique));
   };
 
+  // Picking seed color creates an UNSAVED DRAFT (does not overwrite currentdesigntheme.md)
   const setPrimarySeedColor = (hex: string) => {
     setPrimarySeedColorState(hex);
     const computedTokens = generateThemeFromPrimary(hex, tuningMode);
@@ -286,9 +305,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
 
     setActivePresetId('custom-seed');
-    saveConfig(activeMode, newDark, newLight, 'custom-seed', hex);
+    setIsDraft(true);
+    // Apply in-memory, but DO NOT overwrite currentdesigntheme.md!
+    saveConfig(activeMode, newDark, newLight, 'custom-seed', hex, false);
   };
 
+  // Randomizing color creates an UNSAVED DRAFT (does not overwrite currentdesigntheme.md)
   const generateRandomTheme = () => {
     const randomResult = generateRandomAccessibleTheme(tuningMode);
     setPrimarySeedColorState(randomResult.primaryHex);
@@ -305,11 +327,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
 
     setActivePresetId('random-seed');
-    saveConfig(activeMode, newDark, newLight, 'random-seed', randomResult.primaryHex);
+    setIsDraft(true);
+    // Apply in-memory, but DO NOT overwrite currentdesigntheme.md!
+    saveConfig(activeMode, newDark, newLight, 'random-seed', randomResult.primaryHex, false);
   };
 
+  // Selecting a theme from Saved Design Systems OVERWRITES currentdesigntheme.md
   const applyPreset = (preset: ThemePreset) => {
     setActivePresetId(preset.id);
+    setIsDraft(false);
     if (preset.primarySeed) {
       setPrimarySeedColorState(preset.primarySeed);
     } else {
@@ -319,14 +345,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (preset.mode === 'dark') {
       setDarkTokens(preset.tokens);
       setActiveMode('dark');
-      saveConfig('dark', preset.tokens, lightTokens, preset.id, preset.primarySeed || preset.tokens.accent);
+      saveConfig('dark', preset.tokens, lightTokens, preset.id, preset.primarySeed || preset.tokens.accent, true);
     } else {
       setLightTokens(preset.tokens);
       setActiveMode('light');
-      saveConfig('light', darkTokens, preset.tokens, preset.id, preset.primarySeed || preset.tokens.accent);
+      saveConfig('light', darkTokens, preset.tokens, preset.id, preset.primarySeed || preset.tokens.accent, true);
     }
   };
 
+  // Saving a custom theme OVERWRITES currentdesigntheme.md and creates config/themes/[kebab-timestamp].md
   const saveCustomTheme = (name: string) => {
     const id = nameToKebabId(name);
     const currentTokens = tuningMode === 'dark' ? darkTokens : lightTokens;
@@ -341,6 +368,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     const updated = [...savedPresets, newPreset];
     persistSavedPresets(updated);
+    setIsDraft(false);
     syncThemeToFileSystem(newPreset, 'saveConfig');
     applyPreset(newPreset);
   };
@@ -362,6 +390,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     persistSavedPresets(updated);
     const overwrittenPreset = updated.find((p) => p.id === presetId);
     if (overwrittenPreset) {
+      setIsDraft(false);
       syncThemeToFileSystem(overwrittenPreset, 'saveConfig');
       applyPreset(overwrittenPreset);
     }
@@ -381,6 +410,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       importedPreset.isCustom = true;
       const updated = [...savedPresets.filter((p) => p.id !== importedPreset.id), importedPreset];
       persistSavedPresets(updated);
+      setIsDraft(false);
       syncThemeToFileSystem(importedPreset, 'saveConfig');
       applyPreset(importedPreset);
       return true;
@@ -413,12 +443,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       setLightTokens(newLight);
     }
     setActivePresetId('custom');
-    saveConfig(activeMode, newDark, newLight, 'custom', primarySeedColor);
+    setIsDraft(true);
+    saveConfig(activeMode, newDark, newLight, 'custom', primarySeedColor, false);
   };
 
   const handleSetActiveMode = (mode: 'dark' | 'light') => {
     setActiveMode(mode);
-    saveConfig(mode, darkTokens, lightTokens, activePresetId, primarySeedColor);
+    saveConfig(mode, darkTokens, lightTokens, activePresetId, primarySeedColor, !isDraft);
   };
 
   return (
@@ -431,6 +462,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         activePresetId,
         savedPresets,
         primarySeedColor,
+        isDraft,
         setActiveMode: handleSetActiveMode,
         setTuningMode,
         setPrimarySeedColor,

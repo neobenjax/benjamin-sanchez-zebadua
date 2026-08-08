@@ -4,6 +4,7 @@ import { ThemePreset } from '@/context/ThemeContext';
 import { importDesignSystemFromMarkdown, exportDesignSystemToMarkdown } from './designSystemMd';
 
 const ROOT_CURRENT_THEME_PATH = path.join(process.cwd(), 'currentdesigntheme.md');
+const THEME_TOKENS_CSS_PATH = path.join(process.cwd(), 'src', 'app', 'theme-tokens.css');
 const CONFIG_THEMES_DIR = path.join(process.cwd(), 'config', 'themes');
 
 /**
@@ -60,15 +61,34 @@ export function getAllConfigFileThemes(): ThemePreset[] {
 }
 
 /**
- * Save active theme to root currentdesigntheme.md
+ * Save active theme to root currentdesigntheme.md and update src/app/theme-tokens.css
  */
 export function saveCurrentDesignThemeToFile(preset: ThemePreset): boolean {
   try {
     const markdown = exportDesignSystemToMarkdown(preset);
     fs.writeFileSync(ROOT_CURRENT_THEME_PATH, markdown, 'utf-8');
+
+    // Also update static CSS custom properties file
+    const t = preset.tokens;
+    const cssOutput = `/* AUTO-GENERATED FROM currentdesigntheme.md - DO NOT EDIT DIRECTLY */
+/* Theme: ${preset.name} (${preset.mode.toUpperCase()}) */
+:root {
+  --color-primary: ${t.primary_bg};
+  --color-secondary-bg: ${t.secondary_bg};
+  --color-surface: ${t.surface_card};
+  --color-text-primary: ${t.text_primary};
+  --color-text-secondary: ${t.text_secondary};
+  --color-text-muted: ${t.text_muted};
+  --color-accent: ${t.accent};
+  --color-secondary: ${t.slate_steel};
+  --border-subtle: ${t.border_subtle};
+  --border-accent: ${t.border_accent};
+}
+`;
+    fs.writeFileSync(THEME_TOKENS_CSS_PATH, cssOutput, 'utf-8');
     return true;
   } catch (err) {
-    console.error('Error writing root currentdesigntheme.md:', err);
+    console.error('Error writing root currentdesigntheme.md and theme-tokens.css:', err);
     return false;
   }
 }
