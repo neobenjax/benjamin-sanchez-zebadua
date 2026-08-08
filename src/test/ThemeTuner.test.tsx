@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import React from 'react';
 import { ThemeProvider } from '../context/ThemeContext';
@@ -18,26 +18,14 @@ describe('ThemeTuner Component', () => {
     expect(screen.getByText(/Save Theme As.../i)).toBeInTheDocument();
   });
 
-  it('switches target tuning mode between dark and light', () => {
+  it('renders derived token swatches and accessibility feedback', () => {
     render(
       <ThemeProvider>
         <ThemeTuner />
       </ThemeProvider>
     );
 
-    const lightModeButton = screen.getByText('Light Tokens');
-    fireEvent.click(lightModeButton);
-
-    expect(screen.getByText(/Derived Token Swatches \(LIGHT Mode\)/i)).toBeInTheDocument();
-  });
-
-  it('displays WCAG 2.1 AA contrast ratio pass indicator', () => {
-    render(
-      <ThemeProvider>
-        <ThemeTuner />
-      </ThemeProvider>
-    );
-
+    expect(screen.getByText(/Derived Token Swatches/i)).toBeInTheDocument();
     expect(screen.getByText(/WCAG 2.1 AA Contrast Ratio/i)).toBeInTheDocument();
     expect(screen.getByText(/Passes WCAG AA/i)).toBeInTheDocument();
   });

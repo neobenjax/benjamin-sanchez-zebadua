@@ -1,8 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import { exportDesignSystemToMarkdown, importDesignSystemFromMarkdown } from '@/lib/designSystemMd';
+import {
+  exportDesignSystemToMarkdown,
+  importDesignSystemFromMarkdown,
+  validateDesignSystemMarkdown,
+  nameToKebabId,
+} from '@/lib/designSystemMd';
 import { ThemePreset } from '@/context/ThemeContext';
 
-describe('DesignSystemMd Spec Transpiler Tests', () => {
+describe('DesignSystemMd Spec Transpiler & Auditor Tests', () => {
   const samplePreset: ThemePreset = {
     id: 'cyber-amber',
     name: 'Cyber Amber Test System',
@@ -20,6 +25,31 @@ describe('DesignSystemMd Spec Transpiler Tests', () => {
       border_accent: 'rgba(245, 158, 11, 0.25)',
     },
   };
+
+  it('converts theme name to kebab-case with timestamp ID', () => {
+    const id = nameToKebabId('Neon Orange');
+    expect(id).toMatch(/^neon-orange-\d+$/);
+  });
+
+  it('validates a correct design.md specification', () => {
+    const md = exportDesignSystemToMarkdown(samplePreset, 'Architect');
+    const result = validateDesignSystemMarkdown(md);
+    expect(result.isValid).toBe(true);
+  });
+
+  it('detects missing tokens and rejects invalid markdown', () => {
+    const invalidMD = `---
+design_system_name: "Broken Theme"
+---
+# Design System Specification: Broken Theme
+:root {
+  --color-primary: #000;
+}
+`;
+    const result = validateDesignSystemMarkdown(invalidMD);
+    expect(result.isValid).toBe(false);
+    expect(result.errorReason).toContain('Missing required design system tokens');
+  });
 
   it('exports theme preset to valid design.md markdown content', () => {
     const md = exportDesignSystemToMarkdown(samplePreset, 'Architect');

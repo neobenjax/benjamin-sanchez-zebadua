@@ -9,10 +9,78 @@ export interface DesignSystemMetadata {
   updatedAt?: string;
 }
 
-export interface ExportedDesignMD {
-  metadata: DesignSystemMetadata;
-  tokens: ThemeTokens;
-  markdownContent: string;
+export interface ValidationResult {
+  isValid: boolean;
+  errorReason?: string;
+  missingTokens?: string[];
+}
+
+export const REQUIRED_TOKEN_KEYS: (keyof ThemeTokens)[] = [
+  'primary_bg',
+  'secondary_bg',
+  'surface_card',
+  'text_primary',
+  'text_secondary',
+  'text_muted',
+  'accent',
+  'slate_steel',
+  'border_subtle',
+  'border_accent',
+];
+
+/**
+ * Generate a clean kebab-case ID with timestamp from a human-readable theme name
+ */
+export function nameToKebabId(name: string): string {
+  const kebab = name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+  const timestamp = Date.now();
+  return `${kebab || 'custom'}-${timestamp}`;
+}
+
+/**
+ * Validates raw Markdown content against the design.md standard specification
+ */
+export function validateDesignSystemMarkdown(markdownContent: string): ValidationResult {
+  if (!markdownContent || typeof markdownContent !== 'string' || markdownContent.trim().length === 0) {
+    return { isValid: false, errorReason: 'Markdown content is empty.' };
+  }
+
+  // Check for design system name in frontmatter or H1 title
+  const hasName =
+    /design_system_name:\s*"([^"]+)"/i.test(markdownContent) ||
+    /# Design System Specification:\s*(.+)/i.test(markdownContent);
+  if (!hasName) {
+    return { isValid: false, errorReason: 'Missing design system name in frontmatter or title (# Design System Specification: Name).' };
+  }
+
+  const missingTokens: string[] = [];
+
+  for (const tokenKey of REQUIRED_TOKEN_KEYS) {
+    const cssRegex = new RegExp(`--color-${tokenKey.replace(/_/g, '-')}:\\s*([^;\\n\\r]+);`, 'i');
+    const tableRegex = new RegExp(`\\|\\s*\`?${tokenKey}\`?\\s*\\|[^|]*\\|\\s*\`?([^|\`\\n]+)\`?\\s*\\|`, 'i');
+    const borderRegex = new RegExp(`--${tokenKey.replace(/_/g, '-')}:\\s*([^;\\n\\r]+);`, 'i');
+
+    const matchesCSS = cssRegex.test(markdownContent) || borderRegex.test(markdownContent);
+    const matchesTable = tableRegex.test(markdownContent);
+
+    if (!matchesCSS && !matchesTable) {
+      missingTokens.push(tokenKey);
+    }
+  }
+
+  if (missingTokens.length > 0) {
+    return {
+      isValid: false,
+      errorReason: `Missing required design system tokens: ${missingTokens.join(', ')}.`,
+      missingTokens,
+    };
+  }
+
+  return { isValid: true };
 }
 
 /**
@@ -81,10 +149,6 @@ updated_at: "${dateStr}"
 - **Display Headings**: Playfair Display (Font Serif).
 - **Body Copy & Interfaces**: Inter Sans (Font Sans).
 - **Technical & Code**: Fira Code / JetBrains Mono (Font Mono).
-
-### Quantitative & Trading Indicators
-- **Positive Metrics**: Emerald Green (\`#10B981\` / \`#059669\`) with \`+\` prefix.
-- **Negative Metrics**: Crimson Red (\`#EF4444\` / \`#DC2626\`) with \`-\` prefix.
 `;
 }
 
@@ -92,11 +156,17 @@ updated_at: "${dateStr}"
  * Import and parse raw design.md Markdown content into a ThemePreset object
  */
 export function importDesignSystemFromMarkdown(markdownContent: string): ThemePreset {
+  const validation = validateDesignSystemMarkdown(markdownContent);
+  if (!validation.isValid) {
+    throw new Error(validation.errorReason || 'Invalid design.md specification format.');
+  }
+
   let name = 'Imported Design System';
   let mode: 'dark' | 'light' = 'dark';
 
-  // Extract frontmatter metadata
-  const nameMatch = markdownContent.match(/design_system_name:\s*"([^"]+)"/i) || markdownContent.match(/# Design System Specification:\s*(.+)/i);
+  const nameMatch =
+    markdownContent.match(/design_system_name:\s*"([^"]+)"/i) ||
+    markdownContent.match(/# Design System Specification:\s*(.+)/i);
   if (nameMatch && nameMatch[1]) {
     name = nameMatch[1].trim();
   }
@@ -106,7 +176,6 @@ export function importDesignSystemFromMarkdown(markdownContent: string): ThemePr
     mode = modeMatch[1].toLowerCase() as 'dark' | 'light';
   }
 
-  // Extract tokens from markdown table or CSS block
   const tokens: ThemeTokens = {
     primary_bg: mode === 'dark' ? '#0A192F' : '#F7F5F2',
     secondary_bg: mode === 'dark' ? '#081426' : '#EAE5DF',
@@ -141,21 +210,7 @@ export function importDesignSystemFromMarkdown(markdownContent: string): ThemePr
     }
   }
 
-  // Also check markdown table rows for tokens if CSS block was missing
-  const tableRowsMap: Record<string, keyof ThemeTokens> = {
-    primary_bg: 'primary_bg',
-    secondary_bg: 'secondary_bg',
-    surface_card: 'surface_card',
-    text_primary: 'text_primary',
-    text_secondary: 'text_secondary',
-    text_muted: 'text_muted',
-    accent: 'accent',
-    slate_steel: 'slate_steel',
-    border_subtle: 'border_subtle',
-    border_accent: 'border_accent',
-  };
-
-  for (const tokenKey of Object.keys(tableRowsMap) as (keyof ThemeTokens)[]) {
+  for (const tokenKey of REQUIRED_TOKEN_KEYS) {
     const tableRegex = new RegExp(`\\|\\s*\`?${tokenKey}\`?\\s*\\|[^|]*\\|\\s*\`?([^|\`\\n]+)\`?\\s*\\|`, 'i');
     const tableMatch = markdownContent.match(tableRegex);
     if (tableMatch && tableMatch[1]) {
@@ -163,10 +218,10 @@ export function importDesignSystemFromMarkdown(markdownContent: string): ThemePr
     }
   }
 
-  const cleanId = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `imported-${Date.now()}`;
+  const generatedId = nameToKebabId(name);
 
   return {
-    id: cleanId,
+    id: generatedId,
     name,
     mode,
     tokens,

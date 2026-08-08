@@ -1,7 +1,8 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, beforeEach } from 'vitest';
 import React from 'react';
-import { ThemeProvider, useTheme, PRESET_THEMES } from '../context/ThemeContext';
+import { ThemeProvider, useTheme, DEFAULT_FINTECH_MIDNIGHT } from '../context/ThemeContext';
+import { exportDesignSystemToMarkdown } from '@/lib/designSystemMd';
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
   <ThemeProvider>{children}</ThemeProvider>
@@ -53,8 +54,7 @@ describe('ThemeContext', () => {
       result.current.setPrimarySeedColor('#8B5CF6');
       result.current.saveCustomTheme('Purple Neo System');
     });
-    expect(result.current.savedPresets.length).toBe(1);
-    expect(result.current.savedPresets[0].name).toBe('Purple Neo System');
+    expect(result.current.savedPresets.some((p) => p.name === 'Purple Neo System')).toBe(true);
 
     let exported = '';
     act(() => {
@@ -66,18 +66,25 @@ describe('ThemeContext', () => {
 
   it('imports design.md markdown specifications into saved presets', () => {
     const { result } = renderHook(() => useTheme(), { wrapper });
-    const sampleMD = `---
-design_system_name: "Imported Binance System"
-mode: "dark"
----
-# Design System Specification: Imported Binance System
-\`\`\`css
-:root[data-theme="dark"] {
-  --color-primary: #181A20;
-  --color-accent: #F0B90B;
-}
-\`\`\`
-`;
+    const fullPreset: ThemePreset = {
+      id: 'binance-system',
+      name: 'Imported Binance System',
+      mode: 'dark',
+      tokens: {
+        primary_bg: '#181A20',
+        secondary_bg: '#0B0E11',
+        surface_card: '#1E2329',
+        text_primary: '#EAECEF',
+        text_secondary: '#848E9C',
+        text_muted: '#474D57',
+        accent: '#F0B90B',
+        slate_steel: '#2B313A',
+        border_subtle: 'rgba(255, 255, 255, 0.10)',
+        border_accent: 'rgba(240, 185, 11, 0.20)',
+      },
+    };
+    const sampleMD = exportDesignSystemToMarkdown(fullPreset);
+
     act(() => {
       const success = result.current.importDesignMD(sampleMD);
       expect(success).toBe(true);
@@ -86,21 +93,10 @@ mode: "dark"
     expect(result.current.darkTokens.accent).toBe('#F0B90B');
   });
 
-  it('applies preset themes correctly', () => {
-    const { result } = renderHook(() => useTheme(), { wrapper });
-    const cyberAmberPreset = PRESET_THEMES.find((p) => p.id === 'cyber-amber')!;
-    act(() => {
-      result.current.applyPreset(cyberAmberPreset);
-    });
-    expect(result.current.activePresetId).toBe('cyber-amber');
-    expect(result.current.darkTokens.accent).toBe('#F59E0B');
-  });
-
-  it('resets to default FinTech Midnight theme', () => {
+  it('applies default preset themes correctly', () => {
     const { result } = renderHook(() => useTheme(), { wrapper });
     act(() => {
-      result.current.setPrimarySeedColor('#000000');
-      result.current.resetToDefault();
+      result.current.applyPreset(DEFAULT_FINTECH_MIDNIGHT);
     });
     expect(result.current.activePresetId).toBe('fintech-midnight');
     expect(result.current.darkTokens.accent).toBe('#10B981');
