@@ -27,13 +27,63 @@ describe('ThemeContext', () => {
     expect(result.current.activeMode).toBe('light');
   });
 
-  it('updates individual token values live', () => {
+  it('generates whole token system from a primary seed color', () => {
     const { result } = renderHook(() => useTheme(), { wrapper });
     act(() => {
-      result.current.updateToken('dark', 'accent', '#F59E0B');
+      result.current.setPrimarySeedColor('#3B82F6');
     });
-    expect(result.current.darkTokens.accent).toBe('#F59E0B');
-    expect(result.current.activePresetId).toBe('custom');
+    expect(result.current.primarySeedColor).toBe('#3B82F6');
+    expect(result.current.darkTokens.primary_bg).toBeDefined();
+    expect(result.current.darkTokens.text_primary).toBeDefined();
+    expect(result.current.activePresetId).toBe('custom-seed');
+  });
+
+  it('generates random accessible theme pair (RandomA11y)', () => {
+    const { result } = renderHook(() => useTheme(), { wrapper });
+    act(() => {
+      result.current.generateRandomTheme();
+    });
+    expect(result.current.primarySeedColor).toMatch(/^#[0-9A-F]{6}$/i);
+    expect(result.current.activePresetId).toBe('random-seed');
+  });
+
+  it('saves custom themes and exports design.md specifications', () => {
+    const { result } = renderHook(() => useTheme(), { wrapper });
+    act(() => {
+      result.current.setPrimarySeedColor('#8B5CF6');
+      result.current.saveCustomTheme('Purple Neo System');
+    });
+    expect(result.current.savedPresets.length).toBe(1);
+    expect(result.current.savedPresets[0].name).toBe('Purple Neo System');
+
+    let exported = '';
+    act(() => {
+      exported = result.current.exportCurrentDesignMD();
+    });
+    expect(exported).toContain('Purple Neo System');
+    expect(exported).toContain('--color-primary:');
+  });
+
+  it('imports design.md markdown specifications into saved presets', () => {
+    const { result } = renderHook(() => useTheme(), { wrapper });
+    const sampleMD = `---
+design_system_name: "Imported Binance System"
+mode: "dark"
+---
+# Design System Specification: Imported Binance System
+\`\`\`css
+:root[data-theme="dark"] {
+  --color-primary: #181A20;
+  --color-accent: #F0B90B;
+}
+\`\`\`
+`;
+    act(() => {
+      const success = result.current.importDesignMD(sampleMD);
+      expect(success).toBe(true);
+    });
+    expect(result.current.darkTokens.primary_bg).toBe('#181A20');
+    expect(result.current.darkTokens.accent).toBe('#F0B90B');
   });
 
   it('applies preset themes correctly', () => {
@@ -49,7 +99,7 @@ describe('ThemeContext', () => {
   it('resets to default FinTech Midnight theme', () => {
     const { result } = renderHook(() => useTheme(), { wrapper });
     act(() => {
-      result.current.updateToken('dark', 'accent', '#000000');
+      result.current.setPrimarySeedColor('#000000');
       result.current.resetToDefault();
     });
     expect(result.current.activePresetId).toBe('fintech-midnight');

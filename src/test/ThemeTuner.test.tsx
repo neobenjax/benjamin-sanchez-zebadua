@@ -5,17 +5,17 @@ import { ThemeProvider } from '../context/ThemeContext';
 import { ThemeTuner } from '../components/ThemeTuner';
 
 describe('ThemeTuner Component', () => {
-  it('renders Theme Tuner Engine header and preset choices', () => {
+  it('renders Theme & Color Engine header and primary seed controls', () => {
     render(
       <ThemeProvider>
         <ThemeTuner />
       </ThemeProvider>
     );
 
-    expect(screen.getByText('Theme Tuner Engine')).toBeInTheDocument();
-    expect(screen.getAllByText(/FinTech Midnight/i).length).toBeGreaterThan(0);
-    expect(screen.getByText(/Cyber Amber/i)).toBeInTheDocument();
-    expect(screen.getByText(/Obsidian Violet/i)).toBeInTheDocument();
+    expect(screen.getByText('Theme & Color Engine')).toBeInTheDocument();
+    expect(screen.getByText(/Primary Seed Color/i)).toBeInTheDocument();
+    expect(screen.getByText(/Random Accessible Pair/i)).toBeInTheDocument();
+    expect(screen.getByText(/Save Theme As.../i)).toBeInTheDocument();
   });
 
   it('switches target tuning mode between dark and light', () => {
@@ -25,20 +25,20 @@ describe('ThemeTuner Component', () => {
       </ThemeProvider>
     );
 
-    const lightModeButton = screen.getByText('Tuning Light Mode');
+    const lightModeButton = screen.getByText('Light Tokens');
     fireEvent.click(lightModeButton);
 
-    expect(screen.getByText(/Token Color Fine-Tuning \(LIGHT Mode\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Derived Token Swatches \(LIGHT Mode\)/i)).toBeInTheDocument();
   });
 
-  it('displays WCAG AA contrast ratio pass indicator', () => {
+  it('displays WCAG 2.1 AA contrast ratio pass indicator', () => {
     render(
       <ThemeProvider>
         <ThemeTuner />
       </ThemeProvider>
     );
 
-    expect(screen.getByText(/WCAG AA Text Contrast Ratio/i)).toBeInTheDocument();
+    expect(screen.getByText(/WCAG 2.1 AA Contrast Ratio/i)).toBeInTheDocument();
     expect(screen.getByText(/Passes WCAG AA/i)).toBeInTheDocument();
   });
 });

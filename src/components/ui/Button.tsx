@@ -4,7 +4,7 @@ import React from 'react';
 import { clsx } from 'clsx';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'accent';
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
 }
@@ -29,6 +29,7 @@ export function Button({
     secondary: 'bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 active:scale-95',
     outline: 'border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-500 active:scale-95',
     ghost: 'text-slate-300 hover:text-white hover:bg-white/5 active:scale-95',
+    accent: 'bg-[var(--color-accent)] hover:opacity-90 text-slate-950 font-semibold shadow-md active:scale-95',
   };
 
   return (

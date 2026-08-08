@@ -1,0 +1,174 @@
+import { ThemeTokens, ThemePreset } from '@/context/ThemeContext';
+
+export interface DesignSystemMetadata {
+  name: string;
+  mode: 'dark' | 'light';
+  version?: string;
+  author?: string;
+  description?: string;
+  updatedAt?: string;
+}
+
+export interface ExportedDesignMD {
+  metadata: DesignSystemMetadata;
+  tokens: ThemeTokens;
+  markdownContent: string;
+}
+
+/**
+ * Generate a standard design.md Markdown document string from Theme Preset tokens
+ */
+export function exportDesignSystemToMarkdown(
+  preset: ThemePreset,
+  author: string = 'Benjamin Sanchez Zebadua'
+): string {
+  const dateStr = new Date().toISOString().split('T')[0];
+  const t = preset.tokens;
+
+  return `---
+design_system_name: "${preset.name}"
+mode: "${preset.mode}"
+version: "1.0.0"
+author: "${author}"
+updated_at: "${dateStr}"
+---
+
+# Design System Specification: ${preset.name}
+
+> Official Design System Specification file (\`design.md\` standard). Synchronized with root CSS custom properties and WCAG 2.1 AA accessibility guidelines.
+
+## 1. Color System & Design Tokens (${preset.mode.toUpperCase()} Mode)
+
+| Token Key | Design System Role | Hex / CSS Value | Description |
+| :--- | :--- | :--- | :--- |
+| \`primary_bg\` | Primary Background | \`${t.primary_bg}\` | Main application background |
+| \`secondary_bg\` | Secondary Background | \`${t.secondary_bg}\` | Alternating section backdrops |
+| \`surface_card\` | Surface Card | \`${t.surface_card}\` | Elevated card containers and popups |
+| \`text_primary\` | Primary Copy | \`${t.text_primary}\` | High contrast headings & body copy |
+| \`text_secondary\` | Secondary Copy | \`${t.text_secondary}\` | Subtitles, labels & descriptions |
+| \`text_muted\` | Muted Text | \`${t.text_muted}\` | Captions, metadata & hints |
+| \`accent\` | Accent Color | \`${t.accent}\` | High visibility CTAs & status badges |
+| \`slate_steel\` | Steel Slate | \`${t.slate_steel}\` | Secondary borders & icon outlines |
+| \`border_subtle\` | Subtle Border | \`${t.border_subtle}\` | Card grid lines & subtle dividers |
+| \`border_accent\` | Accent Border | \`${t.border_accent}\` | Active state highlight borders |
+
+### CSS Custom Properties Snippet
+
+\`\`\`css
+:root[data-theme="${preset.mode}"] {
+  --color-primary: ${t.primary_bg};
+  --color-secondary-bg: ${t.secondary_bg};
+  --color-surface: ${t.surface_card};
+  --color-text-primary: ${t.text_primary};
+  --color-text-secondary: ${t.text_secondary};
+  --color-text-muted: ${t.text_muted};
+  --color-accent: ${t.accent};
+  --color-secondary: ${t.slate_steel};
+  --border-subtle: ${t.border_subtle};
+  --border-accent: ${t.border_accent};
+}
+\`\`\`
+
+## 2. Component Guidelines & Specifications
+
+### Buttons
+- **Primary CTA**: Styled with \`var(--color-accent)\`, high contrast text.
+- **Secondary**: \`var(--color-surface)\` with \`var(--border-subtle)\` border.
+- **Disabled**: \`opacity: 0.5\`, \`pointer-events: none\`.
+- **Pill**: Fully rounded (\`rounded-full\`).
+
+### Typography & Display Scale
+- **Display Headings**: Playfair Display (Font Serif).
+- **Body Copy & Interfaces**: Inter Sans (Font Sans).
+- **Technical & Code**: Fira Code / JetBrains Mono (Font Mono).
+
+### Quantitative & Trading Indicators
+- **Positive Metrics**: Emerald Green (\`#10B981\` / \`#059669\`) with \`+\` prefix.
+- **Negative Metrics**: Crimson Red (\`#EF4444\` / \`#DC2626\`) with \`-\` prefix.
+`;
+}
+
+/**
+ * Import and parse raw design.md Markdown content into a ThemePreset object
+ */
+export function importDesignSystemFromMarkdown(markdownContent: string): ThemePreset {
+  let name = 'Imported Design System';
+  let mode: 'dark' | 'light' = 'dark';
+
+  // Extract frontmatter metadata
+  const nameMatch = markdownContent.match(/design_system_name:\s*"([^"]+)"/i) || markdownContent.match(/# Design System Specification:\s*(.+)/i);
+  if (nameMatch && nameMatch[1]) {
+    name = nameMatch[1].trim();
+  }
+
+  const modeMatch = markdownContent.match(/mode:\s*"(dark|light)"/i);
+  if (modeMatch && modeMatch[1]) {
+    mode = modeMatch[1].toLowerCase() as 'dark' | 'light';
+  }
+
+  // Extract tokens from markdown table or CSS block
+  const tokens: ThemeTokens = {
+    primary_bg: mode === 'dark' ? '#0A192F' : '#F7F5F2',
+    secondary_bg: mode === 'dark' ? '#081426' : '#EAE5DF',
+    surface_card: mode === 'dark' ? '#0C1E38' : '#FFFFFF',
+    text_primary: mode === 'dark' ? '#F8FAFC' : '#1A1C1E',
+    text_secondary: mode === 'dark' ? '#CBD5E1' : '#475569',
+    text_muted: mode === 'dark' ? '#94A3B8' : '#64748B',
+    accent: mode === 'dark' ? '#10B981' : '#059669',
+    slate_steel: mode === 'dark' ? '#334155' : '#CBD5E1',
+    border_subtle: mode === 'dark' ? 'rgba(255, 255, 255, 0.10)' : 'rgba(0, 0, 0, 0.10)',
+    border_accent: mode === 'dark' ? 'rgba(16, 185, 129, 0.20)' : 'rgba(5, 150, 105, 0.25)',
+  };
+
+  const cssPropertyMap: Record<string, keyof ThemeTokens> = {
+    '--color-primary': 'primary_bg',
+    '--color-secondary-bg': 'secondary_bg',
+    '--color-surface': 'surface_card',
+    '--color-text-primary': 'text_primary',
+    '--color-text-secondary': 'text_secondary',
+    '--color-text-muted': 'text_muted',
+    '--color-accent': 'accent',
+    '--color-secondary': 'slate_steel',
+    '--border-subtle': 'border_subtle',
+    '--border-accent': 'border_accent',
+  };
+
+  for (const [cssProp, tokenKey] of Object.entries(cssPropertyMap)) {
+    const regex = new RegExp(`${cssProp}:\\s*([^;\\n\\r]+);`, 'i');
+    const match = markdownContent.match(regex);
+    if (match && match[1]) {
+      tokens[tokenKey] = match[1].trim();
+    }
+  }
+
+  // Also check markdown table rows for tokens if CSS block was missing
+  const tableRowsMap: Record<string, keyof ThemeTokens> = {
+    primary_bg: 'primary_bg',
+    secondary_bg: 'secondary_bg',
+    surface_card: 'surface_card',
+    text_primary: 'text_primary',
+    text_secondary: 'text_secondary',
+    text_muted: 'text_muted',
+    accent: 'accent',
+    slate_steel: 'slate_steel',
+    border_subtle: 'border_subtle',
+    border_accent: 'border_accent',
+  };
+
+  for (const tokenKey of Object.keys(tableRowsMap) as (keyof ThemeTokens)[]) {
+    const tableRegex = new RegExp(`\\|\\s*\`?${tokenKey}\`?\\s*\\|[^|]*\\|\\s*\`?([^|\`\\n]+)\`?\\s*\\|`, 'i');
+    const tableMatch = markdownContent.match(tableRegex);
+    if (tableMatch && tableMatch[1]) {
+      tokens[tokenKey] = tableMatch[1].trim();
+    }
+  }
+
+  const cleanId = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `imported-${Date.now()}`;
+
+  return {
+    id: cleanId,
+    name,
+    mode,
+    tokens,
+  };
+}
