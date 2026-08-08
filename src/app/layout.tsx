@@ -63,6 +63,7 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from "@/context/ThemeContext";
 import DevTunerLauncher from "@/components/DevTunerLauncher";
+import { HeaderFragment } from "@/components/fragments/FragmentRenderer";
 
 export default function RootLayout({
   children,
@@ -86,7 +87,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-primary text-foreground">
         <ThemeProvider>
-          <Navigation />
+          <HeaderFragment fallback={<Navigation />} />
           {children}
           <Analytics />
           <FAB />
