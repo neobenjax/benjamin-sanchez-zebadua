@@ -26,10 +26,10 @@ export default function FragmentFooter({ ast }: FragmentFooterProps) {
   };
 
   return (
-    <footer className="bg-primary pt-16 pb-12 border-t border-white/10 relative overflow-hidden text-foreground">
+    <footer className="bg-[var(--color-primary)] pt-16 pb-12 border-t border-[var(--border-subtle)] relative overflow-hidden text-[var(--color-text-primary)]">
       {/* Decorative background glow */}
       <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
-        <div className="absolute left-1/3 top-0 w-1/2 h-full bg-gradient-to-r from-transparent via-[#10B981]/20 to-transparent blur-[120px]" />
+        <div className="absolute left-1/3 top-0 w-1/2 h-full bg-gradient-to-r from-transparent via-[var(--color-accent)]/20 to-transparent blur-[120px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
@@ -40,12 +40,12 @@ export default function FragmentFooter({ ast }: FragmentFooterProps) {
         </div>
 
         {/* BOTTOM LEGAL & COPYRIGHT BAR */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400">
+        <div className="border-t border-[var(--border-subtle)] pt-8 flex flex-col md:flex-row items-center justify-between text-sm text-[var(--color-text-secondary)]">
           <p className="mb-4 md:mb-0">
             © {currentYear} Benjamin Sanchez Zebadua. All rights reserved.
           </p>
           <div className="flex items-center space-x-6">
-            <span className="text-xs text-gray-500 uppercase tracking-widest">
+            <span className="text-xs text-[var(--color-text-muted)] uppercase tracking-widest">
               Agnostic Fragment Engine v1.0
             </span>
           </div>
@@ -59,14 +59,14 @@ function RenderFooterColumn({ column }: { column: FooterColumnAST }) {
   return (
     <div className="flex flex-col space-y-4">
       {column.title && (
-        <h4 className="font-serif text-lg font-bold text-white tracking-wide border-b border-white/10 pb-2">
+        <h4 className="font-serif text-lg font-bold text-[var(--color-text-primary)] tracking-wide border-b border-[var(--border-subtle)] pb-2">
           {column.title}
         </h4>
       )}
 
       {/* TEXT BLOCKS */}
       {column.textBlocks.map((text, idx) => (
-        <p key={idx} className="text-gray-300 text-sm leading-relaxed">
+        <p key={idx} className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
           {text}
         </p>
       ))}
@@ -105,7 +105,7 @@ function RenderFooterLink({ item }: { item: FragmentLink }) {
     return (
       <a
         href={item.href}
-        className="inline-flex items-center text-accent font-semibold text-base hover:text-white transition-colors group mt-2"
+        className="inline-flex items-center text-[var(--color-accent)] font-semibold text-base hover:text-[var(--color-text-primary)] transition-colors group mt-2"
       >
         <Mail className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
         {item.text}
@@ -120,7 +120,7 @@ function RenderFooterLink({ item }: { item: FragmentLink }) {
       href={item.href}
       target={item.isExternal ? "_blank" : "_self"}
       rel={item.isExternal ? "noopener noreferrer" : undefined}
-      className="text-gray-400 text-sm hover:text-accent transition-colors inline-flex items-center"
+      className="text-[var(--color-text-secondary)] text-sm hover:text-[var(--color-accent)] transition-colors inline-flex items-center"
     >
       {item.text}
       {item.isExternal && <ArrowUpRight className="ml-1 w-3 h-3 opacity-60" />}

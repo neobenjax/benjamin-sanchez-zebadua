@@ -186,7 +186,8 @@ export function exportDesignSystemToMarkdown(
 version: "1.0.0"
 name: "${preset.name}"
 design_system_name: "${preset.name}"
-description: "A precision-engineered design language with WCAG 2.1 AA contrast compliance, standardized tokens, and responsive UI primitives."
+description: "A precision-engineered design language with WCAG 2.1 AA contrast compliance, standardized tokens, responsive UI primitives, and full behavioral specifications."
+mode: "dark"
 author: "${author}"
 updated_at: "${dateStr}"
 
@@ -196,8 +197,10 @@ colors:
   primary-bg: "${t.primary_bg}"
   secondary-bg: "${t.secondary_bg}"
   surface: "${t.surface_card}"
+  surface-card: "${t.surface_card}"
   body: "${t.text_primary}"
   body-muted: "${t.text_muted}"
+  ink: "${t.text_primary}"
   text-primary: "${t.text_primary}"
   text-secondary: "${t.text_secondary}"
   text-muted: "${t.text_muted}"
@@ -210,12 +213,26 @@ colors:
 
 typography:
   display-lg:
-    fontFamily: "Inter, sans-serif"
+    fontFamily: "Playfair Display, Georgia, serif"
     fontSize: "40px"
     fontWeight: "700"
+    lineHeight: "1.15"
+  display-md:
+    fontFamily: "Playfair Display, Georgia, serif"
+    fontSize: "32px"
+    fontWeight: "700"
+  title-lg:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "20px"
+    fontWeight: "600"
   body:
-    fontFamily: "Inter, sans-serif"
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "16px"
+    fontWeight: "400"
+    lineHeight: "1.5"
+  caption:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "12px"
     fontWeight: "400"
 
 rounded:
@@ -232,36 +249,86 @@ spacing:
   md: "16px"
   lg: "24px"
   xl: "32px"
+  xxl: "48px"
 
 components:
   button-primary:
     backgroundColor: "{colors.accent}"
     textColor: "{colors.on-primary}"
+    typography: "{typography.body}"
     rounded: "{rounded.sm}"
+    padding: "10px 20px"
+  button-secondary:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text-primary}"
+    borderColor: "{colors.border-subtle}"
+    rounded: "{rounded.sm}"
+    padding: "10px 20px"
+  button-accent-pill:
+    backgroundColor: "{colors.accent}"
+    textColor: "{colors.on-primary}"
+    rounded: "{rounded.full}"
+    padding: "10px 24px"
+  input-search:
+    backgroundColor: "{colors.secondary-bg}"
+    textColor: "{colors.text-primary}"
+    borderColor: "{colors.border-subtle}"
+    rounded: "{rounded.sm}"
+    padding: "8px 14px"
+  select-dropdown:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text-primary}"
+    borderColor: "{colors.border-subtle}"
+    rounded: "{rounded.sm}"
+    padding: "8px 12px"
   card-surface:
     backgroundColor: "{colors.surface}"
     borderColor: "{colors.border-subtle}"
     rounded: "{rounded.md}"
+    padding: "24px"
+  global-nav:
+    backgroundColor: "{colors.primary-bg}"
+    textColor: "{colors.text-primary}"
+    borderColor: "{colors.border-subtle}"
+    height: "80px"
+  footer:
+    backgroundColor: "{colors.primary-bg}"
+    textColor: "{colors.text-secondary}"
+    borderColor: "{colors.border-subtle}"
+    padding: "64px 32px"
 ---
 
 # Design System Specification: ${preset.name}
 
 > Official Design System Specification file (\`design.md\` standard). Synchronized with root CSS custom properties and WCAG 2.1 AA accessibility guidelines.
 
-## 1. Color System & Design Tokens
+## 1. System Overview & Key Characteristics
+
+- **Geometry Canvas Color**: \`${t.primary_bg}\`.
+- **Visual Philosophy**: Precision-engineered interface built for accessibility, contrast compliance, and real-time design token synchronization across application surfaces.
+- **Key Characteristics**: Strict surface hierarchy, WCAG 2.1 AA contrast compliance ($\ge 4.5:1$ text contrast), and responsive component layout rules.
+
+## 2. Color System & Design Tokens
 
 | Token Key | Design System Role | Hex / CSS Value | Description |
 | :--- | :--- | :--- | :--- |
-| \`primary_bg\` | Primary Background | \`${t.primary_bg}\` | Main application background |
-| \`secondary_bg\` | Secondary Background | \`${t.secondary_bg}\` | Alternating section backdrops |
+| \`primary_bg\` | Primary Background | \`${t.primary_bg}\` | Main application background canvas |
+| \`secondary_bg\` | Secondary Background | \`${t.secondary_bg}\` | Inset section backdrops & secondary surfaces |
 | \`surface_card\` | Surface Card | \`${t.surface_card}\` | Elevated card containers and popups |
-| \`text_primary\` | Primary Copy | \`${t.text_primary}\` | High contrast headings & body copy |
-| \`text_secondary\` | Secondary Copy | \`${t.text_secondary}\` | Subtitles, labels & descriptions |
-| \`text_muted\` | Muted Text | \`${t.text_muted}\` | Captions, metadata & hints |
-| \`accent\` | Accent Color | \`${t.accent}\` | High visibility CTAs & status badges |
-| \`slate_steel\` | Steel Slate | \`${t.slate_steel}\` | Secondary borders & icon outlines |
-| \`border_subtle\` | Subtle Border | \`${t.border_subtle}\` | Card grid lines & subtle dividers |
-| \`border_accent\` | Accent Border | \`${t.border_accent}\` | Active state highlight borders |
+| \`text_primary\` | Primary Copy | \`${t.text_primary}\` | High contrast headings & primary body copy |
+| \`text_secondary\` | Secondary Copy | \`${t.text_secondary}\` | Subtitles, labels, and secondary descriptions |
+| \`text_muted\` | Muted Text | \`${t.text_muted}\` | Captions, metadata, and fine print |
+| \`accent\` | Accent Color | \`${t.accent}\` | High visibility CTAs & status indicators |
+| \`slate_steel\` | Steel Slate | \`${t.slate_steel}\` | Secondary borders, icon outlines, & subtle chips |
+| \`border_subtle\` | Subtle Border | \`${t.border_subtle}\` | Card grid lines & translucent dividers |
+| \`border_accent\` | Accent Border | \`${t.border_accent}\` | Active state highlight focus borders |
+
+### Color Categories & Variations
+
+- **Brand & Accent**: Accent CTA \`${t.accent}\` with high contrast interaction states.
+- **Surface**: Primary Canvas \`${t.primary_bg}\`, Secondary Backdrop \`${t.secondary_bg}\`, Elevated Surface Card \`${t.surface_card}\`.
+- **Text Color Descriptions**: Primary text \`${t.text_primary}\`, Secondary text \`${t.text_secondary}\`, Muted text \`${t.text_muted}\`.
+- **Semantics & Category Accents**: Accent \`${t.accent}\`, Steel Slate \`${t.slate_steel}\`, Subtle Border \`${t.border_subtle}\`, Accent Border \`${t.border_accent}\`.
 
 ### CSS Custom Properties Snippet
 
@@ -280,18 +347,41 @@ components:
 }
 \`\`\`
 
-## 2. Component Guidelines & Specifications
+## 3. Hierarchy, Layout & Spacing System
 
-### Buttons
-- **Primary CTA**: Styled with \`var(--color-accent)\`, high contrast text.
-- **Secondary**: \`var(--color-surface)\` with \`var(--border-subtle)\` border.
-- **Disabled**: \`opacity: 0.5\`, \`pointer-events: none\`.
-- **Pill**: Fully rounded (\`rounded-full\`).
+- **Hierarchy & Principles**: Clear focal emphasis on primary CTAs and headings, balanced by muted secondary text hierarchy.
+- **Layout, Grid & Containers**: 12-column responsive layout grid inside \`max-w-7xl\` container.
+- **Whitespace Philosophy**: Rhythmic padding (\`p-6\`, \`p-8\`) ensuring visual breathing room across cards and section boundaries.
 
-### Typography & Display Scale
-- **Display Headings**: Inter (Font Sans).
-- **Body Copy & Interfaces**: Inter (Font Sans).
-- **Technical & Code**: Fira Code / JetBrains Mono (Font Mono).
+## 4. Elevation, Depth & Shapes
+
+- **Elevation & Depth**: Glassmorphism translucent layers over canvas surfaces with 1px border outlines.
+- **Shapes & Border Radius Scale**: Modern radii scale including \`rounded-xs\` (2px), \`rounded-sm\` (4px), \`rounded-md\` (8px), \`rounded-lg\` (12px), and \`rounded-full\` (9999px).
+
+## 5. Component Specifications
+
+### Inputs & Forms
+- **Form Controls**: \`Select\` dropdowns and text inputs styled with \`var(--color-surface)\`, \`var(--border-subtle)\`, and \`var(--color-text-primary)\`.
+
+### Cards & Containers
+- **Surface Cards**: Glass translucent backdrops with subtle border highlights.
+
+### Navigation & Header
+- **Global Header**: Fixed top navigation bar adhering to active theme background and copy tokens.
+
+### Signature Components & Footer
+- **Signature Components**: Pill CTAs, status badges, and financial metrics.
+- **Footer**: Fragment-based footer adhering to root CSS theme variables.
+
+## 6. Do's and Don'ts
+
+### Do's
+- **Do**: Maintain root CSS custom property binding across all UI elements.
+- **Do**: Validate WCAG 2.1 AA contrast compliance ($\ge 4.5:1$) for all copy.
+
+### Don'ts
+- **Don't**: Avoid hardcoding hex values directly in component stylesheets.
+- **Don't**: Never use \`!important\` CSS overrides.
 `;
 }
 

@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import matter from "gray-matter";
 import type {
   HeaderAST,
@@ -10,15 +8,67 @@ import type {
   FooterDirective,
 } from "@/types/fragments";
 
-const FRAGMENTS_DIR = path.join(process.cwd(), "content", "fragments");
-const TEMP_FRAGMENTS_DIR = path.join(process.cwd(), "temp_fragments");
+const STATIC_HEADER_MD = `# LEFT_SIDE_HEADER
 
-function getFragmentFilePath(fileName: string): string {
-  const primaryPath = path.join(FRAGMENTS_DIR, fileName);
-  if (fs.existsSync(primaryPath)) {
-    return primaryPath;
+[![BENJAMIN // FINTECH ARCHITECT](/favicon.svg)](/)
+
+# RIGHT_SIDE_HEADER
+
+[About Me](/#about)
+[Synergy](/#synergy)
+[Journey](/#journey)
+[Articles](/articles)
+[Download CV](/benjamin-cv.pdf)
+`;
+
+const STATIC_FOOTER_MD = `# THREE_COLUMN_LAYOUT
+
+## COLUMN
+
+### Connect & Collaborate
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/benjaminsanchezzebadua/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/neobenjax)
+[Reach out via email](mailto:hello@benjaminsz.com?subject=Exploration%3A%20Bridging%20Tech%20%26%20Finance%20with%20Benjamin&body=Hi%20Benjamin%2C%20I%20came%20across%20your%20FinTech%20Architect%20portfolio.%20I%E2%80%99m%20interested%20in%20your%20dual-core%20approach%E2%80%94specifically%20how%20you%E2%80%99re%20applying%20a%20computing%20mindset%20to%20financial%20strategy.%20Are%20you%20available%20for%20a%20brief%20sync%20regarding%20%5BProject%2FRole%5D%3F)
+
+## COLUMN
+
+### Navigation
+
+[About Me](/#about)
+[Synergy](/#synergy)
+[Journey](/#journey)
+[Articles](/articles)
+
+## COLUMN
+
+### Platform
+
+[Privacy & Terms](/#privacy)
+Ottawa, ON | Relocated from Mexico
+`;
+
+function getFragmentFilePath(fileName: string): string | null {
+  if (typeof window !== "undefined") return null;
+  try {
+    // Dynamic node require to prevent client bundle resolution errors in Next.js Turbopack
+    const fs = require("fs");
+    const path = require("path");
+    const FRAGMENTS_DIR = path.join(process.cwd(), "content", "fragments");
+    const TEMP_FRAGMENTS_DIR = path.join(process.cwd(), "temp_fragments");
+
+    const primaryPath = path.join(FRAGMENTS_DIR, fileName);
+    if (fs.existsSync(primaryPath)) {
+      return primaryPath;
+    }
+    const tempPath = path.join(TEMP_FRAGMENTS_DIR, fileName);
+    if (fs.existsSync(tempPath)) {
+      return tempPath;
+    }
+    return null;
+  } catch (e) {
+    return null;
   }
-  return path.join(TEMP_FRAGMENTS_DIR, fileName);
 }
 
 /**
@@ -205,11 +255,15 @@ export function parseFooterMarkdown(markdown: string): FooterAST {
  * Reads and parses header.md fragment from content/fragments (or temp_fragments fallback).
  */
 export function getParsedHeaderFragment(): HeaderAST {
+  if (typeof window !== "undefined") {
+    return fallbackHeaderAST();
+  }
   try {
     const filePath = getFragmentFilePath("header.md");
-    if (!fs.existsSync(filePath)) {
+    if (!filePath) {
       return fallbackHeaderAST();
     }
+    const fs = require("fs");
     const fileContents = fs.readFileSync(filePath, "utf8");
     return parseHeaderMarkdown(fileContents);
   } catch (error) {
@@ -222,11 +276,15 @@ export function getParsedHeaderFragment(): HeaderAST {
  * Reads and parses footer.md fragment from content/fragments (or temp_fragments fallback).
  */
 export function getParsedFooterFragment(): FooterAST {
+  if (typeof window !== "undefined") {
+    return fallbackFooterAST();
+  }
   try {
     const filePath = getFragmentFilePath("footer.md");
-    if (!fs.existsSync(filePath)) {
+    if (!filePath) {
       return fallbackFooterAST();
     }
+    const fs = require("fs");
     const fileContents = fs.readFileSync(filePath, "utf8");
     return parseFooterMarkdown(fileContents);
   } catch (error) {
@@ -236,58 +294,9 @@ export function getParsedFooterFragment(): FooterAST {
 }
 
 function fallbackHeaderAST(): HeaderAST {
-  return {
-    layout: "LEFT_SIDE_HEADER",
-    branding: [
-      {
-        text: "BENJAMIN // FINTECH ARCHITECT",
-        href: "/",
-        isExternal: false,
-        isAction: false,
-        isDownload: false,
-        isMailto: false,
-      },
-    ],
-    navigation: [
-      { text: "About Me", href: "/#about", isExternal: false, isAction: false, isDownload: false, isMailto: false },
-      { text: "Synergy", href: "/#synergy", isExternal: false, isAction: false, isDownload: false, isMailto: false },
-      { text: "Journey", href: "/#journey", isExternal: false, isAction: false, isDownload: false, isMailto: false },
-      { text: "Articles", href: "/articles", isExternal: false, isAction: false, isDownload: false, isMailto: false },
-    ],
-    actions: [
-      { text: "Download CV", href: "/benjamin-cv.pdf", isExternal: false, isAction: true, isDownload: true, isMailto: false },
-    ],
-    rawMarkdown: "# LEFT_SIDE_HEADER\n[BENJAMIN // FINTECH ARCHITECT](/)\n# RIGHT_SIDE_HEADER\n[About Me](/#about)\n[Download CV](/benjamin-cv.pdf)",
-  };
+  return parseHeaderMarkdown(STATIC_HEADER_MD);
 }
 
 function fallbackFooterAST(): FooterAST {
-  return {
-    layout: "THREE_COLUMN_LAYOUT",
-    columns: [
-      {
-        title: "Connect & Collaborate",
-        links: [
-          { text: "Reach out via email", href: "mailto:hello@benjaminsz.com", isExternal: false, isAction: true, isDownload: false, isMailto: true },
-        ],
-        textBlocks: [],
-      },
-      {
-        title: "Navigation",
-        links: [
-          { text: "About Me", href: "/#about", isExternal: false, isAction: false, isDownload: false, isMailto: false },
-          { text: "Articles", href: "/articles", isExternal: false, isAction: false, isDownload: false, isMailto: false },
-        ],
-        textBlocks: [],
-      },
-      {
-        title: "Platform",
-        links: [
-          { text: "Theme Tuner", href: "/theme-personalize", isExternal: false, isAction: false, isDownload: false, isMailto: false },
-        ],
-        textBlocks: ["Ottawa, ON | Relocated from Mexico"],
-      },
-    ],
-    rawMarkdown: "# THREE_COLUMN_LAYOUT\n## COLUMN\n[Reach out via email](mailto:hello@benjaminsz.com)",
-  };
+  return parseFooterMarkdown(STATIC_FOOTER_MD);
 }

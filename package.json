@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "lint:css": "node scripts/check-css-no-important.mjs",
+    "validate:specs": "node scripts/validate-design-specs.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",

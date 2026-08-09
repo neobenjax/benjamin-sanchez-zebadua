@@ -8,6 +8,8 @@ import { ModalPortal } from './ui/ModalPortal';
 import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 import { Badge } from './ui/Badge';
+import { Select } from './ui/Select';
+import { ThemeDocumentationViewer } from './ThemeDocumentationViewer';
 import {
   Check,
   AlertTriangle,
@@ -148,7 +150,7 @@ export function ThemeTuner() {
       </div>
 
       {/* Primary Seed Color Picker & Randomizer */}
-      <div className="flex flex-col gap-3 p-4 rounded-sm bg-slate-900/50 border border-[var(--border-subtle)]">
+      <div className="flex flex-col gap-3 p-4 rounded-sm bg-[var(--color-secondary-bg)] border border-[var(--border-subtle)]">
         <div className="flex items-center justify-between">
           <label className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-primary)] flex items-center gap-1.5">
             <Sparkles className="w-4 h-4 text-[var(--color-accent)]" /> Primary Seed Color (HueCodex Generator)
@@ -166,14 +168,14 @@ export function ThemeTuner() {
               value={primarySeedColor.startsWith('#') ? primarySeedColor : '#10B981'}
               aria-label="Primary seed color picker"
               onChange={(e) => setPrimarySeedColor(e.target.value)}
-              className="w-9 h-9 rounded-sm border border-slate-700 bg-transparent cursor-pointer"
+              className="w-9 h-9 rounded-sm border border-[var(--border-subtle)] bg-transparent cursor-pointer"
             />
             <input
               type="text"
               value={primarySeedColor}
               aria-label="Primary seed hex input"
               onChange={(e) => setPrimarySeedColor(e.target.value)}
-              className="w-28 px-2.5 py-1.5 text-xs font-mono rounded-sm bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-[var(--color-accent)]"
+              className="w-28 px-2.5 py-1.5 text-xs font-mono rounded-sm bg-[var(--color-surface)] border border-[var(--border-subtle)] text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent)]"
             />
           </div>
 
@@ -199,24 +201,23 @@ export function ThemeTuner() {
           </span>
         </div>
 
-        <select
-          value={activePresetId}
+        <Select
           aria-label="Select design system theme"
+          value={activePresetId}
           onChange={(e) => {
             const chosen = savedPresets.find((p) => p.id === e.target.value);
             if (chosen) applyPreset(chosen);
           }}
-          className="w-full px-3 py-2 text-xs font-medium rounded-sm bg-slate-950 border border-[var(--border-subtle)] text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent)]"
-        >
-          {savedPresets.map((preset) => (
-            <option key={preset.id} value={preset.id}>
-              {preset.name}
-            </option>
-          ))}
-          {isDraft && !savedPresets.some((p) => p.id === activePresetId) && (
-            <option value={activePresetId}>Unsaved Draft Theme</option>
-          )}
-        </select>
+          options={[
+            ...savedPresets.map((preset) => ({
+              value: preset.id,
+              label: preset.name,
+            })),
+            ...(isDraft && !savedPresets.some((p) => p.id === activePresetId)
+              ? [{ value: activePresetId, label: 'Unsaved Draft Theme' }]
+              : []),
+          ]}
+        />
 
         {/* Action Buttons: Save, Overwrite, Delete */}
         <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
@@ -249,7 +250,7 @@ export function ThemeTuner() {
       </div>
 
       {/* design.md Specification Tools */}
-      <div className="flex flex-col gap-2.5 p-3.5 rounded-sm bg-slate-950/60 border border-[var(--border-subtle)]">
+      <div className="flex flex-col gap-2.5 p-3.5 rounded-sm bg-[var(--color-secondary-bg)] border border-[var(--border-subtle)]">
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-primary)] flex items-center gap-1.5">
             <FileCode className="w-4 h-4 text-[var(--color-accent)]" /> design.md File Standard (getdesign.md)
@@ -334,6 +335,12 @@ export function ThemeTuner() {
           ))}
         </div>
       </div>
+
+      {/* Live Design System Documentation Section */}
+      <ThemeDocumentationViewer
+        markdownText={exportCurrentDesignMD()}
+        themeName={selectedPreset?.name || 'Active Design Theme'}
+      />
 
       {/* Save Custom Theme Modal Portal */}
       {saveModalOpen && (

@@ -10,7 +10,6 @@ import {
   Table as TableIcon,
   Type,
   TrendingUp,
-  TrendingDown,
   ShieldCheck,
   Zap,
   ArrowUpRight,
@@ -62,7 +61,7 @@ export function DesignCatalog() {
                 <Button variant="primary" size="md">
                   Primary Action
                 </Button>
-                <Button variant="primary" size="md" className="ring-2 ring-[var(--color-accent)] ring-offset-2 ring-offset-slate-950">
+                <Button variant="primary" size="md" className="ring-2 ring-[var(--color-accent)] ring-offset-2 ring-offset-[var(--color-primary-bg)]">
                   Primary Active State
                 </Button>
                 <Button variant="primary" size="sm">
@@ -77,15 +76,15 @@ export function DesignCatalog() {
                 Secondary (Dark vs Light Context)
               </span>
               <div className="flex flex-wrap items-center gap-3">
-                <div className="p-3 rounded-sm bg-slate-950 border border-slate-800 flex items-center gap-2">
-                  <span className="text-[10px] text-slate-400 font-mono">Dark:</span>
+                <div className="p-3 rounded-sm bg-[var(--color-secondary-bg)] border border-[var(--border-subtle)] flex items-center gap-2">
+                  <span className="text-[10px] text-[var(--color-text-muted)] font-mono">Dark:</span>
                   <Button variant="secondary" size="sm">
                     Secondary Dark
                   </Button>
                 </div>
-                <div className="p-3 rounded-sm bg-slate-100 border border-slate-300 flex items-center gap-2">
-                  <span className="text-[10px] text-slate-600 font-mono">Light:</span>
-                  <Button variant="outline" size="sm" className="text-slate-900 border-slate-300 hover:bg-slate-200">
+                <div className="p-3 rounded-sm bg-[var(--color-surface)] border border-[var(--border-subtle)] flex items-center gap-2">
+                  <span className="text-[10px] text-[var(--color-text-muted)] font-mono">Light:</span>
+                  <Button variant="outline" size="sm" className="text-[var(--color-text-primary)] border-[var(--border-subtle)] hover:bg-[var(--color-secondary-bg)]">
                     Secondary Light
                   </Button>
                 </div>
@@ -103,7 +102,7 @@ export function DesignCatalog() {
                 </Button>
                 <button
                   disabled
-                  className="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-sm bg-slate-800 text-slate-500 border border-slate-700/50 cursor-not-allowed opacity-50"
+                  className="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-sm bg-[var(--color-secondary-bg)] text-[var(--color-text-muted)] border border-[var(--border-subtle)] cursor-not-allowed opacity-50"
                 >
                   Disabled Action
                 </button>
@@ -127,7 +126,7 @@ export function DesignCatalog() {
           </div>
 
           {/* Right: Technical Spec Description */}
-          <div className="p-5 rounded-sm bg-slate-900/50 border border-[var(--border-subtle)] flex flex-col gap-3 text-xs">
+          <div className="p-5 rounded-sm bg-[var(--color-secondary-bg)] border border-[var(--border-subtle)] flex flex-col gap-3 text-xs">
             <h4 className="font-mono font-bold text-[var(--color-text-primary)] uppercase tracking-wider">
               Button Behavioral Rules
             </h4>
@@ -213,22 +212,22 @@ export function DesignCatalog() {
             </div>
           </div>
 
-          <div className="lg:col-span-4 p-5 rounded-sm bg-slate-900/50 border border-[var(--border-subtle)] flex flex-col gap-3 text-xs">
+          <div className="lg:col-span-4 p-5 rounded-sm bg-[var(--color-secondary-bg)] border border-[var(--border-subtle)] flex flex-col gap-3 text-xs">
             <h4 className="font-mono font-bold text-[var(--color-text-primary)] uppercase tracking-wider">
               Font Specification
             </h4>
             <div className="space-y-3 text-[var(--color-text-secondary)]">
-              <div className="p-2.5 rounded-sm bg-slate-950 border border-slate-800">
+              <div className="p-2.5 rounded-sm bg-[var(--color-surface)] border border-[var(--border-subtle)]">
                 <span className="font-mono font-bold text-[var(--color-accent)]">Headings:</span> Playfair Display (Serif)
-                <p className="text-[11px] text-slate-400 mt-0.5">Used for H1, H2, H3, H4 display titles.</p>
+                <p className="text-[11px] text-[var(--color-text-muted)] mt-0.5">Used for H1, H2, H3, H4 display titles.</p>
               </div>
-              <div className="p-2.5 rounded-sm bg-slate-950 border border-slate-800">
+              <div className="p-2.5 rounded-sm bg-[var(--color-surface)] border border-[var(--border-subtle)]">
                 <span className="font-mono font-bold text-[var(--color-accent)]">Body & UI:</span> Inter (Sans-Serif)
-                <p className="text-[11px] text-slate-400 mt-0.5">Used for paragraph text, buttons, and form labels.</p>
+                <p className="text-[11px] text-[var(--color-text-muted)] mt-0.5">Used for paragraph text, buttons, and form labels.</p>
               </div>
-              <div className="p-2.5 rounded-sm bg-slate-950 border border-slate-800">
+              <div className="p-2.5 rounded-sm bg-[var(--color-surface)] border border-[var(--border-subtle)]">
                 <span className="font-mono font-bold text-[var(--color-accent)]">Numbers & Code:</span> JetBrains / Fira Code
-                <p className="text-[11px] text-slate-400 mt-0.5">Used for financial data, percentages, and tokens.</p>
+                <p className="text-[11px] text-[var(--color-text-muted)] mt-0.5">Used for financial data, percentages, and tokens.</p>
               </div>
             </div>
           </div>
@@ -251,7 +250,7 @@ export function DesignCatalog() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Card 1: Positive growth */}
-          <div className="flex flex-col gap-2 p-4 rounded-sm bg-slate-900/60 border border-[var(--border-subtle)]">
+          <div className="flex flex-col gap-2 p-4 rounded-sm bg-[var(--color-secondary-bg)] border border-[var(--border-subtle)]">
             <span className="text-xs font-mono uppercase text-[var(--color-text-muted)]">Portfolio Value</span>
             <div className="flex items-baseline justify-between">
               <span className="text-2xl font-mono font-bold text-[var(--color-text-primary)]">$2,845,910.42</span>
@@ -262,7 +261,7 @@ export function DesignCatalog() {
           </div>
 
           {/* Card 2: Negative indicator */}
-          <div className="flex flex-col gap-2 p-4 rounded-sm bg-slate-900/60 border border-[var(--border-subtle)]">
+          <div className="flex flex-col gap-2 p-4 rounded-sm bg-[var(--color-secondary-bg)] border border-[var(--border-subtle)]">
             <span className="text-xs font-mono uppercase text-[var(--color-text-muted)]">Volatility Index (VIX)</span>
             <div className="flex items-baseline justify-between">
               <span className="text-2xl font-mono font-bold text-[var(--color-text-primary)]">14.28 pts</span>
@@ -273,7 +272,7 @@ export function DesignCatalog() {
           </div>
 
           {/* Card 3: System Latency */}
-          <div className="flex flex-col gap-2 p-4 rounded-sm bg-slate-900/60 border border-[var(--border-subtle)]">
+          <div className="flex flex-col gap-2 p-4 rounded-sm bg-[var(--color-secondary-bg)] border border-[var(--border-subtle)]">
             <span className="text-xs font-mono uppercase text-[var(--color-text-muted)]">API Latency p99</span>
             <div className="flex items-baseline justify-between">
               <span className="text-2xl font-mono font-bold text-[var(--color-text-primary)]">1.24 ms</span>
@@ -284,12 +283,12 @@ export function DesignCatalog() {
           </div>
 
           {/* Card 4: Neutral metric */}
-          <div className="flex flex-col gap-2 p-4 rounded-sm bg-slate-900/60 border border-[var(--border-subtle)]">
+          <div className="flex flex-col gap-2 p-4 rounded-sm bg-[var(--color-secondary-bg)] border border-[var(--border-subtle)]">
             <span className="text-xs font-mono uppercase text-[var(--color-text-muted)]">Active Node Clusters</span>
             <div className="flex items-baseline justify-between">
               <span className="text-2xl font-mono font-bold text-[var(--color-text-primary)]">32 / 32</span>
             </div>
-            <div className="flex items-center gap-1 text-xs font-mono font-semibold text-[var(--color-text-secondary)] bg-slate-800/80 px-2 py-0.5 rounded-sm w-fit">
+            <div className="flex items-center gap-1 text-xs font-mono font-semibold text-[var(--color-text-secondary)] bg-[var(--color-surface)] px-2 py-0.5 rounded-sm w-fit">
               100% Operational
             </div>
           </div>
@@ -312,7 +311,7 @@ export function DesignCatalog() {
 
         <div className="overflow-x-auto border border-[var(--border-subtle)] rounded-sm bg-[var(--color-surface)]">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-900/80 uppercase font-mono text-[var(--color-text-muted)] border-b border-[var(--border-subtle)]">
+            <thead className="bg-[var(--color-secondary-bg)] uppercase font-mono text-[var(--color-text-muted)] border-b border-[var(--border-subtle)]">
               <tr>
                 <th className="p-3.5 font-semibold">Asset Pair</th>
                 <th className="p-3.5 font-semibold">Execution Engine</th>
@@ -323,7 +322,7 @@ export function DesignCatalog() {
               </tr>
             </thead>
             <tbody className="divide-y divide-[var(--border-subtle)] text-[var(--color-text-secondary)]">
-              <tr className="hover:bg-slate-800/40 transition-colors">
+              <tr className="hover:bg-[var(--color-secondary-bg)]/80 transition-colors">
                 <td className="p-3.5 font-mono font-bold text-[var(--color-text-primary)]">BTC / USDT</td>
                 <td className="p-3.5 font-sans">Matching Engine v4</td>
                 <td className="p-3.5 font-mono">$1,420,890,120</td>
@@ -333,7 +332,7 @@ export function DesignCatalog() {
                   <Badge variant="accent" className="text-[10px]">Active</Badge>
                 </td>
               </tr>
-              <tr className="hover:bg-slate-800/40 transition-colors">
+              <tr className="hover:bg-[var(--color-secondary-bg)]/80 transition-colors">
                 <td className="p-3.5 font-mono font-bold text-[var(--color-text-primary)]">ETH / USDT</td>
                 <td className="p-3.5 font-sans">Matching Engine v4</td>
                 <td className="p-3.5 font-mono">$845,120,500</td>
@@ -343,7 +342,7 @@ export function DesignCatalog() {
                   <Badge variant="accent" className="text-[10px]">Active</Badge>
                 </td>
               </tr>
-              <tr className="hover:bg-slate-800/40 transition-colors">
+              <tr className="hover:bg-[var(--color-secondary-bg)]/80 transition-colors">
                 <td className="p-3.5 font-mono font-bold text-[var(--color-text-primary)]">SOL / USDT</td>
                 <td className="p-3.5 font-sans">Matching Engine v3</td>
                 <td className="p-3.5 font-mono">$312,450,000</td>
@@ -388,7 +387,7 @@ export function DesignCatalog() {
                 type="text"
                 defaultValue="https://api.portfolio.dev/v1/health"
                 aria-label="API Endpoint Domain URL"
-                className="w-full px-3 py-2 text-xs font-mono rounded-sm bg-slate-950 border border-[var(--border-subtle)] text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent)]"
+                className="w-full px-3 py-2 text-xs font-mono rounded-sm bg-[var(--color-surface)] border border-[var(--border-subtle)] text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent)]"
               />
             </div>
           </div>
