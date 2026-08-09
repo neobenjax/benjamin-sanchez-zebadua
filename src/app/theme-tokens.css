@@ -1,14 +1,14 @@
 /* AUTO-GENERATED FROM currentdesigntheme.md - DO NOT EDIT DIRECTLY */
-/* Theme: Nike-design-system */
+/* Theme: Apple-design-system */
 :root {
   --color-primary: #ffffff;
-  --color-secondary-bg: #f5f5f5;
-  --color-surface: #ffffff;
-  --color-text-primary: #111111;
-  --color-text-secondary: #39393b;
-  --color-text-muted: #707072;
-  --color-accent: #111111;
-  --color-secondary: #4b4b4d;
-  --border-subtle: #cacacb;
-  --border-accent: #111111;
+  --color-secondary-bg: #f5f5f7;
+  --color-surface: #fafafc;
+  --color-text-primary: #1d1d1f;
+  --color-text-secondary: #333333;
+  --color-text-muted: #6e6e73;
+  --color-accent: #0066cc;
+  --color-secondary: #475569;
+  --border-subtle: #e0e0e0;
+  --border-accent: #0071e3;
 }

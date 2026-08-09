@@ -1,29 +1,29 @@
 ---
 version: "1.0.0"
-name: "Apple-design-system"
-design_system_name: "Apple-design-system"
+name: "green white theme"
+design_system_name: "green white theme"
 description: "A precision-engineered design language with WCAG 2.1 AA contrast compliance, standardized tokens, responsive UI primitives, and full behavioral specifications."
 mode: "dark"
 author: "Benjamin Sanchez Zebadua"
 updated_at: "2026-08-09"
 
 colors:
-  primary: "#0066cc"
-  primary-focus: "#0066cc"
-  primary-bg: "#ffffff"
-  secondary-bg: "#f5f5f7"
-  surface: "#fafafc"
-  surface-card: "#fafafc"
-  body: "#1d1d1f"
-  body-muted: "#6e6e73"
-  ink: "#1d1d1f"
-  text-primary: "#1d1d1f"
-  text-secondary: "#333333"
-  text-muted: "#6e6e73"
-  accent: "#0066cc"
-  slate-steel: "#475569"
-  border-subtle: "#e0e0e0"
-  border-accent: "#0071e3"
+  primary: "#069932"
+  primary-focus: "#069932"
+  primary-bg: "#F4FAF6"
+  secondary-bg: "#E5F5EA"
+  surface: "#FFFFFF"
+  surface-card: "#FFFFFF"
+  body: "#0F172A"
+  body-muted: "#5C8A6A"
+  ink: "#0F172A"
+  text-primary: "#0F172A"
+  text-secondary: "#366343"
+  text-muted: "#5C8A6A"
+  accent: "#069932"
+  slate-steel: "#C2D6C8"
+  border-subtle: "rgba(0, 0, 0, 0.10)"
+  border-accent: "rgba(24, 247, 91, 0.25)"
   on-primary: "#ffffff"
   on-dark: "#ffffff"
 
@@ -114,13 +114,13 @@ components:
     padding: "64px 32px"
 ---
 
-# Design System Specification: Apple-design-system
+# Design System Specification: green white theme
 
 > Official Design System Specification file (`design.md` standard). Synchronized with root CSS custom properties and WCAG 2.1 AA accessibility guidelines.
 
 ## 1. System Overview & Key Characteristics
 
-- **Geometry Canvas Color**: `#ffffff`.
+- **Geometry Canvas Color**: `#F4FAF6`.
 - **Visual Philosophy**: Precision-engineered interface built for accessibility, contrast compliance, and real-time design token synchronization across application surfaces.
 - **Key Characteristics**: Strict surface hierarchy, WCAG 2.1 AA contrast compliance ($ge 4.5:1$ text contrast), and responsive component layout rules.
 
@@ -128,38 +128,38 @@ components:
 
 | Token Key | Design System Role | Hex / CSS Value | Description |
 | :--- | :--- | :--- | :--- |
-| `primary_bg` | Primary Background | `#ffffff` | Main application background canvas |
-| `secondary_bg` | Secondary Background | `#f5f5f7` | Inset section backdrops & secondary surfaces |
-| `surface_card` | Surface Card | `#fafafc` | Elevated card containers and popups |
-| `text_primary` | Primary Copy | `#1d1d1f` | High contrast headings & primary body copy |
-| `text_secondary` | Secondary Copy | `#333333` | Subtitles, labels, and secondary descriptions |
-| `text_muted` | Muted Text | `#6e6e73` | Captions, metadata, and fine print |
-| `accent` | Accent Color | `#0066cc` | High visibility CTAs & status indicators |
-| `slate_steel` | Steel Slate | `#475569` | Secondary borders, icon outlines, & subtle chips |
-| `border_subtle` | Subtle Border | `#e0e0e0` | Card grid lines & translucent dividers |
-| `border_accent` | Accent Border | `#0071e3` | Active state highlight focus borders |
+| `primary_bg` | Primary Background | `#F4FAF6` | Main application background canvas |
+| `secondary_bg` | Secondary Background | `#E5F5EA` | Inset section backdrops & secondary surfaces |
+| `surface_card` | Surface Card | `#FFFFFF` | Elevated card containers and popups |
+| `text_primary` | Primary Copy | `#0F172A` | High contrast headings & primary body copy |
+| `text_secondary` | Secondary Copy | `#366343` | Subtitles, labels, and secondary descriptions |
+| `text_muted` | Muted Text | `#5C8A6A` | Captions, metadata, and fine print |
+| `accent` | Accent Color | `#069932` | High visibility CTAs & status indicators |
+| `slate_steel` | Steel Slate | `#C2D6C8` | Secondary borders, icon outlines, & subtle chips |
+| `border_subtle` | Subtle Border | `rgba(0, 0, 0, 0.10)` | Card grid lines & translucent dividers |
+| `border_accent` | Accent Border | `rgba(24, 247, 91, 0.25)` | Active state highlight focus borders |
 
 ### Color Categories & Variations
 
-- **Brand & Accent**: Accent CTA `#0066cc` with high contrast interaction states.
-- **Surface**: Primary Canvas `#ffffff`, Secondary Backdrop `#f5f5f7`, Elevated Surface Card `#fafafc`.
-- **Text Color Descriptions**: Primary text `#1d1d1f`, Secondary text `#333333`, Muted text `#6e6e73`.
-- **Semantics & Category Accents**: Accent `#0066cc`, Steel Slate `#475569`, Subtle Border `#e0e0e0`, Accent Border `#0071e3`.
+- **Brand & Accent**: Accent CTA `#069932` with high contrast interaction states.
+- **Surface**: Primary Canvas `#F4FAF6`, Secondary Backdrop `#E5F5EA`, Elevated Surface Card `#FFFFFF`.
+- **Text Color Descriptions**: Primary text `#0F172A`, Secondary text `#366343`, Muted text `#5C8A6A`.
+- **Semantics & Category Accents**: Accent `#069932`, Steel Slate `#C2D6C8`, Subtle Border `rgba(0, 0, 0, 0.10)`, Accent Border `rgba(24, 247, 91, 0.25)`.
 
 ### CSS Custom Properties Snippet
 
 ```css
 :root {
-  --color-primary: #ffffff;
-  --color-secondary-bg: #f5f5f7;
-  --color-surface: #fafafc;
-  --color-text-primary: #1d1d1f;
-  --color-text-secondary: #333333;
-  --color-text-muted: #6e6e73;
-  --color-accent: #0066cc;
-  --color-secondary: #475569;
-  --border-subtle: #e0e0e0;
-  --border-accent: #0071e3;
+  --color-primary: #F4FAF6;
+  --color-secondary-bg: #E5F5EA;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #366343;
+  --color-text-muted: #5C8A6A;
+  --color-accent: #069932;
+  --color-secondary: #C2D6C8;
+  --border-subtle: rgba(0, 0, 0, 0.10);
+  --border-accent: rgba(24, 247, 91, 0.25);
 }
 ```
 
