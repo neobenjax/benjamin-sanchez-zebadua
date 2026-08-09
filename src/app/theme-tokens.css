@@ -1,14 +1,14 @@
 /* AUTO-GENERATED FROM currentdesigntheme.md - DO NOT EDIT DIRECTLY */
-/* Theme: Neon Purple */
+/* Theme: green white theme */
 :root {
-  --color-primary: #190B15;
-  --color-secondary-bg: #12070F;
-  --color-surface: #261220;
-  --color-text-primary: #F8FAFC;
-  --color-text-secondary: #D6C2D0;
-  --color-text-muted: #B398AB;
-  --color-accent: #E718A9;
-  --color-secondary: #503046;
-  --border-subtle: rgba(255, 255, 255, 0.10);
-  --border-accent: rgba(231, 24, 169, 0.25);
+  --color-primary: #F4FAF6;
+  --color-secondary-bg: #E5F5EA;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #366343;
+  --color-text-muted: #5C8A6A;
+  --color-accent: #069932;
+  --color-secondary: #C2D6C8;
+  --border-subtle: rgba(0, 0, 0, 0.10);
+  --border-accent: rgba(24, 247, 91, 0.25);
 }

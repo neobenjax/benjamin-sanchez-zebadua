@@ -1,29 +1,29 @@
 ---
 version: "1.0.0"
-name: "Neon Purple"
-design_system_name: "Neon Purple"
+name: "green white theme"
+design_system_name: "green white theme"
 description: "A precision-engineered design language with WCAG 2.1 AA contrast compliance, standardized tokens, responsive UI primitives, and full behavioral specifications."
 mode: "dark"
 author: "Benjamin Sanchez Zebadua"
 updated_at: "2026-08-09"
 
 colors:
-  primary: "#E718A9"
-  primary-focus: "#E718A9"
-  primary-bg: "#190B15"
-  secondary-bg: "#12070F"
-  surface: "#261220"
-  surface-card: "#261220"
-  body: "#F8FAFC"
-  body-muted: "#B398AB"
-  ink: "#F8FAFC"
-  text-primary: "#F8FAFC"
-  text-secondary: "#D6C2D0"
-  text-muted: "#B398AB"
-  accent: "#E718A9"
-  slate-steel: "#503046"
-  border-subtle: "rgba(255, 255, 255, 0.10)"
-  border-accent: "rgba(231, 24, 169, 0.25)"
+  primary: "#069932"
+  primary-focus: "#069932"
+  primary-bg: "#F4FAF6"
+  secondary-bg: "#E5F5EA"
+  surface: "#FFFFFF"
+  surface-card: "#FFFFFF"
+  body: "#0F172A"
+  body-muted: "#5C8A6A"
+  ink: "#0F172A"
+  text-primary: "#0F172A"
+  text-secondary: "#366343"
+  text-muted: "#5C8A6A"
+  accent: "#069932"
+  slate-steel: "#C2D6C8"
+  border-subtle: "rgba(0, 0, 0, 0.10)"
+  border-accent: "rgba(24, 247, 91, 0.25)"
   on-primary: "#ffffff"
   on-dark: "#ffffff"
 
@@ -114,13 +114,13 @@ components:
     padding: "64px 32px"
 ---
 
-# Design System Specification: Neon Purple
+# Design System Specification: green white theme
 
 > Official Design System Specification file (`design.md` standard). Synchronized with root CSS custom properties and WCAG 2.1 AA accessibility guidelines.
 
 ## 1. System Overview & Key Characteristics
 
-- **Geometry Canvas Color**: `#190B15`.
+- **Geometry Canvas Color**: `#F4FAF6`.
 - **Visual Philosophy**: Precision-engineered interface built for accessibility, contrast compliance, and real-time design token synchronization across application surfaces.
 - **Key Characteristics**: Strict surface hierarchy, WCAG 2.1 AA contrast compliance ($ge 4.5:1$ text contrast), and responsive component layout rules.
 
@@ -128,38 +128,38 @@ components:
 
 | Token Key | Design System Role | Hex / CSS Value | Description |
 | :--- | :--- | :--- | :--- |
-| `primary_bg` | Primary Background | `#190B15` | Main application background canvas |
-| `secondary_bg` | Secondary Background | `#12070F` | Inset section backdrops & secondary surfaces |
-| `surface_card` | Surface Card | `#261220` | Elevated card containers and popups |
-| `text_primary` | Primary Copy | `#F8FAFC` | High contrast headings & primary body copy |
-| `text_secondary` | Secondary Copy | `#D6C2D0` | Subtitles, labels, and secondary descriptions |
-| `text_muted` | Muted Text | `#B398AB` | Captions, metadata, and fine print |
-| `accent` | Accent Color | `#E718A9` | High visibility CTAs & status indicators |
-| `slate_steel` | Steel Slate | `#503046` | Secondary borders, icon outlines, & subtle chips |
-| `border_subtle` | Subtle Border | `rgba(255, 255, 255, 0.10)` | Card grid lines & translucent dividers |
-| `border_accent` | Accent Border | `rgba(231, 24, 169, 0.25)` | Active state highlight focus borders |
+| `primary_bg` | Primary Background | `#F4FAF6` | Main application background canvas |
+| `secondary_bg` | Secondary Background | `#E5F5EA` | Inset section backdrops & secondary surfaces |
+| `surface_card` | Surface Card | `#FFFFFF` | Elevated card containers and popups |
+| `text_primary` | Primary Copy | `#0F172A` | High contrast headings & primary body copy |
+| `text_secondary` | Secondary Copy | `#366343` | Subtitles, labels, and secondary descriptions |
+| `text_muted` | Muted Text | `#5C8A6A` | Captions, metadata, and fine print |
+| `accent` | Accent Color | `#069932` | High visibility CTAs & status indicators |
+| `slate_steel` | Steel Slate | `#C2D6C8` | Secondary borders, icon outlines, & subtle chips |
+| `border_subtle` | Subtle Border | `rgba(0, 0, 0, 0.10)` | Card grid lines & translucent dividers |
+| `border_accent` | Accent Border | `rgba(24, 247, 91, 0.25)` | Active state highlight focus borders |
 
 ### Color Categories & Variations
 
-- **Brand & Accent**: Accent CTA `#E718A9` with high contrast interaction states.
-- **Surface**: Primary Canvas `#190B15`, Secondary Backdrop `#12070F`, Elevated Surface Card `#261220`.
-- **Text Color Descriptions**: Primary text `#F8FAFC`, Secondary text `#D6C2D0`, Muted text `#B398AB`.
-- **Semantics & Category Accents**: Accent `#E718A9`, Steel Slate `#503046`, Subtle Border `rgba(255, 255, 255, 0.10)`, Accent Border `rgba(231, 24, 169, 0.25)`.
+- **Brand & Accent**: Accent CTA `#069932` with high contrast interaction states.
+- **Surface**: Primary Canvas `#F4FAF6`, Secondary Backdrop `#E5F5EA`, Elevated Surface Card `#FFFFFF`.
+- **Text Color Descriptions**: Primary text `#0F172A`, Secondary text `#366343`, Muted text `#5C8A6A`.
+- **Semantics & Category Accents**: Accent `#069932`, Steel Slate `#C2D6C8`, Subtle Border `rgba(0, 0, 0, 0.10)`, Accent Border `rgba(24, 247, 91, 0.25)`.
 
 ### CSS Custom Properties Snippet
 
 ```css
 :root {
-  --color-primary: #190B15;
-  --color-secondary-bg: #12070F;
-  --color-surface: #261220;
-  --color-text-primary: #F8FAFC;
-  --color-text-secondary: #D6C2D0;
-  --color-text-muted: #B398AB;
-  --color-accent: #E718A9;
-  --color-secondary: #503046;
-  --border-subtle: rgba(255, 255, 255, 0.10);
-  --border-accent: rgba(231, 24, 169, 0.25);
+  --color-primary: #F4FAF6;
+  --color-secondary-bg: #E5F5EA;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #366343;
+  --color-text-muted: #5C8A6A;
+  --color-accent: #069932;
+  --color-secondary: #C2D6C8;
+  --border-subtle: rgba(0, 0, 0, 0.10);
+  --border-accent: rgba(24, 247, 91, 0.25);
 }
 ```
 
