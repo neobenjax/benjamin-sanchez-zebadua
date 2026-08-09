@@ -1,27 +1,27 @@
 ---
 version: "1.0.0"
-name: "Active Design System"
-design_system_name: "Active Design System"
+name: "Apple-design-analysis"
+design_system_name: "Apple-design-analysis"
 description: "A precision-engineered design language with WCAG 2.1 AA contrast compliance, standardized tokens, and responsive UI primitives."
 mode: "dark"
 author: "Benjamin Sanchez Zebadua"
 updated_at: "2026-08-09"
 
 colors:
-  primary: "#9FF500"
-  primary-focus: "#9FF500"
-  primary-bg: "#14190B"
-  secondary-bg: "#0E1207"
-  surface: "#1F2612"
-  body: "#F8FAFC"
-  body-muted: "#AAB398"
-  text-primary: "#F8FAFC"
-  text-secondary: "#CFD6C2"
-  text-muted: "#AAB398"
-  accent: "#9FF500"
-  slate-steel: "#455030"
-  border-subtle: "rgba(255, 255, 255, 0.10)"
-  border-accent: "rgba(159, 245, 0, 0.25)"
+  primary: "#0066cc"
+  primary-focus: "#0066cc"
+  primary-bg: "#ffffff"
+  secondary-bg: "#070D12"
+  surface: "#272729"
+  body: "#1d1d1f"
+  body-muted: "#98A6B3"
+  text-primary: "#1d1d1f"
+  text-secondary: "#cccccc"
+  text-muted: "#98A6B3"
+  accent: "#0066cc"
+  slate-steel: "#304050"
+  border-subtle: "#e0e0e0"
+  border-accent: "rgba(0, 102, 204, 0.25)"
   on-primary: "#ffffff"
   on-dark: "#ffffff"
 
@@ -61,7 +61,7 @@ components:
     rounded: "{rounded.md}"
 ---
 
-# Design System Specification: Active Design System
+# Design System Specification: Apple-design-analysis
 
 > Official Design System Specification file (`design.md` standard). Synchronized with root CSS custom properties and WCAG 2.1 AA accessibility guidelines.
 
@@ -69,31 +69,31 @@ components:
 
 | Token Key | Design System Role | Hex / CSS Value | Description |
 | :--- | :--- | :--- | :--- |
-| `primary_bg` | Primary Background | `#14190B` | Main application background |
-| `secondary_bg` | Secondary Background | `#0E1207` | Alternating section backdrops |
-| `surface_card` | Surface Card | `#1F2612` | Elevated card containers and popups |
-| `text_primary` | Primary Copy | `#F8FAFC` | High contrast headings & body copy |
-| `text_secondary` | Secondary Copy | `#CFD6C2` | Subtitles, labels & descriptions |
-| `text_muted` | Muted Text | `#AAB398` | Captions, metadata & hints |
-| `accent` | Accent Color | `#9FF500` | High visibility CTAs & status badges |
-| `slate_steel` | Steel Slate | `#455030` | Secondary borders & icon outlines |
-| `border_subtle` | Subtle Border | `rgba(255, 255, 255, 0.10)` | Card grid lines & subtle dividers |
-| `border_accent` | Accent Border | `rgba(159, 245, 0, 0.25)` | Active state highlight borders |
+| `primary_bg` | Primary Background | `#ffffff` | Main application background |
+| `secondary_bg` | Secondary Background | `#070D12` | Alternating section backdrops |
+| `surface_card` | Surface Card | `#272729` | Elevated card containers and popups |
+| `text_primary` | Primary Copy | `#1d1d1f` | High contrast headings & body copy |
+| `text_secondary` | Secondary Copy | `#cccccc` | Subtitles, labels & descriptions |
+| `text_muted` | Muted Text | `#98A6B3` | Captions, metadata & hints |
+| `accent` | Accent Color | `#0066cc` | High visibility CTAs & status badges |
+| `slate_steel` | Steel Slate | `#304050` | Secondary borders & icon outlines |
+| `border_subtle` | Subtle Border | `#e0e0e0` | Card grid lines & subtle dividers |
+| `border_accent` | Accent Border | `rgba(0, 102, 204, 0.25)` | Active state highlight borders |
 
 ### CSS Custom Properties Snippet
 
 ```css
 :root[data-theme="dark"] {
-  --color-primary: #14190B;
-  --color-secondary-bg: #0E1207;
-  --color-surface: #1F2612;
-  --color-text-primary: #F8FAFC;
-  --color-text-secondary: #CFD6C2;
-  --color-text-muted: #AAB398;
-  --color-accent: #9FF500;
-  --color-secondary: #455030;
-  --border-subtle: rgba(255, 255, 255, 0.10);
-  --border-accent: rgba(159, 245, 0, 0.25);
+  --color-primary: #ffffff;
+  --color-secondary-bg: #070D12;
+  --color-surface: #272729;
+  --color-text-primary: #1d1d1f;
+  --color-text-secondary: #cccccc;
+  --color-text-muted: #98A6B3;
+  --color-accent: #0066cc;
+  --color-secondary: #304050;
+  --border-subtle: #e0e0e0;
+  --border-accent: rgba(0, 102, 204, 0.25);
 }
 ```
 

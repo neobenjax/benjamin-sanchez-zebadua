@@ -14,9 +14,9 @@ export default function DevTunerLauncher() {
       target="_blank"
       rel="noopener noreferrer"
       title="Open Theme Personalize & Tuner (Dev Mode Only)"
-      className="fixed bottom-6 left-6 z-50 flex items-center gap-2 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-white bg-slate-900/90 border border-emerald-500/30 rounded-full shadow-lg backdrop-blur-md transition-all hover:bg-slate-800 hover:border-emerald-500 hover:scale-105 active:scale-95"
+      className="fixed bottom-6 left-6 z-50 flex items-center gap-2 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-white bg-slate-900/90 border border-[var(--border-accent)] rounded-full shadow-lg backdrop-blur-md transition-all hover:bg-slate-800 hover:border-[var(--color-accent)] hover:scale-105 active:scale-95"
     >
-      <Palette className="w-4 h-4 text-emerald-400 animate-pulse" />
+      <Palette className="w-4 h-4 text-[var(--color-accent)] animate-pulse" />
       <span>Theme Tuner</span>
     </a>
   );

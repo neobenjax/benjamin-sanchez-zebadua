@@ -16,7 +16,7 @@ export function Button({
   children,
   ...props
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/50 disabled:opacity-50 disabled:pointer-events-none cursor-pointer';
+  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-sm transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/50 disabled:opacity-50 disabled:pointer-events-none cursor-pointer';
 
   const sizeStyles = {
     sm: 'px-3 py-1.5 text-xs',
@@ -25,11 +25,11 @@ export function Button({
   };
 
   const variantStyles = {
-    primary: 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold shadow-md shadow-emerald-500/20 active:scale-95',
-    secondary: 'bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 active:scale-95',
-    outline: 'border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 hover:border-emerald-500 active:scale-95',
-    ghost: 'text-slate-300 hover:text-white hover:bg-white/5 active:scale-95',
-    accent: 'bg-[var(--color-accent)] hover:opacity-90 text-slate-950 font-semibold shadow-md active:scale-95',
+    primary: 'bg-[var(--color-accent)] hover:opacity-90 text-[var(--color-primary)] font-semibold shadow-md active:scale-95',
+    secondary: 'bg-[var(--color-surface)] hover:bg-[var(--border-subtle)] text-[var(--color-text-primary)] border border-[var(--border-subtle)] active:scale-95',
+    outline: 'border border-[var(--border-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)]/10 active:scale-95',
+    ghost: 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-white/5 active:scale-95',
+    accent: 'bg-[var(--color-accent)] hover:opacity-90 text-[var(--color-primary)] font-semibold shadow-md active:scale-95',
   };
 
   return (

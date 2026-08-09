@@ -106,7 +106,7 @@ export function ThemeTuner() {
   };
 
   return (
-    <Card className="flex flex-col gap-6 max-w-xl w-full">
+    <Card className="flex flex-col gap-6 w-full max-w-none">
       {/* Header */}
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
@@ -146,7 +146,7 @@ export function ThemeTuner() {
               value={primarySeedColor}
               aria-label="Primary seed hex input"
               onChange={(e) => setPrimarySeedColor(e.target.value)}
-              className="w-28 px-2.5 py-1.5 text-xs font-mono rounded-sm bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-emerald-500"
+              className="w-28 px-2.5 py-1.5 text-xs font-mono rounded-sm bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-[var(--color-accent)]"
             />
           </div>
 
@@ -186,7 +186,7 @@ export function ThemeTuner() {
               {preset.name} ({preset.mode.toUpperCase()})
             </option>
           ))}
-          {!savedPresets.some((p) => p.id === activePresetId) && (
+          {isDraft && !savedPresets.some((p) => p.id === activePresetId) && (
             <option value={activePresetId}>Unsaved Draft Theme ({tuningMode.toUpperCase()})</option>
           )}
         </select>
@@ -259,12 +259,12 @@ export function ThemeTuner() {
       <div
         className={`flex items-center gap-3 p-3 rounded-sm border text-xs ${
           isContrastValid
-            ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+            ? 'bg-[var(--color-accent)]/10 border-[var(--border-accent)] text-[var(--color-accent)]'
             : 'bg-amber-500/10 border-amber-500/40 text-amber-300'
         }`}
       >
         {isContrastValid ? (
-          <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+          <Check className="w-4 h-4 text-[var(--color-accent)] shrink-0" />
         ) : (
           <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
         )}
@@ -280,7 +280,7 @@ export function ThemeTuner() {
         </div>
       </div>
 
-      {/* Computed Token Palette Display (Read Only) */}
+      {/* Computed Token Palette Display (Read Only Swatches) */}
       <div className="flex flex-col gap-2">
         <label className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
           Derived Token Swatches
@@ -321,6 +321,7 @@ export function ThemeTuner() {
                   <Save className="w-5 h-5 text-[var(--color-accent)]" /> Save Custom Design System
                 </h4>
                 <button
+                  aria-label="Close save modal"
                   onClick={() => setSaveModalOpen(false)}
                   className="text-slate-400 hover:text-white"
                 >
@@ -336,10 +337,10 @@ export function ThemeTuner() {
                     value={themeNameInput}
                     onChange={(e) => setThemeNameInput(e.target.value)}
                     autoFocus
-                    className="w-full px-3 py-2 text-sm rounded-sm bg-slate-950 border border-slate-700 text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3 py-2 text-sm rounded-sm bg-slate-950 border border-slate-700 text-white focus:outline-none focus:border-[var(--color-accent)]"
                   />
                   <p className="text-[11px] text-slate-400">
-                    File will be saved as <code className="text-emerald-400">neon-orange-[timestamp].md</code> under <code className="text-emerald-400">config/themes/</code>.
+                    File will be saved as <code className="text-[var(--color-accent)]">neon-orange-[timestamp].md</code> under <code className="text-[var(--color-accent)]">config/themes/</code>.
                   </p>
                 </div>
                 <div className="flex justify-end gap-2 pt-2">
@@ -366,6 +367,7 @@ export function ThemeTuner() {
                   <FileCode className="w-5 h-5 text-[var(--color-accent)]" /> Export currentdesigntheme.md
                 </h4>
                 <button
+                  aria-label="Close export modal"
                   onClick={() => setExportModalOpen(false)}
                   className="text-slate-400 hover:text-white"
                 >
@@ -375,7 +377,7 @@ export function ThemeTuner() {
               <textarea
                 readOnly
                 value={exportCurrentDesignMD()}
-                className="w-full h-72 p-3 text-xs font-mono rounded-sm bg-slate-950 border border-slate-800 text-emerald-400 focus:outline-none custom-scrollbar"
+                className="w-full h-72 p-3 text-xs font-mono rounded-sm bg-slate-950 border border-slate-800 text-[var(--color-accent)] focus:outline-none custom-scrollbar"
               />
               <div className="flex items-center justify-between pt-1">
                 <span className="text-xs text-slate-400">Standard getdesign.md format</span>
@@ -403,6 +405,7 @@ export function ThemeTuner() {
                   <Upload className="w-5 h-5 text-[var(--color-accent)]" /> Import External design.md
                 </h4>
                 <button
+                  aria-label="Close import modal"
                   onClick={() => setImportModalOpen(false)}
                   className="text-slate-400 hover:text-white"
                 >
@@ -410,7 +413,7 @@ export function ThemeTuner() {
                 </button>
               </div>
               <p className="text-xs text-slate-300">
-                Paste raw Markdown content from any standard <code className="text-emerald-400">design.md</code> file (such as Binance or Airbnb design-md specs) to update the website design tokens.
+                Paste raw Markdown content from any standard <code className="text-[var(--color-accent)]">design.md</code> file (such as Binance or Airbnb design-md specs) to update the website design tokens.
               </p>
               <form onSubmit={handleImportSubmit} className="flex flex-col gap-4">
                 <textarea
@@ -418,7 +421,7 @@ export function ThemeTuner() {
                   value={importMarkdownText}
                   onChange={(e) => setImportMarkdownText(e.target.value)}
                   required
-                  className="w-full h-64 p-3 text-xs font-mono rounded-sm bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-emerald-500 custom-scrollbar"
+                  className="w-full h-64 p-3 text-xs font-mono rounded-sm bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-[var(--color-accent)] custom-scrollbar"
                 />
                 {importErrorMessage && (
                   <div className="p-3 rounded-sm bg-rose-500/10 border border-rose-500/40 text-rose-300 text-xs flex items-start gap-2">

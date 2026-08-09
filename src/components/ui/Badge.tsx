@@ -17,10 +17,10 @@ export function Badge({
   const baseStyles = 'inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full transition-all';
 
   const variantStyles = {
-    accent: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    secondary: 'bg-slate-800/80 text-slate-300 border border-slate-700/50',
-    outline: 'border border-emerald-500/40 text-emerald-400',
-    pulse: 'glass border-emerald-500/30 text-emerald-400 shadow-sm',
+    accent: 'bg-[var(--color-accent)]/10 text-[var(--color-accent)] border border-[var(--border-accent)]',
+    secondary: 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--border-subtle)]',
+    outline: 'border border-[var(--border-accent)] text-[var(--color-accent)]',
+    pulse: 'glass border border-[var(--border-accent)] text-[var(--color-accent)] shadow-sm',
   };
 
   return (
@@ -29,7 +29,7 @@ export function Badge({
       {...props}
     >
       {variant === 'pulse' && (
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
       )}
       {children}
     </span>

@@ -16,10 +16,7 @@ import {
   ArrowUpRight,
   ArrowDownRight,
   Sliders,
-  Sparkles,
   CheckCircle2,
-  AlertCircle,
-  HelpCircle,
   ExternalLink,
 } from 'lucide-react';
 
@@ -65,7 +62,7 @@ export function DesignCatalog() {
                 <Button variant="primary" size="md">
                   Primary Action
                 </Button>
-                <Button variant="primary" size="md" className="ring-2 ring-emerald-400 ring-offset-2 ring-offset-slate-950">
+                <Button variant="primary" size="md" className="ring-2 ring-[var(--color-accent)] ring-offset-2 ring-offset-slate-950">
                   Primary Active State
                 </Button>
                 <Button variant="primary" size="sm">
@@ -222,15 +219,15 @@ export function DesignCatalog() {
             </h4>
             <div className="space-y-3 text-[var(--color-text-secondary)]">
               <div className="p-2.5 rounded-sm bg-slate-950 border border-slate-800">
-                <span className="font-mono font-bold text-emerald-400">Headings:</span> Playfair Display (Serif)
+                <span className="font-mono font-bold text-[var(--color-accent)]">Headings:</span> Playfair Display (Serif)
                 <p className="text-[11px] text-slate-400 mt-0.5">Used for H1, H2, H3, H4 display titles.</p>
               </div>
               <div className="p-2.5 rounded-sm bg-slate-950 border border-slate-800">
-                <span className="font-mono font-bold text-emerald-400">Body & UI:</span> Inter (Sans-Serif)
+                <span className="font-mono font-bold text-[var(--color-accent)]">Body & UI:</span> Inter (Sans-Serif)
                 <p className="text-[11px] text-slate-400 mt-0.5">Used for paragraph text, buttons, and form labels.</p>
               </div>
               <div className="p-2.5 rounded-sm bg-slate-950 border border-slate-800">
-                <span className="font-mono font-bold text-emerald-400">Numbers & Code:</span> JetBrains / Fira Code
+                <span className="font-mono font-bold text-[var(--color-accent)]">Numbers & Code:</span> JetBrains / Fira Code
                 <p className="text-[11px] text-slate-400 mt-0.5">Used for financial data, percentages, and tokens.</p>
               </div>
             </div>
@@ -259,7 +256,7 @@ export function DesignCatalog() {
             <div className="flex items-baseline justify-between">
               <span className="text-2xl font-mono font-bold text-[var(--color-text-primary)]">$2,845,910.42</span>
             </div>
-            <div className="flex items-center gap-1 text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-sm w-fit">
+            <div className="flex items-center gap-1 text-xs font-mono font-bold text-[var(--color-accent)] bg-[var(--color-accent)]/10 px-2 py-0.5 rounded-sm w-fit">
               <ArrowUpRight className="w-3.5 h-3.5" /> +14.82% (24h)
             </div>
           </div>
@@ -281,7 +278,7 @@ export function DesignCatalog() {
             <div className="flex items-baseline justify-between">
               <span className="text-2xl font-mono font-bold text-[var(--color-text-primary)]">1.24 ms</span>
             </div>
-            <div className="flex items-center gap-1 text-xs font-mono font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-sm w-fit">
+            <div className="flex items-center gap-1 text-xs font-mono font-semibold text-[var(--color-accent)] bg-[var(--color-accent)]/10 px-2 py-0.5 rounded-sm w-fit">
               <CheckCircle2 className="w-3.5 h-3.5" /> Optimal
             </div>
           </div>
@@ -331,7 +328,7 @@ export function DesignCatalog() {
                 <td className="p-3.5 font-sans">Matching Engine v4</td>
                 <td className="p-3.5 font-mono">$1,420,890,120</td>
                 <td className="p-3.5 font-mono text-right font-bold text-[var(--color-text-primary)]">$94,250.00</td>
-                <td className="p-3.5 font-mono text-right font-bold text-emerald-400">+5.42%</td>
+                <td className="p-3.5 font-mono text-right font-bold text-[var(--color-accent)]">+5.42%</td>
                 <td className="p-3.5 text-center">
                   <Badge variant="accent" className="text-[10px]">Active</Badge>
                 </td>
@@ -341,7 +338,7 @@ export function DesignCatalog() {
                 <td className="p-3.5 font-sans">Matching Engine v4</td>
                 <td className="p-3.5 font-mono">$845,120,500</td>
                 <td className="p-3.5 font-mono text-right font-bold text-[var(--color-text-primary)]">$3,420.50</td>
-                <td className="p-3.5 font-mono text-right font-bold text-emerald-400">+3.18%</td>
+                <td className="p-3.5 font-mono text-right font-bold text-[var(--color-accent)]">+3.18%</td>
                 <td className="p-3.5 text-center">
                   <Badge variant="accent" className="text-[10px]">Active</Badge>
                 </td>
