@@ -1,26 +1,26 @@
 ---
 version: "1.0.0"
-name: "Neon Purple"
-design_system_name: "Neon Purple"
+name: "Nike-design-system"
+design_system_name: "Nike-design-system"
 description: "A precision-engineered design language with WCAG 2.1 AA contrast compliance, standardized tokens, and responsive UI primitives."
 author: "Benjamin Sanchez Zebadua"
 updated_at: "2026-08-09"
 
 colors:
-  primary: "#E718A9"
-  primary-focus: "#E718A9"
-  primary-bg: "#190B15"
-  secondary-bg: "#12070F"
-  surface: "#261220"
-  body: "#F8FAFC"
-  body-muted: "#B398AB"
-  text-primary: "#F8FAFC"
-  text-secondary: "#D6C2D0"
-  text-muted: "#B398AB"
-  accent: "#E718A9"
-  slate-steel: "#503046"
-  border-subtle: "rgba(255, 255, 255, 0.10)"
-  border-accent: "rgba(231, 24, 169, 0.25)"
+  primary: "#111111"
+  primary-focus: "#111111"
+  primary-bg: "#ffffff"
+  secondary-bg: "#f5f5f5"
+  surface: "#ffffff"
+  body: "#111111"
+  body-muted: "#707072"
+  text-primary: "#111111"
+  text-secondary: "#39393b"
+  text-muted: "#707072"
+  accent: "#111111"
+  slate-steel: "#4b4b4d"
+  border-subtle: "#cacacb"
+  border-accent: "#111111"
   on-primary: "#ffffff"
   on-dark: "#ffffff"
 
@@ -60,7 +60,7 @@ components:
     rounded: "{rounded.md}"
 ---
 
-# Design System Specification: Neon Purple
+# Design System Specification: Nike-design-system
 
 > Official Design System Specification file (`design.md` standard). Synchronized with root CSS custom properties and WCAG 2.1 AA accessibility guidelines.
 
@@ -68,31 +68,31 @@ components:
 
 | Token Key | Design System Role | Hex / CSS Value | Description |
 | :--- | :--- | :--- | :--- |
-| `primary_bg` | Primary Background | `#190B15` | Main application background |
-| `secondary_bg` | Secondary Background | `#12070F` | Alternating section backdrops |
-| `surface_card` | Surface Card | `#261220` | Elevated card containers and popups |
-| `text_primary` | Primary Copy | `#F8FAFC` | High contrast headings & body copy |
-| `text_secondary` | Secondary Copy | `#D6C2D0` | Subtitles, labels & descriptions |
-| `text_muted` | Muted Text | `#B398AB` | Captions, metadata & hints |
-| `accent` | Accent Color | `#E718A9` | High visibility CTAs & status badges |
-| `slate_steel` | Steel Slate | `#503046` | Secondary borders & icon outlines |
-| `border_subtle` | Subtle Border | `rgba(255, 255, 255, 0.10)` | Card grid lines & subtle dividers |
-| `border_accent` | Accent Border | `rgba(231, 24, 169, 0.25)` | Active state highlight borders |
+| `primary_bg` | Primary Background | `#ffffff` | Main application background |
+| `secondary_bg` | Secondary Background | `#f5f5f5` | Alternating section backdrops |
+| `surface_card` | Surface Card | `#ffffff` | Elevated card containers and popups |
+| `text_primary` | Primary Copy | `#111111` | High contrast headings & body copy |
+| `text_secondary` | Secondary Copy | `#39393b` | Subtitles, labels & descriptions |
+| `text_muted` | Muted Text | `#707072` | Captions, metadata & hints |
+| `accent` | Accent Color | `#111111` | High visibility CTAs & status badges |
+| `slate_steel` | Steel Slate | `#4b4b4d` | Secondary borders & icon outlines |
+| `border_subtle` | Subtle Border | `#cacacb` | Card grid lines & subtle dividers |
+| `border_accent` | Accent Border | `#111111` | Active state highlight borders |
 
 ### CSS Custom Properties Snippet
 
 ```css
 :root {
-  --color-primary: #190B15;
-  --color-secondary-bg: #12070F;
-  --color-surface: #261220;
-  --color-text-primary: #F8FAFC;
-  --color-text-secondary: #D6C2D0;
-  --color-text-muted: #B398AB;
-  --color-accent: #E718A9;
-  --color-secondary: #503046;
-  --border-subtle: rgba(255, 255, 255, 0.10);
-  --border-accent: rgba(231, 24, 169, 0.25);
+  --color-primary: #ffffff;
+  --color-secondary-bg: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-text-primary: #111111;
+  --color-text-secondary: #39393b;
+  --color-text-muted: #707072;
+  --color-accent: #111111;
+  --color-secondary: #4b4b4d;
+  --border-subtle: #cacacb;
+  --border-accent: #111111;
 }
 ```
 

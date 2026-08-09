@@ -1,5 +1,5 @@
 import { ThemeTokens, ThemePreset } from '@/context/ThemeContext';
-import { generateThemeFromPrimary } from './colorEngine';
+import { generateThemeFromPrimary, hexToRgb, getLuminance, calculateContrast } from './colorEngine';
 
 export interface DesignSystemMetadata {
   name: string;
@@ -339,12 +339,33 @@ export function importDesignSystemFromMarkdown(markdownContent: string): ThemePr
   if (frontmatter.colors) {
     const c = frontmatter.colors;
     if (c.primary || c.accent) tokens.accent = c.primary || c.accent;
-    if (c['primary-bg'] || c.canvas || c.body) tokens.primary_bg = c['primary-bg'] || c.canvas || tokens.primary_bg;
-    if (c['secondary-bg'] || c['canvas-soft'] || c['surface-pearl']) tokens.secondary_bg = c['secondary-bg'] || c['canvas-soft'] || tokens.secondary_bg;
-    if (c.surface || c['surface-tile-1']) tokens.surface_card = c.surface || c['surface-tile-1'] || tokens.surface_card;
-    if (c['body-on-dark'] || c.body || c.ink || c['text-primary']) tokens.text_primary = c['body-on-dark'] || c.body || c.ink || c['text-primary'] || tokens.text_primary;
-    if (c['body-muted'] || c['ink-soft'] || c['text-secondary']) tokens.text_secondary = c['body-muted'] || c['ink-soft'] || c['text-secondary'] || tokens.text_secondary;
-    if (c['fine-print'] || c['text-muted']) tokens.text_muted = c['fine-print'] || c['text-muted'] || tokens.text_muted;
+
+    const bgCandidate = c['primary-bg'] || c.canvas || c['surface-canvas'] || c['bg-primary'];
+    if (bgCandidate) tokens.primary_bg = bgCandidate;
+
+    const secBgCandidate = c['secondary-bg'] || c['canvas-parchment'] || c['canvas-soft'] || c['surface-pearl'];
+    if (secBgCandidate) tokens.secondary_bg = secBgCandidate;
+
+    const surfaceCandidate = c.surface || c['surface-card'] || c['surface-tile-1'];
+    if (surfaceCandidate) tokens.surface_card = surfaceCandidate;
+
+    const bgRgb = hexToRgb(tokens.primary_bg);
+    const bgLum = bgRgb ? getLuminance(bgRgb.r, bgRgb.g, bgRgb.b) : 0.5;
+
+    if (bgLum >= 0.5) {
+      // Light surface background (e.g. #ffffff canvas):
+      // Primary text MUST be dark text (body, ink, text-primary, text-dark), NEVER body-on-dark!
+      tokens.text_primary = c.body || c.ink || c['text-primary'] || c['text-dark'] || '#1d1d1f';
+      tokens.text_secondary = c['ink-muted-80'] || c['text-secondary'] || c['body-muted'] || c['ink-soft'] || '#475569';
+      tokens.text_muted = c['ink-muted-48'] || c['fine-print'] || c['text-muted'] || '#6e6e73';
+    } else {
+      // Dark surface background:
+      // Primary text MUST be light text (body-on-dark, on-dark, text-primary)!
+      tokens.text_primary = c['body-on-dark'] || c['on-dark'] || c['text-primary'] || c.body || '#ffffff';
+      tokens.text_secondary = c['body-muted'] || c['text-secondary'] || c['ink-soft'] || '#cbd5e1';
+      tokens.text_muted = c['text-muted'] || c['fine-print'] || '#94a3b8';
+    }
+
     if (c.hairline || c['divider-soft'] || c['border-subtle']) tokens.border_subtle = c.hairline || c['divider-soft'] || c['border-subtle'] || tokens.border_subtle;
     if (c['chrome-indigo'] || c['slate-steel'] || c.secondary) tokens.slate_steel = c['chrome-indigo'] || c['slate-steel'] || c.secondary || tokens.slate_steel;
   }
@@ -376,6 +397,14 @@ export function importDesignSystemFromMarkdown(markdownContent: string): ThemePr
     if (tableMatch && tableMatch[1]) {
       tokens[tokenKey] = tableMatch[1].trim();
     }
+  }
+
+  // Post-import WCAG contrast safety check: guarantee primary text never produces low contrast (< 4.5:1)
+  const contrastWithBg = calculateContrast(tokens.text_primary, tokens.primary_bg);
+  if (contrastWithBg !== null && contrastWithBg < 4.5) {
+    const bgRgb = hexToRgb(tokens.primary_bg);
+    const bgLum = bgRgb ? getLuminance(bgRgb.r, bgRgb.g, bgRgb.b) : 0.5;
+    tokens.text_primary = bgLum >= 0.5 ? '#1D1D1F' : '#F8FAFC';
   }
 
   const generatedId = nameToKebabSlug(name);

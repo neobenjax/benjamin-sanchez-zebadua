@@ -1,0 +1,295 @@
+---
+version: alpha
+name: Nike-design-system
+description: A photography-first commerce system built on extreme typographic contrast — towering uppercase Futura display lockups burned into editorial campaign imagery, sitting above a dense, neutral, near-monochrome retail chrome of pill-shaped black CTAs, gray search and tag pills, and tight 8px-grid product cards. Repaired for WCAG 2.1 AA accessibility contrast compliance.
+
+colors:
+  primary: "#111111"
+  on-primary: "#ffffff"
+  canvas: "#ffffff"
+  soft-cloud: "#f5f5f5"
+  ink: "#111111"
+  charcoal: "#39393b"
+  ash: "#4b4b4d"
+  mute: "#707072"
+  stone: "#6e6e70"
+  stone-dark: "#9e9ea0"
+  hairline: "#cacacb"
+  hairline-soft: "#e5e5e5"
+  sale: "#d30005"
+  sale-deep: "#780700"
+  success: "#007d48"
+  success-bright: "#1eaa52"
+  info: "#1151ff"
+  info-deep: "#0034e3"
+  accent-pink: "#ed1aa0"
+  accent-pink-soft: "#ffb0dd"
+  accent-purple-soft: "#beaffd"
+  accent-purple-pale: "#d6d1ff"
+  accent-teal: "#0a7281"
+  accent-pink-deep: "#4c012d"
+
+typography:
+  display-campaign:
+    fontFamily: Nike Futura ND
+    fontSize: 96px
+    fontWeight: 500
+    lineHeight: 0.9
+    letterSpacing: 0
+    textTransform: uppercase
+  heading-xl:
+    fontFamily: Helvetica Now Display Medium
+    fontSize: 32px
+    fontWeight: 500
+    lineHeight: 1.2
+    letterSpacing: 0
+  heading-lg:
+    fontFamily: Helvetica Now Display Medium
+    fontSize: 24px
+    fontWeight: 500
+    lineHeight: 1.2
+    letterSpacing: 0
+  heading-md:
+    fontFamily: Helvetica Now Display Medium
+    fontSize: 16px
+    fontWeight: 500
+    lineHeight: 1.75
+    letterSpacing: 0
+  body-md:
+    fontFamily: Helvetica Now Text
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: 0
+  body-strong:
+    fontFamily: Helvetica Now Text Medium
+    fontSize: 16px
+    fontWeight: 500
+    lineHeight: 1.5
+    letterSpacing: 0
+  button-lg:
+    fontFamily: Helvetica Now Display Medium
+    fontSize: 24px
+    fontWeight: 500
+    lineHeight: 1.2
+    letterSpacing: 0
+  button-md:
+    fontFamily: Helvetica Now Text Medium
+    fontSize: 16px
+    fontWeight: 500
+    lineHeight: 1.5
+    letterSpacing: 0
+  button-sm:
+    fontFamily: Helvetica Now Text Medium
+    fontSize: 14px
+    fontWeight: 500
+    lineHeight: 1.5
+    letterSpacing: 0
+  link-md:
+    fontFamily: Helvetica Now Text
+    fontSize: 16px
+    fontWeight: 500
+    lineHeight: 1.75
+    letterSpacing: 0
+    textDecoration: underline
+  caption-md:
+    fontFamily: Helvetica Now Text Medium
+    fontSize: 14px
+    fontWeight: 500
+    lineHeight: 1.5
+    letterSpacing: 0
+  caption-sm:
+    fontFamily: Helvetica Now Text Medium
+    fontSize: 12px
+    fontWeight: 500
+    lineHeight: 1.5
+    letterSpacing: 0
+  utility-xs:
+    fontFamily: Helvetica Neue
+    fontSize: 9px
+    fontWeight: 500
+    lineHeight: 1.75
+    letterSpacing: 0
+
+rounded:
+  none: 0px
+  sm: 18px
+  md: 24px
+  lg: 30px
+  full: 9999px
+
+spacing:
+  xxs: 2px
+  xs: 4px
+  sm: 8px
+  md: 12px
+  lg: 18px
+  xl: 24px
+  xxl: 30px
+  section: 48px
+
+components:
+  button-primary:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.button-md}"
+    rounded: "{rounded.full}"
+    padding: 16px 32px
+    height: 48px
+  button-primary-active:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.button-md}"
+    rounded: "{rounded.full}"
+  button-secondary:
+    backgroundColor: "{colors.soft-cloud}"
+    textColor: "{colors.ink}"
+    typography: "{typography.button-md}"
+    rounded: "{rounded.full}"
+    padding: 16px 32px
+    height: 48px
+  button-outline-on-image:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    typography: "{typography.button-md}"
+    rounded: "{rounded.full}"
+    padding: 12px 24px
+  button-icon-circular:
+    backgroundColor: "{colors.soft-cloud}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.full}"
+    size: 40px
+  search-pill:
+    backgroundColor: "{colors.soft-cloud}"
+    textColor: "{colors.ink}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.md}"
+    padding: 8px 16px
+    height: 40px
+  search-pill-focused:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+  filter-chip:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    typography: "{typography.button-md}"
+    rounded: "{rounded.full}"
+    padding: 8px 16px
+  filter-chip-active:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.button-md}"
+    rounded: "{rounded.full}"
+  badge-promo:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    typography: "{typography.caption-sm}"
+    rounded: "{rounded.full}"
+    padding: 4px 12px
+  badge-sale-text:
+    textColor: "{colors.sale}"
+    typography: "{typography.caption-md}"
+  product-card:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    typography: "{typography.body-strong}"
+    rounded: "{rounded.none}"
+    padding: 0px
+  product-card-image:
+    backgroundColor: "{colors.soft-cloud}"
+    rounded: "{rounded.none}"
+  swatch-dot:
+    backgroundColor: "{colors.ink}"
+    rounded: "{rounded.full}"
+    size: 12px
+  swatch-dot-active:
+    backgroundColor: "{colors.ink}"
+    rounded: "{rounded.full}"
+    size: 12px
+  campaign-tile:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.display-campaign}"
+    rounded: "{rounded.none}"
+  category-icon-card:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    typography: "{typography.caption-md}"
+    rounded: "{rounded.none}"
+  member-benefit-card:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.heading-lg}"
+    rounded: "{rounded.none}"
+  faq-row:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    typography: "{typography.heading-md}"
+    rounded: "{rounded.none}"
+    padding: 24px 0px
+  pdp-disclosure-row:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    typography: "{typography.body-strong}"
+    rounded: "{rounded.none}"
+    padding: 24px 0px
+  utility-bar:
+    backgroundColor: "{colors.soft-cloud}"
+    textColor: "{colors.ink}"
+    typography: "{typography.caption-sm}"
+    rounded: "{rounded.none}"
+    height: 36px
+  primary-nav:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    typography: "{typography.body-strong}"
+    rounded: "{rounded.none}"
+    height: 56px
+  filter-sidebar:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    typography: "{typography.body-strong}"
+    rounded: "{rounded.none}"
+  footer:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.mute}"
+    typography: "{typography.caption-md}"
+    rounded: "{rounded.none}"
+---
+
+# Design System Specification: Nike-design-system
+
+> Official Design System Specification file (`design.md` standard). Synchronized with root CSS custom properties and WCAG 2.1 AA accessibility guidelines.
+
+## 1. Color System & Design Tokens
+
+| Token Key | Design System Role | Hex / CSS Value | Description |
+| :--- | :--- | :--- | :--- |
+| `primary_bg` | Primary Background | `#ffffff` | Main application background (Pure White canvas) |
+| `secondary_bg` | Secondary Background | `#f5f5f5` | Product card image backdrops & secondary controls (Soft Cloud) |
+| `surface_card` | Surface Card | `#ffffff` | Retail product card & category containers |
+| `text_primary` | Primary Copy | `#111111` | High contrast headlines, product names & prices (Nike Black Ink) |
+| `text_secondary` | Secondary Copy | `#39393b` | Running body copy & subtitles (Charcoal) |
+| `text_muted` | Muted Text | `#707072` | Product category subtitles & footer links (Mute) |
+| `accent` | Accent Color | `#111111` | Signature Nike Black pill CTAs & active indicators |
+| `slate_steel` | Steel Slate | `#4b4b4d` | Secondary borders & utility text (Ash) |
+| `border_subtle` | Subtle Border | `#cacacb` | Hairline dividers & card outlines |
+| `border_accent` | Accent Border | `#111111` | Active state highlight focus borders |
+
+### CSS Custom Properties Snippet
+
+```css
+:root {
+  --color-primary: #ffffff;
+  --color-secondary-bg: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-text-primary: #111111;
+  --color-text-secondary: #39393b;
+  --color-text-muted: #707072;
+  --color-accent: #111111;
+  --color-secondary: #4b4b4d;
+  --border-subtle: #cacacb;
+  --border-accent: #111111;
+}
+```
