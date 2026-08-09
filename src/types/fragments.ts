@@ -14,7 +14,9 @@ export type FooterDirective =
 export type SectionDirective =
   | "SPLIT_HERO_LAYOUT"
   | "TWO_COLUMN_SPLIT"
-  | "FEATURE_GRID";
+  | "FEATURE_GRID"
+  | "HERO_SECTION"
+  | "COMING_SOON_SECTION";
 
 export type LayoutDirective = HeaderDirective | FooterDirective | SectionDirective;
 
@@ -49,8 +51,20 @@ export interface FooterAST {
   rawMarkdown: string;
 }
 
+export interface ComingSoonAST {
+  heroTitle: string;
+  heroSubtitle?: string;
+  heroStatement: string;
+  heroActions: FragmentLink[];
+  comingSoonStatement: string;
+  illustrationAlt?: string;
+  illustrationUrl?: string;
+  rawMarkdown: string;
+}
+
 export interface FragmentAST {
   header?: HeaderAST;
   footer?: FooterAST;
+  comingSoon?: ComingSoonAST;
   layoutDirective: LayoutDirective;
 }

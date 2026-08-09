@@ -412,6 +412,36 @@ export function DesignCatalog() {
           </div>
         </Card>
       </div>
+
+      {/* 6. COMING SOON FRONT PAGE HERO & ARCHITECT BLUEPRINT SPECIFICATION */}
+      <Card variant="solid" className="flex flex-col gap-6 p-6 md:p-8">
+        <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
+          <div>
+            <h3 className="text-2xl font-serif font-bold text-[var(--color-text-primary)] flex items-center gap-2">
+              <Layers className="w-5 h-5 text-[var(--color-accent)]" /> Frontpage Hero & Solutions Architect Tech Blueprint
+            </h3>
+            <p className="text-xs text-[var(--color-text-muted)] mt-1">
+              Dynamic Agnostic Markdown Fragment Component (<code className="text-[var(--color-accent)]">coming_soon.md</code>) with theme-adaptive vector blueprint illustration.
+            </p>
+          </div>
+          <Badge variant="accent">Frontpage Component</Badge>
+        </div>
+
+        <div className="p-4 sm:p-6 rounded-sm bg-[var(--color-secondary-bg)] border border-[var(--border-subtle)] overflow-hidden">
+          <div className="max-w-4xl mx-auto flex flex-col gap-6 text-center">
+            <span className="text-xs font-mono font-bold text-[var(--color-accent)] uppercase tracking-wider">
+              Live Preview Fragment Component
+            </span>
+            <div className="p-4 rounded-lg bg-[var(--color-surface)] stroke-var-[--color-accent] border border-[var(--border-subtle)] shadow-lg">
+              <img
+                src="/images/architect-blueprint.svg"
+                alt="Solutions Architect Blueprint Diagram"
+                className="w-full h-auto object-contain max-h-[360px]"
+              />
+            </div>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }

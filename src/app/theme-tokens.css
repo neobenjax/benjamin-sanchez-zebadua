@@ -1,14 +1,14 @@
 /* AUTO-GENERATED FROM currentdesigntheme.md - DO NOT EDIT DIRECTLY */
-/* Theme: Apple-design-system */
+/* Theme: Neon Purple */
 :root {
-  --color-primary: #ffffff;
-  --color-secondary-bg: #f5f5f7;
-  --color-surface: #fafafc;
-  --color-text-primary: #1d1d1f;
-  --color-text-secondary: #333333;
-  --color-text-muted: #6e6e73;
-  --color-accent: #0066cc;
-  --color-secondary: #475569;
-  --border-subtle: #e0e0e0;
-  --border-accent: #0071e3;
+  --color-primary: #190B15;
+  --color-secondary-bg: #12070F;
+  --color-surface: #261220;
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #D6C2D0;
+  --color-text-muted: #B398AB;
+  --color-accent: #E718A9;
+  --color-secondary: #503046;
+  --border-subtle: rgba(255, 255, 255, 0.10);
+  --border-accent: rgba(231, 24, 169, 0.25);
 }

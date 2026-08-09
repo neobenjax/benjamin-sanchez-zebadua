@@ -3,6 +3,7 @@ import type {
   HeaderAST,
   FooterAST,
   FooterColumnAST,
+  ComingSoonAST,
   FragmentLink,
   HeaderDirective,
   FooterDirective,
@@ -251,6 +252,110 @@ export function parseFooterMarkdown(markdown: string): FooterAST {
   };
 }
 
+const STATIC_COMING_SOON_MD = `# HERO_SECTION
+
+## HERO_TITLE
+Precision in Code. Performance in Finance.
+
+## HERO_SUBTITLE
+< AI Practitioner & FinTech Solutions Architect >
+
+## HERO_STATEMENT
+I am Benjamin Sanchez Zebadua. I apply a computing mindset to bridge the gap between complex data and actionable solutions. Whether architecting scalable systems or engineering financial strategies, I deliver precision-driven results for a digital-first economy. My journey took me from the high-traffic tech hubs of Mexico to the Canadian financial landscape, and I bring that same disciplined, global mindset to every project.
+
+## HERO_ACTIONS
+[Let's Connect](https://www.linkedin.com/in/benjaminsanchezzebadua/)
+[Reach Out via Email](mailto:benjaminsz.work@gmail.com?subject=Exploration%3A%20Bridging%20Tech%20%26%20Finance%20with%20Benjamin&body=Hi%20Benjamin%2C%20I%20came%20across%20your%20FinTech%20Architect%20portfolio.%20I%E2%80%99m%20interested%20in%20your%20dual-core%20approach%E2%80%94specifically%20how%20you%E2%80%99re%20applying%20a%20computing%20mindset%20to%20financial%20strategy.%20Are%20you%20available%20for%20a%20brief%20sync%20regarding%20%5BProject%2FRole%5D%3F)
+[Download CV](/benjamin-cv.pdf)
+
+# COMING_SOON_SECTION
+
+## COMING_SOON_STATEMENT
+This site is being crafted meticulously.
+/* TODO: Compiling production-grade excellence... Stay tuned! */
+
+## COMING_SOON_ILLUSTRATION
+![Illustration of a Solutions Architect Engineering code, requirements, guardrails, security](/images/architect-blueprint.svg)
+`;
+
+/**
+ * Transpiler Engine: Parses coming_soon.md markdown content into ComingSoonAST.
+ */
+export function parseComingSoonMarkdown(markdown: string): ComingSoonAST {
+  const { content } = matter(markdown);
+  const lines = content.split("\n");
+
+  let heroTitle = "";
+  let heroSubtitle = "";
+  let heroStatement = "";
+  const heroActions: FragmentLink[] = [];
+  let comingSoonStatement = "";
+  let illustrationAlt = "";
+  let illustrationUrl = "";
+
+  let currentSubSection:
+    | "HERO_TITLE"
+    | "HERO_SUBTITLE"
+    | "HERO_STATEMENT"
+    | "HERO_ACTIONS"
+    | "COMING_SOON_STATEMENT"
+    | "COMING_SOON_ILLUSTRATION"
+    | null = null;
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line) continue;
+
+    if (line.startsWith("# ")) {
+      continue;
+    }
+
+    if (line.startsWith("## ")) {
+      const heading = line.replace(/^##\s+/, "").trim();
+      if (heading.includes("HERO_TITLE")) currentSubSection = "HERO_TITLE";
+      else if (heading.includes("HERO_SUBTITLE")) currentSubSection = "HERO_SUBTITLE";
+      else if (heading.includes("HERO_STATEMENT")) currentSubSection = "HERO_STATEMENT";
+      else if (heading.includes("HERO_ACTIONS")) currentSubSection = "HERO_ACTIONS";
+      else if (heading.includes("COMING_SOON_STATEMENT")) currentSubSection = "COMING_SOON_STATEMENT";
+      else if (heading.includes("COMING_SOON_ILLUSTRATION")) currentSubSection = "COMING_SOON_ILLUSTRATION";
+      continue;
+    }
+
+    if (currentSubSection === "HERO_TITLE") {
+      heroTitle = heroTitle ? `${heroTitle} ${line}` : line;
+    } else if (currentSubSection === "HERO_SUBTITLE") {
+      heroSubtitle = heroSubtitle ? `${heroSubtitle} ${line}` : line;
+    } else if (currentSubSection === "HERO_STATEMENT") {
+      heroStatement = heroStatement ? `${heroStatement} ${line}` : line;
+    } else if (currentSubSection === "HERO_ACTIONS") {
+      const links = parseLinksFromText(line);
+      heroActions.push(...links);
+    } else if (currentSubSection === "COMING_SOON_STATEMENT") {
+      comingSoonStatement = comingSoonStatement ? `${comingSoonStatement} ${line}` : line;
+    } else if (currentSubSection === "COMING_SOON_ILLUSTRATION") {
+      const imgRegex = /!\[([^\]]*)\]\(([^)]+)\)/;
+      const match = imgRegex.exec(line);
+      if (match) {
+        illustrationAlt = match[1] || "";
+        illustrationUrl = match[2] || "";
+      } else {
+        illustrationAlt = line;
+      }
+    }
+  }
+
+  return {
+    heroTitle,
+    heroSubtitle,
+    heroStatement,
+    heroActions,
+    comingSoonStatement,
+    illustrationAlt,
+    illustrationUrl,
+    rawMarkdown: content,
+  };
+}
+
 /**
  * Reads and parses header.md fragment from content/fragments (or temp_fragments fallback).
  */
@@ -293,10 +398,35 @@ export function getParsedFooterFragment(): FooterAST {
   }
 }
 
+/**
+ * Reads and parses coming_soon.md fragment from content/fragments (or temp_fragments fallback).
+ */
+export function getParsedComingSoonFragment(): ComingSoonAST {
+  if (typeof window !== "undefined") {
+    return fallbackComingSoonAST();
+  }
+  try {
+    const filePath = getFragmentFilePath("coming_soon.md");
+    if (!filePath) {
+      return fallbackComingSoonAST();
+    }
+    const fs = require("fs");
+    const fileContents = fs.readFileSync(filePath, "utf8");
+    return parseComingSoonMarkdown(fileContents);
+  } catch (error) {
+    console.error("Error reading coming_soon fragment:", error);
+    return fallbackComingSoonAST();
+  }
+}
+
 function fallbackHeaderAST(): HeaderAST {
   return parseHeaderMarkdown(STATIC_HEADER_MD);
 }
 
 function fallbackFooterAST(): FooterAST {
   return parseFooterMarkdown(STATIC_FOOTER_MD);
+}
+
+function fallbackComingSoonAST(): ComingSoonAST {
+  return parseComingSoonMarkdown(STATIC_COMING_SOON_MD);
 }

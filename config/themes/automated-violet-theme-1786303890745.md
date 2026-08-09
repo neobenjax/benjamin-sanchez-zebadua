@@ -1,29 +1,29 @@
 ---
 version: "1.0.0"
-name: "Neon Purple"
-design_system_name: "Neon Purple"
+name: "Automated Violet Theme"
+design_system_name: "Automated Violet Theme"
 description: "A precision-engineered design language with WCAG 2.1 AA contrast compliance, standardized tokens, responsive UI primitives, and full behavioral specifications."
 mode: "dark"
 author: "Benjamin Sanchez Zebadua"
 updated_at: "2026-08-09"
 
 colors:
-  primary: "#E718A9"
-  primary-focus: "#E718A9"
-  primary-bg: "#190B15"
-  secondary-bg: "#12070F"
-  surface: "#261220"
-  surface-card: "#261220"
+  primary: "#D73C78"
+  primary-focus: "#D73C78"
+  primary-bg: "#190B10"
+  secondary-bg: "#12070B"
+  surface: "#26121A"
+  surface-card: "#26121A"
   body: "#F8FAFC"
-  body-muted: "#B398AB"
+  body-muted: "#B398A3"
   ink: "#F8FAFC"
   text-primary: "#F8FAFC"
-  text-secondary: "#D6C2D0"
-  text-muted: "#B398AB"
-  accent: "#E718A9"
-  slate-steel: "#503046"
+  text-secondary: "#D6C2CA"
+  text-muted: "#B398A3"
+  accent: "#D73C78"
+  slate-steel: "#50303C"
   border-subtle: "rgba(255, 255, 255, 0.10)"
-  border-accent: "rgba(231, 24, 169, 0.25)"
+  border-accent: "rgba(215, 60, 120, 0.25)"
   on-primary: "#ffffff"
   on-dark: "#ffffff"
 
@@ -114,13 +114,13 @@ components:
     padding: "64px 32px"
 ---
 
-# Design System Specification: Neon Purple
+# Design System Specification: Automated Violet Theme
 
 > Official Design System Specification file (`design.md` standard). Synchronized with root CSS custom properties and WCAG 2.1 AA accessibility guidelines.
 
 ## 1. System Overview & Key Characteristics
 
-- **Geometry Canvas Color**: `#190B15`.
+- **Geometry Canvas Color**: `#190B10`.
 - **Visual Philosophy**: Precision-engineered interface built for accessibility, contrast compliance, and real-time design token synchronization across application surfaces.
 - **Key Characteristics**: Strict surface hierarchy, WCAG 2.1 AA contrast compliance ($ge 4.5:1$ text contrast), and responsive component layout rules.
 
@@ -128,38 +128,38 @@ components:
 
 | Token Key | Design System Role | Hex / CSS Value | Description |
 | :--- | :--- | :--- | :--- |
-| `primary_bg` | Primary Background | `#190B15` | Main application background canvas |
-| `secondary_bg` | Secondary Background | `#12070F` | Inset section backdrops & secondary surfaces |
-| `surface_card` | Surface Card | `#261220` | Elevated card containers and popups |
+| `primary_bg` | Primary Background | `#190B10` | Main application background canvas |
+| `secondary_bg` | Secondary Background | `#12070B` | Inset section backdrops & secondary surfaces |
+| `surface_card` | Surface Card | `#26121A` | Elevated card containers and popups |
 | `text_primary` | Primary Copy | `#F8FAFC` | High contrast headings & primary body copy |
-| `text_secondary` | Secondary Copy | `#D6C2D0` | Subtitles, labels, and secondary descriptions |
-| `text_muted` | Muted Text | `#B398AB` | Captions, metadata, and fine print |
-| `accent` | Accent Color | `#E718A9` | High visibility CTAs & status indicators |
-| `slate_steel` | Steel Slate | `#503046` | Secondary borders, icon outlines, & subtle chips |
+| `text_secondary` | Secondary Copy | `#D6C2CA` | Subtitles, labels, and secondary descriptions |
+| `text_muted` | Muted Text | `#B398A3` | Captions, metadata, and fine print |
+| `accent` | Accent Color | `#D73C78` | High visibility CTAs & status indicators |
+| `slate_steel` | Steel Slate | `#50303C` | Secondary borders, icon outlines, & subtle chips |
 | `border_subtle` | Subtle Border | `rgba(255, 255, 255, 0.10)` | Card grid lines & translucent dividers |
-| `border_accent` | Accent Border | `rgba(231, 24, 169, 0.25)` | Active state highlight focus borders |
+| `border_accent` | Accent Border | `rgba(215, 60, 120, 0.25)` | Active state highlight focus borders |
 
 ### Color Categories & Variations
 
-- **Brand & Accent**: Accent CTA `#E718A9` with high contrast interaction states.
-- **Surface**: Primary Canvas `#190B15`, Secondary Backdrop `#12070F`, Elevated Surface Card `#261220`.
-- **Text Color Descriptions**: Primary text `#F8FAFC`, Secondary text `#D6C2D0`, Muted text `#B398AB`.
-- **Semantics & Category Accents**: Accent `#E718A9`, Steel Slate `#503046`, Subtle Border `rgba(255, 255, 255, 0.10)`, Accent Border `rgba(231, 24, 169, 0.25)`.
+- **Brand & Accent**: Accent CTA `#D73C78` with high contrast interaction states.
+- **Surface**: Primary Canvas `#190B10`, Secondary Backdrop `#12070B`, Elevated Surface Card `#26121A`.
+- **Text Color Descriptions**: Primary text `#F8FAFC`, Secondary text `#D6C2CA`, Muted text `#B398A3`.
+- **Semantics & Category Accents**: Accent `#D73C78`, Steel Slate `#50303C`, Subtle Border `rgba(255, 255, 255, 0.10)`, Accent Border `rgba(215, 60, 120, 0.25)`.
 
 ### CSS Custom Properties Snippet
 
 ```css
 :root {
-  --color-primary: #190B15;
-  --color-secondary-bg: #12070F;
-  --color-surface: #261220;
+  --color-primary: #190B10;
+  --color-secondary-bg: #12070B;
+  --color-surface: #26121A;
   --color-text-primary: #F8FAFC;
-  --color-text-secondary: #D6C2D0;
-  --color-text-muted: #B398AB;
-  --color-accent: #E718A9;
-  --color-secondary: #503046;
+  --color-text-secondary: #D6C2CA;
+  --color-text-muted: #B398A3;
+  --color-accent: #D73C78;
+  --color-secondary: #50303C;
   --border-subtle: rgba(255, 255, 255, 0.10);
-  --border-accent: rgba(231, 24, 169, 0.25);
+  --border-accent: rgba(215, 60, 120, 0.25);
 }
 ```
 

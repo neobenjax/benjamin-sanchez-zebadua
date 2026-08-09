@@ -103,7 +103,9 @@ async function runAutomationTests() {
 
     // 6. Test Import design.md with sample theme specification
     console.log('Testing Import design.md with sample theme specification...');
-    const sampleMdPath = path.join(rootDir, 'bugs', 'sampledesingsystem.md');
+    const sampleMdPath = fs.existsSync(path.join(rootDir, 'bugs', 'sampledesingsystem.md'))
+      ? path.join(rootDir, 'bugs', 'sampledesingsystem.md')
+      : path.join(rootDir, 'bugs', 'Mintlify-design-system.md');
     const sampleMdContent = fs.readFileSync(sampleMdPath, 'utf-8');
 
     await page.click('button:has-text("Import design.md")');

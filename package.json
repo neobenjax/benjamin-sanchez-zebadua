@@ -14,6 +14,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "node scripts/test-theme-tuner.mjs",
+    "test:coming-soon": "node scripts/test-coming-soon.mjs",
     "image:migrate": "node scripts/optimize-images.mjs --all",
     "image:staged": "node scripts/optimize-images.mjs",
     "prepare": "husky"

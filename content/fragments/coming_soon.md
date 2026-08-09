@@ -1,0 +1,24 @@
+# HERO_SECTION
+
+## HERO_TITLE
+Precision in Code. Performance in Finance.
+
+## HERO_SUBTITLE
+< AI Practitioner & FinTech Solutions Architect >
+
+## HERO_STATEMENT
+I am Benjamin Sanchez Zebadua. I apply a computing mindset to bridge the gap between complex data and actionable solutions. Whether architecting scalable systems or engineering financial strategies, I deliver precision-driven results for a digital-first economy. My journey took me from the high-traffic tech hubs of Mexico to the Canadian financial landscape, and I bring that same disciplined, global mindset to every project.
+
+## HERO_ACTIONS
+[Let's Connect](https://www.linkedin.com/in/benjaminsanchezzebadua/)
+[Reach Out via Email](mailto:benjaminsz.work@gmail.com?subject=Exploration%3A%20Bridging%20Tech%20%26%20Finance%20with%20Benjamin&body=Hi%20Benjamin%2C%20I%20came%20across%20your%20FinTech%20Architect%20portfolio.%20I%E2%80%99m%20interested%20in%20your%20dual-core%20approach%E2%80%94specifically%20how%20you%E2%80%99re%20applying%20a%20computing%20mindset%20to%20financial%20strategy.%20Are%20you%20available%20for%20a%20brief%20sync%20regarding%20%5BProject%2FRole%5D%3F)
+[Download CV](/benjamin-cv.pdf)
+
+# COMING_SOON_SECTION
+
+## COMING_SOON_STATEMENT
+This site is being crafted meticulously.
+Compiling production-grade excellence... Stay tuned!
+
+## COMING_SOON_ILLUSTRATION
+![Illustration of a Solutions Architect Engineering code, requirements, guardrails, security](/images/architect-blueprint.svg)
