@@ -10,7 +10,6 @@ const currentThemeMdPath = path.join(rootDir, 'currentdesigntheme.md');
 const outputPath = path.join(rootDir, 'src', 'app', 'theme-tokens.css');
 
 const DEFAULT_TOKENS = {
-  mode: 'dark',
   primary_bg: '#0A192F',
   secondary_bg: '#081426',
   surface_card: '#0C1E38',
@@ -25,7 +24,7 @@ const DEFAULT_TOKENS = {
 
 export function transpileCurrentTheme() {
   let tokens = { ...DEFAULT_TOKENS };
-  let themeName = 'FinTech Midnight (Default)';
+  let themeName = 'FinTech Midnight';
 
   if (fs.existsSync(currentThemeMdPath)) {
     try {
@@ -36,11 +35,6 @@ export function transpileCurrentTheme() {
         content.match(/# Design System Specification:\s*(.+)/i);
       if (nameMatch && nameMatch[1]) {
         themeName = nameMatch[1].trim();
-      }
-
-      const modeMatch = content.match(/mode:\s*"(dark|light)"/i);
-      if (modeMatch && modeMatch[1]) {
-        tokens.mode = modeMatch[1].toLowerCase();
       }
 
       const cssPropertyMap = {
@@ -83,7 +77,7 @@ export function transpileCurrentTheme() {
   }
 
   const cssOutput = `/* AUTO-GENERATED FROM currentdesigntheme.md - DO NOT EDIT DIRECTLY */
-/* Theme: ${themeName} (${tokens.mode.toUpperCase()}) */
+/* Theme: ${themeName} */
 :root {
   --color-primary: ${tokens.primary_bg};
   --color-secondary-bg: ${tokens.secondary_bg};

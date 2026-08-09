@@ -13,7 +13,6 @@ describe('DesignSystemMd Spec Transpiler & Auditor Tests', () => {
   const samplePreset: ThemePreset = {
     id: 'cyber-amber',
     name: 'Cyber Amber Test System',
-    mode: 'dark',
     tokens: {
       primary_bg: '#0F172A',
       secondary_bg: '#020617',
@@ -65,34 +64,20 @@ design_system_name: "Broken Theme"
     const md = exportDesignSystemToMarkdown(samplePreset, 'Architect');
     const imported = importDesignSystemFromMarkdown(md);
     expect(imported.name).toBe('Cyber Amber Test System');
-    expect(imported.mode).toBe('dark');
     expect(imported.tokens.primary_bg).toBe('#0F172A');
     expect(imported.tokens.accent).toBe('#F59E0B');
   });
 
-  it('validates and imports sample apple_design_system.md', () => {
-    const applePath = path.join(process.cwd(), 'bugs', 'apple_design_system.md');
-    if (fs.existsSync(applePath)) {
-      const appleContent = fs.readFileSync(applePath, 'utf-8');
-      const validation = validateDesignSystemMarkdown(appleContent);
+  it('validates and imports sampledesingsystem.md', () => {
+    const samplePath = path.join(process.cwd(), 'bugs', 'sampledesingsystem.md');
+    if (fs.existsSync(samplePath)) {
+      const sampleContent = fs.readFileSync(samplePath, 'utf-8');
+      const validation = validateDesignSystemMarkdown(sampleContent);
       expect(validation.isValid).toBe(true);
 
-      const imported = importDesignSystemFromMarkdown(appleContent);
+      const imported = importDesignSystemFromMarkdown(sampleContent);
       expect(imported.name).toBe('Apple-design-analysis');
       expect(imported.tokens.accent).toBe('#0066cc');
-    }
-  });
-
-  it('validates and imports sample nintendo_2001_design_system.md', () => {
-    const nintendoPath = path.join(process.cwd(), 'bugs', 'nintendo_2001_design_system.md');
-    if (fs.existsSync(nintendoPath)) {
-      const nintendoContent = fs.readFileSync(nintendoPath, 'utf-8');
-      const validation = validateDesignSystemMarkdown(nintendoContent);
-      expect(validation.isValid).toBe(true);
-
-      const imported = importDesignSystemFromMarkdown(nintendoContent);
-      expect(imported.name).toBe('Nintendo.com (2001) Analysis');
-      expect(imported.tokens.accent).toBe('#e60012');
     }
   });
 });

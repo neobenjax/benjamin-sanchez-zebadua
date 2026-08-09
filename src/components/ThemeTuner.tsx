@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useTheme } from '@/context/ThemeContext';
-import { calculateContrast } from '@/lib/colorEngine';
+import { useTheme, ThemePreset } from '@/context/ThemeContext';
+import { calculateContrast, AccessibilityReport } from '@/lib/colorEngine';
 import { validateDesignSystemMarkdown } from '@/lib/designSystemMd';
 import { ModalPortal } from './ui/ModalPortal';
 import { Button } from './ui/Button';
@@ -22,13 +22,12 @@ import {
   Sliders,
   X,
   AlertCircle,
+  ShieldAlert,
 } from 'lucide-react';
 
 export function ThemeTuner() {
   const {
-    tuningMode,
-    darkTokens,
-    lightTokens,
+    tokens,
     activePresetId,
     savedPresets,
     primarySeedColor,
@@ -51,7 +50,12 @@ export function ThemeTuner() {
   const [copySuccess, setCopySuccess] = useState(false);
   const [importErrorMessage, setImportErrorMessage] = useState<string | null>(null);
 
-  const currentTokens = tuningMode === 'dark' ? darkTokens : lightTokens;
+  // WCAG Import Accessibility Warning Modal state
+  const [warningModalOpen, setWarningModalOpen] = useState(false);
+  const [pendingPreset, setPendingPreset] = useState<ThemePreset | null>(null);
+  const [pendingReport, setPendingReport] = useState<AccessibilityReport | null>(null);
+
+  const currentTokens = tokens;
   const contrastRatio = calculateContrast(currentTokens.text_primary, currentTokens.primary_bg);
   const isContrastValid = contrastRatio === null || contrastRatio >= 4.5;
 
@@ -77,14 +81,37 @@ export function ThemeTuner() {
     }
 
     try {
-      const success = importDesignMD(importMarkdownText);
-      if (success) {
+      const { preset, report } = importDesignMD(importMarkdownText);
+
+      if (report.hasViolations) {
+        setPendingPreset(preset);
+        setPendingReport(report);
+        setImportModalOpen(false);
+        setWarningModalOpen(true);
+      } else {
+        applyPreset(preset);
         setImportMarkdownText('');
         setImportModalOpen(false);
       }
     } catch (err) {
       setImportErrorMessage((err as Error).message || 'Failed to import design.md specification.');
     }
+  };
+
+  const confirmImportWithWarnings = () => {
+    if (pendingPreset) {
+      applyPreset(pendingPreset);
+    }
+    setWarningModalOpen(false);
+    setPendingPreset(null);
+    setPendingReport(null);
+    setImportMarkdownText('');
+  };
+
+  const cancelImportWithWarnings = () => {
+    setWarningModalOpen(false);
+    setPendingPreset(null);
+    setPendingReport(null);
   };
 
   const handleCopyMarkdown = async () => {
@@ -110,7 +137,7 @@ export function ThemeTuner() {
       {/* Header */}
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-serif font-bold text-[var(--color-text-primary)] flex items-center gap-2">
+          <h3 className="text-xl font-bold text-[var(--color-text-primary)] flex items-center gap-2">
             <Sliders className="w-5 h-5 text-[var(--color-accent)]" /> Theme & Color Engine
           </h3>
           <div className="flex items-center gap-2">
@@ -183,11 +210,11 @@ export function ThemeTuner() {
         >
           {savedPresets.map((preset) => (
             <option key={preset.id} value={preset.id}>
-              {preset.name} ({preset.mode.toUpperCase()})
+              {preset.name}
             </option>
           ))}
           {isDraft && !savedPresets.some((p) => p.id === activePresetId) && (
-            <option value={activePresetId}>Unsaved Draft Theme ({tuningMode.toUpperCase()})</option>
+            <option value={activePresetId}>Unsaved Draft Theme</option>
           )}
         </select>
 
@@ -227,9 +254,6 @@ export function ThemeTuner() {
           <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-primary)] flex items-center gap-1.5">
             <FileCode className="w-4 h-4 text-[var(--color-accent)]" /> design.md File Standard (getdesign.md)
           </span>
-          <Badge variant="secondary" className="font-mono text-[10px]">
-            currentdesigntheme.md
-          </Badge>
         </div>
 
         <div className="flex gap-2 pt-1">
@@ -317,7 +341,7 @@ export function ThemeTuner() {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
             <div className="flex flex-col gap-4 max-w-md w-full p-6 rounded-sm bg-slate-900 border border-[var(--border-accent)] text-slate-100 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
               <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                <h4 className="text-lg font-serif font-bold flex items-center gap-2">
+                <h4 className="text-lg font-bold flex items-center gap-2">
                   <Save className="w-5 h-5 text-[var(--color-accent)]" /> Save Custom Design System
                 </h4>
                 <button
@@ -363,7 +387,7 @@ export function ThemeTuner() {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
             <div className="flex flex-col gap-4 max-w-2xl w-full p-6 rounded-sm bg-slate-900 border border-[var(--border-accent)] text-slate-100 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
               <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                <h4 className="text-lg font-serif font-bold flex items-center gap-2">
+                <h4 className="text-lg font-bold flex items-center gap-2">
                   <FileCode className="w-5 h-5 text-[var(--color-accent)]" /> Export currentdesigntheme.md
                 </h4>
                 <button
@@ -401,7 +425,7 @@ export function ThemeTuner() {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
             <div className="flex flex-col gap-4 max-w-2xl w-full p-6 rounded-sm bg-slate-900 border border-[var(--border-accent)] text-slate-100 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
               <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                <h4 className="text-lg font-serif font-bold flex items-center gap-2">
+                <h4 className="text-lg font-bold flex items-center gap-2">
                   <Upload className="w-5 h-5 text-[var(--color-accent)]" /> Import External design.md
                 </h4>
                 <button
@@ -441,6 +465,53 @@ export function ThemeTuner() {
                   </Button>
                 </div>
               </form>
+            </div>
+          </div>
+        </ModalPortal>
+      )}
+
+      {/* WCAG Accessibility Warning Modal Portal */}
+      {warningModalOpen && pendingReport && (
+        <ModalPortal>
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+            <div className="flex flex-col gap-4 max-w-lg w-full p-6 rounded-sm bg-slate-900 border border-amber-500/50 text-slate-100 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+              <div className="flex items-center justify-between border-b border-amber-500/30 pb-3">
+                <h4 className="text-lg font-bold text-amber-400 flex items-center gap-2">
+                  <ShieldAlert className="w-5 h-5 text-amber-400" /> WCAG AA Accessibility Warning
+                </h4>
+                <button
+                  aria-label="Close warning modal"
+                  onClick={cancelImportWithWarnings}
+                  className="text-slate-400 hover:text-white"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <p className="text-xs text-slate-300">
+                The imported theme <strong className="text-amber-300">{pendingPreset?.name}</strong> contains severe contrast issues that violate WCAG 2.1 AA guidelines:
+              </p>
+
+              <div className="flex flex-col gap-2 p-3 rounded-sm bg-amber-500/10 border border-amber-500/30 text-xs font-mono text-amber-200">
+                {pendingReport.violations.map((v, i) => (
+                  <p key={i} className="flex items-start gap-1.5">
+                    <AlertTriangle className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" /> {v}
+                  </p>
+                ))}
+              </div>
+
+              <p className="text-[11px] text-slate-400">
+                Would you like to proceed anyway, or cancel and keep your current active theme?
+              </p>
+
+              <div className="flex justify-end gap-2 pt-2 border-t border-slate-800">
+                <Button size="sm" variant="ghost" type="button" onClick={cancelImportWithWarnings}>
+                  Cancel & Keep Previous Theme
+                </Button>
+                <Button size="sm" variant="secondary" className="bg-amber-500/20 text-amber-300 hover:bg-amber-500/30" onClick={confirmImportWithWarnings}>
+                  Proceed Anyway
+                </Button>
+              </div>
             </div>
           </div>
         </ModalPortal>

@@ -3,7 +3,6 @@ import { generateThemeFromPrimary } from './colorEngine';
 
 export interface DesignSystemMetadata {
   name: string;
-  mode: 'dark' | 'light';
   version?: string;
   author?: string;
   description?: string;
@@ -30,16 +29,25 @@ export const REQUIRED_TOKEN_KEYS: (keyof ThemeTokens)[] = [
 ];
 
 /**
+ * Generate a clean kebab-case slug without timestamp
+ */
+export function nameToKebabSlug(name: string): string {
+  return (
+    name
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '') || 'custom'
+  );
+}
+
+/**
  * Generate a clean kebab-case ID with timestamp from a human-readable theme name
  */
 export function nameToKebabId(name: string): string {
-  const kebab = name
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
+  const kebab = nameToKebabSlug(name);
   const timestamp = Date.now();
-  return `${kebab || 'custom'}-${timestamp}`;
+  return `${kebab}-${timestamp}`;
 }
 
 /**
@@ -47,7 +55,6 @@ export function nameToKebabId(name: string): string {
  */
 function parseFrontmatterYaml(markdownContent: string): {
   name?: string;
-  mode?: 'dark' | 'light';
   description?: string;
   colors?: Record<string, string>;
 } {
@@ -57,7 +64,6 @@ function parseFrontmatterYaml(markdownContent: string): {
   const yamlLines = yamlMatch[1].split(/[\r\n]+/);
   const result: {
     name?: string;
-    mode?: 'dark' | 'light';
     description?: string;
     colors?: Record<string, string>;
   } = {};
@@ -77,8 +83,6 @@ function parseFrontmatterYaml(markdownContent: string): {
         inColorsBlock = false;
         if (key === 'name' || key === 'design_system_name') {
           result.name = val;
-        } else if (key === 'mode' && (val === 'dark' || val === 'light')) {
-          result.mode = val as 'dark' | 'light';
         } else if (key === 'description') {
           result.description = val;
         }
@@ -183,7 +187,6 @@ version: "1.0.0"
 name: "${preset.name}"
 design_system_name: "${preset.name}"
 description: "A precision-engineered design language with WCAG 2.1 AA contrast compliance, standardized tokens, and responsive UI primitives."
-mode: "${preset.mode}"
 author: "${author}"
 updated_at: "${dateStr}"
 
@@ -207,7 +210,7 @@ colors:
 
 typography:
   display-lg:
-    fontFamily: "Playfair Display, serif"
+    fontFamily: "Inter, sans-serif"
     fontSize: "40px"
     fontWeight: "700"
   body:
@@ -245,7 +248,7 @@ components:
 
 > Official Design System Specification file (\`design.md\` standard). Synchronized with root CSS custom properties and WCAG 2.1 AA accessibility guidelines.
 
-## 1. Color System & Design Tokens (${preset.mode.toUpperCase()} Mode)
+## 1. Color System & Design Tokens
 
 | Token Key | Design System Role | Hex / CSS Value | Description |
 | :--- | :--- | :--- | :--- |
@@ -263,7 +266,7 @@ components:
 ### CSS Custom Properties Snippet
 
 \`\`\`css
-:root[data-theme="${preset.mode}"] {
+:root {
   --color-primary: ${t.primary_bg};
   --color-secondary-bg: ${t.secondary_bg};
   --color-surface: ${t.surface_card};
@@ -286,8 +289,8 @@ components:
 - **Pill**: Fully rounded (\`rounded-full\`).
 
 ### Typography & Display Scale
-- **Display Headings**: Playfair Display (Font Serif).
-- **Body Copy & Interfaces**: Inter Sans (Font Sans).
+- **Display Headings**: Inter (Font Sans).
+- **Body Copy & Interfaces**: Inter (Font Sans).
 - **Technical & Code**: Fira Code / JetBrains Mono (Font Mono).
 `;
 }
@@ -313,26 +316,24 @@ export function importDesignSystemFromMarkdown(markdownContent: string): ThemePr
     }
   }
 
-  const mode: 'dark' | 'light' = frontmatter.mode || 'dark';
-
   let primarySeed: string | undefined = undefined;
   if (frontmatter.colors && (frontmatter.colors.primary || frontmatter.colors.accent)) {
     primarySeed = frontmatter.colors.primary || frontmatter.colors.accent;
   }
 
   let tokens: ThemeTokens = primarySeed
-    ? generateThemeFromPrimary(primarySeed, mode)
+    ? generateThemeFromPrimary(primarySeed)
     : {
-        primary_bg: mode === 'dark' ? '#0A192F' : '#F7F5F2',
-        secondary_bg: mode === 'dark' ? '#081426' : '#EAE5DF',
-        surface_card: mode === 'dark' ? '#0C1E38' : '#FFFFFF',
-        text_primary: mode === 'dark' ? '#F8FAFC' : '#1A1C1E',
-        text_secondary: mode === 'dark' ? '#CBD5E1' : '#475569',
-        text_muted: mode === 'dark' ? '#94A3B8' : '#64748B',
-        accent: mode === 'dark' ? '#10B981' : '#059669',
-        slate_steel: mode === 'dark' ? '#334155' : '#CBD5E1',
-        border_subtle: mode === 'dark' ? 'rgba(255, 255, 255, 0.10)' : 'rgba(0, 0, 0, 0.10)',
-        border_accent: mode === 'dark' ? 'rgba(16, 185, 129, 0.20)' : 'rgba(5, 150, 105, 0.25)',
+        primary_bg: '#0A192F',
+        secondary_bg: '#081426',
+        surface_card: '#0C1E38',
+        text_primary: '#F8FAFC',
+        text_secondary: '#CBD5E1',
+        text_muted: '#94A3B8',
+        accent: '#10B981',
+        slate_steel: '#334155',
+        border_subtle: 'rgba(255, 255, 255, 0.10)',
+        border_accent: 'rgba(16, 185, 129, 0.20)',
       };
 
   if (frontmatter.colors) {
@@ -341,7 +342,7 @@ export function importDesignSystemFromMarkdown(markdownContent: string): ThemePr
     if (c['primary-bg'] || c.canvas || c.body) tokens.primary_bg = c['primary-bg'] || c.canvas || tokens.primary_bg;
     if (c['secondary-bg'] || c['canvas-soft'] || c['surface-pearl']) tokens.secondary_bg = c['secondary-bg'] || c['canvas-soft'] || tokens.secondary_bg;
     if (c.surface || c['surface-tile-1']) tokens.surface_card = c.surface || c['surface-tile-1'] || tokens.surface_card;
-    if (c.body || c.ink || c['text-primary']) tokens.text_primary = c.body || c.ink || c['text-primary'] || tokens.text_primary;
+    if (c['body-on-dark'] || c.body || c.ink || c['text-primary']) tokens.text_primary = c['body-on-dark'] || c.body || c.ink || c['text-primary'] || tokens.text_primary;
     if (c['body-muted'] || c['ink-soft'] || c['text-secondary']) tokens.text_secondary = c['body-muted'] || c['ink-soft'] || c['text-secondary'] || tokens.text_secondary;
     if (c['fine-print'] || c['text-muted']) tokens.text_muted = c['fine-print'] || c['text-muted'] || tokens.text_muted;
     if (c.hairline || c['divider-soft'] || c['border-subtle']) tokens.border_subtle = c.hairline || c['divider-soft'] || c['border-subtle'] || tokens.border_subtle;
@@ -377,12 +378,11 @@ export function importDesignSystemFromMarkdown(markdownContent: string): ThemePr
     }
   }
 
-  const generatedId = nameToKebabId(name);
+  const generatedId = nameToKebabSlug(name);
 
   return {
     id: generatedId,
     name,
-    mode,
     tokens,
     primarySeed,
   };

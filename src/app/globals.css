@@ -3,8 +3,7 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans: var(--font-inter), sans-serif;
-  --font-serif: var(--font-playfair), serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 
   --color-primary: var(--color-primary-val, #0A192F);
   --color-secondary: var(--color-secondary-val, #334155);
@@ -12,8 +11,7 @@
 }
 
 :root {
-  --font-inter: 'Inter', sans-serif;
-  --font-playfair: 'Playfair Display', serif;
+  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
 
   --background: var(--color-primary);
   --foreground: var(--color-text-primary);
@@ -39,7 +37,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
 }
 
 /* FinTech Architect Aesthetic for Markdown Tables */

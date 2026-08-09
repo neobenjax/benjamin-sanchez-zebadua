@@ -89,7 +89,7 @@ function RenderBrandItem({ item }: { item: FragmentLink }) {
           height={32}
           className="w-8 h-8 object-contain mr-3 group-hover:scale-105 transition-transform"
         />
-        <span className="font-serif text-lg tracking-[0.15em] text-white font-semibold group-hover:text-accent transition-colors">
+        <span className="text-lg tracking-[0.15em] text-white font-semibold group-hover:text-accent transition-colors">
           {item.text || "BENJAMIN"}
         </span>
       </Link>
@@ -97,7 +97,7 @@ function RenderBrandItem({ item }: { item: FragmentLink }) {
   }
 
   return (
-    <Link href={item.href} className="font-serif text-[clamp(0.85rem,2.5vw,1.25rem)] leading-tight tracking-normal md:tracking-wide lg:tracking-[0.2em] text-white font-semibold flex flex-wrap items-center">
+    <Link href={item.href} className="text-[clamp(0.85rem,2.5vw,1.25rem)] leading-tight tracking-normal md:tracking-wide lg:tracking-[0.2em] text-white font-semibold flex flex-wrap items-center">
       <span>{item.text}</span>
     </Link>
   );

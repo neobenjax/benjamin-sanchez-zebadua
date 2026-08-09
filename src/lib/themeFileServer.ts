@@ -71,7 +71,7 @@ export function saveCurrentDesignThemeToFile(preset: ThemePreset): boolean {
     // Also update static CSS custom properties file
     const t = preset.tokens;
     const cssOutput = `/* AUTO-GENERATED FROM currentdesigntheme.md - DO NOT EDIT DIRECTLY */
-/* Theme: ${preset.name} (${preset.mode.toUpperCase()}) */
+/* Theme: ${preset.name} */
 :root {
   --color-primary: ${t.primary_bg};
   --color-secondary-bg: ${t.secondary_bg};

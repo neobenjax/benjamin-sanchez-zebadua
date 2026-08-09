@@ -12,6 +12,15 @@ export interface HslColor {
   l: number;
 }
 
+export interface AccessibilityReport {
+  hasViolations: boolean;
+  primaryContrast: number | null;
+  secondaryContrast: number | null;
+  accentContrast: number | null;
+  surfaceContrast: number | null;
+  violations: string[];
+}
+
 /**
  * Converts Hex string to RGB object
  */
@@ -143,6 +152,37 @@ export function calculateContrast(hex1: string, hex2: string): number | null {
 }
 
 /**
+ * Audit Theme Tokens against WCAG 2.1 AA requirements
+ */
+export function analyzeThemeAccessibility(tokens: ThemeTokens): AccessibilityReport {
+  const primaryContrast = calculateContrast(tokens.text_primary, tokens.primary_bg);
+  const secondaryContrast = calculateContrast(tokens.text_secondary, tokens.primary_bg);
+  const accentContrast = calculateContrast(tokens.accent, tokens.primary_bg);
+  const surfaceContrast = calculateContrast(tokens.text_primary, tokens.surface_card);
+
+  const violations: string[] = [];
+
+  if (primaryContrast !== null && primaryContrast < 4.5) {
+    violations.push(`Primary Copy contrast ratio (${primaryContrast.toFixed(2)}:1) is below WCAG AA minimum (4.5:1).`);
+  }
+  if (secondaryContrast !== null && secondaryContrast < 3.0) {
+    violations.push(`Secondary Copy contrast ratio (${secondaryContrast.toFixed(2)}:1) is below WCAG AA minimum (3.0:1).`);
+  }
+  if (surfaceContrast !== null && surfaceContrast < 4.5) {
+    violations.push(`Surface Card text contrast ratio (${surfaceContrast.toFixed(2)}:1) is below WCAG AA minimum (4.5:1).`);
+  }
+
+  return {
+    hasViolations: violations.length > 0,
+    primaryContrast,
+    secondaryContrast,
+    accentContrast,
+    surfaceContrast,
+    violations,
+  };
+}
+
+/**
  * Adjust lightness of a color to meet a minimum WCAG contrast against background
  */
 export function ensureWCAGContrast(
@@ -162,7 +202,6 @@ export function ensureWCAGContrast(
   const bgLum = getLuminance(bgRgb.r, bgRgb.g, bgRgb.b);
   const fgHsl = rgbToHsl(fgRgb.r, fgRgb.g, fgRgb.b);
 
-  // If background is dark (luminance < 0.5), lighten foreground; else darken foreground
   const makeLighter = bgLum < 0.5;
 
   let currentL = fgHsl.l;
@@ -182,97 +221,57 @@ export function ensureWCAGContrast(
 /**
  * Derive full 10-token palette from a primary seed color
  */
-export function generateThemeFromPrimary(primaryHex: string, mode: 'dark' | 'light'): ThemeTokens {
-  const rgb = hexToRgb(primaryHex) || { r: 16, g: 185, b: 129 }; // Default emerald
+export function generateThemeFromPrimary(primaryHex: string): ThemeTokens {
+  const rgb = hexToRgb(primaryHex) || { r: 16, g: 185, b: 129 };
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+  const isSeedDark = getLuminance(rgb.r, rgb.g, rgb.b) < 0.5;
 
-  if (mode === 'dark') {
-    // Backgrounds: Deep dark shades imbued with primary hue
-    const primary_bg = hslToHex(hsl.h, Math.min(hsl.s, 40), 7);
-    const secondary_bg = hslToHex(hsl.h, Math.min(hsl.s, 45), 5);
-    const surface_card = hslToHex(hsl.h, Math.min(hsl.s, 35), 11);
+  const primary_bg = hslToHex(hsl.h, Math.min(hsl.s, 40), isSeedDark ? 7 : 97);
+  const secondary_bg = hslToHex(hsl.h, Math.min(hsl.s, 45), isSeedDark ? 5 : 93);
+  const surface_card = isSeedDark ? hslToHex(hsl.h, Math.min(hsl.s, 35), 11) : '#FFFFFF';
 
-    // Accent: Primary seed color or lightened vibrant shade
-    const accent = ensureWCAGContrast(
-      hslToHex(hsl.h, Math.max(hsl.s, 65), Math.max(hsl.l, 45)),
-      primary_bg,
-      3.5
-    );
+  const accent = ensureWCAGContrast(
+    hslToHex(hsl.h, Math.max(hsl.s, 65), isSeedDark ? Math.max(hsl.l, 45) : Math.min(hsl.l, 40)),
+    primary_bg,
+    3.5
+  );
 
-    // Text hierarchy
-    const text_primary = ensureWCAGContrast('#F8FAFC', primary_bg, 7.0);
-    const text_secondary = ensureWCAGContrast(hslToHex(hsl.h, 20, 80), primary_bg, 4.5);
-    const text_muted = ensureWCAGContrast(hslToHex(hsl.h, 15, 65), primary_bg, 3.0);
+  const text_primary = ensureWCAGContrast(isSeedDark ? '#F8FAFC' : '#0F172A', primary_bg, 7.0);
+  const text_secondary = ensureWCAGContrast(isSeedDark ? hslToHex(hsl.h, 20, 80) : hslToHex(hsl.h, 30, 30), primary_bg, 4.5);
+  const text_muted = ensureWCAGContrast(isSeedDark ? hslToHex(hsl.h, 15, 65) : hslToHex(hsl.h, 20, 45), primary_bg, 3.0);
 
-    // Secondary steel / borders
-    const slate_steel = hslToHex(hsl.h, 25, 25);
-    const border_subtle = 'rgba(255, 255, 255, 0.10)';
-    const border_accent = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.25)`;
+  const slate_steel = isSeedDark ? hslToHex(hsl.h, 25, 25) : hslToHex(hsl.h, 20, 80);
+  const border_subtle = isSeedDark ? 'rgba(255, 255, 255, 0.10)' : 'rgba(0, 0, 0, 0.10)';
+  const border_accent = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.25)`;
 
-    return {
-      primary_bg,
-      secondary_bg,
-      surface_card,
-      text_primary,
-      text_secondary,
-      text_muted,
-      accent,
-      slate_steel,
-      border_subtle,
-      border_accent,
-    };
-  } else {
-    // Light mode: Clean, crisp light backgrounds imbued with primary hue
-    const primary_bg = hslToHex(hsl.h, Math.min(hsl.s, 25), 97);
-    const secondary_bg = hslToHex(hsl.h, Math.min(hsl.s, 20), 93);
-    const surface_card = '#FFFFFF';
-
-    // Accent: Rich primary color contrast-adjusted for light background
-    const accent = ensureWCAGContrast(
-      hslToHex(hsl.h, Math.max(hsl.s, 75), Math.min(hsl.l, 40)),
-      primary_bg,
-      3.5
-    );
-
-    // Text hierarchy
-    const text_primary = ensureWCAGContrast(hslToHex(hsl.h, 45, 10), primary_bg, 7.0);
-    const text_secondary = ensureWCAGContrast(hslToHex(hsl.h, 30, 30), primary_bg, 4.5);
-    const text_muted = ensureWCAGContrast(hslToHex(hsl.h, 20, 45), primary_bg, 3.0);
-
-    // Steel slate / borders
-    const slate_steel = hslToHex(hsl.h, 20, 80);
-    const border_subtle = 'rgba(0, 0, 0, 0.10)';
-    const border_accent = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.30)`;
-
-    return {
-      primary_bg,
-      secondary_bg,
-      surface_card,
-      text_primary,
-      text_secondary,
-      text_muted,
-      accent,
-      slate_steel,
-      border_subtle,
-      border_accent,
-    };
-  }
+  return {
+    primary_bg,
+    secondary_bg,
+    surface_card,
+    text_primary,
+    text_secondary,
+    text_muted,
+    accent,
+    slate_steel,
+    border_subtle,
+    border_accent,
+  };
 }
 
 /**
  * RandomA11y-inspired generator: returns a random primary color & accessible theme pair
  */
-export function generateRandomAccessibleTheme(mode: 'dark' | 'light'): {
+export function generateRandomAccessibleTheme(): {
   primaryHex: string;
   name: string;
   tokens: ThemeTokens;
 } {
   const randomHue = Math.floor(Math.random() * 360);
-  const randomSat = Math.floor(Math.random() * 40) + 60; // 60% - 100%
-  const randomLit = Math.floor(Math.random() * 30) + 40; // 40% - 70%
+  const randomSat = Math.floor(Math.random() * 40) + 60;
+  const randomLit = Math.floor(Math.random() * 30) + 40;
   const primaryHex = hslToHex(randomHue, randomSat, randomLit);
 
-  const tokens = generateThemeFromPrimary(primaryHex, mode);
+  const tokens = generateThemeFromPrimary(primaryHex);
 
   const colorNames = [
     'Emerald', 'Teal', 'Cyan', 'Electric Blue', 'Royal Indigo',
@@ -284,7 +283,7 @@ export function generateRandomAccessibleTheme(mode: 'dark' | 'light'): {
 
   return {
     primaryHex,
-    name: `${colorName} Seed (${mode.toUpperCase()})`,
+    name: `${colorName} Seed`,
     tokens,
   };
 }

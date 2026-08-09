@@ -13,19 +13,10 @@ describe('ThemeContext', () => {
     localStorage.clear();
   });
 
-  it('provides default dark theme tokens', () => {
+  it('provides default theme tokens', () => {
     const { result } = renderHook(() => useTheme(), { wrapper });
-    expect(result.current.activeMode).toBe('dark');
-    expect(result.current.darkTokens.primary_bg).toBe('#0A192F');
-    expect(result.current.darkTokens.accent).toBe('#10B981');
-  });
-
-  it('allows toggling active mode between dark and light', () => {
-    const { result } = renderHook(() => useTheme(), { wrapper });
-    act(() => {
-      result.current.setActiveMode('light');
-    });
-    expect(result.current.activeMode).toBe('light');
+    expect(result.current.tokens.primary_bg).toBe('#0A192F');
+    expect(result.current.tokens.accent).toBe('#10B981');
   });
 
   it('generates whole token system from a primary seed color', () => {
@@ -34,8 +25,8 @@ describe('ThemeContext', () => {
       result.current.setPrimarySeedColor('#3B82F6');
     });
     expect(result.current.primarySeedColor).toBe('#3B82F6');
-    expect(result.current.darkTokens.primary_bg).toBeDefined();
-    expect(result.current.darkTokens.text_primary).toBeDefined();
+    expect(result.current.tokens.primary_bg).toBeDefined();
+    expect(result.current.tokens.text_primary).toBeDefined();
     expect(result.current.activePresetId).toBe('custom-seed');
   });
 
@@ -69,7 +60,6 @@ describe('ThemeContext', () => {
     const fullPreset: ThemePreset = {
       id: 'binance-system',
       name: 'Imported Binance System',
-      mode: 'dark',
       tokens: {
         primary_bg: '#181A20',
         secondary_bg: '#0B0E11',
@@ -86,11 +76,12 @@ describe('ThemeContext', () => {
     const sampleMD = exportDesignSystemToMarkdown(fullPreset);
 
     act(() => {
-      const success = result.current.importDesignMD(sampleMD);
-      expect(success).toBe(true);
+      const { preset } = result.current.importDesignMD(sampleMD);
+      result.current.applyPreset(preset);
+      expect(preset.name).toBe('Imported Binance System');
     });
-    expect(result.current.darkTokens.primary_bg).toBe('#181A20');
-    expect(result.current.darkTokens.accent).toBe('#F0B90B');
+    expect(result.current.tokens.primary_bg).toBe('#181A20');
+    expect(result.current.tokens.accent).toBe('#F0B90B');
   });
 
   it('applies default preset themes correctly', () => {
@@ -99,6 +90,6 @@ describe('ThemeContext', () => {
       result.current.applyPreset(DEFAULT_FINTECH_MIDNIGHT);
     });
     expect(result.current.activePresetId).toBe('fintech-midnight');
-    expect(result.current.darkTokens.accent).toBe('#10B981');
+    expect(result.current.tokens.accent).toBe('#10B981');
   });
 });

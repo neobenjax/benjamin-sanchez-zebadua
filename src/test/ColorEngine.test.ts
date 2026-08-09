@@ -9,6 +9,7 @@ import {
   ensureWCAGContrast,
   generateThemeFromPrimary,
   generateRandomAccessibleTheme,
+  analyzeThemeAccessibility,
 } from '@/lib/colorEngine';
 
 describe('Color Engine Math & Contrast Unit Tests', () => {
@@ -43,23 +44,19 @@ describe('Color Engine Math & Contrast Unit Tests', () => {
     expect(contrast!).toBeGreaterThanOrEqual(4.5);
   });
 
-  it('generates full 10-token dark and light mode themes from primary seed color', () => {
+  it('generates full 10-token theme from primary seed color with WCAG AA compliance', () => {
     const primarySeed = '#3B82F6';
-    const darkTheme = generateThemeFromPrimary(primarySeed, 'dark');
-    expect(darkTheme.primary_bg).toBeDefined();
-    expect(darkTheme.text_primary).toBeDefined();
-    expect(darkTheme.accent).toBeDefined();
+    const theme = generateThemeFromPrimary(primarySeed);
+    expect(theme.primary_bg).toBeDefined();
+    expect(theme.text_primary).toBeDefined();
+    expect(theme.accent).toBeDefined();
 
-    const darkTextContrast = calculateContrast(darkTheme.text_primary, darkTheme.primary_bg);
-    expect(darkTextContrast!).toBeGreaterThanOrEqual(4.5);
-
-    const lightTheme = generateThemeFromPrimary(primarySeed, 'light');
-    const lightTextContrast = calculateContrast(lightTheme.text_primary, lightTheme.primary_bg);
-    expect(lightTextContrast!).toBeGreaterThanOrEqual(4.5);
+    const report = analyzeThemeAccessibility(theme);
+    expect(report.hasViolations).toBe(false);
   });
 
   it('generates a random accessible theme pair (RandomA11y)', () => {
-    const randomTheme = generateRandomAccessibleTheme('dark');
+    const randomTheme = generateRandomAccessibleTheme();
     expect(randomTheme.primaryHex).toMatch(/^#[0-9A-F]{6}$/i);
     expect(randomTheme.tokens.primary_bg).toBeDefined();
     const contrast = calculateContrast(randomTheme.tokens.text_primary, randomTheme.tokens.primary_bg);

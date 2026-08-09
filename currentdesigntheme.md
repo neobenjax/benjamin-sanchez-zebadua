@@ -1,33 +1,32 @@
 ---
 version: "1.0.0"
-name: "Active Design System"
-design_system_name: "Active Design System"
+name: "Neon Purple"
+design_system_name: "Neon Purple"
 description: "A precision-engineered design language with WCAG 2.1 AA contrast compliance, standardized tokens, and responsive UI primitives."
-mode: "dark"
 author: "Benjamin Sanchez Zebadua"
 updated_at: "2026-08-09"
 
 colors:
-  primary: "#9FF500"
-  primary-focus: "#9FF500"
-  primary-bg: "#14190B"
-  secondary-bg: "#0E1207"
-  surface: "#1F2612"
+  primary: "#E718A9"
+  primary-focus: "#E718A9"
+  primary-bg: "#190B15"
+  secondary-bg: "#12070F"
+  surface: "#261220"
   body: "#F8FAFC"
-  body-muted: "#AAB398"
+  body-muted: "#B398AB"
   text-primary: "#F8FAFC"
-  text-secondary: "#CFD6C2"
-  text-muted: "#AAB398"
-  accent: "#9FF500"
-  slate-steel: "#455030"
+  text-secondary: "#D6C2D0"
+  text-muted: "#B398AB"
+  accent: "#E718A9"
+  slate-steel: "#503046"
   border-subtle: "rgba(255, 255, 255, 0.10)"
-  border-accent: "rgba(159, 245, 0, 0.25)"
+  border-accent: "rgba(231, 24, 169, 0.25)"
   on-primary: "#ffffff"
   on-dark: "#ffffff"
 
 typography:
   display-lg:
-    fontFamily: "Playfair Display, serif"
+    fontFamily: "Inter, sans-serif"
     fontSize: "40px"
     fontWeight: "700"
   body:
@@ -61,39 +60,39 @@ components:
     rounded: "{rounded.md}"
 ---
 
-# Design System Specification: Active Design System
+# Design System Specification: Neon Purple
 
 > Official Design System Specification file (`design.md` standard). Synchronized with root CSS custom properties and WCAG 2.1 AA accessibility guidelines.
 
-## 1. Color System & Design Tokens (DARK Mode)
+## 1. Color System & Design Tokens
 
 | Token Key | Design System Role | Hex / CSS Value | Description |
 | :--- | :--- | :--- | :--- |
-| `primary_bg` | Primary Background | `#14190B` | Main application background |
-| `secondary_bg` | Secondary Background | `#0E1207` | Alternating section backdrops |
-| `surface_card` | Surface Card | `#1F2612` | Elevated card containers and popups |
+| `primary_bg` | Primary Background | `#190B15` | Main application background |
+| `secondary_bg` | Secondary Background | `#12070F` | Alternating section backdrops |
+| `surface_card` | Surface Card | `#261220` | Elevated card containers and popups |
 | `text_primary` | Primary Copy | `#F8FAFC` | High contrast headings & body copy |
-| `text_secondary` | Secondary Copy | `#CFD6C2` | Subtitles, labels & descriptions |
-| `text_muted` | Muted Text | `#AAB398` | Captions, metadata & hints |
-| `accent` | Accent Color | `#9FF500` | High visibility CTAs & status badges |
-| `slate_steel` | Steel Slate | `#455030` | Secondary borders & icon outlines |
+| `text_secondary` | Secondary Copy | `#D6C2D0` | Subtitles, labels & descriptions |
+| `text_muted` | Muted Text | `#B398AB` | Captions, metadata & hints |
+| `accent` | Accent Color | `#E718A9` | High visibility CTAs & status badges |
+| `slate_steel` | Steel Slate | `#503046` | Secondary borders & icon outlines |
 | `border_subtle` | Subtle Border | `rgba(255, 255, 255, 0.10)` | Card grid lines & subtle dividers |
-| `border_accent` | Accent Border | `rgba(159, 245, 0, 0.25)` | Active state highlight borders |
+| `border_accent` | Accent Border | `rgba(231, 24, 169, 0.25)` | Active state highlight borders |
 
 ### CSS Custom Properties Snippet
 
 ```css
-:root[data-theme="dark"] {
-  --color-primary: #14190B;
-  --color-secondary-bg: #0E1207;
-  --color-surface: #1F2612;
+:root {
+  --color-primary: #190B15;
+  --color-secondary-bg: #12070F;
+  --color-surface: #261220;
   --color-text-primary: #F8FAFC;
-  --color-text-secondary: #CFD6C2;
-  --color-text-muted: #AAB398;
-  --color-accent: #9FF500;
-  --color-secondary: #455030;
+  --color-text-secondary: #D6C2D0;
+  --color-text-muted: #B398AB;
+  --color-accent: #E718A9;
+  --color-secondary: #503046;
   --border-subtle: rgba(255, 255, 255, 0.10);
-  --border-accent: rgba(159, 245, 0, 0.25);
+  --border-accent: rgba(231, 24, 169, 0.25);
 }
 ```
 
@@ -106,6 +105,6 @@ components:
 - **Pill**: Fully rounded (`rounded-full`).
 
 ### Typography & Display Scale
-- **Display Headings**: Playfair Display (Font Serif).
-- **Body Copy & Interfaces**: Inter Sans (Font Sans).
+- **Display Headings**: Inter (Font Sans).
+- **Body Copy & Interfaces**: Inter (Font Sans).
 - **Technical & Code**: Fira Code / JetBrains Mono (Font Mono).
