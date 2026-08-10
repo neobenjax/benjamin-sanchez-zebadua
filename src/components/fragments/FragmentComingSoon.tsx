@@ -6,6 +6,7 @@ import { Mail, Download, ArrowUpRight, Sparkles } from "lucide-react";
 import type { ComingSoonAST, FragmentLink } from "@/types/fragments";
 
 import TerminalWidget from "@/components/ui/TerminalWidget";
+import FeelingLuckyButton from "@/components/ui/FeelingLuckyButton";
 
 const LinkedinIcon = ({ className }: { className?: string }) => (
   <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -18,7 +19,9 @@ interface FragmentComingSoonProps {
 }
 
 export default function FragmentComingSoon({ ast }: FragmentComingSoonProps) {
-  const statementLines = ast.comingSoonStatement.split("\n").map((l) => l.trim()).filter(Boolean);
+  const statementLines = ast.comingSoonStatement
+    ? ast.comingSoonStatement.split("\n").map((l) => l.trim()).filter(Boolean)
+    : [];
 
   return (
     <section className="pt-28 pb-16 md:pt-36 md:pb-24 px-6 lg:px-8 max-w-6xl mx-auto flex flex-col justify-center min-h-[calc(100vh-5rem)]">
@@ -33,21 +36,27 @@ export default function FragmentComingSoon({ ast }: FragmentComingSoonProps) {
         )}
 
         {/* Hero Title */}
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-[var(--color-text-primary)] leading-[1.15] tracking-tight max-w-4xl">
-          {ast.heroTitle}
-        </h1>
+        {ast.heroTitle && (
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-[var(--color-text-primary)] leading-[1.15] tracking-tight max-w-4xl">
+            {ast.heroTitle}
+          </h1>
+        )}
 
         {/* Hero Statement */}
-        <p className="text-base sm:text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed max-w-3xl font-sans">
-          {ast.heroStatement}
-        </p>
+        {ast.heroStatement && (
+          <p className="text-base sm:text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed max-w-3xl font-sans">
+            {ast.heroStatement}
+          </p>
+        )}
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-          {ast.heroActions.map((action, idx) => (
-            <RenderCTAButton key={idx} item={action} />
-          ))}
-        </div>
+        {ast.heroActions && ast.heroActions.length > 0 && (
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            {ast.heroActions.map((action, idx) => (
+              <RenderCTAButton key={idx} item={action} />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* 2. HORIZONTAL SEPARATOR */}
@@ -57,22 +66,24 @@ export default function FragmentComingSoon({ ast }: FragmentComingSoonProps) {
 
       {/* 3. COMING SOON SECTION & BLUEPRINT ILLUSTRATION */}
       <div className="flex flex-col items-center text-center space-y-8">
-        <div className="space-y-3 max-w-3xl">
-          {statementLines[0] && (
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-bold text-[var(--color-text-primary)]">
-              {statementLines[0]}
-            </h2>
-          )}
-          {statementLines[1] && (
-            <p className="text-sm sm:text-base font-mono font-bold text-[var(--color-accent)] tracking-wide">
-              {statementLines[1]}
-            </p>
-          )}
-        </div>
+        {statementLines.length > 0 && (
+          <div className="space-y-3 max-w-3xl">
+            {statementLines[0] && (
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-bold text-[var(--color-text-primary)]">
+                {statementLines[0]}
+              </h2>
+            )}
+            {statementLines[1] && (
+              <p className="text-sm sm:text-base font-mono font-bold text-[var(--color-accent)] tracking-wide">
+                {statementLines[1]}
+              </p>
+            )}
+          </div>
+        )}
 
         {/* Dynamic Architectural Blueprint Card */}
-        <div className="w-full max-w-4xl p-4 sm:p-6 md:p-8 rounded-xl bg-[var(--color-surface)] border border-[var(--border-subtle)] shadow-2xl backdrop-blur-md transition-colors">
-          {ast.illustrationUrl ? (
+        {ast.illustrationUrl && (
+          <div className="w-full max-w-4xl p-4 sm:p-6 md:p-8 rounded-xl bg-[var(--color-surface)] border border-[var(--border-subtle)] shadow-2xl backdrop-blur-md transition-colors">
             <div className="relative w-full overflow-hidden rounded-lg flex items-center justify-center">
               <img
                 src={ast.illustrationUrl}
@@ -80,16 +91,17 @@ export default function FragmentComingSoon({ ast }: FragmentComingSoonProps) {
                 className="w-full h-auto object-contain max-h-[480px] block"
               />
             </div>
-          ) : (
-            <div className="p-12 text-[var(--color-text-muted)] font-mono text-sm">
-              [Blueprint Illustration Placeholder]
-            </div>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* 4. LINUX TERMINAL WIDGET */}
-        <TerminalWidget lines={ast.terminalLines} />
+        {ast.terminalLines && ast.terminalLines.length > 0 && (
+          <TerminalWidget lines={ast.terminalLines} />
+        )}
       </div>
+
+      {/* 5. REUSABLE FEELING LUCKY FLOATING BUTTON */}
+      <FeelingLuckyButton />
     </section>
   );
 }

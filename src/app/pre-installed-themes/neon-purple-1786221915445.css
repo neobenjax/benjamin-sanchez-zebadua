@@ -1,0 +1,14 @@
+/* AUTO-GENERATED FROM config/themes/neon-purple-1786221915445.md - DO NOT EDIT DIRECTLY */
+/* Theme: Neon Purple */
+:root {
+  --color-primary: #190B15;
+  --color-secondary-bg: #12070F;
+  --color-surface: #261220;
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #D6C2D0;
+  --color-text-muted: #B398AB;
+  --color-accent: #E718A9;
+  --color-secondary: #503046;
+  --border-subtle: rgba(255, 255, 255, 0.10);
+  --border-accent: rgba(231, 24, 169, 0.25);
+}

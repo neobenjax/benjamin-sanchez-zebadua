@@ -61,7 +61,7 @@ export interface ThemeContextType {
   isDraft: boolean;
   setPrimarySeedColor: (hex: string) => void;
   generateRandomTheme: () => void;
-  applyPreset: (preset: ThemePreset) => void;
+  applyPreset: (preset: ThemePreset, syncToFileSystem?: boolean) => void;
   saveCustomTheme: (name: string) => void;
   overwriteCustomTheme: (presetId: string, name?: string) => void;
   deleteCustomTheme: (presetId: string) => void;
@@ -252,11 +252,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       activePresetId: presetId,
       primarySeedColor: seedColor,
     };
-    if (syncToFileSystem) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-    }
+    // Always save to localStorage so client browser retains temporary theme choices across page navigation
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     applyTokensToDOM(currentTokens);
 
+    // Only write to root currentdesigntheme.md when syncToFileSystem is true (e.g. ThemeTuner)
     if (syncToFileSystem) {
       const activePresetObj: ThemePreset = {
         id: presetId,
@@ -292,7 +292,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     saveConfig(randomResult.tokens, 'random-seed', randomResult.primaryHex, false);
   };
 
-  const applyPreset = (preset: ThemePreset) => {
+  const applyPreset = (preset: ThemePreset, syncToFileSystem: boolean = true) => {
     setActivePresetId(preset.id);
     setIsDraft(false);
     setTokens(preset.tokens);
@@ -301,7 +301,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else {
       setPrimarySeedColorState(preset.tokens.accent);
     }
-    saveConfig(preset.tokens, preset.id, preset.primarySeed || preset.tokens.accent, true);
+    saveConfig(preset.tokens, preset.id, preset.primarySeed || preset.tokens.accent, syncToFileSystem);
   };
 
   const saveCustomTheme = (name: string) => {

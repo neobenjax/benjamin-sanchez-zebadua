@@ -27,7 +27,7 @@ export default function TerminalWidget({
   lines = DEFAULT_LINES,
   typingSpeedMs = 30,
   lineDelayMs = 400,
-  resetDelayMs = 5000,
+  resetDelayMs = 10000,
 }: TerminalWidgetProps) {
   const activeLines = lines && lines.length > 0 ? lines : DEFAULT_LINES;
 
@@ -136,29 +136,30 @@ export default function TerminalWidget({
           ))
         ) : (
           <>
-            {activeLines.slice(0, currentLineIndex).map((line, idx) => (
-              <div key={idx} className="whitespace-pre-wrap break-words">
-                {renderFormattedLine(line)}
-              </div>
-            ))}
+            {activeLines
+              .slice(0, isCompleted ? activeLines.length : currentLineIndex)
+              .map((line, idx) => {
+                const isLastCompletedLine = isCompleted && idx === activeLines.length - 1;
+                return (
+                  <div key={idx} className="whitespace-pre-wrap break-words flex items-center flex-wrap">
+                    {renderFormattedLine(line)}
+                    {isLastCompletedLine && (
+                      <span
+                        className="inline-block w-2 h-4 sm:h-5 bg-[var(--color-accent)] ml-1 animate-pulse"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </div>
+                );
+              })}
 
             {!isCompleted && currentLineIndex < activeLines.length && (
-              <div className="whitespace-pre-wrap break-words flex items-center">
+              <div className="whitespace-pre-wrap break-words flex items-center flex-wrap">
                 {renderFormattedLine(
                   activeLines[currentLineIndex].slice(0, currentCharIndex)
                 )}
                 <span
                   className="inline-block w-2 h-4 sm:h-5 bg-[var(--color-accent)] ml-1 animate-pulse"
-                  aria-hidden="true"
-                />
-              </div>
-            )}
-
-            {isCompleted && (
-              <div className="whitespace-pre-wrap break-words flex items-center text-[var(--color-accent)]">
-                <span className="font-bold mr-2">$</span>
-                <span
-                  className="inline-block w-2 h-4 sm:h-5 bg-[var(--color-accent)] animate-pulse"
                   aria-hidden="true"
                 />
               </div>

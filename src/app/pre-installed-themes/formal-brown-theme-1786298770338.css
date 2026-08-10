@@ -1,0 +1,14 @@
+/* AUTO-GENERATED FROM config/themes/formal-brown-theme-1786298770338.md - DO NOT EDIT DIRECTLY */
+/* Theme: Formal brown theme */
+:root {
+  --color-primary: #121212;
+  --color-secondary-bg: #0D0D0D;
+  --color-surface: #1C1C1C;
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #D6C2C2;
+  --color-text-muted: #B39898;
+  --color-accent: #D63D3D;
+  --color-secondary: #503030;
+  --border-subtle: rgba(255, 255, 255, 0.10);
+  --border-accent: rgba(138, 138, 138, 0.25);
+}

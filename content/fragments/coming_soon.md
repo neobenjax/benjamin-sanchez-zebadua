@@ -16,13 +16,6 @@ I am Benjamin Sanchez Zebadua. I apply a computing mindset to bridge the gap bet
 
 # COMING_SOON_SECTION
 
-## COMING_SOON_STATEMENT
-This site is being crafted meticulously.
-Compiling production-grade excellence... Stay tuned!
-
-## COMING_SOON_ILLUSTRATION
-![Illustration of a Solutions Architect Engineering code, requirements, guardrails, security](/images/architect-blueprint.svg)
-
 ## TERMINAL_WIDGET
 $ agy init --session "portfolio-exploration"
 > Gemini: Connected to Benjamin Sanchez Zebadua's Solutions Architect Agent.

@@ -81,18 +81,23 @@ async function runComingSoonAutomationTests() {
     }
     console.log('✅ Passed: All 3 CTA interaction links validated.');
 
-    // 4. Audit Coming Soon Statement & Illustration
-    console.log('Auditing Coming Soon Statement & Blueprint SVG...');
-    const comingSoonText = await page.locator('h2:has-text("crafted meticulously")').innerText();
-    if (!comingSoonText.includes('crafted meticulously')) {
-      throw new Error('❌ Test Failed: Coming Soon Statement missing!');
+    // 4. Audit Omitted Sections & Terminal Widget
+    console.log('Auditing that removed Coming Soon Statement and Blueprint SVG card are not rendered, and Terminal Widget is present...');
+    const statementCount = await page.locator('h2:has-text("crafted meticulously")').count();
+    if (statementCount !== 0) {
+      throw new Error('❌ Test Failed: Coming Soon Statement should not be rendered when omitted from markdown!');
     }
 
-    const svgImgSrc = await page.getAttribute('img[alt*="Solutions Architect"]', 'src');
-    if (!svgImgSrc || !svgImgSrc.includes('/images/architect-blueprint.svg')) {
-      throw new Error(`❌ Test Failed: Architect Blueprint SVG image source invalid "${svgImgSrc}"`);
+    const placeholderCount = await page.locator('text="[Blueprint Illustration Placeholder]"').count();
+    if (placeholderCount !== 0) {
+      throw new Error('❌ Test Failed: Blueprint illustration placeholder should not be rendered!');
     }
-    console.log('✅ Passed: Coming Soon statement and blueprint SVG verified.');
+
+    const terminalCount = await page.locator('div[role="region"][aria-label="Interactive Linux Terminal CLI"]').count();
+    if (terminalCount === 0) {
+      throw new Error('❌ Test Failed: Terminal Widget CLI missing!');
+    }
+    console.log('✅ Passed: Clean omission of coming soon statement/blueprint and verified terminal widget.');
 
     // 5. Verify /old secondary route works for internal testing
     console.log(`Auditing secondary route ${BASE_URL}/old...`);

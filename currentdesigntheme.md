@@ -5,7 +5,7 @@ design_system_name: "green white theme"
 description: "A precision-engineered design language with WCAG 2.1 AA contrast compliance, standardized tokens, responsive UI primitives, and full behavioral specifications."
 mode: "dark"
 author: "Benjamin Sanchez Zebadua"
-updated_at: "2026-08-09"
+updated_at: "2026-08-10"
 
 colors:
   primary: "#069932"

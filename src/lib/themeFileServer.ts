@@ -4,7 +4,7 @@ import { ThemePreset } from '@/context/ThemeContext';
 import { importDesignSystemFromMarkdown, exportDesignSystemToMarkdown } from './designSystemMd';
 
 const ROOT_CURRENT_THEME_PATH = path.join(process.cwd(), 'currentdesigntheme.md');
-const THEME_TOKENS_CSS_PATH = path.join(process.cwd(), 'src', 'app', 'theme-tokens.css');
+const THEME_TOKENS_CSS_PATH = path.join(process.cwd(), 'src', 'app', 'current-theme-tokens.css');
 const CONFIG_THEMES_DIR = path.join(process.cwd(), 'config', 'themes');
 
 /**

@@ -1,0 +1,14 @@
+/* AUTO-GENERATED FROM config/themes/lemon-1786256626478.md - DO NOT EDIT DIRECTLY */
+/* Theme: lemon */
+:root {
+  --color-primary: #14190B;
+  --color-secondary-bg: #0E1207;
+  --color-surface: #1F2612;
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #CFD6C2;
+  --color-text-muted: #AAB398;
+  --color-accent: #9FF500;
+  --color-secondary: #455030;
+  --border-subtle: rgba(255, 255, 255, 0.10);
+  --border-accent: rgba(159, 245, 0, 0.25);
+}

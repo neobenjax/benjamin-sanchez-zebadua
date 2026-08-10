@@ -56,7 +56,7 @@ export interface ComingSoonAST {
   heroSubtitle?: string;
   heroStatement: string;
   heroActions: FragmentLink[];
-  comingSoonStatement: string;
+  comingSoonStatement?: string;
   illustrationAlt?: string;
   illustrationUrl?: string;
   terminalLines?: string[];

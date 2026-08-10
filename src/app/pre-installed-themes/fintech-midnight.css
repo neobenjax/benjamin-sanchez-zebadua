@@ -1,0 +1,14 @@
+/* AUTO-GENERATED FROM config/themes/fintech-midnight.md - DO NOT EDIT DIRECTLY */
+/* Theme: FinTech Midnight (Default) */
+:root {
+  --color-primary: #0A192F;
+  --color-secondary-bg: #081426;
+  --color-surface: #0C1E38;
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #CBD5E1;
+  --color-text-muted: #94A3B8;
+  --color-accent: #10B981;
+  --color-secondary: #334155;
+  --border-subtle: rgba(255, 255, 255, 0.10);
+  --border-accent: rgba(16, 185, 129, 0.20);
+}

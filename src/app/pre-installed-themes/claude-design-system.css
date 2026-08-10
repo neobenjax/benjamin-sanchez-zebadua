@@ -1,0 +1,14 @@
+/* AUTO-GENERATED FROM config/themes/claude-design-system.md - DO NOT EDIT DIRECTLY */
+/* Theme: Claude-design-system */
+:root {
+  --color-primary: #faf9f5;
+  --color-secondary-bg: #f5f0e8;
+  --color-surface: #efe9de;
+  --color-text-primary: #141413;
+  --color-text-secondary: #3d3d3a;
+  --color-text-muted: #727068;
+  --color-accent: #cc785c;
+  --color-secondary: #475569;
+  --border-subtle: #e6dfd8;
+  --border-accent: rgba(204, 120, 92, 0.25);
+}

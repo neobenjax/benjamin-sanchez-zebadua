@@ -65,7 +65,6 @@ $ agy status
     expect(ast).toBeDefined();
     expect(ast.heroTitle).toContain("Precision in Code");
     expect(ast.heroActions.length).toBe(3);
-    expect(ast.comingSoonStatement).toContain("crafted meticulously");
     expect(ast.terminalLines).toBeDefined();
     expect(ast.terminalLines!.length).toBeGreaterThan(0);
   });

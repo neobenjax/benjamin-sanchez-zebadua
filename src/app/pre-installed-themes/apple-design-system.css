@@ -1,0 +1,14 @@
+/* AUTO-GENERATED FROM config/themes/apple-design-system.md - DO NOT EDIT DIRECTLY */
+/* Theme: Apple-design-system */
+:root {
+  --color-primary: #ffffff;
+  --color-secondary-bg: #f5f5f7;
+  --color-surface: #fafafc;
+  --color-text-primary: #1d1d1f;
+  --color-text-secondary: #333333;
+  --color-text-muted: #6e6e73;
+  --color-accent: #0066cc;
+  --color-secondary: #475569;
+  --border-subtle: #e0e0e0;
+  --border-accent: #0071e3;
+}
