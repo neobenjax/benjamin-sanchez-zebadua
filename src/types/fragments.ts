@@ -59,6 +59,7 @@ export interface ComingSoonAST {
   comingSoonStatement: string;
   illustrationAlt?: string;
   illustrationUrl?: string;
+  terminalLines?: string[];
   rawMarkdown: string;
 }
 

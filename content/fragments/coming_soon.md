@@ -22,3 +22,18 @@ Compiling production-grade excellence... Stay tuned!
 
 ## COMING_SOON_ILLUSTRATION
 ![Illustration of a Solutions Architect Engineering code, requirements, guardrails, security](/images/architect-blueprint.svg)
+
+## TERMINAL_WIDGET
+$ agy init --session "portfolio-exploration"
+> Gemini: Connected to Benjamin Sanchez Zebadua's Solutions Architect Agent.
+$ agy prompt "What is Benjamin's core engineering philosophy?"
+> Gemini: Bridging high-performance software engineering with strategic financial systems.
+$ agy query --tech-stack
+> Gemini: Next.js 16 App Router, React 19, TypeScript, Node.js AST engines, & WCAG AA design systems.
+$ agy inspect --expertise
+> Gemini: Passionate about AI, AI Ethics & Compliance, Agent Skills, Spec-Driven Development, RAG, and OKF architecture for corporate data security—specializing in scalable FinTech architecture.
+$ agy spec --prompt "Build a portfolio website that uses SSR, Markdown files, design system, and dynamic content loading..."
+> Gemini: Analyzing requirements...
+> Gemini: Building awesome things here, please wait and stay tuned for launch!
+
+
