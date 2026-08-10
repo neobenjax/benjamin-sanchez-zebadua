@@ -276,6 +276,19 @@ This site is being crafted meticulously.
 
 ## COMING_SOON_ILLUSTRATION
 ![Illustration of a Solutions Architect Engineering code, requirements, guardrails, security](/images/architect-blueprint.svg)
+
+## TERMINAL_WIDGET
+$ agy init --session "portfolio-exploration"
+> Gemini: Connected to Benjamin Sanchez Zebadua's Solutions Architect Agent.
+$ agy prompt "What is Benjamin's core engineering philosophy?"
+> Gemini: Bridging high-performance software engineering with strategic financial systems.
+$ agy query --tech-stack
+> Gemini: Next.js 16 App Router, React 19, TypeScript, Node.js AST engines, & WCAG AA design systems.
+$ agy inspect --expertise
+> Gemini: Passionate about AI, AI Ethics & Compliance, Agent Skills, Spec-Driven Development, RAG, and OKF architecture for corporate data security—specializing in scalable FinTech architecture.
+$ agy spec --prompt "Build a portfolio website that uses SSR, Markdown files, design system, and dynamic content loading..."
+> Gemini: Analyzing requirements...
+> Gemini: Building awesome things here, please wait and stay tuned for launch!
 `;
 
 /**
@@ -292,6 +305,7 @@ export function parseComingSoonMarkdown(markdown: string): ComingSoonAST {
   let comingSoonStatement = "";
   let illustrationAlt = "";
   let illustrationUrl = "";
+  const terminalLines: string[] = [];
 
   let currentSubSection:
     | "HERO_TITLE"
@@ -300,6 +314,7 @@ export function parseComingSoonMarkdown(markdown: string): ComingSoonAST {
     | "HERO_ACTIONS"
     | "COMING_SOON_STATEMENT"
     | "COMING_SOON_ILLUSTRATION"
+    | "TERMINAL_WIDGET"
     | null = null;
 
   for (const rawLine of lines) {
@@ -318,6 +333,7 @@ export function parseComingSoonMarkdown(markdown: string): ComingSoonAST {
       else if (heading.includes("HERO_ACTIONS")) currentSubSection = "HERO_ACTIONS";
       else if (heading.includes("COMING_SOON_STATEMENT")) currentSubSection = "COMING_SOON_STATEMENT";
       else if (heading.includes("COMING_SOON_ILLUSTRATION")) currentSubSection = "COMING_SOON_ILLUSTRATION";
+      else if (heading.includes("TERMINAL_WIDGET")) currentSubSection = "TERMINAL_WIDGET";
       continue;
     }
 
@@ -341,6 +357,8 @@ export function parseComingSoonMarkdown(markdown: string): ComingSoonAST {
       } else {
         illustrationAlt = line;
       }
+    } else if (currentSubSection === "TERMINAL_WIDGET") {
+      terminalLines.push(line);
     }
   }
 
@@ -352,6 +370,7 @@ export function parseComingSoonMarkdown(markdown: string): ComingSoonAST {
     comingSoonStatement,
     illustrationAlt,
     illustrationUrl,
+    terminalLines,
     rawMarkdown: content,
   };
 }

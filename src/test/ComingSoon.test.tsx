@@ -35,6 +35,10 @@ This site is being crafted meticulously.
 
 ## COMING_SOON_ILLUSTRATION
 ![Architect Diagram](/images/architect-blueprint.svg)
+
+## TERMINAL_WIDGET
+$ agy status
+> Gemini: System operating normally.
 `;
 
     const ast = parseComingSoonMarkdown(sampleMarkdown);
@@ -51,6 +55,9 @@ This site is being crafted meticulously.
     expect(ast.heroActions[2].isDownload).toBe(true);
     expect(ast.comingSoonStatement).toContain("crafted meticulously");
     expect(ast.illustrationUrl).toBe("/images/architect-blueprint.svg");
+    expect(ast.terminalLines).toBeDefined();
+    expect(ast.terminalLines?.length).toBe(2);
+    expect(ast.terminalLines?.[0]).toBe("$ agy status");
   });
 
   it("loads actual coming_soon.md fragment from content/fragments/", () => {
@@ -59,6 +66,8 @@ This site is being crafted meticulously.
     expect(ast.heroTitle).toContain("Precision in Code");
     expect(ast.heroActions.length).toBe(3);
     expect(ast.comingSoonStatement).toContain("crafted meticulously");
+    expect(ast.terminalLines).toBeDefined();
+    expect(ast.terminalLines!.length).toBeGreaterThan(0);
   });
 
   it("FragmentComingSoon component has zero accessibility (axe-core) violations", async () => {
