@@ -158,5 +158,34 @@ export function transpilePreInstalledThemes() {
   console.log(`✅ Transpiled ${manifestEntries.length} pre-installed themes into src/app/pre-installed-themes/`);
 }
 
+export function transpileFragments() {
+  const fragmentsDir = path.join(rootDir, 'content', 'fragments');
+  const cachePath = path.join(rootDir, 'src', 'lib', 'generated-fragments-cache.json');
+  const cache = {
+    headerMd: '',
+    footerMd: '',
+    comingSoonMd: '',
+  };
+
+  const headerPath = path.join(fragmentsDir, 'header.md');
+  const footerPath = path.join(fragmentsDir, 'footer.md');
+  const comingSoonPath = path.join(fragmentsDir, 'coming_soon.md');
+
+  if (fs.existsSync(headerPath)) {
+    cache.headerMd = fs.readFileSync(headerPath, 'utf-8');
+  }
+  if (fs.existsSync(footerPath)) {
+    cache.footerMd = fs.readFileSync(footerPath, 'utf-8');
+  }
+  if (fs.existsSync(comingSoonPath)) {
+    cache.comingSoonMd = fs.readFileSync(comingSoonPath, 'utf-8');
+  }
+
+  fs.writeFileSync(cachePath, JSON.stringify(cache, null, 2), 'utf-8');
+  console.log(`✅ Transpiled fragment markdown specs into src/lib/generated-fragments-cache.json`);
+}
+
 transpileCurrentTheme();
 transpilePreInstalledThemes();
+transpileFragments();
+

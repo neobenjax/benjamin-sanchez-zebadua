@@ -50,7 +50,7 @@ export default function Footer() {
             </div>
             {/* FOOTER GROUNDING */}
             <div className="text-gray-300 text-right text-sm">
-              <span className="block mb-1 text-white font-medium">Based in Ottawa, ON | Relocated from Mexico.</span>
+              <span className="block mb-1 text-white font-medium">Based in Ottawa, ON | From Mexico to Canada.</span>
               Open to local and remote opportunities in FinTech and Financial Strategy.
             </div>
           </div>

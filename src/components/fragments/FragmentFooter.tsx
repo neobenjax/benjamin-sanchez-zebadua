@@ -66,7 +66,7 @@ function RenderFooterColumn({ column }: { column: FooterColumnAST }) {
 
       {/* TEXT BLOCKS */}
       {column.textBlocks.map((text, idx) => (
-        <p key={idx} className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
+        <p key={idx} suppressHydrationWarning className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
           {text}
         </p>
       ))}

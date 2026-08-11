@@ -70,7 +70,8 @@ export default function RootLayout({
       className={`${inter.variable} h-full scroll-smooth`}
     >
       <head>
-        <script
+        <Script
+          id="speculation-rules"
           type="speculationrules"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({

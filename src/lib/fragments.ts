@@ -1,4 +1,5 @@
 import matter from "gray-matter";
+import fragmentsCache from "./generated-fragments-cache.json";
 import type {
   HeaderAST,
   FooterAST,
@@ -36,7 +37,7 @@ const STATIC_FOOTER_MD = `# THREE_COLUMN_LAYOUT
 
 ### Platform
 
-Ottawa, ON | Relocated from Mexico
+Ottawa, ON | From Mexico to Canada
 `;
 
 function getFragmentFilePath(fileName: string): string | null {
@@ -422,13 +423,16 @@ export function getParsedComingSoonFragment(): ComingSoonAST {
 }
 
 function fallbackHeaderAST(): HeaderAST {
-  return parseHeaderMarkdown(STATIC_HEADER_MD);
+  const md = fragmentsCache.headerMd || STATIC_HEADER_MD;
+  return parseHeaderMarkdown(md);
 }
 
 function fallbackFooterAST(): FooterAST {
-  return parseFooterMarkdown(STATIC_FOOTER_MD);
+  const md = fragmentsCache.footerMd || STATIC_FOOTER_MD;
+  return parseFooterMarkdown(md);
 }
 
 function fallbackComingSoonAST(): ComingSoonAST {
-  return parseComingSoonMarkdown(STATIC_COMING_SOON_MD);
+  const md = fragmentsCache.comingSoonMd || STATIC_COMING_SOON_MD;
+  return parseComingSoonMarkdown(md);
 }
