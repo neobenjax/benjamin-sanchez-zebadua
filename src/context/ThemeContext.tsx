@@ -180,7 +180,32 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       setSavedPresets(mergedPresets);
       localStorage.setItem(SAVED_PRESETS_KEY, JSON.stringify(mergedPresets));
 
-      if (fileCurrentTheme) {
+      let localActiveConfig: { tokens?: ThemeTokens; activePresetId?: string; primarySeedColor?: string } | null = null;
+      const savedConfigJson = localStorage.getItem(STORAGE_KEY);
+      if (savedConfigJson) {
+        try {
+          const parsed = JSON.parse(savedConfigJson);
+          if (parsed && parsed.tokens) {
+            localActiveConfig = parsed;
+          }
+        } catch {
+          // ignore
+        }
+      }
+
+      if (localActiveConfig && localActiveConfig.tokens) {
+        setTokens(localActiveConfig.tokens);
+        if (localActiveConfig.activePresetId) {
+          setActivePresetId(localActiveConfig.activePresetId);
+        }
+        if (localActiveConfig.primarySeedColor) {
+          setPrimarySeedColorState(localActiveConfig.primarySeedColor);
+        } else {
+          setPrimarySeedColorState(localActiveConfig.tokens.accent);
+        }
+        applyTokensToDOM(localActiveConfig.tokens);
+        setIsDraft(false);
+      } else if (fileCurrentTheme) {
         setTokens(fileCurrentTheme.tokens);
         const matched = mergedPresets.find(
           (p) => p.id === fileCurrentTheme?.id || p.name.toLowerCase() === fileCurrentTheme?.name.toLowerCase()
@@ -195,20 +220,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         }
         applyTokensToDOM(fileCurrentTheme.tokens);
         setIsDraft(false);
-      } else {
-        const savedConfig = localStorage.getItem(STORAGE_KEY);
-        if (savedConfig) {
-          try {
-            const parsed = JSON.parse(savedConfig);
-            if (parsed.tokens) setTokens(parsed.tokens);
-            if (parsed.activePresetId) setActivePresetId(parsed.activePresetId);
-            if (parsed.primarySeedColor) setPrimarySeedColorState(parsed.primarySeedColor);
-
-            applyTokensToDOM(parsed.tokens || DEFAULT_FINTECH_MIDNIGHT.tokens);
-          } catch {
-            applyTokensToDOM(tokens);
-          }
-        }
       }
     };
 

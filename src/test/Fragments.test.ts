@@ -73,7 +73,7 @@ Ottawa, ON
   it("loads actual fragments from content/fragments/", () => {
     const header = getParsedHeaderFragment();
     expect(header).toBeDefined();
-    expect(header.navigation.length).toBeGreaterThan(0);
+    expect(header.actions.length).toBeGreaterThan(0);
 
     const footer = getParsedFooterFragment();
     expect(footer).toBeDefined();

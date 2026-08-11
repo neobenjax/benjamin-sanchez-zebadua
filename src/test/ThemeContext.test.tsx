@@ -92,4 +92,25 @@ describe('ThemeContext', () => {
     expect(result.current.activePresetId).toBe('fintech-midnight');
     expect(result.current.tokens.accent).toBe('#10B981');
   });
+
+  it('prioritizes localStorage saved theme config on mount', async () => {
+    const customConfig = {
+      tokens: {
+        ...DEFAULT_FINTECH_MIDNIGHT.tokens,
+        accent: '#FF0055',
+      },
+      activePresetId: 'feeling-lucky-custom',
+      primarySeedColor: '#FF0055',
+    };
+    localStorage.setItem('benjaminsz_theme_config', JSON.stringify(customConfig));
+
+    const { result } = renderHook(() => useTheme(), { wrapper });
+
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 50));
+    });
+
+    expect(result.current.tokens.accent).toBe('#FF0055');
+    expect(result.current.activePresetId).toBe('feeling-lucky-custom');
+  });
 });
