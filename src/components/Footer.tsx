@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 import { profileData } from "@/data/profile";
+import { downloadExecutiveBrief } from "@/lib/exportBrief";
 
 export default function Footer() {
   const mailSubject = encodeURIComponent("Exploration: Bridging Tech & Finance with Benjamin");
@@ -25,13 +26,22 @@ export default function Footer() {
             <p className="text-gray-300 text-lg mb-8 max-w-md">
               Bringing quantitative rigor and software scaling discipline to holistic wealth and risk management.
             </p>
-            <a
-              href={`mailto:hello@benjaminsz.com?subject=${mailSubject}&body=${mailBody}`}
-              className="inline-flex items-center text-accent font-semibold text-lg hover:text-white transition-colors"
-            >
-              Reach Out via Email
-              <ArrowUpRight className="ml-2 w-5 h-5" />
-            </a>
+            <div className="flex flex-wrap gap-4 items-center">
+              <a
+                href={`mailto:hello@benjaminsz.com?subject=${mailSubject}&body=${mailBody}`}
+                className="inline-flex items-center text-accent font-semibold text-lg hover:text-white transition-colors"
+              >
+                Reach Out via Email
+                <ArrowUpRight className="ml-2 w-5 h-5" />
+              </a>
+              <button
+                onClick={downloadExecutiveBrief}
+                className="inline-flex items-center px-4 py-2 text-sm rounded-sm bg-slate-800 border border-slate-700 text-slate-200 hover:text-white hover:border-accent transition-colors"
+              >
+                <Download className="mr-2 w-4 h-4 text-accent" />
+                Export Architecture Brief (.md)
+              </button>
+            </div>
           </div>
 
           <div className="flex flex-col md:items-end justify-end space-y-4">

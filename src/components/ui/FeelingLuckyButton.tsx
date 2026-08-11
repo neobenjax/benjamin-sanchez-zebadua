@@ -6,11 +6,17 @@ import { useTheme } from "@/context/ThemeContext";
 
 const SESSION_STORAGE_KEY = "benjaminsz_feeling_lucky_clicked";
 
-export default function FeelingLuckyButton() {
+interface FeelingLuckyButtonProps {
+  isPreview?: boolean;
+}
+
+export default function FeelingLuckyButton({ isPreview = false }: FeelingLuckyButtonProps) {
   const { savedPresets, activePresetId, applyPreset, generateRandomTheme } = useTheme();
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(isPreview);
 
   useEffect(() => {
+    if (isPreview) return;
+
     // Check if the user already clicked the button in this session
     if (typeof window !== "undefined") {
       const clicked = sessionStorage.getItem(SESSION_STORAGE_KEY);
@@ -25,11 +31,16 @@ export default function FeelingLuckyButton() {
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isPreview]);
 
   if (!isVisible) return null;
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (isPreview) {
+      e.preventDefault();
+      return;
+    }
+
     // Store in session storage so it doesn't appear again during this session
     if (typeof window !== "undefined") {
       sessionStorage.setItem(SESSION_STORAGE_KEY, "true");
@@ -52,12 +63,12 @@ export default function FeelingLuckyButton() {
   };
 
   return (
-    <div className="fixed bottom-6 left-1/2 z-40 animate-pop-in">
+    <div className={isPreview ? "relative z-10 inline-block" : "fixed bottom-6 left-1/2 z-40 animate-pop-in"}>
       <button
         onClick={handleClick}
         type="button"
         className="group relative flex items-center space-x-2.5 px-5 py-3 rounded-full bg-[var(--color-accent)] text-[var(--color-primary)] font-semibold text-xs sm:text-sm tracking-wide shadow-2xl border border-[var(--border-accent)] hover:brightness-110 active:scale-95 transition-all duration-300 cursor-pointer"
-        aria-label="Feeling Lucky? Change design system theme randomly"
+        aria-label={isPreview ? "Feeling Lucky? UI Component Preview" : "Feeling Lucky? Change design system theme randomly"}
       >
         {/* Subtle pulsing indicator ring around icon */}
         <span className="relative flex h-3 w-3">

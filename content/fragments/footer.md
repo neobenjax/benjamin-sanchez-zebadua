@@ -16,4 +16,4 @@
 
 ### Platform
 
-Ottawa, ON | Relocated from Mexico
+Ottawa, ON | From Mexico to Canada

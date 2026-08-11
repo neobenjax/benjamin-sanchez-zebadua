@@ -5,6 +5,8 @@ import { Button } from './Button';
 import { Card } from './Card';
 import { Badge } from './Badge';
 import { Select } from './Select';
+import TerminalWidget from './TerminalWidget';
+import FeelingLuckyButton from './FeelingLuckyButton';
 import {
   Layers,
   Table as TableIcon,
@@ -17,6 +19,8 @@ import {
   Sliders,
   CheckCircle2,
   ExternalLink,
+  Terminal,
+  Dices,
 } from 'lucide-react';
 
 export function DesignCatalog() {
@@ -148,93 +152,7 @@ export function DesignCatalog() {
         </div>
       </Card>
 
-      {/* 2. TYPOGRAPHY & TEXT DISPLAY SCALE */}
-      <Card variant="glass" className="flex flex-col gap-6 p-6 md:p-8">
-        <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
-          <div>
-            <h3 className="text-2xl font-serif font-bold text-[var(--color-text-primary)] flex items-center gap-2">
-              <Type className="w-5 h-5 text-[var(--color-accent)]" /> Typography & Display Hierarchy
-            </h3>
-            <p className="text-xs text-[var(--color-text-muted)] mt-1">
-              Playfair Display (Serif Headings), Inter (Sans Body), and JetBrains Mono (Code/Numbers).
-            </p>
-          </div>
-          <Badge variant="secondary">Inter & Playfair</Badge>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-8 flex flex-col gap-6">
-            <div>
-              <span className="text-[10px] font-mono uppercase text-[var(--color-text-muted)]">Display H1 (Serif 48px / 3rem)</span>
-              <h1 className="text-4xl md:text-5xl font-serif font-bold text-[var(--color-text-primary)] leading-tight">
-                Architectural Resilience & Quantitative Engineering
-              </h1>
-            </div>
-
-            <div>
-              <span className="text-[10px] font-mono uppercase text-[var(--color-text-muted)]">Section H2 (Serif 32px / 2rem)</span>
-              <h2 className="text-2xl md:text-3xl font-serif font-bold text-[var(--color-text-primary)]">
-                Algorithmic Execution & Vault Security Models
-              </h2>
-            </div>
-
-            <div>
-              <span className="text-[10px] font-mono uppercase text-[var(--color-text-muted)]">Subhead H3 (Serif 24px / 1.5rem)</span>
-              <h3 className="text-xl font-serif font-bold text-[var(--color-text-primary)]">
-                Distributed Consensus & High-Frequency Microservices
-              </h3>
-            </div>
-
-            <div>
-              <span className="text-[10px] font-mono uppercase text-[var(--color-text-muted)]">Card Title H4 (Serif 18px / 1.125rem)</span>
-              <h4 className="text-lg font-serif font-bold text-[var(--color-text-primary)]">
-                Institutional Liquidity Engine
-              </h4>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-[var(--border-subtle)]">
-              <div>
-                <span className="text-[10px] font-mono uppercase text-[var(--color-text-muted)]">Body Copy (Body-md 14px)</span>
-                <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mt-1">
-                  Engineered with zero latency overhead, complete unit test coverage, and strict design system adherence. Providing institutional grade financial UI frameworks.
-                </p>
-              </div>
-
-              <div>
-                <span className="text-[10px] font-mono uppercase text-[var(--color-text-muted)]">Small Body & Caption (Body-sm / Caption 12px)</span>
-                <p className="text-xs text-[var(--color-text-muted)] leading-normal mt-1">
-                  Metadata tags, timestamps, and captions use <code className="text-[var(--color-accent)]">var(--color-text-muted)</code> for sub-tier visual priority.
-                </p>
-                <a href="#link" className="text-xs font-semibold text-[var(--color-accent)] hover:underline inline-flex items-center gap-1 mt-2">
-                  Inline link anchor state <ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-4 p-5 rounded-sm bg-[var(--color-secondary-bg)] border border-[var(--border-subtle)] flex flex-col gap-3 text-xs">
-            <h4 className="font-mono font-bold text-[var(--color-text-primary)] uppercase tracking-wider">
-              Font Specification
-            </h4>
-            <div className="space-y-3 text-[var(--color-text-secondary)]">
-              <div className="p-2.5 rounded-sm bg-[var(--color-surface)] border border-[var(--border-subtle)]">
-                <span className="font-mono font-bold text-[var(--color-accent)]">Headings:</span> Playfair Display (Serif)
-                <p className="text-[11px] text-[var(--color-text-muted)] mt-0.5">Used for H1, H2, H3, H4 display titles.</p>
-              </div>
-              <div className="p-2.5 rounded-sm bg-[var(--color-surface)] border border-[var(--border-subtle)]">
-                <span className="font-mono font-bold text-[var(--color-accent)]">Body & UI:</span> Inter (Sans-Serif)
-                <p className="text-[11px] text-[var(--color-text-muted)] mt-0.5">Used for paragraph text, buttons, and form labels.</p>
-              </div>
-              <div className="p-2.5 rounded-sm bg-[var(--color-surface)] border border-[var(--border-subtle)]">
-                <span className="font-mono font-bold text-[var(--color-accent)]">Numbers & Code:</span> JetBrains / Fira Code
-                <p className="text-[11px] text-[var(--color-text-muted)] mt-0.5">Used for financial data, percentages, and tokens.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Card>
-
-      {/* 3. NUMERIC DATA & TRADING METRICS */}
+      {/* 2. QUANTITATIVE FINANCIAL METRICS & INDICATORS */}
       <Card variant="solid" className="flex flex-col gap-6 p-6 md:p-8">
         <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
           <div>
@@ -413,30 +331,53 @@ export function DesignCatalog() {
         </Card>
       </div>
 
-      {/* 6. COMING SOON FRONT PAGE HERO & ARCHITECT BLUEPRINT SPECIFICATION */}
+      {/* 6. IMAGES & WIDGETS SPECIFICATION */}
       <Card variant="solid" className="flex flex-col gap-6 p-6 md:p-8">
         <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
           <div>
             <h3 className="text-2xl font-serif font-bold text-[var(--color-text-primary)] flex items-center gap-2">
-              <Layers className="w-5 h-5 text-[var(--color-accent)]" /> Frontpage Hero & Solutions Architect Tech Blueprint
+              <Layers className="w-5 h-5 text-[var(--color-accent)]" /> Images & Widgets
             </h3>
             <p className="text-xs text-[var(--color-text-muted)] mt-1">
-              Dynamic Agnostic Markdown Fragment Component (<code className="text-[var(--color-accent)]">coming_soon.md</code>) with theme-adaptive vector blueprint illustration.
+              Linux Terminal Widget, Feeling Lucky CTA, and theme-adaptive Solutions Architect vector blueprint.
             </p>
           </div>
-          <Badge variant="accent">Frontpage Component</Badge>
+          <Badge variant="accent">Widgets & Media</Badge>
         </div>
 
-        <div className="p-4 sm:p-6 rounded-sm bg-[var(--color-secondary-bg)] border border-[var(--border-subtle)] overflow-hidden">
-          <div className="max-w-4xl mx-auto flex flex-col gap-6 text-center">
-            <span className="text-xs font-mono font-bold text-[var(--color-accent)] uppercase tracking-wider">
-              Live Preview Fragment Component
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Left: Linux Terminal Widget & Feeling Lucky */}
+          <div className="lg:col-span-6 flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <span className="text-xs font-mono font-bold text-[var(--color-text-muted)] uppercase flex items-center gap-1.5">
+                <Terminal className="w-4 h-4 text-[var(--color-accent)]" /> Linux Terminal Widget
+              </span>
+              <TerminalWidget />
+            </div>
+
+            <div className="p-4 rounded-sm bg-[var(--color-secondary-bg)] border border-[var(--border-subtle)] flex items-center justify-between">
+              <div className="flex flex-col gap-1">
+                <span className="text-xs font-mono font-bold text-[var(--color-text-muted)] uppercase flex items-center gap-1.5">
+                  <Dices className="w-4 h-4 text-[var(--color-accent)]" /> Feeling Lucky CTA
+                </span>
+                <span className="text-[11px] text-[var(--color-text-secondary)]">
+                  Pill CTA primitive with animated dice rotation.
+                </span>
+              </div>
+              <FeelingLuckyButton isPreview={true} />
+            </div>
+          </div>
+
+          {/* Right: Live Preview Fragment Component (Architect Blueprint) */}
+          <div className="lg:col-span-6 flex flex-col gap-3">
+            <span className="text-xs font-mono font-bold text-[var(--color-text-muted)] uppercase">
+              Live Preview Fragment Component (coming_soon.md)
             </span>
-            <div className="p-4 rounded-lg bg-[var(--color-surface)] stroke-var-[--color-accent] border border-[var(--border-subtle)] shadow-lg">
+            <div className="p-4 rounded-lg bg-[var(--color-surface)] border border-[var(--border-subtle)] shadow-lg flex items-center justify-center">
               <img
                 src="/images/architect-blueprint.svg"
                 alt="Solutions Architect Blueprint Diagram"
-                className="w-full h-auto object-contain max-h-[360px]"
+                className="w-full h-auto object-contain max-h-[320px]"
               />
             </div>
           </div>

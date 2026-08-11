@@ -53,6 +53,63 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans);
+  text-wrap: balance;
+}
+
+p, blockquote {
+  text-wrap: pretty;
+}
+
+/* Native <dialog> Top Layer Entry/Exit Animations & Backdrop */
+dialog {
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), overlay 0.3s allow-discrete, display 0.3s allow-discrete;
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+dialog[open] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 0.3s ease, overlay 0.3s allow-discrete, display 0.3s allow-discrete;
+  opacity: 0;
+}
+
+dialog[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+/* Native Input Validation Pseudos */
+:user-invalid {
+  border-color: #EF4444;
+}
+
+/* Reduced Motion Preference Override */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pop-in,
+  dialog,
+  dialog::backdrop {
+    animation: none;
+    transition: none;
+  }
 }
 
 /* FinTech Architect Aesthetic for Markdown Tables */
@@ -83,17 +140,25 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: none;
 }
 
-/* Custom Scrollbar for Code and Tables */
-.custom-scrollbar::-webkit-scrollbar {
-  height: 8px;
+/* Custom Scrollbar for Code and Tables - Baseline scrollbar-color */
+.custom-scrollbar {
+  scrollbar-color: var(--color-accent) var(--color-secondary-bg);
+  scrollbar-width: thin;
 }
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: var(--color-secondary-bg);
-  border-radius: 4px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
-  border-radius: 4px;
+
+@supports not (scrollbar-color: auto) {
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--color-secondary-bg);
+    border-radius: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--color-accent);
+    border-radius: 4px;
+  }
 }
 
 /* React Medium Image Zoom Override */
@@ -101,3 +166,4 @@ body [data-rmiz-modal-overlay="visible"] {
   background-color: var(--color-primary);
   opacity: 0.95;
 }
+

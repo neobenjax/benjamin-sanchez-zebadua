@@ -70,6 +70,25 @@ export default function RootLayout({
       className={`${inter.variable} h-full scroll-smooth`}
     >
       <head>
+        <script
+          type="speculationrules"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              prefetch: [
+                {
+                  source: "list",
+                  urls: ["/theme-personalize"]
+                }
+              ],
+              prerender: [
+                {
+                  source: "document",
+                  where: { href_matches: "/entry/*" }
+                }
+              ]
+            })
+          }}
+        />
         {process.env.NODE_ENV === "production" && (
           <Script
             src="https://cloud.umami.is/script.js"

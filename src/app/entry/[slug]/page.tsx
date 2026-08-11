@@ -42,7 +42,7 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
   }
 
   return (
-    <main className="flex-grow bg-primary pt-32 min-h-screen">
+    <main id="main-content" className="flex-grow bg-primary pt-32 min-h-screen">
       <div className="max-w-4xl mx-auto px-8 lg:px-8 mb-24">
         {/* Navigation */}
         <Link
@@ -119,7 +119,7 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
                   <Zoom zoomMargin={45}>
                     <picture>
                       <source srcSet={webpSrc} type="image/webp" />
-                      <img {...props} className="rounded-lg shadow-md max-w-full h-auto cursor-zoom-in my-8 mx-auto block" />
+                      <img {...props} fetchPriority="high" decoding="async" className="rounded-lg shadow-md max-w-full h-auto cursor-zoom-in my-8 mx-auto block" />
                     </picture>
                   </Zoom>
                 );

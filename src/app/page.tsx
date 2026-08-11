@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="flex-grow flex flex-col justify-between">
+    <main id="main-content" className="flex-grow flex flex-col justify-between">
       {/* Dynamic Fragment Transpiler Engine Coming Soon Frontpage */}
       <ComingSoonFragment />
 
