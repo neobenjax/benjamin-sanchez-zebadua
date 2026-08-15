@@ -1,14 +1,14 @@
 /* AUTO-GENERATED FROM currentdesigntheme.md - DO NOT EDIT DIRECTLY */
-/* Theme: green white theme */
+/* Theme: Mind Bubble Theme */
 :root {
-  --color-primary: #F4FAF6;
-  --color-secondary-bg: #E5F5EA;
+  --color-primary: #F4FAFA;
+  --color-secondary-bg: #E5F5F5;
   --color-surface: #FFFFFF;
   --color-text-primary: #0F172A;
-  --color-text-secondary: #366343;
-  --color-text-muted: #5C8A6A;
-  --color-accent: #069932;
-  --color-secondary: #C2D6C8;
+  --color-text-secondary: #366363;
+  --color-text-muted: #5C8A8A;
+  --color-accent: #1E8F8F;
+  --color-secondary: #C2D6D6;
   --border-subtle: rgba(0, 0, 0, 0.10);
-  --border-accent: rgba(24, 247, 91, 0.25);
+  --border-accent: rgba(61, 214, 214, 0.25);
 }
