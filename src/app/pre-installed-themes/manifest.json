@@ -108,6 +108,24 @@
     "primarySeed": "#9FF500"
   },
   {
+    "id": "mind-bubble-theme-1786801019354",
+    "name": "Mind Bubble Theme",
+    "file": "mind-bubble-theme-1786801019354.css",
+    "tokens": {
+      "primary_bg": "#F4FAFA",
+      "secondary_bg": "#E5F5F5",
+      "surface_card": "#FFFFFF",
+      "text_primary": "#0F172A",
+      "text_secondary": "#366363",
+      "text_muted": "#5C8A8A",
+      "accent": "#1E8F8F",
+      "slate_steel": "#C2D6D6",
+      "border_subtle": "rgba(0, 0, 0, 0.10)",
+      "border_accent": "rgba(61, 214, 214, 0.25)"
+    },
+    "primarySeed": "#1E8F8F"
+  },
+  {
     "id": "neon-purple-1786221915445",
     "name": "Neon Purple",
     "file": "neon-purple-1786221915445.css",
