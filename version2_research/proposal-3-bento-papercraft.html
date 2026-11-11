@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposal 03 // The Bento Papercraft — Benjamin Sanchez Zebadua</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            mist: '#F8FAFC',
+            surface: '#FFFFFF',
+            slateInk: '#0F172A',
+            slateMuted: '#64748B',
+            cobalt: '#2563EB',
+            cobaltLight: '#EFF6FF',
+            bentoBorder: '#E2E8F0',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #F8FAFC;
+      color: #0F172A;
+      font-family: 'Inter', sans-serif;
+    }
+    .bento-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .bento-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -8px rgba(15, 23, 42, 0.08);
+      border-color: #CBD5E1;
+    }
+  </style>
+</head>
+<body class="min-h-screen selection:bg-cobalt/10 selection:text-cobalt">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-mist/85 border-b border-bentoBorder">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-slateInk text-white flex items-center justify-center font-bold text-xs">
+          BZ
+        </div>
+        <div>
+          <span class="font-bold text-sm text-slateInk">Benjamin Sanchez Zebadua</span>
+          <span class="text-[11px] font-mono text-slateMuted hidden sm:inline"> // Software Architect & Business Analyst</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-medium text-slateMuted">
+        <a href="#projects" class="hover:text-slateInk transition">Projects</a>
+        <a href="#articles" class="hover:text-slateInk transition">Articles</a>
+        <a href="#pathways" class="hover:text-slateInk transition">About & Trajectory</a>
+        <button onclick="copyContact()" id="quickContactBtn" class="px-3.5 py-1.5 rounded-lg bg-slateInk text-white hover:bg-cobalt transition shadow-sm font-semibold">
+          Contact
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Bento Cover Grid -->
+  <main class="max-w-6xl mx-auto px-6 py-10 md:py-16 space-y-6">
+
+    <!-- BENTO GRID CONTAINER -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+
+      <!-- TILE 1: HERO VALUE PROPOSITION (7 COLS) -->
+      <div class="md:col-span-7 p-8 rounded-2xl bg-surface border border-bentoBorder bento-card flex flex-col justify-between space-y-6">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono uppercase tracking-wider text-cobalt font-semibold">Dual Competency</span>
+            <span class="text-xs font-mono text-slateMuted flex items-center gap-1">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-cobalt"></i> Ottawa, Ontario
+            </span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-slateInk tracking-tight leading-snug">
+            Engineering scalable codebases. <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cobalt to-indigo-600">
+              Aligning corporate strategy.
+            </span>
+          </h1>
+
+          <p class="text-sm sm:text-base text-slateMuted leading-relaxed" id="heroDesc">
+            Seven years of enterprise software engineering at BBVA combined with advanced analytical methodologies. I translate complex stakeholder requirements into resilient, test-driven systems.
+          </p>
+        </div>
+
+        <!-- Interactive Mode Toggle Pill -->
+        <div class="pt-2 flex flex-wrap items-center gap-2 border-t border-bentoBorder/80 text-xs font-mono">
+          <span class="text-slateMuted mr-1">Lens Focus:</span>
+          <button onclick="setFocus('dev')" id="btnDev" class="px-3 py-1 rounded-md bg-cobaltLight text-cobalt font-semibold border border-cobalt/20 transition">
+            [💻 Systems Architecture]
+          </button>
+          <button onclick="setFocus('ba')" id="btnBa" class="px-3 py-1 rounded-md bg-slate-100 text-slate-700 hover:text-slateInk transition">
+            [📊 Business Analysis]
+          </button>
+        </div>
+      </div>
+
+      <!-- TILE 2: REACH OUT / CONTACT HUB (5 COLS) -->
+      <div class="md:col-span-5 p-8 rounded-2xl bg-surface border border-bentoBorder bento-card flex flex-col justify-between space-y-4">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-slateMuted">Direct Channel</span>
+          <h2 class="text-xl font-bold text-slateInk mt-1">Start a Conversation</h2>
+          <p class="text-xs text-slateMuted mt-1 leading-relaxed">
+            Interested in discussing distributed software architecture, business requirements, or potential initiatives?
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <div class="p-3 rounded-xl bg-mist border border-bentoBorder flex items-center justify-between">
+            <span class="font-mono text-xs text-slateInk font-semibold">hello@benjaminsz.com</span>
+            <button onclick="copyContact()" id="copyTileBtn" class="px-2.5 py-1 rounded-md bg-white border border-bentoBorder text-[11px] font-medium text-slateInk hover:text-cobalt transition shadow-xs">
+              Copy
+            </button>
+          </div>
+          <div class="flex gap-2">
+            <a href="mailto:hello@benjaminsz.com" class="flex-1 py-2.5 rounded-xl bg-slateInk text-white font-semibold text-xs text-center hover:bg-cobalt transition">
+              Send Email
+            </a>
+            <a href="https://www.linkedin.com/in/benjaminsanchezzebadua/" target="_blank" class="px-4 py-2.5 rounded-xl bg-white border border-bentoBorder text-slateInk font-semibold text-xs text-center hover:bg-slate-50 transition">
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TILE 3: CURATED ACTIVE PROJECTS (8 COLS) -->
+      <div id="projects" class="md:col-span-8 p-8 rounded-2xl bg-surface border border-bentoBorder bento-card space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-wider text-cobalt font-semibold">Featured Work</span>
+            <h3 class="text-xl font-bold text-slateInk">Curated Systems & Analyses</h3>
+          </div>
+          <!-- Project Tabs -->
+          <div class="flex items-center gap-1 p-1 rounded-lg bg-mist border border-bentoBorder text-xs font-mono">
+            <button onclick="selectProject(0)" id="projTab0" class="px-3 py-1 rounded bg-white text-cobalt font-bold shadow-xs">01 / BBVA Core</button>
+            <button onclick="selectProject(1)" id="projTab1" class="px-3 py-1 rounded text-slateMuted hover:text-slateInk">02 / Requirements</button>
+            <button onclick="selectProject(2)" id="projTab2" class="px-3 py-1 rounded text-slateMuted hover:text-slateInk">03 / Analytics</button>
+          </div>
+        </div>
+
+        <!-- Dynamic Project Body -->
+        <div id="projectDisplay" class="p-5 rounded-xl bg-mist border border-bentoBorder space-y-3">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+
+      <!-- TILE 4: LATEST ARTICLES / DISPATCHES (4 COLS) -->
+      <div id="articles" class="md:col-span-4 p-8 rounded-2xl bg-surface border border-bentoBorder bento-card flex flex-col justify-between space-y-4">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-slateMuted">Writing & Notes</span>
+          <h3 class="text-xl font-bold text-slateInk mt-1">Latest Articles</h3>
+        </div>
+
+        <div class="space-y-4 divide-y divide-bentoBorder">
+          <div class="pt-3 first:pt-0 space-y-1">
+            <span class="text-[10px] font-mono text-slateMuted">May 2026 • 5 min read</span>
+            <h4 class="font-bold text-xs text-slateInk hover:text-cobalt transition cursor-pointer">
+              The Computing Mindset in Complex Business Analysis
+            </h4>
+          </div>
+          <div class="pt-3 space-y-1">
+            <span class="text-[10px] font-mono text-slateMuted">April 2026 • 4 min read</span>
+            <h4 class="font-bold text-xs text-slateInk hover:text-cobalt transition cursor-pointer">
+              Leadership Through Involvement: Route Captaincy Lessons
+            </h4>
+          </div>
+        </div>
+
+        <a href="#pathways" class="text-xs font-mono text-cobalt font-semibold hover:underline flex items-center gap-1">
+          Explore all writing →
+        </a>
+      </div>
+
+      <!-- TILE 5: OUTSIDE THE WORK (6 COLS) -->
+      <div id="pathways" class="md:col-span-6 p-8 rounded-2xl bg-surface border border-bentoBorder bento-card space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono uppercase tracking-wider text-slateMuted">Life Outside the Code</span>
+          <span class="text-xs font-mono text-emerald-600 font-semibold">Community Impact</span>
+        </div>
+        <h3 class="text-lg font-bold text-slateInk">Route Captain & Community Logistics</h3>
+        <p class="text-xs text-slateMuted leading-relaxed">
+          Led route safety and squad coordination for 6,000+ athletes at Ottawa's CN Cycle for CHEO (raising $1M+ for pediatric oncology). Proving that true architectural leadership starts by moving barricades alongside your team.
+        </p>
+        <div class="pt-2 flex items-center gap-4 text-xs font-mono text-slateMuted">
+          <span>Ottawa, CA</span>
+          <span>•</span>
+          <span>Operational Resilience</span>
+        </div>
+      </div>
+
+      <!-- TILE 6: TRAJECTORY & ARCHIVE GATEWAYS (6 COLS) -->
+      <div class="md:col-span-6 p-8 rounded-2xl bg-surface border border-bentoBorder bento-card flex flex-col justify-between space-y-4">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-slateMuted">Deep Navigation</span>
+          <h3 class="text-lg font-bold text-slateInk mt-1">Explore the Fuller Career Dossier</h3>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <div class="p-3.5 rounded-xl bg-mist border border-bentoBorder hover:border-cobalt/40 transition cursor-pointer group">
+            <div class="text-xs font-bold text-slateInk group-hover:text-cobalt transition">Trajectory →</div>
+            <div class="text-[11px] text-slateMuted mt-1">Interactive resume from BBVA leadership to Canadian institutions.</div>
+          </div>
+          <div class="p-3.5 rounded-xl bg-mist border border-bentoBorder hover:border-cobalt/40 transition cursor-pointer group">
+            <div class="text-xs font-bold text-slateInk group-hover:text-cobalt transition">Projects Hub →</div>
+            <div class="text-[11px] text-slateMuted mt-1">Full archive of code repos, diagrams, and case studies.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="pt-8 border-t border-bentoBorder flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slateMuted">
+      <div>Benjamin Sanchez Zebadua © 2026 • Ottawa, Ontario</div>
+      <div class="flex items-center gap-6">
+        <a href="https://github.com/neobenjax" target="_blank" class="hover:text-slateInk transition">GitHub</a>
+        <a href="https://www.linkedin.com/in/benjaminsanchezzebadua/" target="_blank" class="hover:text-slateInk transition">LinkedIn</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    // Perspective Focus toggle
+    function setFocus(mode) {
+      const btnDev = document.getElementById('btnDev');
+      const btnBa = document.getElementById('btnBa');
+      const desc = document.getElementById('heroDesc');
+
+      if (mode === 'dev') {
+        btnDev.className = "px-3 py-1 rounded-md bg-cobaltLight text-cobalt font-semibold border border-cobalt/20 transition";
+        btnBa.className = "px-3 py-1 rounded-md bg-slate-100 text-slate-700 hover:text-slateInk transition";
+        desc.innerText = "Seven years of enterprise software engineering at BBVA combined with modern web frameworks. Architecting fault-tolerant microservices, resilient APIs, and clean full-stack code.";
+      } else {
+        btnBa.className = "px-3 py-1 rounded-md bg-cobaltLight text-cobalt font-semibold border border-cobalt/20 transition";
+        btnDev.className = "px-3 py-1 rounded-md bg-slate-100 text-slate-700 hover:text-slateInk transition";
+        desc.innerText = "Transforming complex business requirements into structured systems. Bridging engineering teams with executive stakeholders through quantitative modeling and process automation.";
+      }
+    }
+
+    // Interactive Curated Projects Tab
+    const projects = [
+      {
+        title: "High-Traffic Banking Core Modernization (BBVA)",
+        cat: "Software Architecture & Scalability",
+        desc: "Spearheaded core JavaScript architecture across distributed enterprise services. Boosted system uptime by 30% and introduced automated AI tooling to reduce defect rates by 20%.",
+        meta: "7+ Yrs Enterprise Experience • Zero Downtime"
+      },
+      {
+        title: "Cross-Functional Requirements & Workflow Engine",
+        cat: "Business Analysis & Optimization",
+        desc: "Formulated structured business requirement documents (BRDs), cross-system process diagrams, and consensus models to streamline multi-team enterprise delivery.",
+        meta: "Requirements Engineering • Stakeholder Alignment"
+      },
+      {
+        title: "Quantitative Multi-Asset Portfolio Model",
+        cat: "Analytical & Financial Modeling",
+        desc: "Engineered algorithmic asset rebalancing models incorporating Canadian tax regulations, risk-weighting parameters, and asset class variance calculations.",
+        meta: "Quantitative Analysis • Algorithmic Logic"
+      }
+    ];
+
+    function selectProject(index) {
+      [0, 1, 2].forEach(i => {
+        const tab = document.getElementById(`projTab${i}`);
+        if (i === index) {
+          tab.className = "px-3 py-1 rounded bg-white text-cobalt font-bold shadow-xs";
+        } else {
+          tab.className = "px-3 py-1 rounded text-slateMuted hover:text-slateInk";
+        }
+      });
+
+      const p = projects[index];
+      document.getElementById('projectDisplay').innerHTML = `
+        <div class="flex items-center justify-between text-[11px] font-mono text-cobalt font-semibold">
+          <span>${p.cat}</span>
+          <span class="text-slateMuted">${p.meta}</span>
+        </div>
+        <h4 class="font-bold text-base text-slateInk">${p.title}</h4>
+        <p class="text-xs text-slateMuted leading-relaxed">${p.desc}</p>
+        <div class="pt-2 flex items-center justify-between text-xs font-mono">
+          <span class="text-slateMuted">Status: Deployed / Active</span>
+          <a href="#" class="text-cobalt font-semibold hover:underline">Read Case Study →</a>
+        </div>
+      `;
+    }
+    selectProject(0);
+
+    function copyContact() {
+      navigator.clipboard.writeText('hello@benjaminsz.com');
+      const btn1 = document.getElementById('quickContactBtn');
+      const btn2 = document.getElementById('copyTileBtn');
+      if (btn1) btn1.innerText = 'Copied!';
+      if (btn2) btn2.innerText = 'Copied!';
+      setTimeout(() => {
+        if (btn1) btn1.innerText = 'Contact';
+        if (btn2) btn2.innerText = 'Copy';
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

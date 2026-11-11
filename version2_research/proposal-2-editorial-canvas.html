@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposal 02 // The Editorial Canvas — Benjamin Sanchez Zebadua</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Inter"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            paper: '#FAF9F6',
+            surface: '#FFFFFF',
+            charcoal: '#18181B',
+            muted: '#52525B',
+            terracotta: '#C2410C',
+            subtleLine: 'rgba(24, 24, 27, 0.08)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #FAF9F6;
+      color: #18181B;
+      font-family: 'Inter', sans-serif;
+    }
+    .hover-project-row:hover .project-arrow {
+      transform: translateX(6px);
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .accordion-content.open {
+      max-height: 400px;
+    }
+  </style>
+</head>
+<body class="min-h-screen selection:bg-terracotta/15 selection:text-terracotta">
+
+  <!-- Header -->
+  <header class="max-w-5xl mx-auto px-6 py-10 flex items-baseline justify-between border-b border-subtleLine">
+    <div class="flex items-baseline gap-4">
+      <span class="font-serif italic text-2xl text-charcoal">Benjamin S.Z.</span>
+      <span class="text-xs font-mono text-muted uppercase tracking-widest hidden sm:inline">Software Architect & Analyst</span>
+    </div>
+    <div class="flex items-center gap-6 text-xs font-mono uppercase tracking-wider text-muted">
+      <a href="#work" class="hover:text-charcoal transition">Works</a>
+      <a href="#journal" class="hover:text-charcoal transition">Journal</a>
+      <a href="#index" class="hover:text-charcoal transition">The Index</a>
+      <button onclick="toggleContact()" class="text-terracotta font-semibold hover:underline">Contact</button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-5xl mx-auto px-6 py-16 md:py-24 space-y-28">
+
+    <!-- HERO COVER -->
+    <section class="space-y-10">
+      
+      <!-- Interactive Perspective Switcher Pill -->
+      <div class="inline-flex items-center gap-1 p-1 rounded-full bg-white border border-subtleLine shadow-sm text-xs font-mono">
+        <button id="pillArch" onclick="setPerspective('arch')" class="px-4 py-1.5 rounded-full bg-charcoal text-white font-medium transition">
+          Software Architecture
+        </button>
+        <button id="pillAnalyst" onclick="setPerspective('analyst')" class="px-4 py-1.5 rounded-full text-muted hover:text-charcoal transition">
+          Business Analysis
+        </button>
+      </div>
+
+      <!-- Main Rhetorical Title -->
+      <div class="space-y-6">
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-serif text-charcoal leading-[1.08] tracking-tight max-w-4xl">
+          Constructing clarity from <br />
+          <span class="italic text-terracotta" id="heroKeyWord">technical complexity</span>.
+        </h1>
+        
+        <p class="text-lg sm:text-xl text-muted font-light leading-relaxed max-w-2xl" id="heroStatement">
+          Designing scalable, resilient software systems with clean architectures—paired with rigorous business analysis to ensure every line of code moves organizational strategy forward.
+        </p>
+      </div>
+
+      <!-- Compact Action Links -->
+      <div class="flex flex-wrap items-center gap-6 pt-4 text-xs font-mono text-muted">
+        <button onclick="toggleContact()" class="px-5 py-2.5 rounded-full bg-charcoal text-white font-semibold hover:bg-terracotta transition shadow-sm flex items-center gap-2">
+          <i data-lucide="send" class="w-3.5 h-3.5"></i> Reach Out
+        </button>
+        <a href="#work" class="hover:text-charcoal transition flex items-center gap-1 font-semibold">
+          Explore Curated Works ↓
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 1: SELECTED WORKS (MINIMAL HORIZONTAL PROJECT STRIP) -->
+    <section id="work" class="space-y-6 pt-8 border-t border-subtleLine">
+      <div class="flex items-baseline justify-between">
+        <span class="text-xs font-mono uppercase tracking-widest text-muted">Selected Projects (03)</span>
+        <a href="#index" class="text-xs font-mono text-terracotta hover:underline">Full Archive in Index →</a>
+      </div>
+
+      <!-- List of Selected Works -->
+      <div class="divide-y divide-subtleLine">
+        
+        <!-- Work 1 -->
+        <div class="py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 hover-project-row cursor-pointer group">
+          <div class="space-y-1">
+            <span class="text-[10px] font-mono uppercase text-terracotta tracking-wider">Enterprise Architecture</span>
+            <h3 class="text-xl sm:text-2xl font-serif font-bold text-charcoal group-hover:text-terracotta transition">
+              High-Traffic Banking Core Modernization
+            </h3>
+            <p class="text-xs text-muted max-w-xl leading-relaxed">
+              Engineered resilient event architectures at BBVA, achieving a 30% reliability increase and reducing production defect rates by 20%.
+            </p>
+          </div>
+          <div class="flex items-center gap-3 text-xs font-mono text-muted group-hover:text-charcoal transition">
+            <span>2020 — 2024</span>
+            <span class="project-arrow transition-transform">→</span>
+          </div>
+        </div>
+
+        <!-- Work 2 -->
+        <div class="py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 hover-project-row cursor-pointer group">
+          <div class="space-y-1">
+            <span class="text-[10px] font-mono uppercase text-terracotta tracking-wider">Business Analysis & Requirements</span>
+            <h3 class="text-xl sm:text-2xl font-serif font-bold text-charcoal group-hover:text-terracotta transition">
+              Cross-Functional Workflow & Requirements Engine
+            </h3>
+            <p class="text-xs text-muted max-w-xl leading-relaxed">
+              Synthesized complex stakeholder needs into deterministic requirements specifications (BRD/FRD) and automated validation pipelines.
+            </p>
+          </div>
+          <div class="flex items-center gap-3 text-xs font-mono text-muted group-hover:text-charcoal transition">
+            <span>2024 — 2025</span>
+            <span class="project-arrow transition-transform">→</span>
+          </div>
+        </div>
+
+        <!-- Work 3 -->
+        <div class="py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 hover-project-row cursor-pointer group">
+          <div class="space-y-1">
+            <span class="text-[10px] font-mono uppercase text-terracotta tracking-wider">Quantitative Modeling</span>
+            <h3 class="text-xl sm:text-2xl font-serif font-bold text-charcoal group-hover:text-terracotta transition">
+              Algorithmic Multi-Asset Portfolio Balancing
+            </h3>
+            <p class="text-xs text-muted max-w-xl leading-relaxed">
+              Bridged mathematical portfolio theories with Canadian capital regulations and tax-efficient asset rebalancing algorithms.
+            </p>
+          </div>
+          <div class="flex items-center gap-3 text-xs font-mono text-muted group-hover:text-charcoal transition">
+            <span>2025 — 2026</span>
+            <span class="project-arrow transition-transform">→</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: RECENT JOURNAL ENTRIES -->
+    <section id="journal" class="space-y-6 pt-8 border-t border-subtleLine">
+      <div class="flex items-baseline justify-between">
+        <span class="text-xs font-mono uppercase tracking-widest text-muted">Recent Dispatches (02)</span>
+        <span class="text-xs font-mono text-muted">Ottawa, ON</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <article class="p-6 rounded-xl bg-white border border-subtleLine space-y-3">
+          <span class="text-[11px] font-mono text-muted">May 2026 • Systems Thinking</span>
+          <h4 class="font-serif font-bold text-lg text-charcoal hover:text-terracotta transition cursor-pointer">
+            The Mirror Effect: Treating Undefined Environments as Open-Source Sandboxes
+          </h4>
+          <p class="text-xs text-muted leading-relaxed">
+            When you enter an unfamiliar domain, you can either freeze or realize that unstructured spaces offer the greatest leverage for architectural problem-solving.
+          </p>
+        </article>
+
+        <article class="p-6 rounded-xl bg-white border border-subtleLine space-y-3">
+          <span class="text-[11px] font-mono text-muted">April 2026 • Leadership</span>
+          <h4 class="font-serif font-bold text-lg text-charcoal hover:text-terracotta transition cursor-pointer">
+            Route Captaincy & Ground-Level Systems
+          </h4>
+          <p class="text-xs text-muted leading-relaxed">
+            Coordinating 6,000+ athletes across Ottawa streets taught me that the best leaders never detach from the ground: they move barricades alongside their squad.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 3: THE INDEX (DOORWAYS TO DEEPER ROOMS) -->
+    <section id="index" class="space-y-6 pt-8 border-t border-subtleLine">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-widest text-muted">The Dossier Index</span>
+        <h2 class="text-3xl font-serif font-bold text-charcoal mt-1">Explore the Fuller Narrative</h2>
+      </div>
+
+      <div class="space-y-3">
+        
+        <!-- Accordion 1: Trajectory -->
+        <div class="rounded-xl bg-white border border-subtleLine overflow-hidden">
+          <button onclick="toggleAccordion('traj')" class="w-full p-5 text-left flex items-center justify-between font-serif font-bold text-lg text-charcoal hover:text-terracotta transition">
+            <span>01 / Trajectory & Working Experience</span>
+            <span id="trajIcon" class="text-xs font-mono text-muted">+</span>
+          </button>
+          <div id="trajContent" class="accordion-content px-5 pb-5 text-xs text-muted space-y-3">
+            <p><strong>BBVA Mexico (2019 — 2024):</strong> Senior Software Developer & Tech Squad Leader. Managed critical payment microservices, accelerated AI adoption, and boosted uptime by 30%.</p>
+            <p><strong>Canadian Studies & Financial Risk (2024 — 2026):</strong> Post-Graduate in Financial Planning & Wealth Management at Lambton College. IFC Certified (Investment Funds in Canada).</p>
+            <a href="#" class="inline-block text-terracotta font-mono font-semibold pt-1">Open Full Interactive Resume →</a>
+          </div>
+        </div>
+
+        <!-- Accordion 2: Outside Work -->
+        <div class="rounded-xl bg-white border border-subtleLine overflow-hidden">
+          <button onclick="toggleAccordion('life')" class="w-full p-5 text-left flex items-center justify-between font-serif font-bold text-lg text-charcoal hover:text-terracotta transition">
+            <span>02 / Beyond the Screen: Life & Community</span>
+            <span id="lifeIcon" class="text-xs font-mono text-muted">+</span>
+          </button>
+          <div id="lifeContent" class="accordion-content px-5 pb-5 text-xs text-muted space-y-3">
+            <p><strong>Route Captain, CN Cycle for CHEO:</strong> Orchestrated safety, volunteer teams, and course integrity for over 6,000 cyclists raising over $1M for pediatric cancer research.</p>
+            <p><strong>Mutchmor Book Sale Setup Supervisor:</strong> Streamlined inventory flow logistics and spatial retail transformation with community volunteers.</p>
+            <a href="#" class="inline-block text-terracotta font-mono font-semibold pt-1">Read Community Impact Stories →</a>
+          </div>
+        </div>
+
+        <!-- Accordion 3: Full Projects Hub -->
+        <div class="rounded-xl bg-white border border-subtleLine overflow-hidden">
+          <button onclick="toggleAccordion('hub')" class="w-full p-5 text-left flex items-center justify-between font-serif font-bold text-lg text-charcoal hover:text-terracotta transition">
+            <span>03 / Complete Projects & Code Hub</span>
+            <span id="hubIcon" class="text-xs font-mono text-muted">+</span>
+          </button>
+          <div id="hubContent" class="accordion-content px-5 pb-5 text-xs text-muted space-y-3">
+            <p>Browse full source code repositories, architectural blueprint PDFs, requirements analysis case studies, and live demo sandboxes.</p>
+            <a href="#" class="inline-block text-terracotta font-mono font-semibold pt-1">Enter Complete Projects Archive →</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INLINE CONTACT DRAWER -->
+    <section id="contactDrawer" class="p-8 rounded-2xl bg-white border border-subtleLine space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-xs font-mono uppercase text-terracotta font-semibold">Start a Dialogue</span>
+          <h3 class="text-2xl font-serif font-bold text-charcoal mt-0.5">Let's Connect</h3>
+        </div>
+        <a href="mailto:hello@benjaminsz.com" class="px-5 py-2.5 rounded-full bg-charcoal text-white font-mono text-xs hover:bg-terracotta transition">
+          hello@benjaminsz.com
+        </a>
+      </div>
+      <p class="text-xs text-muted max-w-xl leading-relaxed">
+        Always open for substantive discussions around systems architecture, data-driven business analysis, and high-impact engineering leadership.
+      </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="pt-10 border-t border-subtleLine flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-muted">
+      <div>Benjamin Sanchez Zebadua — Ottawa, Ontario</div>
+      <div class="flex items-center gap-6">
+        <a href="https://github.com/neobenjax" target="_blank" class="hover:text-charcoal transition">GitHub</a>
+        <a href="https://www.linkedin.com/in/benjaminsanchezzebadua/" target="_blank" class="hover:text-charcoal transition">LinkedIn</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    function setPerspective(mode) {
+      const pillArch = document.getElementById('pillArch');
+      const pillAnalyst = document.getElementById('pillAnalyst');
+      const keyWord = document.getElementById('heroKeyWord');
+      const statement = document.getElementById('heroStatement');
+
+      if (mode === 'arch') {
+        pillArch.className = "px-4 py-1.5 rounded-full bg-charcoal text-white font-medium transition";
+        pillAnalyst.className = "px-4 py-1.5 rounded-full text-muted hover:text-charcoal transition";
+        keyWord.innerText = "technical complexity";
+        statement.innerText = "Designing scalable, resilient software systems with clean architectures—paired with rigorous business analysis to ensure every line of code moves organizational strategy forward.";
+      } else {
+        pillAnalyst.className = "px-4 py-1.5 rounded-full bg-charcoal text-white font-medium transition";
+        pillArch.className = "px-4 py-1.5 rounded-full text-muted hover:text-charcoal transition";
+        keyWord.innerText = "business ambiguity";
+        statement.innerText = "Transforming complex stakeholder needs, business flows, and quantitative metrics into clear, deterministic architectural requirements that eliminate project friction.";
+      }
+    }
+
+    function toggleAccordion(id) {
+      const content = document.getElementById(`${id}Content`);
+      const icon = document.getElementById(`${id}Icon`);
+      const isOpen = content.classList.contains('open');
+
+      document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+      document.querySelectorAll('[id$="Icon"]').forEach(i => i.innerText = '+');
+
+      if (!isOpen) {
+        content.classList.add('open');
+        icon.innerText = '−';
+      }
+    }
+
+    function toggleContact() {
+      document.getElementById('contactDrawer').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
