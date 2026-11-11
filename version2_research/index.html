@@ -3,307 +3,236 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Executive Design Pitch & Research Hub // Benjamin Sanchez Zebadua</title>
+  <title>Executive Design Pitch Deck (Iteration 3) // Benjamin Sanchez Zebadua</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Inter"', 'sans-serif'],
-            serif: ['"Playfair Display"', 'Georgia', 'serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          colors: {
-            canvas: '#F4FAFA',
-            surface: '#FFFFFF',
-            ink: '#0F172A',
-            inkMuted: '#475569',
-            accent: '#1E8F8F',
-            accentLight: '#E6F4F4',
-            borderSubtle: 'rgba(15, 23, 42, 0.08)',
-          }
-        }
-      }
-    }
-  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
+    :root {
+      --color-primary: #F4FAFA;
+      --color-secondary-bg: #E5F5F5;
+      --color-surface: #FFFFFF;
+      --color-text-primary: #0F172A;
+      --color-text-secondary: #366363;
+      --color-text-muted: #5C8A8A;
+      --color-accent: #1E8F8F;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-accent: rgba(30, 143, 143, 0.25);
+    }
     body {
-      background-color: #F4FAFA;
-      color: #0F172A;
+      background-color: var(--color-primary);
+      color: var(--color-text-primary);
       font-family: 'Inter', sans-serif;
-    }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #CBD5E1;
-      border-radius: 3px;
     }
   </style>
 </head>
-<body class="min-h-screen selection:bg-accent/20 selection:text-accent">
+<body class="min-h-screen selection:bg-teal-500/20 selection:text-teal-900">
 
-  <!-- Header -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-canvas/85 border-b border-borderSubtle">
-    <div class="max-w-7xl mx-auto px-6 h-18 py-4 flex items-center justify-between">
+  <!-- Hub Header -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-black/5">
+    <div class="max-w-7xl mx-auto px-6 h-18 py-3.5 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-lg bg-accent text-white flex items-center justify-center font-bold text-xs shadow-sm">
-          V2
+        <div class="w-8 h-8 rounded-xl flex items-center justify-center font-bold text-xs text-white shadow-xs" style="background-color: var(--color-accent)">
+          V2.3
         </div>
         <div>
-          <div class="font-bold text-sm text-ink flex items-center gap-2">
-            Frontpage Cover Design Deck
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-accentLight text-accent font-semibold border border-accent/20">REVISED RESEARCH</span>
+          <div class="font-bold text-sm tracking-tight" style="color: var(--color-text-primary)">
+            Frontpage "Cover" System Pitch Deck
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-teal-50 text-teal-800 font-bold border border-teal-200">ITERATION 3</span>
           </div>
-          <div class="text-[11px] text-inkMuted font-mono">Client: Benjamin Sanchez Zebadua // Software Architect & Business Analyst</div>
+          <div class="text-[11px] text-slate-500 font-mono">Client: Benjamin Sanchez Zebadua // Software Architect & Business Analyst</div>
         </div>
       </div>
 
       <div class="flex items-center gap-3 text-xs font-mono">
-        <a href="RESEARCH_AND_PROPOSALS.md" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-borderSubtle bg-surface hover:bg-slate-50 transition text-ink font-semibold">
-          <i data-lucide="file-text" class="w-3.5 h-3.5 text-accent"></i> Full Research Dossier
+        <a href="RESEARCH_AND_PROPOSALS.md" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 transition font-bold text-slate-700">
+          <i data-lucide="file-text" class="w-3.5 h-3.5 text-teal-600"></i> Research Brief
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Main Container -->
+  <!-- Main Pitch Container -->
   <main class="max-w-7xl mx-auto px-6 py-10 space-y-16">
 
-    <!-- INTRO STATEMENT & DESIGN STRATEGY -->
-    <section class="p-8 sm:p-10 rounded-2xl bg-surface border border-borderSubtle shadow-sm space-y-6">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accentLight text-accent font-mono text-xs font-semibold">
+    <!-- EXECUTIVE DESIGN STATEMENT -->
+    <section class="p-8 sm:p-10 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 text-teal-800 font-mono text-xs font-bold border border-teal-200">
         <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Senior Creative Director Pitch
       </div>
 
       <div class="space-y-4 max-w-4xl">
-        <h1 class="text-3xl sm:text-4xl font-serif font-bold text-ink leading-tight">
-          A Minimalist Cover That Commands Authority Without Walls of Text.
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight" style="color: var(--color-text-primary)">
+          "The User Won't Read, They Will <span class="italic text-teal-700">See</span>."
         </h1>
-        <p class="text-inkMuted text-sm sm:text-base leading-relaxed">
-          Benjamin, we took your feedback to heart. We completely stripped away the heavy FinTech-only speech and the generic "dark AI cyberpunk" aesthetic. Instead, we built on your authentic <strong>Mind Bubble light theme</strong> and designed the frontpage as a high-status <strong>Cover</strong>. It invites the visitor in with an unmistakable dual-identity (Software Architect + Business Analyst), showcases a curated set of active projects, displays your latest dispatches, and provides clear doorways to your trajectory and personal life—<strong>with zero "looking for work" badges.</strong>
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+          Benjamin, we took every piece of your feedback and pushed past the newspaper limits. This iteration delivers:
         </p>
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-medium text-slate-700 pt-2">
+          <li class="flex items-start gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200/60">
+            <i data-lucide="check-circle" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i>
+            <span><strong>The Vector Face Duality:</strong> Interactive split illustration with pupil eye-tracking, glowing logic circuits, and analyst charts.</span>
+          </li>
+          <li class="flex items-start gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200/60">
+            <i data-lucide="check-circle" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i>
+            <span><strong>Kinetic Rollout Narrative:</strong> Auto-rotating text transition between Software Architecture and Business Analysis without clicking.</span>
+          </li>
+          <li class="flex items-start gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200/60">
+            <i data-lucide="check-circle" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i>
+            <span><strong>Projects as Primary Highlight:</strong> Rich visual cards with micro-previews, telemetry beacons, and zero walls of text.</span>
+          </li>
+          <li class="flex items-start gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200/60">
+            <i data-lucide="check-circle" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i>
+            <span><strong>First-Glance Reach Out:</strong> Direct communication widget placed immediately after the hero with copy feedback.</span>
+          </li>
+          <li class="flex items-start gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200/60">
+            <i data-lucide="check-circle" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i>
+            <span><strong>100% Sans-Serif & Theme Adaptability:</strong> Built on your authentic Inter font and bound to CSS custom properties.</span>
+          </li>
+          <li class="flex items-start gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200/60">
+            <i data-lucide="check-circle" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i>
+            <span><strong>Full-Route Navigation:</strong> Links lead to full pages (Trajectory, Outside Work, Archive) with zero jump-scroll confusion.</span>
+          </li>
+        </ul>
       </div>
 
       <!-- Quick Selector Cards for the 3 Proposals -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-4">
         
         <!-- Proposal 1 Card -->
-        <div onclick="switchPreview(1)" id="card-p1" class="p-6 rounded-2xl border-2 border-accent bg-accentLight/30 cursor-pointer hover:shadow-md transition space-y-3">
+        <div onclick="switchPreview(1)" id="card-p1" class="p-6 rounded-2xl border-2 border-teal-600 bg-teal-50/40 cursor-pointer hover:shadow-md transition space-y-3">
           <div class="flex items-center justify-between text-xs font-mono">
-            <span class="text-accent font-bold">PROPOSAL 01</span>
-            <span class="px-2 py-0.5 rounded bg-accentLight text-accent text-[10px] font-semibold">ADHAM DANNAWAY EVOLUTION</span>
+            <span class="text-teal-700 font-bold">PROPOSAL 01</span>
+            <span class="px-2 py-0.5 rounded bg-teal-100 text-teal-800 text-[10px] font-bold">RECOMMENDED</span>
           </div>
-          <h3 class="font-serif font-bold text-ink text-lg">The Dual-Core Split Cover</h3>
-          <p class="text-xs text-inkMuted leading-relaxed">
-            Evolves the classic Adham Dannaway split-avatar paradigm for 2026. Interactive emblem activates Code vs. Analysis on hover. Curated projects & pathways.
+          <h3 class="font-extrabold text-slate-900 text-lg">The Kinetic Dual-Face Cover</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Evolves the Adham Dannaway concept into an interactive vector face with mouse eye-tracking, auto-rotating narrative progress bar, and visual project cards.
           </p>
         </div>
 
         <!-- Proposal 2 Card -->
-        <div onclick="switchPreview(2)" id="card-p2" class="p-6 rounded-2xl border border-borderSubtle bg-surface cursor-pointer hover:border-slate-400 hover:shadow-md transition space-y-3">
+        <div onclick="switchPreview(2)" id="card-p2" class="p-6 rounded-2xl border border-slate-200 bg-white cursor-pointer hover:border-slate-400 hover:shadow-md transition space-y-3">
           <div class="flex items-center justify-between text-xs font-mono">
-            <span class="text-amber-700 font-bold">PROPOSAL 02</span>
-            <span class="px-2 py-0.5 rounded bg-amber-50 text-amber-700 text-[10px] font-semibold">SWISS EDITORIAL</span>
+            <span class="text-slate-700 font-bold">PROPOSAL 02</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-800 text-[10px] font-bold">FUMADOCS RETRO-MODERN</span>
           </div>
-          <h3 class="font-serif font-bold text-ink text-lg">The Editorial Canvas</h3>
-          <p class="text-xs text-inkMuted leading-relaxed">
-            Warm oat-paper monograph with exquisite Playfair typography. Dual-perspective lens pill, interactive work strip, and dossier accordion index.
+          <h3 class="font-extrabold text-slate-900 text-lg">The Retro-Modern Canvas</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Inspired by Fumadocs.dev: technical dot grid, auto-syncing perspective ticker, and sleek project cards with interactive spec details.
           </p>
         </div>
 
         <!-- Proposal 3 Card -->
-        <div onclick="switchPreview(3)" id="card-p3" class="p-6 rounded-2xl border border-borderSubtle bg-surface cursor-pointer hover:border-slate-400 hover:shadow-md transition space-y-3">
+        <div onclick="switchPreview(3)" id="card-p3" class="p-6 rounded-2xl border border-slate-200 bg-white cursor-pointer hover:border-slate-400 hover:shadow-md transition space-y-3">
           <div class="flex items-center justify-between text-xs font-mono">
-            <span class="text-cobalt font-bold">PROPOSAL 03</span>
-            <span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-semibold">BENTO PAPERCRAFT</span>
+            <span class="text-slate-700 font-bold">PROPOSAL 03</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-800 text-[10px] font-bold">SPLIT STAGE COCKPIT</span>
           </div>
-          <h3 class="font-bold text-ink text-lg">The Bento Papercraft</h3>
-          <p class="text-xs text-inkMuted leading-relaxed">
-            Light tactile cards with gentle elevation (Apple Design Awards style). Tabbed project viewer, community impact tile, and quick contact hub.
+          <h3 class="font-extrabold text-slate-900 text-lg">The Split Stage Cover</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Dual-stage cockpit layout with smooth auto-cycling carousel, clean reach-out card, and balanced numbered dispatches.
           </p>
         </div>
 
       </div>
     </section>
 
-    <!-- INTERACTIVE VIEWPORT SIMULATOR -->
+    <!-- LIVE VIEWPORT STAGE -->
     <section class="space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div class="flex items-center gap-3">
-          <span class="text-xs font-mono uppercase tracking-widest text-inkMuted font-semibold flex items-center gap-2">
-            <i data-lucide="laptop" class="w-4 h-4 text-accent"></i> Live Prototype Viewport
+          <span class="text-xs font-mono uppercase tracking-widest text-slate-500 font-bold flex items-center gap-2">
+            <i data-lucide="play" class="w-4 h-4 text-teal-600"></i> Live Prototype Viewport
           </span>
-          <span class="text-xs font-mono px-2.5 py-1 rounded bg-slate-100 text-slate-700 font-semibold" id="currentProposalLabel">
-            Viewing: Proposal 01 (Dual-Core Split Cover)
+          <span class="text-xs font-mono px-2.5 py-1 rounded bg-slate-100 text-slate-800 font-semibold" id="currentProposalLabel">
+            Viewing: Proposal 01 (The Kinetic Dual-Face Cover)
           </span>
         </div>
         
         <div class="flex items-center gap-2">
-          <button onclick="setViewportWidth('100%')" class="px-3 py-1 rounded-md bg-white border border-borderSubtle text-xs font-mono text-ink font-semibold hover:bg-slate-50 transition">Desktop</button>
-          <button onclick="setViewportWidth('768px')" class="px-3 py-1 rounded-md bg-white border border-borderSubtle text-xs font-mono text-ink font-semibold hover:bg-slate-50 transition">Tablet</button>
-          <button onclick="setViewportWidth('410px')" class="px-3 py-1 rounded-md bg-white border border-borderSubtle text-xs font-mono text-ink font-semibold hover:bg-slate-50 transition">Mobile</button>
-          <a id="fullscreenLink" href="proposal-1-split-cover.html" target="_blank" class="px-3.5 py-1 rounded-md bg-accent text-white text-xs font-mono font-semibold flex items-center gap-1.5 shadow-sm hover:brightness-105 transition">
+          <button onclick="setViewportWidth('100%')" class="px-3 py-1 rounded-lg bg-white border border-slate-200 text-xs font-mono font-bold text-slate-700 hover:bg-slate-50 transition">Desktop</button>
+          <button onclick="setViewportWidth('768px')" class="px-3 py-1 rounded-lg bg-white border border-slate-200 text-xs font-mono font-bold text-slate-700 hover:bg-slate-50 transition">Tablet</button>
+          <button onclick="setViewportWidth('410px')" class="px-3 py-1 rounded-lg bg-white border border-slate-200 text-xs font-mono font-bold text-slate-700 hover:bg-slate-50 transition">Mobile</button>
+          <a id="fullscreenLink" href="proposal-1-kinetic-face.html" target="_blank" class="px-3.5 py-1 rounded-lg text-white text-xs font-mono font-bold flex items-center gap-1.5 shadow-xs hover:brightness-110 transition" style="background-color: var(--color-accent)">
             <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Full Window
           </a>
         </div>
       </div>
 
       <!-- Iframe Container -->
-      <div class="w-full flex justify-center bg-slate-200/50 p-3 sm:p-5 rounded-2xl border border-borderSubtle shadow-inner">
-        <iframe id="previewIframe" src="proposal-1-split-cover.html" class="w-full h-[700px] rounded-xl border border-borderSubtle bg-white transition-all duration-300 shadow-xl"></iframe>
+      <div class="w-full flex justify-center bg-slate-100 p-3 sm:p-5 rounded-3xl border border-slate-200/80 shadow-inner">
+        <iframe id="previewIframe" src="proposal-1-kinetic-face.html" class="w-full h-[720px] rounded-2xl border border-slate-200 bg-white transition-all duration-300 shadow-xl"></iframe>
       </div>
     </section>
 
-    <!-- RESEARCH BENCHMARK GALLERY (WITH LIVE SCREENSHOTS) -->
+    <!-- RESEARCH EVIDENCE & SCREENSHOT BENCHMARKS -->
     <section class="space-y-6">
-      <div class="border-b border-borderSubtle pb-3 flex items-center justify-between">
-        <h2 class="text-xs font-mono uppercase tracking-widest text-inkMuted font-semibold flex items-center gap-2">
-          <i data-lucide="camera" class="w-4 h-4 text-accent"></i> Research Evidence & Screenshot Gallery
+      <div class="border-b border-slate-200 pb-3 flex items-center justify-between">
+        <h2 class="text-xs font-mono uppercase tracking-widest text-slate-500 font-bold flex items-center gap-2">
+          <i data-lucide="camera" class="w-4 h-4 text-teal-600"></i> Benchmark Audit Gallery
         </h2>
-        <span class="text-[11px] font-mono text-inkMuted">LIVE AUDIT ARTIFACTS</span>
+        <span class="text-[11px] font-mono text-slate-400">INSPIRATION ARTIFACTS</span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         <!-- Screenshot 1: Adham Dannaway Reference -->
-        <div class="p-5 rounded-2xl bg-surface border border-borderSubtle space-y-3">
-          <div class="h-48 rounded-xl bg-slate-100 overflow-hidden border border-borderSubtle flex items-center justify-center">
+        <div class="p-5 rounded-2xl bg-white border border-slate-200 space-y-3">
+          <div class="h-44 rounded-xl bg-slate-100 overflow-hidden border border-slate-200 flex items-center justify-center">
             <img src="screenshots/adham_dannaway.png" alt="Adham Dannaway Split Screen" class="w-full h-full object-cover object-top hover:scale-105 transition duration-500">
           </div>
           <div>
-            <span class="text-[10px] font-mono uppercase text-accent font-semibold">Reference Benchmark</span>
-            <h4 class="font-bold text-sm text-ink">Adham Dannaway (Split Paradigm)</h4>
-            <p class="text-xs text-inkMuted mt-1 leading-relaxed">
-              Legendary 50/50 split avatar. Instantly explains the dual discipline in 2 seconds. Clean light background, zero text bloat, room for 3 curated works.
+            <span class="text-[10px] font-mono uppercase text-teal-700 font-bold">Pioneer Reference</span>
+            <h4 class="font-bold text-sm text-slate-900">Adham Dannaway (Split Paradigm)</h4>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+              The iconic 50/50 duality anchor. In 2 seconds, visitors understand the hybrid discipline. Used as the inspiration for our interactive vector face.
             </p>
           </div>
         </div>
 
-        <!-- Screenshot 2: Current Frontpage Baseline -->
-        <div class="p-5 rounded-2xl bg-surface border border-borderSubtle space-y-3">
-          <div class="h-48 rounded-xl bg-slate-100 overflow-hidden border border-borderSubtle flex items-center justify-center">
+        <!-- Screenshot 2: Fumadocs Reference -->
+        <div class="p-5 rounded-2xl bg-white border border-slate-200 space-y-3">
+          <div class="h-44 rounded-xl bg-slate-100 overflow-hidden border border-slate-200 flex items-center justify-center">
+            <img src="screenshots/fumadocs_ref.png" alt="Fumadocs Reference" class="w-full h-full object-cover object-top hover:scale-105 transition duration-500">
+          </div>
+          <div>
+            <span class="text-[10px] font-mono uppercase text-teal-700 font-bold">Requested Tech Reference</span>
+            <h4 class="font-bold text-sm text-slate-900">Fumadocs.dev (Retro-Modern Tech)</h4>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+              Retro technical dot-grid, interactive micro-animations, and fast code/spec previews that keep the reader captivated without walls of text.
+            </p>
+          </div>
+        </div>
+
+        <!-- Screenshot 3: Current Frontpage Baseline -->
+        <div class="p-5 rounded-2xl bg-white border border-slate-200 space-y-3">
+          <div class="h-44 rounded-xl bg-slate-100 overflow-hidden border border-slate-200 flex items-center justify-center">
             <img src="screenshots/current_frontpage.png" alt="Current Frontpage" class="w-full h-full object-cover object-top hover:scale-105 transition duration-500">
           </div>
           <div>
-            <span class="text-[10px] font-mono uppercase text-teal-600 font-semibold">Your Current Baseline</span>
-            <h4 class="font-bold text-sm text-ink">Mind Bubble Theme (#F4FAFA)</h4>
-            <p class="text-xs text-inkMuted mt-1 leading-relaxed">
-              Clean, refreshing light mint and slate palette. Human, approachable, and distinctly authentic compared to dark AI boilerplate.
+            <span class="text-[10px] font-mono uppercase text-teal-700 font-bold">Your Authentic Baseline</span>
+            <h4 class="font-bold text-sm text-slate-900">Mind Bubble Light Theme (#F4FAFA)</h4>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+              Your authentic light mint palette and Inter sans-serif typography. All 3 proposals directly bind to these CSS custom properties.
             </p>
           </div>
         </div>
 
-        <!-- Screenshot 3: Award-Winning Minimal Curator -->
-        <div class="p-5 rounded-2xl bg-surface border border-borderSubtle space-y-3">
-          <div class="h-48 rounded-xl bg-slate-100 overflow-hidden border border-borderSubtle flex items-center justify-center">
-            <img src="screenshots/minimal_gallery.png" alt="Minimal Gallery Curator" class="w-full h-full object-cover object-top hover:scale-105 transition duration-500">
-          </div>
-          <div>
-            <span class="text-[10px] font-mono uppercase text-blue-600 font-semibold">2026 Trend Benchmark</span>
-            <h4 class="font-bold text-sm text-ink">Minimal Gallery & Awwwards SOTD</h4>
-            <p class="text-xs text-inkMuted mt-1 leading-relaxed">
-              Emphasis on high whitespace, generous negative space, subtle tactile card elevation, and fast micro-interactions.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- REQUIREMENTS VERIFICATION TABLE -->
-    <section class="space-y-6">
-      <div class="border-b border-borderSubtle pb-3 flex items-center justify-between">
-        <h2 class="text-xs font-mono uppercase tracking-widest text-inkMuted font-semibold flex items-center gap-2">
-          <i data-lucide="check-square" class="w-4 h-4 text-emerald-600"></i> Client Requirements Compliance Check
-        </h2>
-        <span class="text-[11px] font-mono text-emerald-600 font-bold">100% COMPLIANT</span>
-      </div>
-
-      <div class="overflow-x-auto custom-scrollbar">
-        <table class="w-full text-left text-xs border-collapse">
-          <thead>
-            <tr class="border-b border-borderSubtle text-inkMuted font-mono text-[11px]">
-              <th class="py-3 px-4">Client Directive</th>
-              <th class="py-3 px-4 text-accent font-semibold">Proposal 1: Split Cover</th>
-              <th class="py-3 px-4 text-amber-700 font-semibold">Proposal 2: Editorial Canvas</th>
-              <th class="py-3 px-4 text-cobalt font-semibold">Proposal 3: Bento Papercraft</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-borderSubtle text-ink">
-            <tr>
-              <td class="py-3.5 px-4 font-semibold">No "Available for hire" badges</td>
-              <td class="py-3.5 px-4 text-emerald-600">✓ Completely Removed</td>
-              <td class="py-3.5 px-4 text-emerald-600">✓ Completely Removed</td>
-              <td class="py-3.5 px-4 text-emerald-600">✓ Completely Removed</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-4 font-semibold">Non-dark / Not generic AI palette</td>
-              <td class="py-3.5 px-4">Ice Mint `#F4FAFA` & Slate</td>
-              <td class="py-3.5 px-4">Warm Oat `#FAF9F6` & Terracotta</td>
-              <td class="py-3.5 px-4">Mist `#F8FAFC` & White</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-4 font-semibold">Software Architect + Business Analyst</td>
-              <td class="py-3.5 px-4">Interactive Dual-Core Emblem</td>
-              <td class="py-3.5 px-4">Dual-Perspective Switcher Pill</td>
-              <td class="py-3.5 px-4">Tactile Focus Controller</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-4 font-semibold">Minimal Cover (Not text-heavy)</td>
-              <td class="py-3.5 px-4">1-sentence value prop + high whitespace</td>
-              <td class="py-3.5 px-4">Editorial serif with generous margins</td>
-              <td class="py-3.5 px-4">Modular bento with compact copy</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-4 font-semibold">Curated Projects Room</td>
-              <td class="py-3.5 px-4">3 Curated Work Mockups</td>
-              <td class="py-3.5 px-4">Hover-preview Project Strip</td>
-              <td class="py-3.5 px-4">Interactive Tabbed Showcase</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-4 font-semibold">Latest News / Articles</td>
-              <td class="py-3.5 px-4">2 Clean Article Cards</td>
-              <td class="py-3.5 px-4">2 Dispatches Columns</td>
-              <td class="py-3.5 px-4">Dispatches Feed Tile</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-4 font-semibold">Pathways: Trajectory, Outside Work, Hub</td>
-              <td class="py-3.5 px-4">3 Dedicated Gateway Tiles</td>
-              <td class="py-3.5 px-4">Accordion Dossier Index</td>
-              <td class="py-3.5 px-4">Dual Gateway Cards</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-4 font-semibold">Clear Contact / Reach Out Action</td>
-              <td class="py-3.5 px-4">Contact Modal & Quick Copy</td>
-              <td class="py-3.5 px-4">Inline Dialogue Drawer</td>
-              <td class="py-3.5 px-4">Quick-Action Contact Tile</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </section>
 
     <!-- SYNTHESIS & NEXT STEPS -->
-    <section class="p-8 sm:p-10 rounded-2xl bg-surface border border-borderSubtle space-y-4">
-      <span class="text-xs font-mono uppercase text-accent font-semibold tracking-wider">The Strategic Recommendation</span>
-      <h3 class="text-2xl font-serif font-bold text-ink">How to Pick & Mix Your Elements</h3>
-      <p class="text-sm text-inkMuted leading-relaxed max-w-3xl">
-        Each of these 3 proposals solves your requirements through a distinct design lens. As the client, you can now:
+    <section class="p-8 sm:p-10 rounded-3xl bg-white border border-slate-200 space-y-4">
+      <span class="text-xs font-mono uppercase text-teal-700 font-bold tracking-wider">Solutions Architect Roadmap</span>
+      <h3 class="text-2xl font-bold text-slate-900">Recommended Next Steps</h3>
+      <p class="text-sm text-slate-600 leading-relaxed max-w-3xl">
+        Proposal 01 (**The Kinetic Dual-Face Cover**) incorporates all your requirements: the animated vector face, the auto-rotating text transition, the reach-out widget directly below the hero, the curated projects as primary visual highlights, and full-route navigation.
       </p>
-      <ul class="list-disc list-inside text-xs text-inkMuted space-y-2 font-sans pl-2">
-        <li><strong>Take the Split Hero from Proposal 1</strong> (the Adham Dannaway dual-core interactive anchor) if you want instant, unmistakable hybrid recognition.</li>
-        <li><strong>Take the Hover-Preview Project Strip from Proposal 2</strong> if you prefer an editorial, publication-style list for your curated projects.</li>
-        <li><strong>Take the Bento Grid from Proposal 3</strong> if you love clean, organized physical tiles with quick tabs for your life outside work and articles.</li>
-      </ul>
-      <p class="text-xs text-ink font-semibold pt-2">
-        Tell me which visual identity or combination you love most, and we will tailor every asset and detail directly to your personal brand!
+      <p class="text-xs font-bold text-slate-800 pt-1">
+        Review the proposals in the stage above, and let me know your preferred composition so we can begin coding the final production components in Next.js 16 & React 19!
       </p>
     </section>
 
@@ -313,9 +242,9 @@
     lucide.createIcons();
 
     const proposals = [
-      { id: 1, file: 'proposal-1-split-cover.html', label: 'Viewing: Proposal 01 (Dual-Core Split Cover)' },
-      { id: 2, file: 'proposal-2-editorial-canvas.html', label: 'Viewing: Proposal 02 (The Editorial Canvas)' },
-      { id: 3, file: 'proposal-3-bento-papercraft.html', label: 'Viewing: Proposal 03 (The Bento Papercraft)' },
+      { id: 1, file: 'proposal-1-kinetic-face.html', label: 'Viewing: Proposal 01 (The Kinetic Dual-Face Cover)' },
+      { id: 2, file: 'proposal-2-retro-canvas.html', label: 'Viewing: Proposal 02 (The Retro-Modern Canvas)' },
+      { id: 3, file: 'proposal-3-split-stage.html', label: 'Viewing: Proposal 03 (The Split Stage Cover)' },
     ];
 
     function switchPreview(id) {
@@ -326,13 +255,12 @@
       document.getElementById('currentProposalLabel').innerText = p.label;
       document.getElementById('fullscreenLink').href = p.file;
 
-      // Update card active styles
       [1, 2, 3].forEach(i => {
         const card = document.getElementById(`card-p${i}`);
         if (i === id) {
-          card.className = "p-6 rounded-2xl border-2 border-accent bg-accentLight/30 cursor-pointer shadow-md transition space-y-3";
+          card.className = "p-6 rounded-2xl border-2 border-teal-600 bg-teal-50/40 cursor-pointer shadow-md transition space-y-3";
         } else {
-          card.className = "p-6 rounded-2xl border border-borderSubtle bg-surface cursor-pointer hover:border-slate-400 hover:shadow-md transition space-y-3";
+          card.className = "p-6 rounded-2xl border border-slate-200 bg-white cursor-pointer hover:border-slate-400 hover:shadow-md transition space-y-3";
         }
       });
     }

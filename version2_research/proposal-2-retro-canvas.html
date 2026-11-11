@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposal 02 // The Retro-Modern Canvas — Benjamin Sanchez Zebadua</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --color-primary: #F4FAFA;
+      --color-secondary-bg: #E5F5F5;
+      --color-surface: #FFFFFF;
+      --color-text-primary: #0F172A;
+      --color-text-secondary: #366363;
+      --color-text-muted: #5C8A8A;
+      --color-accent: #1E8F8F;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-accent: rgba(30, 143, 143, 0.25);
+    }
+    body {
+      background-color: var(--color-primary);
+      color: var(--color-text-primary);
+      font-family: 'Inter', sans-serif;
+    }
+    .retro-dots {
+      background-image: radial-gradient(var(--border-subtle) 1.5px, transparent 1.5px);
+      background-size: 20px 20px;
+    }
+    .live-code-tag {
+      background: var(--color-surface);
+      border: 1px solid var(--border-subtle);
+      transition: all 0.2s ease;
+    }
+    .live-code-tag:hover {
+      border-color: var(--color-accent);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="min-h-screen relative overflow-x-hidden retro-dots">
+
+  <!-- THEME PRESET SWITCHER TOOLBAR -->
+  <aside class="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-black/5 text-[11px] font-mono py-2 px-6">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="font-semibold text-slate-700">THEME PREVIEW ENGINE:</span>
+        <span class="text-slate-500 hidden sm:inline">(Fumadocs Retro-Modern Style)</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="setThemePreset('mindBubble')" class="px-2.5 py-1 rounded bg-teal-50 border border-teal-600/30 text-teal-800 font-bold hover:bg-teal-100 transition">Mind Bubble (Default)</button>
+        <button onclick="setThemePreset('cleanWhite')" class="px-2.5 py-1 rounded bg-slate-100 border border-slate-300 text-slate-700 hover:bg-slate-200 transition">Pure White</button>
+        <button onclick="setThemePreset('lemon')" class="px-2.5 py-1 rounded bg-amber-50 border border-amber-300 text-amber-800 hover:bg-amber-100 transition">Warm Citrus</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Navigation -->
+  <header class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg border flex items-center justify-center font-mono font-bold text-xs" style="background-color: var(--color-surface); border-color: var(--border-accent); color: var(--color-accent)">
+        &lt;&gt;
+      </div>
+      <span class="font-bold text-base tracking-tight" style="color: var(--color-text-primary)">Benjamin Sanchez Zebadua</span>
+    </div>
+
+    <nav class="flex items-center gap-6 text-sm font-medium" style="color: var(--color-text-secondary)">
+      <a href="/projects" class="hover:text-black transition">Projects</a>
+      <a href="/trajectory" class="hover:text-black transition">Trajectory</a>
+      <a href="/outside-work" class="hover:text-black transition hidden sm:inline">Me Outside Work</a>
+      <a href="/articles" class="hover:text-black transition">Articles</a>
+      <button onclick="openContactModal()" class="px-4 py-2 rounded-xl text-white text-xs font-semibold shadow-xs hover:brightness-110 transition" style="background-color: var(--color-accent)">
+        Get in Touch
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main Cover -->
+  <main class="max-w-6xl mx-auto px-6 py-8 md:py-16 space-y-20">
+
+    <!-- HERO SECTION: FUMADOCS-INSPIRED DUAL-CORE CONSOLE -->
+    <section class="space-y-8">
+      <div class="max-w-3xl space-y-4">
+        
+        <!-- Live Pill -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md text-xs font-mono font-semibold border" style="background-color: var(--color-surface); border-color: var(--border-accent); color: var(--color-accent)">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span>DUAL-DISCIPLINE ARCHITECTURE & ANALYSIS</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.12]" style="color: var(--color-text-primary)">
+          Building Software with <br />
+          <span class="font-normal italic" style="color: var(--color-accent)">&</span> Business Rigor.
+        </h1>
+
+        <!-- Kinetic perspective text ticker -->
+        <div class="p-4 rounded-xl border flex items-center justify-between gap-4" style="background-color: var(--color-surface); border-color: var(--border-subtle)">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full" style="background-color: var(--color-accent)"></span>
+            <span id="activeTickerText" class="text-xs sm:text-sm font-mono text-slate-800 transition-all duration-300">
+              [Perspective 01]: Software Engineering (Microservices, Resilient APIs, Node.js, Next.js)
+            </span>
+          </div>
+          <span class="text-[10px] font-mono text-slate-400 shrink-0">Auto-Syncing</span>
+        </div>
+      </div>
+
+      <!-- REACH OUT WIDGET (Directly after Hero) -->
+      <div class="w-full max-w-xl p-5 rounded-2xl border shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4" style="background-color: var(--color-surface); border-color: var(--border-subtle)">
+        <div class="text-left">
+          <div class="text-[10px] font-mono uppercase font-bold text-teal-800">Direct Channel</div>
+          <div class="text-sm font-bold" style="color: var(--color-text-primary)">Start a Conversation</div>
+          <div class="text-xs text-slate-500">hello@benjaminsz.com</div>
+        </div>
+        
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button onclick="copyEmail(this)" class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-semibold border hover:bg-black/5 transition flex items-center justify-center gap-1.5" style="border-color: var(--border-subtle); color: var(--color-text-primary)">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i> <span>Copy</span>
+          </button>
+          <a href="mailto:hello@benjaminsz.com" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-white text-xs font-semibold hover:brightness-110 transition shadow-xs flex items-center justify-center gap-1.5" style="background-color: var(--color-accent)">
+            <i data-lucide="mail" class="w-3.5 h-3.5"></i> <span>Email</span>
+          </a>
+          <a href="https://www.linkedin.com/in/benjaminsanchezzebadua/" target="_blank" class="px-3.5 py-2 rounded-xl bg-[#0A66C2] text-white text-xs font-semibold hover:brightness-110 transition flex items-center justify-center gap-1.5">
+            <i data-lucide="linkedin" class="w-3.5 h-3.5"></i> <span>LinkedIn</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: THE MAIN HIGHLIGHT — FEATURED PROJECTS CONSOLE -->
+    <section class="space-y-6 pt-4">
+      <div class="flex items-baseline justify-between border-b pb-3" style="border-color: var(--border-subtle)">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest font-bold" style="color: var(--color-accent)">Engineering Highlights</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-0.5" style="color: var(--color-text-primary)">
+            Curated Projects & Systems
+          </h2>
+        </div>
+        <a href="/projects" class="text-xs font-mono font-bold hover:underline" style="color: var(--color-accent)">
+          Explore All (15+) →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Project 1 -->
+        <article class="p-6 rounded-2xl border flex flex-col justify-between transition-all hover:-translate-y-1 hover:shadow-lg group" style="background-color: var(--color-surface); border-color: var(--border-subtle)">
+          <div class="space-y-4">
+            <div class="h-44 rounded-xl p-4 bg-teal-900/5 border border-teal-500/10 flex flex-col justify-between relative overflow-hidden">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-white text-teal-800 shadow-xs w-max">BBVA CORE</span>
+              <div class="text-center my-auto">
+                <i data-lucide="terminal" class="w-10 h-10 mx-auto text-teal-700 group-hover:scale-110 transition duration-300"></i>
+                <div class="text-xs font-mono text-teal-900 font-bold mt-2">Zero Downtime Microservices</div>
+              </div>
+              <div class="text-[10px] font-mono text-slate-500">7+ Yrs Enterprise Experience</div>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg leading-snug group-hover:text-teal-700 transition" style="color: var(--color-text-primary)">
+                Distributed Banking Systems & Transaction Gateway
+              </h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                Spearheaded core banking application reliability at BBVA, achieving a 30% reliability surge and slashing defect rates by 20%.
+              </p>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t flex items-center justify-between text-xs font-mono" style="border-color: var(--border-subtle)">
+            <span class="text-slate-500">Node.js • Cloud</span>
+            <span class="font-bold text-teal-700 group-hover:translate-x-1 transition-transform">Spec Details →</span>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="p-6 rounded-2xl border flex flex-col justify-between transition-all hover:-translate-y-1 hover:shadow-lg group" style="background-color: var(--color-surface); border-color: var(--border-subtle)">
+          <div class="space-y-4">
+            <div class="h-44 rounded-xl p-4 bg-slate-100 border border-slate-200 flex flex-col justify-between relative overflow-hidden">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-white text-slate-800 shadow-xs w-max">BUSINESS ANALYSIS</span>
+              <div class="text-center my-auto">
+                <i data-lucide="workflow" class="w-10 h-10 mx-auto text-slate-700 group-hover:scale-110 transition duration-300"></i>
+                <div class="text-xs font-mono text-slate-900 font-bold mt-2">Requirements Orchestration</div>
+              </div>
+              <div class="text-[10px] font-mono text-slate-500">Cross-Functional Delivery</div>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg leading-snug group-hover:text-slate-900 transition" style="color: var(--color-text-primary)">
+                Cross-Functional Requirements & Process Engine
+              </h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                Created standardized functional requirements (FRDs) and process architectures aligning technical teams with strategic organizational roadmaps.
+              </p>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t flex items-center justify-between text-xs font-mono" style="border-color: var(--border-subtle)">
+            <span class="text-slate-500">Workflow • Logic</span>
+            <span class="font-bold text-teal-700 group-hover:translate-x-1 transition-transform">Spec Details →</span>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="p-6 rounded-2xl border flex flex-col justify-between transition-all hover:-translate-y-1 hover:shadow-lg group" style="background-color: var(--color-surface); border-color: var(--border-subtle)">
+          <div class="space-y-4">
+            <div class="h-44 rounded-xl p-4 bg-emerald-50 border border-emerald-200 flex flex-col justify-between relative overflow-hidden">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-white text-emerald-800 shadow-xs w-max">QUANTITATIVE</span>
+              <div class="text-center my-auto">
+                <i data-lucide="bar-chart" class="w-10 h-10 mx-auto text-emerald-700 group-hover:scale-110 transition duration-300"></i>
+                <div class="text-xs font-mono text-emerald-900 font-bold mt-2">Algorithmic Rebalancer</div>
+              </div>
+              <div class="text-[10px] font-mono text-slate-500">Portfolio Optimization</div>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg leading-snug group-hover:text-emerald-800 transition" style="color: var(--color-text-primary)">
+                Quantitative Multi-Asset Portfolio Balancing
+              </h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                Engineered automated asset rebalancing algorithms integrating Canadian regulatory frameworks, risk-weighting, and tax-loss minimization.
+              </p>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t flex items-center justify-between text-xs font-mono" style="border-color: var(--border-subtle)">
+            <span class="text-slate-500">Quantitative • CRA</span>
+            <span class="font-bold text-teal-700 group-hover:translate-x-1 transition-transform">Spec Details →</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: ARTICLES (NUMBERED LIST) & COMMUNITY IMPACT -->
+    <section class="grid grid-cols-1 md:grid-cols-12 gap-8 pt-4">
+      <div class="md:col-span-7 space-y-4">
+        <div class="flex items-baseline justify-between border-b pb-3" style="border-color: var(--border-subtle)">
+          <span class="text-xs font-mono uppercase tracking-widest font-bold" style="color: var(--color-accent)">Dispatches</span>
+          <a href="/articles" class="text-xs font-mono text-slate-500 hover:text-black">All Writing →</a>
+        </div>
+
+        <div class="divide-y" style="border-color: var(--border-subtle)">
+          <div class="py-4 flex items-baseline justify-between gap-4 group cursor-pointer">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-mono font-bold" style="color: var(--color-accent)">01 /</span>
+                <h4 class="font-bold text-sm group-hover:text-teal-700 transition" style="color: var(--color-text-primary)">
+                  The Computing Mindset in Complex Business Analysis
+                </h4>
+              </div>
+              <p class="text-xs pl-6 leading-relaxed text-slate-600">
+                Viewing undefined environments as open-source sandboxes for structured problem solving.
+              </p>
+            </div>
+            <span class="text-[11px] font-mono text-slate-400 shrink-0">May 2026</span>
+          </div>
+
+          <div class="py-4 flex items-baseline justify-between gap-4 group cursor-pointer">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-mono font-bold" style="color: var(--color-accent)">02 /</span>
+                <h4 class="font-bold text-sm group-hover:text-teal-700 transition" style="color: var(--color-text-primary)">
+                  Leadership Through Involvement: Route Captaincy
+                </h4>
+              </div>
+              <p class="text-xs pl-6 leading-relaxed text-slate-600">
+                Moving barricades with the crew: Ground-level presence as the foundation of resilient systems.
+              </p>
+            </div>
+            <span class="text-[11px] font-mono text-slate-400 shrink-0">Apr 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-5 p-6 rounded-2xl border flex flex-col justify-between space-y-4" style="background-color: var(--color-surface); border-color: var(--border-subtle)">
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono uppercase font-bold text-emerald-700">Ottawa Community</span>
+            <i data-lucide="heart" class="w-4 h-4 text-emerald-600"></i>
+          </div>
+          <h3 class="font-bold text-base" style="color: var(--color-text-primary)">Route Captain: CN Cycle for CHEO</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            Coordinated safety and route logistics for 6,000+ athletes across Ottawa's urban core, supporting pediatric cancer research. Leadership through direct involvement.
+          </p>
+        </div>
+        <a href="/outside-work" class="inline-flex items-center text-xs font-mono font-bold hover:underline" style="color: var(--color-accent)">
+          Read Impact Story →
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 3: DOORWAYS -->
+    <section class="p-8 rounded-2xl border flex flex-col md:flex-row items-center justify-between gap-6" style="background-color: var(--color-surface); border-color: var(--border-subtle)">
+      <div class="space-y-1">
+        <span class="text-xs font-mono uppercase font-bold" style="color: var(--color-accent)">Platform Navigation</span>
+        <h3 class="font-bold text-xl" style="color: var(--color-text-primary)">The Full Professional Record</h3>
+        <p class="text-xs text-slate-500">Access verified experience, community impact, and source repositories.</p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <a href="/trajectory" class="px-4 py-2 rounded-xl border text-xs font-bold transition hover:bg-black/5" style="border-color: var(--border-subtle); color: var(--color-text-primary)">
+          Career Trajectory
+        </a>
+        <a href="/outside-work" class="px-4 py-2 rounded-xl border text-xs font-bold transition hover:bg-black/5" style="border-color: var(--border-subtle); color: var(--color-text-primary)">
+          Life Outside Work
+        </a>
+        <a href="/projects" class="px-4 py-2 rounded-xl text-white text-xs font-bold transition hover:brightness-110" style="background-color: var(--color-accent)">
+          Projects Hub
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    // Auto-syncing perspective ticker
+    const tickers = [
+      "[Perspective 01]: Software Engineering (Microservices, Resilient APIs, Node.js, Next.js)",
+      "[Perspective 02]: Business Analysis (Requirements Engineering, Process Optimization, ROI Models)"
+    ];
+    let tickIdx = 0;
+    setInterval(() => {
+      tickIdx = (tickIdx + 1) % tickers.length;
+      const el = document.getElementById('activeTickerText');
+      el.style.opacity = '0';
+      setTimeout(() => {
+        el.innerText = tickers[tickIdx];
+        el.style.opacity = '1';
+      }, 300);
+    }, 4000);
+
+    function copyEmail(btn) {
+      navigator.clipboard.writeText('hello@benjaminsz.com');
+      btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> Copied!`;
+      lucide.createIcons();
+      setTimeout(() => {
+        btn.innerHTML = `<i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy`;
+        lucide.createIcons();
+      }, 2000);
+    }
+
+    const themes = {
+      mindBubble: {
+        '--color-primary': '#F4FAFA',
+        '--color-secondary-bg': '#E5F5F5',
+        '--color-surface': '#FFFFFF',
+        '--color-text-primary': '#0F172A',
+        '--color-text-secondary': '#366363',
+        '--color-text-muted': '#5C8A8A',
+        '--color-accent': '#1E8F8F',
+        '--border-subtle': 'rgba(0, 0, 0, 0.08)',
+        '--border-accent': 'rgba(30, 143, 143, 0.25)'
+      },
+      cleanWhite: {
+        '--color-primary': '#FFFFFF',
+        '--color-secondary-bg': '#F8FAFC',
+        '--color-surface': '#FFFFFF',
+        '--color-text-primary': '#0F172A',
+        '--color-text-secondary': '#475569',
+        '--color-text-muted': '#64748B',
+        '--color-accent': '#2563EB',
+        '--border-subtle': 'rgba(0, 0, 0, 0.09)',
+        '--border-accent': 'rgba(37, 99, 235, 0.25)'
+      },
+      lemon: {
+        '--color-primary': '#FEFCE8',
+        '--color-secondary-bg': '#FEF9C3',
+        '--color-surface': '#FFFFFF',
+        '--color-text-primary': '#1C1917',
+        '--color-text-secondary': '#78350F',
+        '--color-text-muted': '#A16207',
+        '--color-accent': '#CA8A04',
+        '--border-subtle': 'rgba(120, 53, 15, 0.12)',
+        '--border-accent': 'rgba(202, 138, 4, 0.3)'
+      }
+    };
+
+    function setThemePreset(preset) {
+      const t = themes[preset];
+      if (!t) return;
+      for (const [key, value] of Object.entries(t)) {
+        document.documentElement.style.setProperty(key, value);
+      }
+    }
+  </script>
+</body>
+</html>

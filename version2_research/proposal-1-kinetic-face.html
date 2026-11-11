@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposal 01 // The Kinetic Dual-Face Cover — Benjamin Sanchez Zebadua</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Dynamic CSS Custom Properties (Mind Bubble Theme Default) */
+    :root {
+      --color-primary: #F4FAFA;
+      --color-secondary-bg: #E5F5F5;
+      --color-surface: #FFFFFF;
+      --color-text-primary: #0F172A;
+      --color-text-secondary: #366363;
+      --color-text-muted: #5C8A8A;
+      --color-accent: #1E8F8F;
+      --color-secondary: #C2D6D6;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-accent: rgba(30, 143, 143, 0.25);
+    }
+
+    body {
+      background-color: var(--color-primary);
+      color: var(--color-text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Ambient background grid */
+    .bg-grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+    }
+
+    /* Vector Face Animation & Glows */
+    .face-wrapper {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      filter: drop-shadow(0 20px 30px rgba(30, 143, 143, 0.15));
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .face-wrapper:hover {
+      transform: scale(1.03);
+    }
+
+    /* Auto-rotating Hero Text Roll Animation */
+    .roll-container {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      height: 1.35em;
+    }
+    .roll-text {
+      display: inline-block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+    }
+
+    /* Progress bar for auto-rotation */
+    .progress-bar-fill {
+      transition: width 4s linear;
+    }
+
+    /* Card Micro-interactions */
+    .interactive-card {
+      background-color: var(--color-surface);
+      border: 1px solid var(--border-subtle);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .interactive-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--color-accent);
+      box-shadow: 0 16px 32px -10px rgba(30, 143, 143, 0.12);
+    }
+
+    /* Pulse indicators */
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+    .circuit-pulse {
+      animation: subtlePulse 3s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative overflow-x-hidden selection:bg-teal-500/20 selection:text-teal-900 bg-grid-pattern">
+
+  <!-- THEME PRESET SWITCHER TOOLBAR (Allows instant testing of theme personalizer compatibility) -->
+  <aside class="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-black/5 text-[11px] font-mono py-2 px-6">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="font-semibold text-slate-700">THEME PREVIEW ENGINE:</span>
+        <span class="text-slate-500 hidden sm:inline">(Proves CSS Custom Property Binding)</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="setThemePreset('mindBubble')" class="px-2.5 py-1 rounded bg-teal-50 border border-teal-600/30 text-teal-800 font-bold hover:bg-teal-100 transition">Mind Bubble (Default)</button>
+        <button onclick="setThemePreset('cleanWhite')" class="px-2.5 py-1 rounded bg-slate-100 border border-slate-300 text-slate-700 hover:bg-slate-200 transition">Pure White</button>
+        <button onclick="setThemePreset('lemon')" class="px-2.5 py-1 rounded bg-amber-50 border border-amber-300 text-amber-800 hover:bg-amber-100 transition">Warm Citrus</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- NAVIGATION BAR (Route-based, not an anchor-jump scroll!) -->
+  <header class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3 group">
+      <div class="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm text-white shadow-sm transition group-hover:scale-105" style="background-color: var(--color-accent)">
+        BZ
+      </div>
+      <span class="font-bold text-lg tracking-tight" style="color: var(--color-text-primary)">
+        Benjamin Sanchez Zebadua
+      </span>
+    </a>
+
+    <!-- Full Extent Page Navigation Links (No anchor jumping) -->
+    <nav class="flex items-center gap-6 text-sm font-medium" style="color: var(--color-text-secondary)">
+      <a href="/projects" class="hover:text-black transition flex items-center gap-1">Projects</a>
+      <a href="/trajectory" class="hover:text-black transition">Trajectory</a>
+      <a href="/outside-work" class="hover:text-black transition hidden sm:inline">Me Outside Work</a>
+      <a href="/articles" class="hover:text-black transition">Articles</a>
+      <button onclick="openContactModal()" class="px-4 py-2 rounded-xl text-white text-xs font-semibold shadow-sm hover:brightness-110 active:scale-95 transition" style="background-color: var(--color-accent)">
+        Get in Touch
+      </button>
+    </nav>
+  </header>
+
+  <!-- MAIN COVER CONTAINER -->
+  <main class="max-w-6xl mx-auto px-6 py-8 md:py-16 space-y-20">
+
+    <!-- HERO SECTION: THE KINETIC DUAL-CORE FACE & AUTO-ROTATING NARRATIVE -->
+    <section class="flex flex-col items-center text-center space-y-8">
+      
+      <!-- HERO TITLE -->
+      <div class="max-w-3xl space-y-3">
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.12]" style="color: var(--color-text-primary)">
+          Systems Architecture <br />
+          <span class="font-light italic" style="color: var(--color-accent)">&</span> Business Analysis.
+        </h1>
+
+        <!-- DYNAMIC AUTO-ROTATING STATEMENT (FANCY SMOOTH ROLLOUT WITHOUT CLICKING) -->
+        <div class="pt-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold mb-3 border" style="background-color: var(--color-secondary-bg); color: var(--color-accent); border-color: var(--border-accent)">
+            <span class="w-1.5 h-1.5 rounded-full animate-ping" style="background-color: var(--color-accent)"></span>
+            <span id="roleBadge">SOFTWARE DEVELOPER & ARCHITECT</span>
+          </div>
+
+          <div class="h-16 flex items-center justify-center">
+            <p id="rollingStatement" class="text-base sm:text-lg max-w-xl mx-auto font-normal leading-relaxed transition-all duration-500" style="color: var(--color-text-secondary)">
+              Designing fault-tolerant microservices, resilient APIs, and enterprise cloud systems built to scale.
+            </p>
+          </div>
+
+          <!-- Subtle auto-rotation progress bar -->
+          <div class="w-36 h-1 mx-auto bg-black/5 rounded-full overflow-hidden mt-1">
+            <div id="progressBar" class="h-full w-0 progress-bar-fill rounded-full" style="background-color: var(--color-accent)"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- THE CORE VECTOR ANIMATION: INTERACTIVE DUAL-IDENTITY FACE -->
+      <div class="py-2 flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-10 w-full max-w-4xl" id="avatarStage">
+        
+        <!-- Left Side Pill: Developer Indicator -->
+        <div id="devTag" class="p-4 rounded-xl border w-full md:w-64 text-left transition-all duration-300 cursor-pointer shadow-xs" style="background-color: var(--color-surface); border-color: var(--border-subtle)">
+          <div class="flex items-center justify-between mb-1 text-xs font-mono font-bold" style="color: var(--color-accent)">
+            <span>&lt;CODER&gt;</span>
+            <i data-lucide="terminal" class="w-3.5 h-3.5"></i>
+          </div>
+          <div class="font-bold text-sm" style="color: var(--color-text-primary)">Software Engineering</div>
+          <div class="text-[11px] mt-1 leading-snug" style="color: var(--color-text-muted)">
+            Distributed systems, TypeScript, Next.js, and CI/CD pipelines.
+          </div>
+        </div>
+
+        <!-- CENTER VECTOR FACE (Interactive SVG with cursor-tracking pupils & duality split) -->
+        <div class="face-wrapper cursor-pointer" onmousemove="trackFace(event)" onmouseleave="resetFace()">
+          <svg viewBox="0 0 200 200" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <!-- Left side clip (Developer) -->
+              <clipPath id="leftClip">
+                <rect x="0" y="0" width="100" height="200" />
+              </clipPath>
+              <!-- Right side clip (Business Analyst) -->
+              <clipPath id="rightClip">
+                <rect x="100" y="0" width="100" height="200" />
+              </clipPath>
+              <!-- Gradients -->
+              <linearGradient id="devGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1E8F8F" />
+                <stop offset="100%" stop-color="#0E5E5E" />
+              </linearGradient>
+              <linearGradient id="analystGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#334155" />
+                <stop offset="100%" stop-color="#0F172A" />
+              </linearGradient>
+            </defs>
+
+            <!-- Base Face Contour (Circle) -->
+            <circle cx="100" cy="100" r="90" fill="white" stroke="var(--border-subtle)" stroke-width="3" />
+
+            <!-- LEFT HALF: THE DEVELOPER (Glasses, Circuit Traces, Binary Pulse) -->
+            <g clip-path="url(#leftClip)">
+              <rect x="0" y="0" width="100" height="200" fill="url(#devGradient)" />
+              
+              <!-- Subtle logic circuit lines -->
+              <path d="M20 70 H60 V100 H40 V140" stroke="rgba(255,255,255,0.25)" stroke-width="2" fill="none" class="circuit-pulse" />
+              <circle cx="20" cy="70" r="3" fill="#6EE7B7" />
+              <circle cx="40" cy="140" r="3" fill="#6EE7B7" />
+
+              <!-- Left Eye (Developer Glasses) -->
+              <rect x="35" y="80" width="45" height="30" rx="8" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="2.5" />
+              <!-- Pupil that tracks cursor -->
+              <circle id="devPupil" cx="57" cy="95" r="6" fill="#6EE7B7" />
+              <!-- Code reflection inside lens -->
+              <text x="40" y="99" fill="rgba(255,255,255,0.7)" font-size="9" font-family="monospace">&lt;/&gt;</text>
+              
+              <!-- Dev Smile -->
+              <path d="M65 140 Q 80 150 100 148" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none" />
+            </g>
+
+            <!-- RIGHT HALF: THE BUSINESS ANALYST (Collar, Process Chart Grid, Analytics Lens) -->
+            <g clip-path="url(#rightClip)">
+              <rect x="100" y="0" width="100" height="200" fill="url(#analystGradient)" />
+
+              <!-- Subtle bar chart background graphic -->
+              <rect x="125" y="125" width="8" height="25" fill="rgba(255,255,255,0.12)" />
+              <rect x="138" y="115" width="8" height="35" fill="rgba(255,255,255,0.18)" />
+              <rect x="151" y="105" width="8" height="45" fill="rgba(255,255,255,0.25)" />
+              <path d="M125 125 L138 115 L151 105 L165 95" stroke="#FBBF24" stroke-width="2" fill="none" />
+
+              <!-- Right Eye (Analyst Spectacles) -->
+              <rect x="120" y="80" width="45" height="30" rx="8" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="2.5" />
+              <!-- Pupil that tracks cursor -->
+              <circle id="analystPupil" cx="142" cy="95" r="6" fill="#FBBF24" />
+              
+              <!-- Executive Tie & Collar -->
+              <polygon points="100,160 115,185 100,195" fill="white" />
+              <polygon points="100,160 100,195 108,198 104,165" fill="#FBBF24" />
+
+              <!-- Analyst Smile -->
+              <path d="M100 148 Q 120 150 135 140" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none" />
+            </g>
+
+            <!-- Central Neon Divide Line -->
+            <line x1="100" y1="10" x2="100" y2="190" stroke="white" stroke-width="3" stroke-linecap="round" />
+            <circle cx="100" cy="100" r="7" fill="white" />
+            <circle cx="100" cy="100" r="3" fill="#1E8F8F" />
+          </svg>
+        </div>
+
+        <!-- Right Side Pill: Analyst Indicator -->
+        <div id="analystTag" class="p-4 rounded-xl border w-full md:w-64 text-left transition-all duration-300 cursor-pointer shadow-xs" style="background-color: var(--color-surface); border-color: var(--border-subtle)">
+          <div class="flex items-center justify-between mb-1 text-xs font-mono font-bold text-slate-700">
+            <span>[ANALYST]</span>
+            <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i>
+          </div>
+          <div class="font-bold text-sm" style="color: var(--color-text-primary)">Business Analysis</div>
+          <div class="text-[11px] mt-1 leading-snug" style="color: var(--color-text-muted)">
+            Requirements engineering, stakeholder alignment, and quantitative ROI models.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- REACH OUT WIDGET (Directly below Hero as requested!) -->
+      <div class="w-full max-w-xl p-5 rounded-2xl border shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4" style="background-color: var(--color-surface); border-color: var(--border-subtle)">
+        <div class="text-left">
+          <span class="text-[10px] font-mono uppercase font-bold tracking-wider" style="color: var(--color-accent)">First Glance Channel</span>
+          <div class="text-sm font-bold" style="color: var(--color-text-primary)">Start a Conversation</div>
+          <div class="text-xs" style="color: var(--color-text-muted)">hello@benjaminsz.com</div>
+        </div>
+        
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button onclick="copyEmail(this)" class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-semibold border transition hover:bg-black/5 flex items-center justify-center gap-1.5" style="border-color: var(--border-subtle); color: var(--color-text-primary)">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i> <span>Copy</span>
+          </button>
+          <a href="mailto:hello@benjaminsz.com" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-white text-xs font-semibold hover:brightness-110 transition shadow-xs flex items-center justify-center gap-1.5" style="background-color: var(--color-accent)">
+            <i data-lucide="mail" class="w-3.5 h-3.5"></i> <span>Email</span>
+          </a>
+          <a href="https://www.linkedin.com/in/benjaminsanchezzebadua/" target="_blank" class="px-3.5 py-2 rounded-xl bg-[#0A66C2] text-white text-xs font-semibold hover:brightness-110 transition flex items-center justify-center gap-1.5">
+            <i data-lucide="linkedin" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">LinkedIn</span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECTION 1: THE MAIN HIGHLIGHT — CURATED CURRENT PROJECTS (HIGH VISUAL IMPACT) -->
+    <section class="space-y-6 pt-4">
+      <div class="flex items-baseline justify-between border-b pb-3" style="border-color: var(--border-subtle)">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest font-bold" style="color: var(--color-accent)">Flagship Engineering & Strategy</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-0.5" style="color: var(--color-text-primary)">
+            Featured Projects
+          </h2>
+        </div>
+        <a href="/projects" class="text-xs font-mono font-bold hover:underline flex items-center gap-1" style="color: var(--color-accent)">
+          Full Archive (15+) →
+        </a>
+      </div>
+
+      <!-- Visual Project Cards with interactive diagrams & metrics -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Card 1: BBVA Core Banking -->
+        <article class="interactive-card p-6 rounded-2xl flex flex-col justify-between group">
+          <div class="space-y-4">
+            <!-- Visual Header Canvas Graphic -->
+            <div class="h-44 rounded-xl p-4 flex flex-col justify-between relative overflow-hidden" style="background: linear-gradient(135deg, var(--color-secondary-bg) 0%, rgba(30,143,143,0.15) 100%)">
+              <div class="flex items-center justify-between z-10">
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-white/90 text-slate-800 shadow-xs">ENTERPRISE CORE</span>
+                <span class="text-[10px] font-mono text-emerald-700 font-bold flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 99.99% SLA
+                </span>
+              </div>
+              <div class="my-auto text-center z-10">
+                <i data-lucide="cpu" class="w-10 h-10 mx-auto text-teal-700 group-hover:scale-110 transition duration-300"></i>
+                <div class="text-[11px] font-mono text-teal-900 mt-1 font-bold">+30% Reliability Boost</div>
+              </div>
+              <div class="text-[10px] font-mono text-slate-500 z-10">BBVA Mexico • 2019–2024</div>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-lg leading-snug group-hover:text-teal-700 transition" style="color: var(--color-text-primary)">
+                Distributed Banking Systems & Transaction Gateway
+              </h3>
+              <p class="text-xs mt-2 leading-relaxed" style="color: var(--color-text-secondary)">
+                Spearheaded high-concurrency microservice modernization, zero-downtime deployment pipelines, and AI efficiency tooling reducing defect rates by 20%.
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-4 mt-4 border-t flex items-center justify-between text-xs font-mono" style="border-color: var(--border-subtle)">
+            <span style="color: var(--color-text-muted)">Node.js • Microservices</span>
+            <span class="font-bold group-hover:translate-x-1 transition-transform" style="color: var(--color-accent)">Inspect Spec →</span>
+          </div>
+        </article>
+
+        <!-- Card 2: Enterprise Requirements Engine -->
+        <article class="interactive-card p-6 rounded-2xl flex flex-col justify-between group">
+          <div class="space-y-4">
+            <!-- Visual Header Canvas Graphic -->
+            <div class="h-44 rounded-xl p-4 flex flex-col justify-between relative overflow-hidden bg-gradient-to-tr from-slate-100 to-slate-200">
+              <div class="flex items-center justify-between z-10">
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-white text-slate-800 shadow-xs">REQUIREMENTS ENG</span>
+                <span class="text-[10px] font-mono text-slate-700 font-bold">BRD / FRD</span>
+              </div>
+              <div class="my-auto text-center z-10">
+                <i data-lucide="git-branch" class="w-10 h-10 mx-auto text-slate-700 group-hover:scale-110 transition duration-300"></i>
+                <div class="text-[11px] font-mono text-slate-800 mt-1 font-bold">0% Spec Ambiguity</div>
+              </div>
+              <div class="text-[10px] font-mono text-slate-500 z-10">Workflow Architecture</div>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-lg leading-snug group-hover:text-slate-900 transition" style="color: var(--color-text-primary)">
+                Cross-Functional Requirements & Process Engine
+              </h3>
+              <p class="text-xs mt-2 leading-relaxed" style="color: var(--color-text-secondary)">
+                Synthesized multi-stakeholder business goals into deterministic technical schemas, eradicating communication friction between executive boards and engineering squads.
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-4 mt-4 border-t flex items-center justify-between text-xs font-mono" style="border-color: var(--border-subtle)">
+            <span style="color: var(--color-text-muted)">Process Mapping • BRD</span>
+            <span class="font-bold group-hover:translate-x-1 transition-transform" style="color: var(--color-accent)">Inspect Spec →</span>
+          </div>
+        </article>
+
+        <!-- Card 3: Quantitative Rebalancer -->
+        <article class="interactive-card p-6 rounded-2xl flex flex-col justify-between group">
+          <div class="space-y-4">
+            <!-- Visual Header Canvas Graphic -->
+            <div class="h-44 rounded-xl p-4 flex flex-col justify-between relative overflow-hidden bg-gradient-to-tr from-emerald-50 to-teal-100">
+              <div class="flex items-center justify-between z-10">
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-white text-slate-800 shadow-xs">QUANTITATIVE</span>
+                <span class="text-[10px] font-mono text-emerald-800 font-bold">ALGORITHMIC</span>
+              </div>
+              <div class="my-auto text-center z-10">
+                <i data-lucide="line-chart" class="w-10 h-10 mx-auto text-teal-800 group-hover:scale-110 transition duration-300"></i>
+                <div class="text-[11px] font-mono text-teal-900 mt-1 font-bold">Variance Optimization</div>
+              </div>
+              <div class="text-[10px] font-mono text-slate-500 z-10">CRA Compliance Logic</div>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-lg leading-snug group-hover:text-teal-800 transition" style="color: var(--color-text-primary)">
+                Multi-Asset Algorithmic Portfolio Balancing
+              </h3>
+              <p class="text-xs mt-2 leading-relaxed" style="color: var(--color-text-secondary)">
+                Engineered quantitative rebalancing models incorporating Canadian tax regulations, covariance matrices, and automated asset harvesting logic.
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-4 mt-4 border-t flex items-center justify-between text-xs font-mono" style="border-color: var(--border-subtle)">
+            <span style="color: var(--color-text-muted)">Algorithmic • Finance</span>
+            <span class="font-bold group-hover:translate-x-1 transition-transform" style="color: var(--color-accent)">Inspect Spec →</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: ARTICLES (NUMBERED LIST STYLE AS PRAISED BY CLIENT) & COMMUNITY IMPACT -->
+    <section class="grid grid-cols-1 md:grid-cols-12 gap-8 pt-4">
+      
+      <!-- Left 7 Cols: Numbered Articles / Dispatches List (Client praised this format!) -->
+      <div class="md:col-span-7 space-y-4">
+        <div class="flex items-baseline justify-between border-b pb-3" style="border-color: var(--border-subtle)">
+          <span class="text-xs font-mono uppercase tracking-widest font-bold" style="color: var(--color-accent)">Recent Writing</span>
+          <a href="/articles" class="text-xs font-mono text-slate-500 hover:text-black">All Articles →</a>
+        </div>
+
+        <div class="divide-y" style="border-color: var(--border-subtle)">
+          <!-- Article 01 -->
+          <div class="py-4 flex items-baseline justify-between gap-4 group cursor-pointer">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-mono font-bold" style="color: var(--color-accent)">01 /</span>
+                <h4 class="font-bold text-sm group-hover:text-teal-700 transition" style="color: var(--color-text-primary)">
+                  The Computing Mindset in Complex Business Analysis
+                </h4>
+              </div>
+              <p class="text-xs pl-6 leading-relaxed" style="color: var(--color-text-muted)">
+                Why viewing undefined organizational environments as open-source sandboxes creates structural clarity.
+              </p>
+            </div>
+            <span class="text-[11px] font-mono text-slate-400 shrink-0">May 2026</span>
+          </div>
+
+          <!-- Article 02 -->
+          <div class="py-4 flex items-baseline justify-between gap-4 group cursor-pointer">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-mono font-bold" style="color: var(--color-accent)">02 /</span>
+                <h4 class="font-bold text-sm group-hover:text-teal-700 transition" style="color: var(--color-text-primary)">
+                  Leadership Through Involvement: Route Captaincy
+                </h4>
+              </div>
+              <p class="text-xs pl-6 leading-relaxed" style="color: var(--color-text-muted)">
+                How moving barricades alongside 6,000+ athletes directly translates to zero-failure software systems.
+              </p>
+            </div>
+            <span class="text-[11px] font-mono text-slate-400 shrink-0">Apr 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right 5 Cols: Me Outside Work / Community Impact Card -->
+      <div class="md:col-span-5 p-6 rounded-2xl border flex flex-col justify-between space-y-4" style="background-color: var(--color-surface); border-color: var(--border-subtle)">
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono uppercase font-bold text-emerald-700">Beyond the Screen</span>
+            <i data-lucide="heart-handshake" class="w-4 h-4 text-emerald-600"></i>
+          </div>
+          <h3 class="font-bold text-base" style="color: var(--color-text-primary)">Route Captain: CN Cycle for CHEO</h3>
+          <p class="text-xs leading-relaxed" style="color: var(--color-text-secondary)">
+            Orchestrated course safety and volunteer teams for 6,000+ athletes across Ottawa streets, helping raise over $1M for pediatric oncology. Demonstrating that true leadership begins by being hands-on.
+          </p>
+        </div>
+
+        <a href="/outside-work" class="inline-flex items-center text-xs font-mono font-bold hover:underline" style="color: var(--color-accent)">
+          Explore Community Stories →
+        </a>
+      </div>
+
+    </section>
+
+    <!-- SECTION 3: DOORWAYS TO THE FULL SITE -->
+    <section class="p-8 rounded-2xl border flex flex-col md:flex-row items-center justify-between gap-6" style="background-color: var(--color-surface); border-color: var(--border-subtle)">
+      <div class="space-y-1">
+        <span class="text-xs font-mono uppercase font-bold" style="color: var(--color-accent)">Dossier Navigation</span>
+        <h3 class="font-bold text-xl" style="color: var(--color-text-primary)">Explore the Full Story</h3>
+        <p class="text-xs" style="color: var(--color-text-muted)">
+          Access verified career trajectory, community impact logs, and the complete projects hub.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <a href="/trajectory" class="px-4 py-2 rounded-xl border text-xs font-bold transition hover:bg-black/5" style="border-color: var(--border-subtle); color: var(--color-text-primary)">
+          Interactive Trajectory (Resume)
+        </a>
+        <a href="/outside-work" class="px-4 py-2 rounded-xl border text-xs font-bold transition hover:bg-black/5" style="border-color: var(--border-subtle); color: var(--color-text-primary)">
+          Life Outside Work
+        </a>
+        <a href="/projects" class="px-4 py-2 rounded-xl text-white text-xs font-bold transition hover:brightness-110" style="background-color: var(--color-accent)">
+          Projects Hub
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: CLEAN CONTACT DRAWER -->
+  <div id="contactModal" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="rounded-2xl border max-w-md w-full p-6 shadow-2xl space-y-5 relative" style="background-color: var(--color-surface); border-color: var(--border-subtle)">
+      <button onclick="closeContactModal()" class="absolute top-5 right-5 text-slate-400 hover:text-black">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div>
+        <span class="text-xs font-mono uppercase font-bold" style="color: var(--color-accent)">Direct Contact</span>
+        <h3 class="text-xl font-bold mt-1" style="color: var(--color-text-primary)">Start a Conversation</h3>
+        <p class="text-xs mt-1" style="color: var(--color-text-muted)">
+          Connect regarding software architecture, business requirements engineering, or prospective initiatives.
+        </p>
+      </div>
+
+      <div class="p-3.5 rounded-xl border flex items-center justify-between" style="background-color: var(--color-secondary-bg); border-color: var(--border-subtle)">
+        <span class="font-mono text-xs font-bold text-slate-800">hello@benjaminsz.com</span>
+        <button onclick="copyEmail(this)" class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:text-teal-700 transition">
+          Copy
+        </button>
+      </div>
+
+      <div class="flex gap-2">
+        <a href="mailto:hello@benjaminsz.com" class="flex-1 py-2.5 rounded-xl text-white font-bold text-xs text-center shadow-xs hover:brightness-110 transition" style="background-color: var(--color-accent)">
+          Open Email App
+        </a>
+        <a href="https://www.linkedin.com/in/benjaminsanchezzebadua/" target="_blank" class="px-4 py-2.5 rounded-xl bg-[#0A66C2] text-white font-bold text-xs text-center hover:brightness-110 transition">
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    // AUTO-ROTATING HERO STATEMENT SCRIPT (SMOOTH KINETIC TRANSITION)
+    const perspectives = [
+      {
+        badge: "SOFTWARE DEVELOPER & ARCHITECT",
+        desc: "Designing fault-tolerant microservices, resilient APIs, and enterprise cloud systems built to scale under critical load."
+      },
+      {
+        badge: "BUSINESS & SYSTEMS ANALYST",
+        desc: "Translating ambiguous stakeholder visions into deterministic requirements, process workflows, and quantitative ROI models."
+      }
+    ];
+    let currentIndex = 0;
+
+    function runAutoRotation() {
+      const progressBar = document.getElementById('progressBar');
+      progressBar.style.width = '0%';
+      
+      // Start progress fill
+      setTimeout(() => {
+        progressBar.style.width = '100%';
+      }, 50);
+
+      setTimeout(() => {
+        currentIndex = (currentIndex + 1) % perspectives.length;
+        const badge = document.getElementById('roleBadge');
+        const statement = document.getElementById('rollingStatement');
+
+        statement.style.opacity = '0';
+        statement.style.transform = 'translateY(10px)';
+
+        setTimeout(() => {
+          badge.innerText = perspectives[currentIndex].badge;
+          statement.innerText = perspectives[currentIndex].desc;
+          statement.style.opacity = '1';
+          statement.style.transform = 'translateY(0)';
+          runAutoRotation();
+        }, 400);
+
+      }, 4000);
+    }
+    runAutoRotation();
+
+    // VECTOR FACE EYE-TRACKING LOGIC
+    function trackFace(e) {
+      const devPupil = document.getElementById('devPupil');
+      const analystPupil = document.getElementById('analystPupil');
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      // Limit pupil motion to +/- 4px
+      const deltaX = Math.max(-5, Math.min(5, x / 15));
+      const deltaY = Math.max(-3, Math.min(3, y / 15));
+
+      devPupil.setAttribute('cx', 57 + deltaX);
+      devPupil.setAttribute('cy', 95 + deltaY);
+      analystPupil.setAttribute('cx', 142 + deltaX);
+      analystPupil.setAttribute('cy', 95 + deltaY);
+    }
+
+    function resetFace() {
+      document.getElementById('devPupil').setAttribute('cx', '57');
+      document.getElementById('devPupil').setAttribute('cy', '95');
+      document.getElementById('analystPupil').setAttribute('cx', '142');
+      document.getElementById('analystPupil').setAttribute('cy', '95');
+    }
+
+    // Modal controls
+    function openContactModal() {
+      document.getElementById('contactModal').classList.remove('hidden');
+    }
+    function closeContactModal() {
+      document.getElementById('contactModal').classList.add('hidden');
+    }
+
+    // Copy Email Toast
+    function copyEmail(btn) {
+      navigator.clipboard.writeText('hello@benjaminsz.com');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> Copied!`;
+      lucide.createIcons();
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        lucide.createIcons();
+      }, 2000);
+    }
+
+    // LIVE THEME SWITCHER PRESETS (Demonstrates CSS Custom Properties binding)
+    const themes = {
+      mindBubble: {
+        '--color-primary': '#F4FAFA',
+        '--color-secondary-bg': '#E5F5F5',
+        '--color-surface': '#FFFFFF',
+        '--color-text-primary': '#0F172A',
+        '--color-text-secondary': '#366363',
+        '--color-text-muted': '#5C8A8A',
+        '--color-accent': '#1E8F8F',
+        '--border-subtle': 'rgba(0, 0, 0, 0.08)',
+        '--border-accent': 'rgba(30, 143, 143, 0.25)'
+      },
+      cleanWhite: {
+        '--color-primary': '#FFFFFF',
+        '--color-secondary-bg': '#F8FAFC',
+        '--color-surface': '#FFFFFF',
+        '--color-text-primary': '#0F172A',
+        '--color-text-secondary': '#475569',
+        '--color-text-muted': '#64748B',
+        '--color-accent': '#2563EB',
+        '--border-subtle': 'rgba(0, 0, 0, 0.09)',
+        '--border-accent': 'rgba(37, 99, 235, 0.25)'
+      },
+      lemon: {
+        '--color-primary': '#FEFCE8',
+        '--color-secondary-bg': '#FEF9C3',
+        '--color-surface': '#FFFFFF',
+        '--color-text-primary': '#1C1917',
+        '--color-text-secondary': '#78350F',
+        '--color-text-muted': '#A16207',
+        '--color-accent': '#CA8A04',
+        '--border-subtle': 'rgba(120, 53, 15, 0.12)',
+        '--border-accent': 'rgba(202, 138, 4, 0.3)'
+      }
+    };
+
+    function setThemePreset(preset) {
+      const t = themes[preset];
+      if (!t) return;
+      for (const [key, value] of Object.entries(t)) {
+        document.documentElement.style.setProperty(key, value);
+      }
+    }
+  </script>
+</body>
+</html>
