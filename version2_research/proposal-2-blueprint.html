@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposal 02 // The Editorial Blueprint — Benjamin Sanchez Zebadua</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['"Inter"', 'sans-serif'],
+          },
+          colors: {
+            blueprint: {
+              canvas: '#0b0d11',
+              card: '#121620',
+              border: '#1e2638',
+              grid: '#151b2a',
+              gold: '#e2b170',
+              goldMuted: '#967445',
+              paper: '#f8fafc',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #0b0d11;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+    }
+    .blueprint-grid {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(30, 38, 56, 0.4) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(30, 38, 56, 0.4) 1px, transparent 1px);
+    }
+    .ruler-top {
+      background-image: repeating-linear-gradient(90deg, #1e2638 0, #1e2638 1px, transparent 0, transparent 20px);
+    }
+    .spotlight {
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(226, 177, 112, 0.08), transparent 45%);
+    }
+  </style>
+</head>
+<body class="min-h-screen relative overflow-x-hidden selection:bg-amber-400/20 selection:text-amber-200 spotlight">
+
+  <!-- Background Blueprint Grids -->
+  <div class="fixed inset-0 blueprint-grid pointer-events-none z-0"></div>
+
+  <!-- Editorial Top Bar -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-blueprint-canvas/85 border-b border-blueprint-border text-xs font-mono">
+    <div class="h-1 ruler-top w-full"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <span class="text-blueprint-gold font-serif italic text-base">BSZ</span>
+        <span class="text-slate-500">|</span>
+        <span class="tracking-widest text-[11px] text-slate-300">ARCHITECTURAL DOSSIER // VOL. 2026</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <span class="hidden sm:inline text-slate-400 text-[11px]">SPEC: FINTECH SYSTEMS & CANADIAN WEALTH</span>
+        <a href="index.html" class="px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition flex items-center gap-1.5 text-[11px]">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Hub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 py-16 lg:py-24 space-y-24">
+
+    <!-- HERO SECTION: EDITORIAL MANIFESTO -->
+    <section class="space-y-10">
+      <div class="flex items-center gap-2 text-xs font-mono text-blueprint-gold tracking-widest uppercase">
+        <i data-lucide="compass" class="w-4 h-4"></i> Architect's Treatise // Ottawa, Ontario
+      </div>
+
+      <div class="space-y-6 max-w-4xl">
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-serif font-normal leading-[1.1] text-slate-100">
+          Where <span class="italic text-blueprint-gold">Systems Engineering</span> Meets the Nuances of Capital.
+        </h1>
+        <p class="text-slate-300 text-lg sm:text-xl font-light leading-relaxed max-w-3xl">
+          "An undefined environment isn't a bug—it’s an open-source sandbox." 
+          Bridging seven years of core banking software leadership at BBVA with Canadian Wealth Management strategy.
+        </p>
+      </div>
+
+      <!-- Tactical Badges -->
+      <div class="flex flex-wrap items-center gap-3 pt-2 text-xs font-mono">
+        <span class="px-3 py-1.5 rounded-sm border border-blueprint-border bg-blueprint-card text-slate-300">
+          REF: 7+ YRS ENTERPRISE SYSTEMS
+        </span>
+        <span class="px-3 py-1.5 rounded-sm border border-blueprint-border bg-blueprint-card text-slate-300">
+          CRED: IFC (INVESTMENT FUNDS IN CANADA)
+        </span>
+        <span class="px-3 py-1.5 rounded-sm border border-blueprint-border bg-blueprint-card text-slate-300">
+          ROLE: FINTECH SOLUTIONS ARCHITECT
+        </span>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE ARCHITECTURAL PIPELINE (SVG INTERACTION) -->
+    <section class="space-y-6">
+      <div class="border-b border-blueprint-border pb-3 flex items-center justify-between">
+        <div class="text-xs font-mono uppercase tracking-widest text-slate-400">
+          Figure 1.0 — End-to-End FinTech Pipeline Topology
+        </div>
+        <span class="text-[11px] font-mono text-blueprint-gold">INTERACTIVE SCHEMATIC</span>
+      </div>
+
+      <div class="p-8 rounded-lg border border-blueprint-border bg-blueprint-card relative overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative z-10">
+          
+          <!-- Node 1 -->
+          <div class="p-5 rounded border border-blueprint-border bg-blueprint-canvas hover:border-blueprint-gold transition group cursor-pointer" onclick="selectPipelineNode(0)">
+            <div class="text-[10px] font-mono text-slate-500 mb-1">01 // INGESTION</div>
+            <div class="font-serif text-lg text-slate-100 group-hover:text-blueprint-gold transition">Core Banking Feeds</div>
+            <p class="text-xs text-slate-400 mt-2 font-sans">High-concurrency streaming transactions, mutual TLS, and ISO 20022 message parsing.</p>
+          </div>
+
+          <!-- Node 2 -->
+          <div class="p-5 rounded border border-blueprint-border bg-blueprint-canvas hover:border-blueprint-gold transition group cursor-pointer" onclick="selectPipelineNode(1)">
+            <div class="text-[10px] font-mono text-slate-500 mb-1">02 // ALGORITHM</div>
+            <div class="font-serif text-lg text-slate-100 group-hover:text-blueprint-gold transition">Quantitative Risk Engine</div>
+            <p class="text-xs text-slate-400 mt-2 font-sans">Dynamic portfolio variance calculation, risk weighting, and automated rebalance triggers.</p>
+          </div>
+
+          <!-- Node 3 -->
+          <div class="p-5 rounded border border-blueprint-border bg-blueprint-canvas hover:border-blueprint-gold transition group cursor-pointer" onclick="selectPipelineNode(2)">
+            <div class="text-[10px] font-mono text-slate-500 mb-1">03 // EXECUTION</div>
+            <div class="font-serif text-lg text-slate-100 group-hover:text-blueprint-gold transition">Tax-Loss Harvesting</div>
+            <p class="text-xs text-slate-400 mt-2 font-sans">Optimized asset disposal algorithms under Canadian CRA capital gains regulations.</p>
+          </div>
+
+          <!-- Node 4 -->
+          <div class="p-5 rounded border border-blueprint-border bg-blueprint-canvas hover:border-blueprint-gold transition group cursor-pointer" onclick="selectPipelineNode(3)">
+            <div class="text-[10px] font-mono text-slate-500 mb-1">04 // GOVERNANCE</div>
+            <div class="font-serif text-lg text-slate-100 group-hover:text-blueprint-gold transition">Executive Fiduciary BI</div>
+            <p class="text-xs text-slate-400 mt-2 font-sans">Real-time board telemetry, compliance sign-offs, and automated audit trails.</p>
+          </div>
+
+        </div>
+
+        <!-- Node Details Dynamic Callout -->
+        <div id="nodeDetailBox" class="mt-6 p-4 rounded bg-blueprint-canvas/90 border border-blueprint-border text-xs font-mono text-slate-300">
+          <span class="text-blueprint-gold font-bold">SCHEMATIC READOUT:</span> Select a pipeline node above to inspect architectural specifications and compliance boundaries.
+        </div>
+      </div>
+    </section>
+
+    <!-- THREE CHAPTER DOSSIER: STORYTELLING THROUGH INVOLVEMENT -->
+    <section class="space-y-8">
+      <div class="border-b border-blueprint-border pb-3 flex items-center justify-between">
+        <div class="text-xs font-mono uppercase tracking-widest text-slate-400">
+          Section 2.0 — Selected Architectural Chapters
+        </div>
+        <span class="text-[11px] font-mono text-slate-500">EXECUTIVE CASE DOSSIER</span>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Chapter 1 -->
+        <article class="p-8 rounded-lg border border-blueprint-border bg-blueprint-card/60 hover:bg-blueprint-card transition space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+            <span class="text-xs font-mono text-blueprint-gold">CHAPTER 01 // ENTERPRISE SCALE</span>
+            <span class="text-xs font-mono text-slate-500">BBVA LEADERSHIP // 7+ YEARS</span>
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-serif text-slate-100">
+            Scaling High-Security Financial Infrastructure Without Compromise
+          </h3>
+          <p class="text-slate-300 font-sans text-sm sm:text-base leading-relaxed">
+            In software architecture, the best technical leads are those who understand the code at the ground level while holding the executive horizon. Over seven years in core banking operations at BBVA, I directed cross-functional squads building resilient payment gateways, navigating legacy constraints, and shipping resilient microservices under intense regulatory scrutiny.
+          </p>
+          <div class="pt-4 flex flex-wrap gap-4 text-xs font-mono text-slate-400 border-t border-blueprint-border/60">
+            <span><strong class="text-slate-200">OUTCOME:</strong> 99.99% Availability</span>
+            <span><strong class="text-slate-200">GOVERNANCE:</strong> Bank-Grade Security</span>
+            <span><strong class="text-slate-200">METHOD:</strong> Ground-Up Involvement</span>
+          </div>
+        </article>
+
+        <!-- Chapter 2 -->
+        <article class="p-8 rounded-lg border border-blueprint-border bg-blueprint-card/60 hover:bg-blueprint-card transition space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+            <span class="text-xs font-mono text-blueprint-gold">CHAPTER 02 // CANADIAN MARKET INTEGRATION</span>
+            <span class="text-xs font-mono text-slate-500">LAMBTON COLLEGE // OTTAWA</span>
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-serif text-slate-100">
+            The Strategic Pivot: Software Engineering into Canadian Wealth Management
+          </h3>
+          <p class="text-slate-300 font-sans text-sm sm:text-base leading-relaxed">
+            Transitioning from the binary determinism of software to the nuanced, human complexities of Canadian Financial Planning wasn't accidental—it was an optimization exercise. Gaining the IFC (Investment Funds in Canada) and mastering wealth management frameworks allows me to architect software that isn't just computationally elegant, but legally, fiduciarily, and economically potent.
+          </p>
+          <div class="pt-4 flex flex-wrap gap-4 text-xs font-mono text-slate-400 border-t border-blueprint-border/60">
+            <span><strong class="text-slate-200">ACCREDITATION:</strong> IFC Certified</span>
+            <span><strong class="text-slate-200">DOMAIN:</strong> Canadian Wealth & CRA Tax Codes</span>
+            <span><strong class="text-slate-200">SPECIALTY:</strong> FinTech Solutions</span>
+          </div>
+        </article>
+
+        <!-- Chapter 3 -->
+        <article class="p-8 rounded-lg border border-blueprint-border bg-blueprint-card/60 hover:bg-blueprint-card transition space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+            <span class="text-xs font-mono text-blueprint-gold">CHAPTER 03 // LEADERSHIP THROUGH INVOLVEMENT</span>
+            <span class="text-xs font-mono text-slate-500">CN CYCLE FOR CHEO // 6,000+ ATHLETES</span>
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-serif text-slate-100">
+            Route Captaincy: Operational Command Under Zero-Failure Tolerances
+          </h3>
+          <p class="text-slate-300 font-sans text-sm sm:text-base leading-relaxed">
+            True leadership isn't standing back with a clipboard; it’s picking up barricades alongside your team. As Route Captain for Ottawa's premier pediatric oncology charity event, I coordinated route assistants, safety logistics, and emergency path clearance for over 6,000 cyclists. Operational grit on the ground translates directly into building unshakeable digital platforms.
+          </p>
+          <div class="pt-4 flex flex-wrap gap-4 text-xs font-mono text-slate-400 border-t border-blueprint-border/60">
+            <span><strong class="text-slate-200">IMPACT:</strong> $1M+ Community Pediatric Funding</span>
+            <span><strong class="text-slate-200">LOGISTICS:</strong> Urban Route Integrity</span>
+            <span><strong class="text-slate-200">LEADERSHIP:</strong> Human-Centric Resilience</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ARCHITECT'S CREED / FOOTER -->
+    <footer class="pt-12 border-t border-blueprint-border flex flex-col sm:flex-row items-center justify-between gap-6 font-mono text-xs text-slate-400">
+      <div>
+        <div class="font-serif italic text-base text-slate-200">Benjamin Sanchez Zebadua</div>
+        <div class="text-[11px] text-slate-500">Solutions Architect • FinTech & Wealth Management • Ottawa, ON</div>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="proposal-1-terminal.html" class="hover:text-blueprint-gold transition">Proposal 1</a>
+        <span class="text-slate-700">•</span>
+        <a href="proposal-3-bento.html" class="text-blueprint-gold hover:underline flex items-center gap-1">
+          Next: Proposal 3 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    // Mouse Spotlight Effect
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      document.body.style.setProperty('--mouse-x', `${x}%`);
+      document.body.style.setProperty('--mouse-y', `${y}%`);
+    });
+
+    // Pipeline details
+    const nodeDetails = [
+      "INGESTION NODE: Kafka/Redis event streaming processing over 12,000 banking payloads/sec. Fully encrypted end-to-end with TLS 1.3.",
+      "QUANTITATIVE NODE: Vectorized portfolio variance algorithms computing covariance matrix against Canadian benchmark indexes (TSX/S&P).",
+      "TAX-LOSS ENGINE: Identifies tax-drag inefficiencies across TFSA, RRSP, and non-registered accounts, applying superficial loss rule checks.",
+      "GOVERNANCE BI: Real-time telemetry dashboard exporting automated compliance summaries for internal audit and OSC/CIRO standards."
+    ];
+
+    function selectPipelineNode(index) {
+      document.getElementById('nodeDetailBox').innerHTML = `
+        <span class="text-blueprint-gold font-bold">NODE ${index + 1} SPECIFICATION:</span> ${nodeDetails[index]}
+      `;
+    }
+  </script>
+</body>
+</html>

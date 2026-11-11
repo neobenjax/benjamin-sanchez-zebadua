@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposal 01 // The Quantitative Terminal — Benjamin Sanchez Zebadua</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['"Inter"', 'sans-serif'],
+          },
+          colors: {
+            term: {
+              void: '#05070d',
+              card: '#0a0f1d',
+              border: '#162238',
+              emerald: '#10b981',
+              cyan: '#06b6d4',
+              gold: '#f59e0b',
+              muted: '#64748b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #05070d;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+    }
+    .grid-lines {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(22, 34, 56, 0.4) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(22, 34, 56, 0.4) 1px, transparent 1px);
+    }
+    .glow-cyan {
+      box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.3);
+    }
+    .glow-gold {
+      box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.3);
+    }
+    .scanline {
+      background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3));
+      background-size: 100% 4px;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative overflow-x-hidden selection:bg-cyan-500/20 selection:text-cyan-300">
+
+  <!-- Interactive Canvas Background (Radar & Coordinate Grid) -->
+  <canvas id="radarCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+  <div class="fixed inset-0 grid-lines pointer-events-none z-0"></div>
+
+  <!-- HUD Telemetry Header -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-term-void/80 border-b border-term-border text-xs font-mono">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-12 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+        <span class="font-bold tracking-wider text-slate-200">SYS_ID // BENJAMIN.S.Z</span>
+        <span class="hidden sm:inline px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-800/60 text-[10px]">FINTECH ARCHITECT</span>
+      </div>
+
+      <!-- Live Ottawa Clock & Metrics -->
+      <div class="flex items-center gap-6 text-term-muted">
+        <div class="hidden md:flex items-center gap-2">
+          <span>LATENCY:</span>
+          <span class="text-cyan-400 font-semibold" id="latencyDisplay">14ms</span>
+        </div>
+        <div class="hidden sm:flex items-center gap-2">
+          <span>LOC:</span>
+          <span class="text-slate-300">OTTAWA, CA</span>
+          <span class="text-slate-400" id="liveClock">00:00:00 EST</span>
+        </div>
+        <a href="index.html" class="px-2.5 py-1 rounded bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-600 transition flex items-center gap-1.5 text-[11px]">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Hub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 lg:py-16 space-y-16">
+
+    <!-- HERO SECTION -->
+    <section class="space-y-8">
+      <!-- Status Pill -->
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-term-border bg-term-card/80 text-xs font-mono text-slate-300">
+        <span class="flex h-2 w-2 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+        </span>
+        <span>STATUS: AVAILABLE FOR ARCHITECTURAL ADVISORY & CORE ENGINEERING</span>
+      </div>
+
+      <!-- Core Headline -->
+      <div class="max-w-4xl space-y-4">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-mono leading-tight">
+          BRIDGING <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">CORE BANKING SYSTEMS</span> WITH CANADIAN WEALTH INTELLIGENCE.
+        </h1>
+        <p class="text-slate-400 text-base sm:text-lg max-w-2xl font-sans leading-relaxed">
+          Senior Software Engineer with 7+ years of BBVA leadership, merging high-concurrency architecture with rigorous financial planning analytics. Converting algorithmic complexity into audited enterprise EBITDA.
+        </p>
+      </div>
+
+      <!-- THE CORE INNOVATION: DUAL-LENS RHETORICAL SWITCHER -->
+      <div class="p-4 sm:p-6 rounded-xl border border-term-border bg-term-card/90 shadow-2xl space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-term-border/60 pb-4">
+          <div>
+            <div class="text-[11px] font-mono uppercase tracking-widest text-term-muted">Perspective Lens Controller</div>
+            <div class="text-sm font-semibold text-slate-200">Select your evaluative perspective:</div>
+          </div>
+          <!-- Toggle Buttons -->
+          <div class="inline-flex p-1 rounded-lg bg-term-void border border-term-border font-mono text-xs">
+            <button id="techLensBtn" onclick="setLens('tech')" class="px-4 py-2 rounded-md transition font-medium flex items-center gap-2 bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 glow-cyan">
+              <i data-lucide="cpu" class="w-3.5 h-3.5"></i> [ 💻 TECHNICAL TOPOLOGY ]
+            </button>
+            <button id="bizLensBtn" onclick="setLens('biz')" class="px-4 py-2 rounded-md transition font-medium flex items-center gap-2 text-slate-400 hover:text-slate-200">
+              <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> [ 📈 BUSINESS & CAPITAL ]
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Content Area -->
+        <div id="lensContent" class="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-300">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE TELEMETRY MATRIX & CORE CAPABILITIES -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xs font-mono uppercase tracking-widest text-term-muted flex items-center gap-2">
+          <i data-lucide="activity" class="w-4 h-4 text-cyan-400"></i> Architectural Proof & Telemetry
+        </h2>
+        <span class="text-[11px] font-mono text-slate-500">REAL-TIME ACCREDITATION METRICS</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <!-- Metric 1 -->
+        <div class="p-5 rounded-lg border border-term-border bg-term-card hover:border-cyan-500/40 transition group">
+          <div class="text-xs font-mono text-slate-400 flex items-center justify-between">
+            <span>CORE EXPERIENCE</span>
+            <i data-lucide="shield-check" class="w-4 h-4 text-cyan-400 group-hover:scale-110 transition"></i>
+          </div>
+          <div class="text-3xl font-extrabold font-mono text-slate-100 mt-2">7+ YRS</div>
+          <p class="text-xs text-slate-400 mt-1 font-sans">Enterprise banking systems, BBVA tech leadership & distributed APIs.</p>
+        </div>
+
+        <!-- Metric 2 -->
+        <div class="p-5 rounded-lg border border-term-border bg-term-card hover:border-cyan-500/40 transition group">
+          <div class="text-xs font-mono text-slate-400 flex items-center justify-between">
+            <span>WEALTH ACCREDITATION</span>
+            <i data-lucide="award" class="w-4 h-4 text-emerald-400 group-hover:scale-110 transition"></i>
+          </div>
+          <div class="text-3xl font-extrabold font-mono text-slate-100 mt-2">IFC / FPWM</div>
+          <p class="text-xs text-slate-400 mt-1 font-sans">Lambton College Financial Planning & Canadian Investment Funds certification.</p>
+        </div>
+
+        <!-- Metric 3 -->
+        <div class="p-5 rounded-lg border border-term-border bg-term-card hover:border-cyan-500/40 transition group">
+          <div class="text-xs font-mono text-slate-400 flex items-center justify-between">
+            <span>COMMUNITY CAPITAL</span>
+            <i data-lucide="users" class="w-4 h-4 text-gold group-hover:scale-110 transition"></i>
+          </div>
+          <div class="text-3xl font-extrabold font-mono text-slate-100 mt-2">6,000+</div>
+          <p class="text-xs text-slate-400 mt-1 font-sans">Participants coordinated as Route Captain for CN Cycle for CHEO (Ottawa).</p>
+        </div>
+
+        <!-- Metric 4 -->
+        <div class="p-5 rounded-lg border border-term-border bg-term-card hover:border-cyan-500/40 transition group">
+          <div class="text-xs font-mono text-slate-400 flex items-center justify-between">
+            <span>ARCHITECTURE RELIABILITY</span>
+            <i data-lucide="zap" class="w-4 h-4 text-cyan-300 group-hover:scale-110 transition"></i>
+          </div>
+          <div class="text-3xl font-extrabold font-mono text-slate-100 mt-2">99.99%</div>
+          <p class="text-xs text-slate-400 mt-1 font-sans">SLA target engineering, fault-tolerant microservices, resilient event pipelines.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE DOSSIERS / ARCHITECTURAL PIPELINES -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xs font-mono uppercase tracking-widest text-term-muted flex items-center gap-2">
+          <i data-lucide="folder-git-2" class="w-4 h-4 text-emerald-400"></i> Flagship Systems & Case Studies
+        </h2>
+        <span class="text-[11px] font-mono text-slate-500">[INTERACTIVE DRILL-DOWN]</span>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Project 1 -->
+        <div class="p-6 rounded-xl border border-term-border bg-term-card/80 hover:bg-term-card transition space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="flex items-center gap-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-950/80 text-cyan-300 border border-cyan-800">FINTECH CORE</span>
+              <h3 class="text-lg font-bold font-mono text-slate-100">Automated Wealth Rebalancing & Tax-Loss Harvesting Pipeline</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-400">LATENCY: 42ms // THROUGHPUT: 12k ops/sec</span>
+          </div>
+          <p class="text-slate-300 text-sm font-sans leading-relaxed">
+            Engineered an automated algorithmic rebalancing engine for multi-asset portfolios. Bridges portfolio theory with event-driven microservices to minimize capital gains exposure under Canadian tax law.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-term-border/40 text-xs font-mono">
+            <div class="text-cyan-400">
+              <span class="text-slate-500">TECH STACK:</span> TypeScript, Next.js 16, Distributed Queues, Vitest, Node.js
+            </div>
+            <div class="text-emerald-400 sm:text-right">
+              <span class="text-slate-500">BUSINESS METRIC:</span> -34% Slippage, +18% Capital Velocity, 100% Audit Compliance
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="p-6 rounded-xl border border-term-border bg-term-card/80 hover:bg-term-card transition space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="flex items-center gap-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-950/80 text-emerald-300 border border-emerald-800">BANKING MIGRATION</span>
+              <h3 class="text-lg font-bold font-mono text-slate-100">BBVA Enterprise Integration: High-Security Transaction Hub</h3>
+            </div>
+            <span class="text-xs font-mono text-slate-400">ZERO DOWNTIME // ISO 27001 COMPLIANT</span>
+          </div>
+          <p class="text-slate-300 text-sm font-sans leading-relaxed">
+            Led architectural team orchestrating core banking modernization. Built resilient fallback mechanisms, mutual TLS authentication, and automated integration testing pipelines.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-term-border/40 text-xs font-mono">
+            <div class="text-cyan-400">
+              <span class="text-slate-500">TECH STACK:</span> Enterprise APIs, Microservices, CI/CD, Container Security
+            </div>
+            <div class="text-emerald-400 sm:text-right">
+              <span class="text-slate-500">BUSINESS METRIC:</span> $0 Regulatory Penalties, -60% Deployment Incident Rate
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER CTA -->
+    <footer class="pt-8 border-t border-term-border/80 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-term-muted">
+      <div>
+        <span>PROPOSAL 01 // QUANTITATIVE TERMINAL ARCHITECTURE</span>
+        <span class="block text-[10px] text-slate-500">DESIGNED FOR HIGH-CONCURRENCY FINTECH LEADERSHIP</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="proposal-2-blueprint.html" class="hover:text-cyan-400 transition flex items-center gap-1">
+          Next: Proposal 2 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Live Clock (Ottawa Time)
+    function updateClock() {
+      const now = new Date();
+      const options = { timeZone: 'America/Toronto', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      document.getElementById('liveClock').innerText = now.toLocaleTimeString('en-US', options) + ' EST';
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Simulated Latency fluctuation
+    setInterval(() => {
+      const ms = Math.floor(11 + Math.random() * 6);
+      document.getElementById('latencyDisplay').innerText = ms + 'ms';
+    }, 3000);
+
+    // Dynamic Dual-Lens Content Data
+    const lensData = {
+      tech: [
+        {
+          title: "FAULT-TOLERANT TOPOLOGY",
+          tag: "SYSTEM RELIABILITY",
+          val: "< 15ms P99",
+          desc: "Microservice decoupling, idempotent message queues, and zero-drift state management ensuring institutional durability.",
+          stack: "Node 24, TypeScript, Redis, Event Sinks"
+        },
+        {
+          title: "DETERMINISTIC COLOR & DESIGN ENGINE",
+          tag: "WCAG AA CONFORMANCE",
+          val: "100% CONTRAST PASS",
+          desc: "Algorithmic luminance calibration and strict CSS custom property cascading without !important pollution.",
+          stack: "AST Parsing, Vitest Axe, Tailwind v4"
+        },
+        {
+          title: "COMPLIANCE AUTOMATION PIPELINE",
+          tag: "SECURITY & AUDIT",
+          val: "0 VULNERABILITIES",
+          desc: "End-to-end cryptographic payload verification and automated CI/CD gating for zero regression releases.",
+          stack: "Static Analysis, Husky, GitHub Actions"
+        }
+      ],
+      biz: [
+        {
+          title: "CAPITAL PRESERVATION & ROI",
+          tag: "PORTFOLIO EFFICIENCY",
+          val: "+3.2% NET YIELD",
+          desc: "Automated tax-loss harvesting and rebalancing logic reduces tax drag across multi-account Canadian portfolios.",
+          stack: "Tax-Efficient Slicing, Asset Class Rebalancing"
+        },
+        {
+          title: "REGULATORY ACCREDITATION",
+          tag: "CANADIAN COMPLIANCE",
+          val: "IFC CERTIFIED",
+          desc: "Deep immersion in Canadian Securities Institute frameworks, Know Your Client (KYC), and fiduciary compliance standards.",
+          stack: "Mutual Funds, Wealth Planning, Ethics"
+        },
+        {
+          title: "STAKEHOLDER HARMONIZATION",
+          tag: "LEADERSHIP VALUE",
+          val: "7+ YRS LEADERSHIP",
+          desc: "Unifying non-technical executive visions with engineering reality. Eradicating miscommunication between developers and finance.",
+          stack: "Executive Storytelling, Agile Roadmapping"
+        }
+      ]
+    };
+
+    function setLens(mode) {
+      const techBtn = document.getElementById('techLensBtn');
+      const bizBtn = document.getElementById('bizLensBtn');
+      const container = document.getElementById('lensContent');
+
+      if (mode === 'tech') {
+        techBtn.className = "px-4 py-2 rounded-md transition font-medium flex items-center gap-2 bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 glow-cyan";
+        bizBtn.className = "px-4 py-2 rounded-md transition font-medium flex items-center gap-2 text-slate-400 hover:text-slate-200";
+      } else {
+        bizBtn.className = "px-4 py-2 rounded-md transition font-medium flex items-center gap-2 bg-amber-500/20 text-amber-300 border border-amber-500/40 glow-gold";
+        techBtn.className = "px-4 py-2 rounded-md transition font-medium flex items-center gap-2 text-slate-400 hover:text-slate-200";
+      }
+
+      const activeColor = mode === 'tech' ? 'cyan' : 'amber';
+      const items = lensData[mode];
+
+      container.innerHTML = items.map(item => `
+        <div class="p-5 rounded-lg border border-term-border bg-term-void/70 hover:border-${activeColor}-500/40 transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[10px] font-mono text-${activeColor}-400 mb-2">
+              <span>${item.tag}</span>
+              <span class="font-bold">${item.val}</span>
+            </div>
+            <h4 class="text-sm font-bold font-mono text-slate-100 mb-2">${item.title}</h4>
+            <p class="text-xs text-slate-400 font-sans leading-relaxed mb-4">${item.desc}</p>
+          </div>
+          <div class="pt-3 border-t border-term-border/40 text-[10px] font-mono text-slate-500">
+            <span class="text-slate-400">TOOLS:</span> ${item.stack}
+          </div>
+        </div>
+      `).join('');
+      
+      lucide.createIcons();
+    }
+
+    // Default to Tech lens on load
+    setLens('tech');
+
+    // Radar Canvas Animation
+    const canvas = document.getElementById('radarCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, angle = 0;
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function drawRadar() {
+      ctx.clearRect(0, 0, width, height);
+      const centerX = width * 0.85;
+      const centerY = height * 0.3;
+      const radius = 220;
+
+      // Radar circles
+      ctx.strokeStyle = 'rgba(6, 182, 212, 0.12)';
+      ctx.lineWidth = 1;
+      for (let r = 40; r <= radius; r += 50) {
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      // Radar Sweep line
+      angle += 0.015;
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(centerX + Math.cos(angle) * radius, centerY + Math.sin(angle) * radius);
+      ctx.strokeStyle = 'rgba(6, 182, 212, 0.4)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      requestAnimationFrame(drawRadar);
+    }
+    drawRadar();
+  </script>
+</body>
+</html>
